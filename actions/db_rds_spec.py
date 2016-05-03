@@ -9,7 +9,7 @@ class DatabaseRdsSpec(Action):
         # take the payload name and replace any non-alphanumerical characters with "-"
         # to create a name for the database
         try:
-            db_name = re.sub('[^0-9a-zA-Z]+', '-', payload['name']) + "-" + payload['namespace']
+            db_name = re.sub('["-.]+', '', payload['name'])
         except:
             self.logger.exception('Cannot create valid name for database!')
             raise
@@ -25,10 +25,12 @@ class DatabaseRdsSpec(Action):
 
         l = dict(self.config.get('rds', {}))
         pw = self._id_generator()
+        namespace = payload['namespace']
 
         newpayload = {
             'db_name': db_name,
             'user_name': user_name,
+            'namespace': namespace,
             'pw': pw
         }
 

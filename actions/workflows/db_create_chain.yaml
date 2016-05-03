@@ -8,12 +8,79 @@
       on-success: "rds_create_database"
     -
       name: "rds_create_database"
-      ref: "aws.rds_create_dbinstance"
+      ref: "aws.boto3_rds_create_db_instance"
       params:
-        master_username: "{{db_rds_spec.result.user_name}}"
-        master_password: "{{db_rds_spec.result.pw}}"
-        id: "{{db_rds_spec.result.db_name}}"
-        engine: "{{db_rds_spec.result.engine}}"
-        instance_class: "{{db_rds_spec.result.instance_class}}"
-        port: "{{db_rds_spec.result.port}}"
-        allocated_storage: "{{db_rds_spec.result.allocated_storage}}"
+        DBSubnetGroupName: "{{db_rds_spec.result.DBSubnetGroupName}}"
+        MasterUsername: "{{db_rds_spec.result.user_name}}"
+        MasterUserPassword: "{{db_rds_spec.result.pw}}"
+        DBName: "{{db_rds_spec.result.db_name}}"
+        DBInstanceIdentifier: "{{db_rds_spec.result.db_name}}"
+        Engine: "{{db_rds_spec.result.Engine}}"
+        DBInstanceClass: "{{db_rds_spec.result.DBInstanceClass}}"
+        DBParameterGroupName: "{{db_rds_spec.result.DBParameterGroupName}}"
+        Port: "{{db_rds_spec.result.Port}}"
+        AllocatedStorage: "{{db_rds_spec.result.AllocatedStorage}}"
+        MultiAZ: "{{db_rds_spec.result.MultiAZ}}"
+        VpcSecurityGroupIds:
+        - "{{db_rds_spec.result.VpcSecurityGroupIds}}"
+        BackupRetentionPeriod: "{{db_rds_spec.result.BackupRetentionPeriod}}"
+        StorageType: "{{db_rds_spec.result.StorageType}}"
+      on-success: "get_rds_data"
+    -
+      name: "get_rds_data"
+      ref: "aws.rds_get_all_dbinstances"
+      parameters:
+        instance_id: "{{db_rds_spec.result.db_name}}"
+      on-success: "get_rds_status"
+    -
+      name: "get_rds_status"
+      ref: "core.local"
+      parameters:
+        cmd: "echo '{% for key, value in get_rds_data.result[0].iteritems() if key == 'status' -%}{{ value }}{%- endfor %}'"
+      on-success: "rds_status_check"
+    -
+      name: "rds_status_check"
+      ref: "core.local"
+      parameters:
+        cmd: '[[ "available failed" =~ "{{ get_rds_status.stdout }}" ]]'
+      on-success: "get_rds_endpoint"
+      on-failure: "retry"
+    -
+      name: "get_rds_endpoint"
+      ref: "core.local"
+      parameters:
+        cmd: "echo '{% for key, value in get_rds_data.result[0].iteritems() if key == 'endpoint' -%}{{ value[0] }}{%- endfor %}'"
+      on-success: "consul_put_rds_endpoint"
+    -
+      name: "retry"
+      ref: "core.local"
+      parameters:
+        cmd: "sleep 30"
+      on-success: "get_rds_data"
+    -
+      name: "consul_put_rds_endpoint"
+      ref: "consul.put"
+      parameters:
+        key: "{{db_rds_spec.result.namespace}}/rds_endpoint"
+        value: "{{get_rds_endpoint.stdout}}"
+      on-success: "consul_put_db_name"
+    -
+      name: "consul_put_db_name"
+      ref: "consul.put"
+      parameters:
+        key: "{{db_rds_spec.result.namespace}}/rds_dbname"
+        value: "{{db_rds_spec.result.db_name}}"
+      on-success: "consul_put_user_name"
+    -
+      name: "consul_put_user_name"
+      ref: "consul.put"
+      parameters:
+        key: "{{db_rds_spec.result.namespace}}/rds_username"
+        value: "{{db_rds_spec.result.user_name}}"
+      on-success: "vault_put_pw"
+    -
+      name: "vault_put_pw"
+      ref: "vault.write"
+      parameters:
+        path: "secret/{{db_rds_spec.result.namespace}}/rds"
+        values: '{"rds_password":"{{db_rds_spec.result.pw}}"}'

@@ -1,0 +1,13 @@
+---
+  chain:
+    -
+      name: "cloudformation_spec"
+      ref: "kubernetes.cloudformation_spec"
+      params:
+        payload: "{{payload}}"
+      on-success: "delete_cloudformation_stack"
+    -
+      name: "delete_cloudformation_stack"
+      ref: "aws.cf_delete_stack"
+      params:
+        stack_name_or_id: "{{cloudformation_spec.result.stack_name_or_id}}"

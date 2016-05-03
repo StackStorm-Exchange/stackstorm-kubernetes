@@ -1,7 +1,7 @@
 ---
-name: "kubernetes_rds_delete"
+name: "kubernetes_cloudformation_create"
 pack: "kubernetes"
-description: "Check for rds instances to delete using kubernetes thirdpartyresource sensor"
+description: "Check for cloudformation events to manage from kubernetes thirdpartyresource sensor"
 enabled: true
 
 trigger:
@@ -11,12 +11,12 @@ trigger:
 criteria:
   trigger.resource:
     type: "contains"
-    pattern: "DELETED"
+    pattern: "ADDED"
   trigger.labels.type:
     type: "equals"
-    pattern: "mysql"
+    pattern: "mongo"
 
 action:
-  ref: "kubernetes.db_delete_chain"
+  ref: "kubernetes.cloudformation_create_chain"
   parameters:
     payload: "{{trigger}}"

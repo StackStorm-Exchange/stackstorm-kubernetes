@@ -1,0 +1,95 @@
+---
+  chain:
+    -
+      name: "cloudformation_spec"
+      ref: "kubernetes.cloudformation_spec"
+      params:
+        payload: "{{payload}}"
+      on-success: "create_cloudformation_stack"
+    -
+      name: "create_cloudformation_stack"
+      ref: "aws.cf_create_stack"
+      params:
+        stack_name: "{{cloudformation_spec.result.stack_name}}"
+        template_url: "{{cloudformation_spec.result.template_url}}"
+        parameters: "{{cloudformation_spec.result.parameters}}"
+        capabilities:
+        - "CAPABILITY_IAM"
+      on-success: "get_stack_events"
+    -
+      name: "get_stack_events"
+      ref: "aws.cf_describe_stack_events"
+      params:
+        stack_name_or_id: "{{cloudformation_spec.result.stack_name}}"
+      on-success: "check_stack_status"
+    -
+      name: "check_stack_status"
+      ref: "kubernetes.cloudformation_poll"
+      parameters:
+        cmd: "{{get_stack_events.result}}"
+      on-failure: "retry"
+      on-success: "get_stack_data"
+    -
+      name: "retry"
+      ref: "core.local"
+      parameters:
+        cmd: "sleep 10"
+      on-success: "get_stack_events"
+    -
+      name: "get_stack_data"
+      ref: "aws.cf_describe_stacks"
+      params:
+        stack_name_or_id: "{{cloudformation_spec.result.stack_name}}"
+      on-success: "get_stack_outputs"
+    -
+      name: "get_stack_outputs"
+      ref: "core.local"
+      parameters:
+        cmd: "echo '{% set result = get_stack_data.result.split(',') -%}{% for i in result -%}{% if 'PrivateIP' in i -%}{{ i.split('\"')[-2]  }}{%- endif %}{%- endfor %}'"
+      on-success: "create_mongodb"
+    -
+      name: "create_mongodb"
+      ref: "core.remote_sudo"
+      parameters:
+        cmd: "echo 'db.createUser( { user: \"{{cloudformation_spec.result.user_name}}\", pwd: \"{{cloudformation_spec.result.pw}}\", roles: [\"dbOwner\"] });' | mongo {{cloudformation_spec.result.db_name}}"
+        hosts: "{{get_stack_outputs.stdout}}"
+        username: "ubuntu"
+        timeout: "300"
+        private_key: |
+          -----BEGIN RSA PRIVATE KEY-----
+          -----END RSA PRIVATE KEY-----
+      on-success: "consul_put_private_ipaddress"
+      on-failure: "retry_ssh"
+    -
+      name: "consul_put_private_ipaddress"
+      ref: "consul.put"
+      parameters:
+        key: "{{cloudformation_spec.result.namespace}}/mongo_private_ipaddress"
+        value: "{{get_stack_outputs.stdout}}"
+      on-success: "consul_put_db_name"
+    -
+      name: "consul_put_db_name"
+      ref: "consul.put"
+      parameters:
+        key: "{{cloudformation_spec.result.namespace}}/mongo_dbname"
+        value: "{{cloudformation_spec.result.db_name}}"
+      on-success: "consul_put_user_name"
+    -
+      name: "consul_put_user_name"
+      ref: "consul.put"
+      parameters:
+        key: "{{cloudformation_spec.result.namespace}}/mongo_username"
+        value: "{{cloudformation_spec.result.user_name}}"
+      on-success: "vault_put_pw"
+    -
+      name: "vault_put_pw"
+      ref: "vault.write"
+      parameters:
+        path: "secret/{{cloudformation_spec.result.namespace}}/mongo"
+        values: '{"mongo_password":"{{cloudformation_spec.result.pw}}"}'
+    -
+      name: "retry_ssh"
+      ref: "core.local"
+      parameters:
+        cmd: "sleep 10"
+      on-success: "create_mongodb"

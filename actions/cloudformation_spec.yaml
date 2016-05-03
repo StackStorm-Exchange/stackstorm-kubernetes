@@ -1,0 +1,12 @@
+---
+  name: "cloudformation_spec"
+  entry_point: "cloudformation_spec.py"
+  pack: "kubernetes"
+  description: "Munge Kubernetes data so we can create a Cloudformation Stack."
+  runner_type: run-python
+  parameters:
+    payload:
+      type: object
+    config:
+      type: object
+

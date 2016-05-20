@@ -1,0 +1,9 @@
+---
+  chain:
+    -
+      name: "create_alias_record"
+      ref: "kubernetes.route53_alias"
+        
+      parameters:
+        cmd: "UPSERT"
+        payload: "{{payload}}"

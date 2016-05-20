@@ -1,0 +1,22 @@
+---
+name: "kubernetes_route53_delete"
+pack: "kubernetes"
+description: "Check for route53 entries to delete using kubernetes thirdpartyresource sensor"
+enabled: true
+
+trigger:
+  type: "kubernetes.thirdpartyobject"
+  parameters: {}
+
+criteria:
+  trigger.resource:
+    type: "contains"
+    pattern: "DELETED"
+  trigger.labels.type:
+    type: "equals"
+    pattern: "dns"
+
+action:
+  ref: "kubernetes.route53_delete_chain"
+  parameters:
+    payload: "{{trigger}}"

@@ -1,0 +1,28 @@
+---
+  name: "route53_alias"
+  entry_point: "route53_alias.py"
+  pack: "kubernetes"
+  description: "Updates Route53 alias records"
+  enabled: true
+  runner_type: run-python
+  parameters:
+    cmd:
+      type: "string"
+      description: "Action to take (CREATE|UPSERT|DELETE)"
+      required: true
+      position: 0
+    hosted_zone_name:
+      type: "string"
+      description: "Hosted zone name"
+      default: "prsn.io"
+    name:
+      type: "string"
+      description: "Desired Name e.g loadtester.prsn.io"
+    alias_dns_name:
+      type: "string"
+      description: "AWS reesource to point to e.g lb.prsn.io"
+    payload:
+      type: object
+      description: "kubernetes payload object, not required in stackstorm Web UI"
+
+

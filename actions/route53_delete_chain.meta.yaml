@@ -1,0 +1,14 @@
+---
+  name: "route53_delete_chain"
+  runner_type: "action-chain"
+  description: "route53 Delete Stack Action Chain Workflow"
+  enabled: true
+  entry_point: "workflows/route53_delete_chain.yaml"
+  pack: "kubernetes"
+  parameters:
+    payload:
+      type: "object"
+      description: "payload object from kubernetes sensor"
+    config:
+      type: "string"
+      description: "payload object from kubernetes sensor"

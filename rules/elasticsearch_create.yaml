@@ -1,0 +1,22 @@
+---
+name: "kubernetes_elasticsearch_create"
+pack: "kubernetes"
+description: "Check for elasticsearch events to manage from kubernetes thirdpartyresource sensor"
+enabled: true
+
+trigger:
+  type: "kubernetes.thirdpartyobject"
+  parameters: {}
+
+criteria:
+  trigger.resource:
+    type: "contains"
+    pattern: "ADDED"
+  trigger.labels.type:
+    type: "equals"
+    pattern: "elasticsearch"
+
+action:
+  ref: "kubernetes.elasticsearch_create_chain"
+  parameters:
+    payload: "{{trigger}}"

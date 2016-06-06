@@ -1,0 +1,22 @@
+---
+name: "kubernetes_elasticsearch_delete"
+pack: "kubernetes"
+description: "Check for elasticsearch domains to delete using kubernetes thirdpartyresource sensor"
+enabled: true
+
+trigger:
+  type: "kubernetes.thirdpartyobject"
+  parameters: {}
+
+criteria:
+  trigger.resource:
+    type: "contains"
+    pattern: "DELETED"
+  trigger.labels.type:
+    type: "equals"
+    pattern: "elasticsearch"
+
+action:
+  ref: "kubernetes.elasticsearch_delete_chain"
+  parameters:
+    payload: "{{trigger}}"

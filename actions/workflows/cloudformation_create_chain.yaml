@@ -40,32 +40,53 @@
       ref: "aws.cf_describe_stacks"
       params:
         stack_name_or_id: "{{cloudformation_spec.result.stack_name}}"
-      on-success: "get_stack_outputs"
+      on-success: "get_stack_output"
     -
-      name: "get_stack_outputs"
-      ref: "core.local"
+      name: "get_stack_output"
+      ref: "kubernetes.cloudformation_output"
       parameters:
-        cmd: "echo '{% set result = get_stack_data.result.split(',') -%}{% for i in result -%}{% if 'PrivateIP' in i -%}{{ i.split('\"')[-2]  }}{%- endif %}{%- endfor %}'"
+        cmd: "{{get_stack_data.result}}"
       on-success: "create_mongodb"
     -
       name: "create_mongodb"
       ref: "core.remote_sudo"
       parameters:
         cmd: "echo 'db.createUser( { user: \"{{cloudformation_spec.result.user_name}}\", pwd: \"{{cloudformation_spec.result.pw}}\", roles: [\"dbOwner\"] });' | mongo {{cloudformation_spec.result.db_name}}"
-        hosts: "{{get_stack_outputs.stdout}}"
+        hosts: "{{get_stack_output.result[3]}}"
         username: "ubuntu"
         timeout: "300"
         private_key: |
           -----BEGIN RSA PRIVATE KEY-----
           -----END RSA PRIVATE KEY-----
-      on-success: "consul_put_private_ipaddress"
+      on-success: "consul_put_private_ipaddress1"
       on-failure: "retry_ssh"
     -
-      name: "consul_put_private_ipaddress"
+      name: "consul_put_private_ipaddress1"
       ref: "consul.put"
       parameters:
-        key: "{{cloudformation_spec.result.namespace}}/mongo_private_ipaddress"
-        value: "{{get_stack_outputs.stdout}}"
+        key: "{{cloudformation_spec.result.namespace}}/mongo_private_ipaddress1"
+        value: "{{get_stack_output.result[0]}}"
+      on-success: "consul_put_private_ipaddress2"
+    -
+      name: "consul_put_private_ipaddress2"
+      ref: "consul.put"
+      parameters:
+        key: "{{cloudformation_spec.result.namespace}}/mongo_private_ipaddress2"
+        value: "{{get_stack_output.result[1]}}"
+      on-success: "consul_put_private_ipaddress3"
+    -
+      name: "consul_put_private_ipaddress3"
+      ref: "consul.put"
+      parameters:
+        key: "{{cloudformation_spec.result.namespace}}/mongo_private_ipaddress3"
+        value: "{{get_stack_output.result[2]}}"
+      on-success: "consul_put_private_ipaddress4"
+    -
+      name: "consul_put_private_ipaddress4"
+      ref: "consul.put"
+      parameters:
+        key: "{{cloudformation_spec.result.namespace}}/mongo_private_ipaddress4"
+        value: "{{get_stack_output.result[3]}}"
       on-success: "consul_put_db_name"
     -
       name: "consul_put_db_name"

@@ -1,5 +1,4 @@
 import requests
-import ast
 import re
 import uuid
 from urlparse import urljoin
@@ -7,10 +6,15 @@ from st2actions.runners.pythonrunner import Action
 
 
 class CloudFormationSpec(Action):
+
     def run(self, payload, config):
-        # take the payload name and replace any non-alphanumerical characters with "-"
+        # take the payload name and replace any non-alphanumerical characters
+        # with "-"
         try:
-            db_name = re.sub('[^0-9a-zA-Z]+', '-', payload['name']) + "-" + payload['namespace']
+            db_name = re.sub(
+                '[^0-9a-zA-Z]+',
+                '-',
+                payload['name']) + "-" + payload['namespace']
         except:
             self.logger.exception('Cannot create valid name for database!')
             raise
@@ -30,14 +34,17 @@ class CloudFormationSpec(Action):
             stack_name = stack_name_or_id = payload['labels']['stack_name']
             s3_bucket_url = self.config.get('s3_bucket_url')
             template_filename = payload['labels']['template_filename']
-            parameter_filename = payload['labels']['parameter_filename']
             namespace = payload['namespace']
             template_url = urljoin(s3_bucket_url, template_filename)
-            parameter_url = urljoin(s3_bucket_url, parameter_filename)
-            parameters = ast.literal_eval(requests.get(parameter_url).text)
+            parameters_config = self.config['cloudformation']['stack_params']
+            if 'version' in payload['labels']:
+                if '3.2' in payload['labels']['version']:
+                    parameters_config['MongoVersion'] = '3.2'
+            parameters = parameters_config.items()
 
         except:
-            self.logger.exception('Cannot create valid name for Cloudformation Stack!')
+            self.logger.exception(
+                'Cannot create valid name for Cloudformation Stack!')
             raise
 
         l = dict(self.config.get('cloudformation', {}))

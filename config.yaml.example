@@ -4,6 +4,7 @@
     kubernetes_api_url: "https://kube_api_url"
     extension_url: "/apis/extensions/v1beta1/watch/thirdpartyresources"
     verify: true
+    s3_bucket_url: "https://s3_bucket_url_for_templates_and_parameters/"
 
 # These are the available labels that can be applied to a third party resource and have st2 understand how to use them
 # Simply remove any labels you don't intend to use
@@ -12,3 +13,29 @@
       port: "3306"
       engine: "mysql"
       allocated_storage: "100"
+
+    cloudformation:
+      stack: "cloudformation"
+      stack_params:
+        KeyName: 'bitesize'
+        VpcId: 'vpc-ddddddd'
+        SubnetId1: 'subnet-ddddddd1'
+        SubnetId2: 'subnet-dddddddd'
+        SubnetId3: 'subnet-bddddddd'
+        AmiId: 'ami-ddddddd'
+        SecurityGroupId: 'sg-d2ddddd'
+        InstanceType: 'm4.large'
+        Region: 'us-east-1'
+        MongoVersion: '2.6'
+
+    rds:
+      DBInstanceClass: "db.m3.xlarge"
+      Port: "3306"
+      Engine: "mysql"
+      AllocatedStorage: "100"
+      DBParameterGroupName: "barracuda"
+      DBSubnetGroupName: "subnet-group"
+      BackupRetentionPeriod: "30"
+      StorageType: "gp2"
+      MultiAZ: trued
+      VpcSecurityGroupIds: "sg-ddddddd"

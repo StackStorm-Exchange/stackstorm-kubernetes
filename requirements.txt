@@ -1,2 +1,3 @@
-git+git://github.com/mward29/python-k8sclient-v1beta1-v1.2.2#egg=k8sclient-v1beta1
+git+git://github.com/pearsontechnology/k8sv1beta1#k8sv1beta1
+git+git://github.com/pearsontechnology/k8sv1#k8sv1
 boto

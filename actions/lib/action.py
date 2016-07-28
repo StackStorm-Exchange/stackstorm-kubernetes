@@ -1,25 +1,31 @@
+import importlib
 from st2actions.runners.pythonrunner import Action
-
-import swagger_client
-from swagger_client import Configuration
 
 
 class K8sBaseAction(Action):
 
     def __init__(self, config):
         super(K8sBaseAction, self).__init__(config)
-        self.k8s = self._get_client()
+        self.k8s = (
+            self._get_k8s_client(
+                'k8sv1', 'ApivApi'),
+            self._get_k8s_client(
+                'k8sv1beta1', 'ApisextensionsvbetaApi'))
 
-    def _get_client(self):
-        Configuration().verify_ssl = self.config['verify']
-        Configuration().username = self.config['user']
-        Configuration().password = self.config['password']
+    def _get_k8s_client(self, api_version, api_library):
+
+        api_version = importlib.import_module(api_version)
+        api_library = getattr(api_version, api_library)
+        api_version.Configuration().verify_ssl = self.config['verify']
+        api_version.Configuration().username = self.config['user']
+        api_version.Configuration().password = self.config['password']
         host = self.config['kubernetes_api_url']
 
-        apiclient = swagger_client.ApiClient(
+        apiclient = api_version.ApiClient(
             host,
             header_name="Authorization",
-            header_value=swagger_client.configuration.get_basic_auth_token())
+            header_value=api_version.configuration.get_basic_auth_token())
+        apiclient.default_headers['Content-Type'] = 'application/json'
 
-        client = swagger_client.ApisextensionsvbetaApi(apiclient)
+        client = api_library(apiclient)
         return client

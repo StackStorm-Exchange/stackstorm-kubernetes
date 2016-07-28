@@ -1,0 +1,6 @@
+name: migrate_cluster
+runner_type: run-python
+description: "migrate cluster"
+enabled: true
+entry_point: "migrate_cluster.py"
+parameters: {}

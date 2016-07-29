@@ -152,8 +152,8 @@ class K8sBaseAction(Action):
                                     'spec']['template']['spec']:
                                 del item['spec']['template'][
                                     'spec']['restartPolicy']
-                    if "cluster_ip" in item['spec']:
-                        del item['spec']['cluster_ip']
+                    if "clusterIP" in item['spec']:
+                        del item['spec']['clusterIP']
 
                 output.append(item)
         else:

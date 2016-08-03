@@ -1,8 +1,8 @@
 import json
 import importlib
-
 from datetime import datetime
-from lib import action
+
+from st2actions.runners.pythonrunner import Action
 
 
 def json_serial(obj):
@@ -16,18 +16,77 @@ def json_serial(obj):
 
 class K8sMigrateAction(Action):
 
-    def __init__(self, src_k8s_url, src_k8s_password, dst_k8s_url, dst_k8s_password):
-#        super(K8sMigrateAction, self).__init__(config)
+    def run(
+            self,
+            src_k8s_url,
+            src_k8s_password,
+            dst_k8s_url,
+            dst_k8s_password):
+
         self.k8s_src = (
             self._get_k8s_client(
-                'k8sv1', 'ApivApi', src_k8s_url, src_k8s_password ),
+                'k8sv1',
+                'ApivApi',
+                src_k8s_url,
+                src_k8s_password),
             self._get_k8s_client(
-                'k8sv1beta1', 'ApisextensionsvbetaApi', src_k8s_url, src_k8s_password ))
+                'k8sv1beta1',
+                'ApisextensionsvbetaApi',
+                src_k8s_url,
+                src_k8s_password))
         self.k8s_dst = (
             self._get_k8s_client(
-                'k8sv1', 'ApivApi', dst_k8s_url, dst_k8s_password ),
+                'k8sv1',
+                'ApivApi',
+                dst_k8s_url,
+                dst_k8s_password),
             self._get_k8s_client(
-                'k8sv1beta1', 'ApisextensionsvbetaApi', dst_k8s_url, dst_k8s_password ))
+                'k8sv1beta1',
+                'ApisextensionsvbetaApi',
+                dst_k8s_url,
+                dst_k8s_password))
+
+        def get_and_post(datatype, **kwargs):
+            """
+            Copy data from one cluster to another
+
+            :param str datatype: the type of k8s object (required)
+            :param str ns: k8s namespace (optional)
+
+            """
+
+            tmp = self.get_data(datatype, **kwargs)
+
+            print "__________________"
+            print "RECEIVED:"
+            print json.dumps(tmp, sort_keys=True, indent=2, default=json_serial)
+            print "__________________"
+
+            # namespaces don't need a namespace argument when they're created
+            if datatype == "ns":
+                kwargs = {}
+
+            # post data to second cluster
+            res = self.post_data(datatype, tmp, **kwargs)
+
+            print "RESP:"
+            print json.dumps(res, sort_keys=True, indent=2, default=json_serial)
+
+        nsdata = self.k8s_src[0].list_namespace().to_dict()
+
+        for ns in nsdata['items']:
+
+            name = ns['metadata']['name']
+            print "name: " + name
+            if name in ['default', 'kube-system']:
+                continue
+
+            get_and_post("ns", ns=name)
+            get_and_post("service", ns=name)
+            get_and_post("rc", ns=name)
+            get_and_post("secret", ns=name)
+            get_and_post("ingress", ns=name)
+            get_and_post("thirdparty", ns=name)
 
     def get_data(self, datatype, **kwargs):
         """
@@ -253,47 +312,3 @@ class K8sMigrateAction(Action):
 
         client = api_library(apiclient)
         return client
-
-    def run(self):
-
-        def get_and_post(datatype, **kwargs):
-            """
-            Copy data from one cluster to another
-
-            :param str datatype: the type of k8s object (required)
-            :param str ns: k8s namespace (optional)
-
-            """
-
-            tmp = self.get_data(datatype, **kwargs)
-
-            print "__________________"
-            print "RECEIVED:"
-            print json.dumps(tmp, sort_keys=True, indent=2, default=json_serial)
-            print "__________________"
-
-            # namespaces don't need a namespace argument when they're created
-            if datatype == "ns":
-                kwargs = {}
-
-            # post data to second cluster
-            res = self.post_data(datatype, tmp, **kwargs)
-
-            print "RESP:"
-            print json.dumps(res, sort_keys=True, indent=2, default=json_serial)
-
-        nsdata = self.k8s_source[0].list_namespace().to_dict()
-
-        for ns in nsdata['items']:
-
-            name = ns['metadata']['name']
-            print "name: " + name
-            if name in ['default', 'kube-system']:
-                continue
-
-            get_and_post("ns", ns=name)
-            get_and_post("service", ns=name)
-            get_and_post("rc", ns=name)
-            get_and_post("secret", ns=name)
-            get_and_post("ingress", ns=name)
-            get_and_post("thirdparty", ns=name)

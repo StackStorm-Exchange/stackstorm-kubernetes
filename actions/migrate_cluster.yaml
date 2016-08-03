@@ -1,6 +1,28 @@
-name: migrate_cluster
-runner_type: run-python
-description: "migrate cluster"
-enabled: true
-entry_point: "migrate_cluster.py"
-parameters: {}
+---
+  name: "migrate_cluster"
+  entry_point: "migrate_cluster.py"
+  pack: "kubernetes"
+  description: "migrate applications running on a kubernetes cluster to another"
+  enabled: true
+  runner_type: run-python
+  parameters:
+    src_k8s_url:
+      type: "string"
+      description: "Source kubernetes url e.g https://master.use-prod.prsn.io"
+      required: true
+      position: 0
+    src_k8s_password:
+      type: "string"
+      description: "Source kubernetes API password"
+      required: true
+      position: 1
+    dst_k8s_url:
+      type: "string"
+      description: "Destination kubernetes url e.g https://master.pidah.prsn-dev.io"
+      required: true
+      position: 2
+    dst_k8s_password:
+      type: "string"
+      description: "Target kubernetes API password"
+      required: true
+      position: 3

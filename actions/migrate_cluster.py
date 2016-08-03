@@ -1,10 +1,7 @@
-import sys
 import json
 import importlib
-import yaml
 
 from datetime import datetime
-from os.path import expanduser
 from lib import action
 
 
@@ -17,15 +14,20 @@ def json_serial(obj):
     raise TypeError("Type not serializable")
 
 
-class K8sMigrateAction(action.K8sBaseAction):
+class K8sMigrateAction(Action):
 
-    def __init__(self, config):
-        self.migrate = (
-            self._get_migrate_client(
-                'k8sv1', 'ApivApi'),
-            self._get_migrate_client(
-                'k8sv1beta1', 'ApisextensionsvbetaApi'))
-        super(K8sMigrateAction, self).__init__(config)
+    def __init__(self, src_k8s_url, src_k8s_password, dst_k8s_url, dst_k8s_password):
+#        super(K8sMigrateAction, self).__init__(config)
+        self.k8s_src = (
+            self._get_k8s_client(
+                'k8sv1', 'ApivApi', src_k8s_url, src_k8s_password ),
+            self._get_k8s_client(
+                'k8sv1beta1', 'ApisextensionsvbetaApi', src_k8s_url, src_k8s_password ))
+        self.k8s_dst = (
+            self._get_k8s_client(
+                'k8sv1', 'ApivApi', dst_k8s_url, dst_k8s_password ),
+            self._get_k8s_client(
+                'k8sv1beta1', 'ApisextensionsvbetaApi', dst_k8s_url, dst_k8s_password ))
 
     def get_data(self, datatype, **kwargs):
         """
@@ -40,10 +42,10 @@ class K8sMigrateAction(action.K8sBaseAction):
 
         # lookup which api the function lives in and set that to be the api
         # endpoint to use
-        if(myfunc in dir(self.k8s[0])):
-            myapi = self.k8s[0]
-        if(myfunc in dir(self.k8s[1])):
-            myapi = self.k8s[1]
+        if(myfunc in dir(self.k8s_src[0])):
+            myapi = self.k8s_src[0]
+        if(myfunc in dir(self.k8s_src[1])):
+            myapi = self.k8s_src[1]
 
         # third party resources don't need a namespace argument when they're queried,
         # but will when posted. best to strip it out here
@@ -202,10 +204,10 @@ class K8sMigrateAction(action.K8sBaseAction):
 
         # lookup which api the function lives in and set that to be the api
         # endpoint to use
-        if(myfunc in dir(self.migrate[0])):
-            myapi = self.migrate[0]
-        if(myfunc in dir(self.migrate[1])):
-            myapi = self.migrate[1]
+        if(myfunc in dir(self.k8s_dst[0])):
+            myapi = self.k8s_dst[0]
+        if(myfunc in dir(self.k8s_dst[1])):
+            myapi = self.k8s_dst[1]
 
         print "Datatype: " + datatype
         if "ns" in kwargs:
@@ -234,14 +236,14 @@ class K8sMigrateAction(action.K8sBaseAction):
             output.append(data)
         return output
 
-    def _get_migrate_client(self, api_version, api_library):
+    def _get_k8s_client(self, api_version, api_library, url, password):
 
         api_version = importlib.import_module(api_version)
         api_library = getattr(api_version, api_library)
         api_version.Configuration().verify_ssl = False
-        api_version.Configuration().username = 'target_admin'
-        api_version.Configuration().password = 'target_password'
-        host = 'https://target_kube_url'
+        api_version.Configuration().username = 'admin'
+        api_version.Configuration().password = password
+        host = url
 
         apiclient = api_version.ApiClient(
             host,
@@ -280,7 +282,7 @@ class K8sMigrateAction(action.K8sBaseAction):
             print "RESP:"
             print json.dumps(res, sort_keys=True, indent=2, default=json_serial)
 
-        nsdata = self.k8s[0].list_namespace().to_dict()
+        nsdata = self.k8s_source[0].list_namespace().to_dict()
 
         for ns in nsdata['items']:
 

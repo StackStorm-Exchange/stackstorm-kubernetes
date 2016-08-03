@@ -8,7 +8,7 @@
   parameters:
     src_k8s_url:
       type: "string"
-      description: "Source kubernetes url e.g https://master.use-prod.prsn.io"
+      description: "Source kubernetes url e.g https://master-a.pidah.kube"
       required: true
       position: 0
     src_k8s_password:
@@ -16,9 +16,10 @@
       description: "Source kubernetes API password"
       required: true
       position: 1
+      secret: true
     dst_k8s_url:
       type: "string"
-      description: "Destination kubernetes url e.g https://master.pidah.prsn-dev.io"
+      description: "Destination kubernetes url e.g https://master-b.pidah.kube"
       required: true
       position: 2
     dst_k8s_password:
@@ -26,3 +27,4 @@
       description: "Target kubernetes API password"
       required: true
       position: 3
+      secret: true

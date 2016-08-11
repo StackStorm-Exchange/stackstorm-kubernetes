@@ -1,0 +1,32 @@
+---
+  name: "migrate_lb"
+  entry_point: "migrate_lb.py"
+  pack: "kubernetes"
+  description: "migrate applications running on a kubernetes cluster to another"
+  enabled: true
+  runner_type: run-python
+  parameters:
+    access_key:
+      type: "string"
+      description: "AWS access key"
+      required: true
+      position: 0
+      secret: true
+    secret_key:
+      type: "string"
+      description: "AWS secret key"
+      required: true
+      position: 1
+      secret: true
+    environment:
+      type: "string"
+      description: "bitesize environment"
+      required: true
+      position: 2
+    cluster:
+      type: "string"
+      enum:
+        - a
+        - b
+      description: "cluster to make live"
+      position: 3

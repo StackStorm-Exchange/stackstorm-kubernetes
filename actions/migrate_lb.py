@@ -37,7 +37,7 @@ class ELBMigrate(Action):
 
         #self.get_asgs()
 
-        if cluster not in ['a','b'] or cluster not in ['a', 'b']:
+        if cluster not in ['a','b']:
             print "cluster must be a or b"
             return 0
 

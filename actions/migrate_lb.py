@@ -8,29 +8,23 @@ from datetime import datetime
 
 from st2actions.runners.pythonrunner import Action
 
-#variables required:
-# AWS_DEFAULT_REGION
-# AWS_ACCESS_KEY_ID
-# AWS_SECRET_ACCESS_KEY
-
 #boto3.set_stream_logger('boto3.resources', logging.DEBUG)
 #boto3.set_stream_logger('botocore', logging.DEBUG)
 #boto3.set_stream_logger('boto3', logging.DEBUG)
 
 class ELBMigrate(Action):
 
-    def run(self, access_key, secret_key, environment, cluster):
+    def run(self, environment, cluster, region):
         """
         Entry into the action script
 
-        :param str access_key: aws access key
-        :param str secret_key: aws secret key
         :param str environment: bitesize cluster environment name
         :param str cluster: cluster to migrate to live (a or b)
+        :param str region: aws region
 
         """
 
-        self.asgc = boto3.client('autoscaling', region_name='eu-west-1', aws_access_key_id=access_key, aws_secret_access_key=secret_key)
+        self.asgc = boto3.client('autoscaling', region_name=region)
 
         self.my_asgs = []
         self.env = environment

@@ -14,7 +14,7 @@ from st2actions.runners.pythonrunner import Action
 
 class ELBMigrate(Action):
 
-    def run(self, environment, cluster, region):
+    def run(self, cluster):
         """
         Entry into the action script
 
@@ -24,10 +24,13 @@ class ELBMigrate(Action):
 
         """
 
+        self.my_asgs = []
+
+        region = self.config.get('region')
+        self.env = self.config.get('environment')
+
         self.asgc = boto3.client('autoscaling', region_name=region)
 
-        self.my_asgs = []
-        self.env = environment
 
         #self.get_asgs()
 

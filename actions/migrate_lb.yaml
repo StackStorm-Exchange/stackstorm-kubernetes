@@ -6,24 +6,10 @@
   enabled: true
   runner_type: run-python
   parameters:
-    environment:
-      type: "string"
-      description: "bitesize environment"
-      required: true
-      position: 0
     cluster:
       type: "string"
       enum:
         - a
         - b
       description: "cluster to make live"
-      position: 1
-    region:
-      type: "string"
-      enum:
-        - eu-west-1
-        - us-west-1
-        - us-west-2
-        - us-east-1
-      description: "aws region to use"
-      position: 2
+      position: 0

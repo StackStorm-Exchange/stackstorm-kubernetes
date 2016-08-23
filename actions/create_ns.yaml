@@ -1,0 +1,27 @@
+---
+  name: "create_ns"
+  entry_point: "create_ns.py"
+  pack: "kubernetes"
+  description: "create a namespace"
+  enabled: true
+  runner_type: run-python
+  notify:
+    on-complete:
+      routes:
+      - hipchat
+      message: '"@bitesize-andy: Action succeeded."'
+  parameters:
+    ns:
+      type: "string"
+      description: "environment name"
+      position: 0
+    suffix:
+      type: "string"
+      enum:
+        - dev
+        - tst
+        - stg
+        - prd
+      default: dev
+      description: "environment suffix"
+      position: 1

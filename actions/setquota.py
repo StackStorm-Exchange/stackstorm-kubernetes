@@ -71,17 +71,10 @@ class SetQuota(Action):
 
         self.k8s = K8sClient(k8surl, k8suser, k8spass)
 
-        print json.dumps(kwargs, sort_keys=True, indent=2)
-
         data = self.k8s.k8s.list_namespaced_resource_quota(ns).to_dict()
         quotacount = len(data['items'])
 
-        #print data['items']
-        print "quota count: %s" % quotacount
-
         if quotacount == 0:
-
-            print "Creating"
 
             for key in myspec['spec']['hard']:
                 if key in kwargs and kwargs[key] != None:
@@ -89,26 +82,17 @@ class SetQuota(Action):
 
             myquotas['metadata']['namespace'] = ns
             myquotas['spec'] = myspec['spec']
-            print json.dumps(myquotas, sort_keys=True, indent=2, default=self.json_serial)
+            #print json.dumps(myquotas, sort_keys=True, indent=2, default=self.json_serial)
 
             self.k8s.k8s.create_namespaced_resource_quota(myquotas, ns)
 
         else:
-            #mypatch = {}
-            #mypatch['items'] = []
-            #mypatch['items'][0]['spec'] = {}
-            #mypatch['items'][0]['spec']['hard'] = myspec
-            #tmp = { "items": [ { "spec": { "hard": { myspec } } } ] }
-            myspec = {}
+            myspec = { 'spec' : { 'hard':  {} } }
             for key in kwargs:
                 if kwargs[key] != None:
-                    myspec[key] = kwargs[key]
-            tmp = { "items": [] }
-            tmp2 = { 'spec' : { 'hard':  myspec  } }
-            tmp['items'].append(tmp2)
-            print "Patching"
-            print json.dumps(tmp, sort_keys=True, indent=2, default=self.json_serial)
-            self.k8s.k8s.patch_namespaced_resource_quota(tmp, ns, "quota")
+                    myspec['spec']['hard'][key] = kwargs[key]
+            #print json.dumps(myspec, sort_keys=True, indent=2, default=self.json_serial)
+            self.k8s.k8s.patch_namespaced_resource_quota(myspec, ns, "quota")
 
     def json_serial(self, obj):
         """JSON serializer for objects not serializable by default json code"""

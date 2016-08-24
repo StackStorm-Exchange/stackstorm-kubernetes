@@ -1,0 +1,31 @@
+---
+  name: "setquota"
+  entry_point: "setquota.py"
+  pack: "kubernetes"
+  description: "Set kubernetes quotas for a namespace"
+  enabled: true
+  runner_type: "run-python"
+  parameters:
+    ns:
+      type: "string"
+      description: "namespace to apply quotas to"
+      required: true
+      position: 0
+    pods:
+      type: "string"
+      description: "max number of pods"
+    services:
+      type: "string"
+      description: "max number of services"
+    replicationcontrollers:
+      type: "string"
+      description: "max number of replication controllers"
+    persistentvolumeclaims:
+      type: "string"
+      description: "max number of persistent volume claims"
+    secrets:
+      type: "string"
+      description: "max number of secrets"
+    resourcequotas:
+      type: "string"
+      description: "max number of resource quotas"

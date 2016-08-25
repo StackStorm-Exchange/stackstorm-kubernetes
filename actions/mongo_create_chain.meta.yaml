@@ -1,9 +1,9 @@
 ---
-  name: "cloudformation_create_chain"
+  name: "mongo_create_chain"
   runner_type: "action-chain"
-  description: "Cloudformation Create Stack Action Chain Workflow"
+  description: "Mongo cloudformation Create Stack Action Chain Workflow"
   enabled: true
-  entry_point: "workflows/cloudformation_create_chain.yaml"
+  entry_point: "workflows/mongo_create_chain.yaml"
   pack: "kubernetes"
   parameters:
     payload:

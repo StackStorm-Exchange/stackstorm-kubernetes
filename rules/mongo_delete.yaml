@@ -1,7 +1,7 @@
 ---
-name: "kubernetes_cloudformation_delete"
+name: "kubernetes_mongo_delete"
 pack: "kubernetes"
-description: "Check for cloudformation stacks to delete using kubernetes thirdpartyresource sensor"
+description: "Check for Mongo cloudformation stacks to delete using kubernetes thirdpartyresource sensor"
 enabled: true
 
 trigger:
@@ -17,6 +17,6 @@ criteria:
     pattern: "mongo"
 
 action:
-  ref: "kubernetes.cloudformation_delete_chain"
+  ref: "kubernetes.mongo_delete_chain"
   parameters:
     payload: "{{trigger}}"

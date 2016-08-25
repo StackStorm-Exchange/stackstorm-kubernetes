@@ -1,0 +1,16 @@
+---
+  name: "describe_stacks"
+  entry_point: "describe_stacks.py"
+  pack: "kubernetes"
+  description: "Describe Stack"
+  enabled: true
+  runner_type: run-python
+  parameters:
+    stack_name_or_id:
+      type: "string"
+      description: "Message to print."
+#      required: true
+      position: 0
+      default: "bite-663"
+
+

@@ -1,7 +1,7 @@
 ---
-name: "kubernetes_cloudformation_create"
+name: "kubernetes_mongo_create"
 pack: "kubernetes"
-description: "Check for cloudformation events to manage from kubernetes thirdpartyresource sensor"
+description: "Check for Mongo cloudformation events to manage from kubernetes thirdpartyresource sensor"
 enabled: true
 
 trigger:
@@ -17,6 +17,6 @@ criteria:
     pattern: "mongo"
 
 action:
-  ref: "kubernetes.cloudformation_create_chain"
+  ref: "kubernetes.mongo_create_chain"
   parameters:
     payload: "{{trigger}}"

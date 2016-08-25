@@ -1,9 +1,9 @@
 ---
-  name: "cloudformation_delete_chain"
+  name: "mongo_delete_chain"
   runner_type: "action-chain"
-  description: "Cloudformation Delete Stack Action Chain Workflow"
+  description: "Mongo cloudformation Delete Stack Action Chain Workflow"
   enabled: true
-  entry_point: "workflows/cloudformation_delete_chain.yaml"
+  entry_point: "workflows/mongo_delete_chain.yaml"
   pack: "kubernetes"
   parameters:
     payload:

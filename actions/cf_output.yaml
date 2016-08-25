@@ -1,15 +1,15 @@
 ---
-  name: "cloudformation_output"
-  entry_point: "cloudformation_output.py"
+  name: "cf_output"
+  entry_point: "cf_output.py"
   pack: "kubernetes"
   description: "Parse Cloudformation Output and retrieve relevant data."
   enabled: true
   runner_type: run-python
   parameters:
-    cmd:
+    stack_name_or_id:
       type: "string"
       description: "Message to print."
-      required: true
       position: 0
+
 
 

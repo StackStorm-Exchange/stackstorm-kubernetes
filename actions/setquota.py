@@ -82,17 +82,16 @@ class SetQuota(Action):
 
             myquotas['metadata']['namespace'] = ns
             myquotas['spec'] = myspec['spec']
-            #print json.dumps(myquotas, sort_keys=True, indent=2, default=self.json_serial)
 
-            self.k8s.k8s.create_namespaced_resource_quota(myquotas, ns)
+            print json.dumps(self.k8s.k8s.create_namespaced_resource_quota(myquotas, ns).to_dict(), sort_keys=True, indent=2, default=self.json_serial)
 
         else:
             myspec = { 'spec' : { 'hard':  {} } }
             for key in kwargs:
                 if kwargs[key] != None:
                     myspec['spec']['hard'][key] = kwargs[key]
-            #print json.dumps(myspec, sort_keys=True, indent=2, default=self.json_serial)
-            self.k8s.k8s.patch_namespaced_resource_quota(myspec, ns, "quota")
+
+            print json.dumps(self.k8s.k8s.patch_namespaced_resource_quota(myspec, ns, "quota").to_dict(), sort_keys=True, indent=2, default=self.json_serial)
 
     def json_serial(self, obj):
         """JSON serializer for objects not serializable by default json code"""

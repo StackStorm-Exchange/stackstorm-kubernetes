@@ -71,15 +71,12 @@ class CreateNS(Action):
 
         self.k8s = K8sClient(k8surl, k8suser, k8spass)
 
-        self.k8s.k8s.create_namespace(self.myconf)
+        print json.dumps(self.k8s.k8s.create_namespace(self.myconf).to_dict(), sort_keys=True, indent=2, default=self.json_serial)
 
     def createNSConfig(self):
-        print type(nstemplate)
         self.myconf = nstemplate
         self.myconf['metadata']['name'] = self.the_ns
         self.myconf['metadata']['labels']['project'] = self.ns
-
-        print json.dumps(self.myconf, sort_keys=True, indent=2)
 
     def json_serial(self, obj):
         """JSON serializer for objects not serializable by default json code"""

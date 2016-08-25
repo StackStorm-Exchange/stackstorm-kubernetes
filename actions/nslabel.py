@@ -53,8 +53,8 @@ class ApproveNS(Action):
           value = kwargs['data']
           patch = {"metadata":{"labels":{label:value}}}
 
-        print self.k8s.k8s.read_namespace(ns)
-        print self.k8s.k8s.patch_namespace(patch, ns)
+        #print self.k8s.k8s.read_namespace(ns)
+        print json.dumps(self.k8s.k8s.patch_namespace(patch, ns).to_dict(), sort_keys=True, indent=2, default=self.json_serial)
 
     def json_serial(self, obj):
         """JSON serializer for objects not serializable by default json code"""

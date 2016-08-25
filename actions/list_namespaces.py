@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import importlib
 import json
 import sys
@@ -28,7 +30,6 @@ class K8sClient:
         client = api_library(apiclient)
         return client
 
-
 class k8sReadAction(Action):
 
     def run(self):
@@ -40,10 +41,7 @@ class k8sReadAction(Action):
         k8surl   = self.config.get('kubernetes_api_url')
 
         self.k8s = K8sClient(k8surl, k8suser, k8spass)
-        print json.dumps(self.k8s.k8s.list_namespace().to_dict(), default=self.json_serial)
-        #print self.k8s.k8s.list_namespace()
-        #return 0
-        #print json.dumps(self.k8s.k8s.list_namespace(), sort_keys=True, indent=2, default=self.json_serial)
+        print json.dumps(self.k8s.k8s.list_namespace().to_dict(), sort_keys=True, indent=2, default=self.json_serial)
 
     def json_serial(self, obj):
         """JSON serializer for objects not serializable by default json code"""
@@ -52,5 +50,4 @@ class k8sReadAction(Action):
             serial = obj.isoformat()
             return serial
         raise TypeError("Type not serializable")
-
 

@@ -21,7 +21,7 @@ parameters:
       - add
       - remove
     default: add
-    description: "environment suffix"
+    description: "action (add|remove)"
     position: 2
   data:
     type: "string"

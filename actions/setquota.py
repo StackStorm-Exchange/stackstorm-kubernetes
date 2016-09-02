@@ -1,15 +1,11 @@
 #!/usr/bin/python
 
 import importlib
-import logging
-import os
 import json
-import sys
 from datetime import datetime
 
-from pprint import pprint
-
 from st2actions.runners.pythonrunner import Action
+from lib import k8s
 
 quotatemplate = {
     "kind": "ResourceQuota",
@@ -33,29 +29,6 @@ spectemplate = {
     }
 }
 
-class K8sClient:
-
-    def __init__(self, master_url, username, password):
-
-        self.k8s = self._get_k8s_client('k8sv1','ApivApi', master_url, username, password)
-
-    def _get_k8s_client(self, api_version, api_library, master_url, username, password):
-
-        api_version = importlib.import_module(api_version)
-        api_library = getattr(api_version, api_library)
-        api_version.Configuration().verify_ssl = False
-        api_version.Configuration().username = username
-        api_version.Configuration().password = password
-
-        apiclient = api_version.ApiClient(
-            master_url,
-            header_name="Authorization",
-            header_value=api_version.configuration.get_basic_auth_token())
-        apiclient.default_headers['Content-Type'] = 'application/json'
-
-        client = api_library(apiclient)
-        return client
-
 class SetQuota(Action):
 
     def run(self, ns, **kwargs):
@@ -69,9 +42,9 @@ class SetQuota(Action):
         myquotas = quotatemplate
         myspec   = spectemplate
 
-        self.k8s = K8sClient(k8surl, k8suser, k8spass)
+        self.k8s = k8s.K8sClient(k8surl, k8suser, k8spass)
 
-        data = self.k8s.k8s.list_namespaced_resource_quota(ns).to_dict()
+        data = self.k8s.k8s[0].list_namespaced_resource_quota(ns).to_dict()
         quotacount = len(data['items'])
 
         if quotacount == 0:
@@ -83,7 +56,7 @@ class SetQuota(Action):
             myquotas['metadata']['namespace'] = ns
             myquotas['spec'] = myspec['spec']
 
-            print json.dumps(self.k8s.k8s.create_namespaced_resource_quota(myquotas, ns).to_dict(), sort_keys=True, indent=2, default=self.json_serial)
+            print json.dumps(self.k8s.k8s[0].create_namespaced_resource_quota(myquotas, ns).to_dict(), sort_keys=True, indent=2, default=self.json_serial)
 
         else:
             myspec = { 'spec' : { 'hard':  {} } }
@@ -91,7 +64,7 @@ class SetQuota(Action):
                 if kwargs[key] != None:
                     myspec['spec']['hard'][key] = kwargs[key]
 
-            print json.dumps(self.k8s.k8s.patch_namespaced_resource_quota(myspec, ns, "quota").to_dict(), sort_keys=True, indent=2, default=self.json_serial)
+            print json.dumps(self.k8s.k8s[0].patch_namespaced_resource_quota(myspec, ns, "quota").to_dict(), sort_keys=True, indent=2, default=self.json_serial)
 
     def json_serial(self, obj):
         """JSON serializer for objects not serializable by default json code"""

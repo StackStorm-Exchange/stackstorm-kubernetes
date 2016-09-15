@@ -94,13 +94,4 @@ class K8sClient:
 
         data = getattr(myapi, myfunc)(data, ns).to_dict()
 
-        print json.dumps(data, sort_keys=True, indent=2, default=self._json_serial)
-
-    def _json_serial(self, obj):
-        """JSON serializer for objects not serializable by default json code"""
-
-        if isinstance(obj, datetime):
-            serial = obj.isoformat()
-            return serial
-        raise TypeError("Type not serializable")
-
+        return data

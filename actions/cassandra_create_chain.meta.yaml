@@ -1,0 +1,14 @@
+---
+  name: "cassandra_create_chain"
+  runner_type: "action-chain"
+  description: "Cassandra cloudformation Create Stack Action Chain Workflow"
+  enabled: true
+  entry_point: "workflows/cassandra_create_chain.yaml"
+  pack: "kubernetes"
+  parameters:
+    payload:
+      type: "object"
+      description: "payload object from kubernetes sensor"
+    cmd:
+      type: "string"
+      description: "payload object from kubernetes sensor"

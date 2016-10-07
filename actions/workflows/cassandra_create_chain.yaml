@@ -1,8 +1,8 @@
 ---
   chain:
     -
-      name: "cloudformation_spec"
-      ref: "kubernetes.cloudformation_spec"
+      name: "cassandra_spec"
+      ref: "kubernetes.cassandra_spec"
       params:
         payload: "{{payload}}"
       on-success: "create_cloudformation_stack"

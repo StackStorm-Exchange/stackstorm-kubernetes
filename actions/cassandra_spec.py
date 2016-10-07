@@ -55,6 +55,7 @@ class CassandraSpec(Action):
             parameters.append(['VpcCidrBlock', vpcdata['cidrblock']])
             parameters.append(['Namespace', namespace])
             parameters.append(['Environment', environment])
+            parameters.append(['ClusterName', stack_name])
 
         except:
             self.logger.exception(

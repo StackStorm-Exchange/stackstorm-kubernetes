@@ -8,9 +8,6 @@
   parameters:
     stack_name_or_id:
       type: "string"
-      description: "Message to print."
+      description: "Stack Name or ID"
 #      required: true
       position: 0
-      default: "bite-663"
-
-

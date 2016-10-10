@@ -120,3 +120,35 @@ First of all, do these 2 manual steps -
     ```
     kubectl create -f name_of_your_file.yaml
     ```
+
+### Deploying Cassandra clusters in the Kubernetes Pack
+
+1. As with the mongo deployment above, add the vault token to stackstorm, and the public ip's of stackstorm and vpc-nat to the VPC nat security group.
+
+2. Create a demo namespace
+
+3. Create a cassandra third party resource:
+
+Create a yaml file with something like below:
+
+    ```yaml
+    metadata:
+        name: demo-cass
+        namespace: demo
+        labels:
+            type: cassandra
+            version: '2.2'
+            stack_name: demo-cass
+    apiVersion: extensions/v1beta1
+    kind: ThirdPartyResource
+    description: ""
+    versions:
+      - name: stable/v1
+    ```
+
+  * With kubectl run:
+
+    ```
+    kubectl create -f name_of_your_file.yaml
+    ```
+

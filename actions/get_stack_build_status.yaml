@@ -1,0 +1,13 @@
+---
+  name: "get_stack_build_status"
+  entry_point: "get_stack_build_status.py"
+  pack: "kubernetes"
+  description: "Get Stack Build Status"
+  enabled: true
+  runner_type: run-python
+  parameters:
+    stack_name_or_id:
+      type: "string"
+      description: "Stack Name or ID"
+      required: true
+      position: 0

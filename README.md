@@ -129,7 +129,7 @@ First of all, do these 2 manual steps -
 
 3. Create a cassandra third party resource:
 
-Create a yaml file with something like below:
+  * Create a yaml file with the below:
 
     ```yaml
     metadata:
@@ -152,3 +152,16 @@ Create a yaml file with something like below:
     kubectl create -f name_of_your_file.yaml
     ```
 
+4. Once the stack is built, the instances will continue to deploy and configure - this takes around 15m
+
+5. Upon completion there should be keys in consul under namespace/clustername and vault under the same for the password. The user will be bitesize
+
+6. To delete, remove the third party resource within kubernetes
+
+  * With kubectl run:
+
+    ```
+    kubectl --namespace=demo delete thirdpartyresource demo-cass
+    ```
+
+  * You should be able to observe the deletion in both stackstorm and the cloudformation console

@@ -57,17 +57,28 @@ class K8sMigrateAction(Action):
 
             tmp = self.get_data(datatype, **kwargs)
 
-            #print "__________________"
-            #print "RECEIVED:"
-            #print json.dumps(tmp, sort_keys=True, indent=2, default=json_serial)
-            #print "__________________"
-
             # namespaces don't need a namespace argument when they're created
             if datatype == "ns":
                 kwargs = {}
 
-            # post data to second cluster
-            res = self.post_data(datatype, tmp, **kwargs)
+            if datatype == "thirdparty":
+                print json.dumps(tmp, sort_keys=True, indent=2, default=json_serial)
+                # split third party resources and post per namespace
+                for tpr in tmp:
+                    print "++++"
+                    print json.dumps(tpr, sort_keys=True, indent=2, default=json_serial)
+                    print "++++"
+                    if 'namespace' in tpr['metadata']:
+                        kwargs['ns'] = tpr['metadata']['namespace']
+                        if kwargs['ns'] in ['default', 'kube-system']:
+                            print "not migrating 3pr system ns"
+                            return
+                        res = self.post_data(datatype, tpr, **kwargs)
+                    else:
+                        print "no namespace for %s - skipping" % tpr['metadata']['name']
+            else:
+                # post data to second cluster
+                res = self.post_data(datatype, tmp, **kwargs)
 
             #print "RESP:"
             #print json.dumps(res, sort_keys=True, indent=2, default=json_serial)
@@ -88,7 +99,9 @@ class K8sMigrateAction(Action):
             get_and_post("rc", ns=name)
             get_and_post("secret", ns=name)
             get_and_post("ingress", ns=name)
-            get_and_post("thirdparty", ns=name)
+
+        # third party resources aren't namespaced on the request
+        #get_and_post("thirdparty")
 
     def get_data(self, datatype, **kwargs):
         """
@@ -229,7 +242,7 @@ class K8sMigrateAction(Action):
                                   "create": "create_namespaced_third_party_resource"},
                    "ds": {"list": "list_namespaced_daemon_set_0",
                           "create": "create_namespaced_daemon_set"},
-                   "deployments": {"list": "list_namespaced_deployment_2",
+                   "deployments": {"list": "list_namespaced_deployment_0",
                                    "create": "create_namespaced_deployment"},
                    "rs": {"list": "list_namespaced_replica_set",
                           "create": "create_namespaced_replica_set"},

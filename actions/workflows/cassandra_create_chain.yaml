@@ -15,28 +15,16 @@
         parameters: "{{cassandra_spec.result.parameters}}"
         capabilities:
         - "CAPABILITY_IAM"
-      on-success: "get_stack_events"
+      on-success: "get_stack_build_status"
     -
-      name: "get_stack_events"
-      ref: "kubernetes.describe_stack_events"
+      name: "get_stack_build_status"
+      ref: "kubernetes.get_stack_build_status"
       params:
         stack_name_or_id: "{{cassandra_spec.result.stack_name}}"
-      on-success: "check_stack_status"
-    -
-      name: "check_stack_status"
-      ref: "kubernetes.cloudformation_poll"
-      parameters:
-        cmd: "{{get_stack_events.stdout}}"
       on-failure: "retry_check_stack_status"
-      on-success: "get_stack_output"
     -
       name: "retry_check_stack_status"
       ref: "core.local"
       parameters:
         cmd: "sleep 10"
-      on-success: "get_stack_events"
-    -
-      name: "get_stack_output"
-      ref: "kubernetes.cf_output"
-      params:
-        stack_name_or_id: "{{cassandra_spec.result.stack_name}}"
+      on-success: "get_stack_build_status"

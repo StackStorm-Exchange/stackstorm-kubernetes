@@ -57,10 +57,10 @@ class K8sMigrateAction(Action):
 
             tmp = self.get_data(datatype, **kwargs)
 
-            print "__________________"
-            print "RECEIVED:"
-            print json.dumps(tmp, sort_keys=True, indent=2, default=json_serial)
-            print "__________________"
+            #print "__________________"
+            #print "RECEIVED:"
+            #print json.dumps(tmp, sort_keys=True, indent=2, default=json_serial)
+            #print "__________________"
 
             # namespaces don't need a namespace argument when they're created
             if datatype == "ns":
@@ -69,8 +69,8 @@ class K8sMigrateAction(Action):
             # post data to second cluster
             res = self.post_data(datatype, tmp, **kwargs)
 
-            print "RESP:"
-            print json.dumps(res, sort_keys=True, indent=2, default=json_serial)
+            #print "RESP:"
+            #print json.dumps(res, sort_keys=True, indent=2, default=json_serial)
 
         nsdata = self.k8s_src[0].list_namespace().to_dict()
 
@@ -83,6 +83,8 @@ class K8sMigrateAction(Action):
 
             get_and_post("ns", ns=name)
             get_and_post("service", ns=name)
+            get_and_post("deployments", ns=name)
+            get_and_post("ds", ns=name)
             get_and_post("rc", ns=name)
             get_and_post("secret", ns=name)
             get_and_post("ingress", ns=name)
@@ -188,6 +190,12 @@ class K8sMigrateAction(Action):
                                     'spec']['restartPolicy']
                     if "clusterIP" in item['spec']:
                         del item['spec']['clusterIP']
+                    if "strategy" in item['spec']:
+                        if "rollingUpdate" in item['spec']['strategy']:
+                            if 'maxSurge' in item['spec']['strategy']['rollingUpdate']:
+                                del item['spec']['strategy']['rollingUpdate']['maxSurge']
+                            if 'maxUnavailable' in item['spec']['strategy']['rollingUpdate']:
+                                del item['spec']['strategy']['rollingUpdate']['maxUnavailable']
 
                 output.append(item)
         else:
@@ -273,16 +281,16 @@ class K8sMigrateAction(Action):
             print "ns: " + kwargs['ns']
         else:
             print "ns: None"
-        print "body: "
-        print json.dumps(body, sort_keys=True, indent=2, default=json_serial)
-        print type(body)
+        #print "body: "
+        #print json.dumps(body, sort_keys=True, indent=2, default=json_serial)
+        #print type(body)
         output = []
 
         for item in body:
 
-            print "++++++++++++++"
-            print json.dumps(item, sort_keys=True, indent=2, default=json_serial)
-            print "++++++++++++++"
+            #print "++++++++++++++"
+            #print json.dumps(item, sort_keys=True, indent=2, default=json_serial)
+            #print "++++++++++++++"
 
             # if a namespace is set, make the function call with it. return a
             # dict

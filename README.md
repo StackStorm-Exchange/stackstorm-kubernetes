@@ -152,11 +152,15 @@ First of all, do these 2 manual steps -
     kubectl create -f name_of_your_file.yaml
     ```
 
-4. Once the stack is built, the instances will continue to deploy and configure - this takes around 15m
+4. Once the stack is built, the instances will continue to deploy and configure - this takes around 20m. The last thing you'll see in stackstorm is 3 cass_acl and a standalone vault_write action in the stackstorm history tab
 
-5. Upon completion there should be keys in consul under namespace/clustername and vault under the same for the password. The user will be bitesize
+5. Upon completion there will be keys in consul under namespace/clustername and vault under the same for the password. The user will be bitesize
 
-6. To delete, remove the third party resource within kubernetes
+6. To see the cluster status, login to any of the cassandra nodes and run:
+
+  ``` /home/cassandra/current/bin/nodetool status ```
+
+7. To delete, remove the third party resource within kubernetes
 
   * With kubectl run:
 

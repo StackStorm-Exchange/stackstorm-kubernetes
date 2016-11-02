@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import json
+import base64
 from st2actions.runners.pythonrunner import Action
 from lib import k8s
 from datetime import datetime
@@ -15,7 +16,11 @@ class SecretRead(Action):
         self.k8s = k8s.K8sClient(k8surl, k8suser, k8spass)
 
         resp = self.k8s.k8s[0].read_namespaced_secret(ns, name).to_dict()
-        print json.dumps(resp, sort_keys=True, indent=2, default=self._json_serial)
+        datastr = json.dumps(resp, sort_keys=True, indent=2, default=self._json_serial)
+        data = json.loads(datastr)
+        secret = data['data']
+
+        print base64.decodestring(secret[name])
 
     def _json_serial(self, obj):
         """JSON serializer for objects not serializable by default json code"""

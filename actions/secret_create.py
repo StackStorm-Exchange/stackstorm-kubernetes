@@ -37,7 +37,7 @@ class SecretCreate(Action):
         self.k8s = k8s.K8sClient(k8surl, k8suser, k8spass)
 
         resp = self.k8s.k8s[0].create_namespaced_secret(mysecret, ns).to_dict()
-        print json.dumps(resp, sort_keys=True, indent=2, default=self._json_serial)
+        #print json.dumps(resp, sort_keys=True, indent=2, default=self._json_serial)
 
     def _json_serial(self, obj):
         """JSON serializer for objects not serializable by default json code"""

@@ -9,7 +9,7 @@ from st2reactor.sensor.base import Sensor
 
 class KubeSystemSecret(Sensor):
     def __init__(self, sensor_service, config=None):
-        super(Secret, self).__init__(sensor_service=sensor_service, config=config)
+        super(KubeSystemSecret, self).__init__(sensor_service=sensor_service, config=config)
         self._log = self._sensor_service.get_logger(__name__)
         self.TRIGGER_REF = 'kubernetes.secret'
         self.client = None

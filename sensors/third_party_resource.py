@@ -78,9 +78,14 @@ class ThirdPartyResource(Sensor):
             self._log.exception(msg)
             raise
         else:
-            payload = self._build_a_trigger(resource_type=resource_type, name=name,
-                                    labels=labels_data, namespace=namespace,
-                                    object_kind=object_kind, uid=uid)
+            payload = self._build_a_trigger(
+		                resource_type=resource_type,
+		                name=name,
+		                labels=labels_data,
+		                namespace=namespace,
+		                object_kind=object_kind,
+		                uid=uid) if not (
+			                 'grafana' in str(k8s_object) and 'dev' in self._config['domain']) else None
             self._log.debug('Trigger payload: %s.' % payload)
             return payload
 

@@ -22,4 +22,4 @@ class listCoreV1PodTemplateForAllNamespaces(Action):
         if watch is not None:
           args['watch'] = watch
 
-        return myk8s.runAction('listCoreV1PodTemplateForAllNamespaces', **args)
+        return (True, myk8s.runAction('listCoreV1PodTemplateForAllNamespaces', **args))

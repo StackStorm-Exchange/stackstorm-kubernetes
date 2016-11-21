@@ -10,4 +10,4 @@ class getStorageAPIGroup(Action):
 
         args = {}
 
-        return myk8s.runAction('getStorageAPIGroup', **args)
+        return (True, myk8s.runAction('getStorageAPIGroup', **args))

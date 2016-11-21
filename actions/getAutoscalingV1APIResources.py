@@ -10,4 +10,4 @@ class getAutoscalingV1APIResources(Action):
 
         args = {}
 
-        return myk8s.runAction('getAutoscalingV1APIResources', **args)
+        return (True, myk8s.runAction('getAutoscalingV1APIResources', **args))

@@ -6,7 +6,7 @@ enabled: true
 entry_point: "deleteRbacAuthorizationV1alpha1NamespacedRole.py"
 parameters:
     body:
-        type: string
+        type: object
         description: ""
         required: True
     name:

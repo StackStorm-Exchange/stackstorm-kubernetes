@@ -10,4 +10,4 @@ class getCertificatesV1alpha1APIResources(Action):
 
         args = {}
 
-        return myk8s.runAction('getCertificatesV1alpha1APIResources', **args)
+        return (True, myk8s.runAction('getCertificatesV1alpha1APIResources', **args))

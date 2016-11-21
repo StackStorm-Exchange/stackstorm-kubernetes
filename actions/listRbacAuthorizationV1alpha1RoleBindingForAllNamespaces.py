@@ -22,4 +22,4 @@ class listRbacAuthorizationV1alpha1RoleBindingForAllNamespaces(Action):
         if watch is not None:
           args['watch'] = watch
 
-        return myk8s.runAction('listRbacAuthorizationV1alpha1RoleBindingForAllNamespaces', **args)
+        return (True, myk8s.runAction('listRbacAuthorizationV1alpha1RoleBindingForAllNamespaces', **args))

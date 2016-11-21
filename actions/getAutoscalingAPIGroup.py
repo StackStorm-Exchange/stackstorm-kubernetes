@@ -10,4 +10,4 @@ class getAutoscalingAPIGroup(Action):
 
         args = {}
 
-        return myk8s.runAction('getAutoscalingAPIGroup', **args)
+        return (True, myk8s.runAction('getAutoscalingAPIGroup', **args))

@@ -6,7 +6,7 @@ enabled: true
 entry_point: "replaceCertificatesV1alpha1CertificateSigningRequestStatus.py"
 parameters:
     body:
-        type: string
+        type: object
         description: ""
         required: True
     name:

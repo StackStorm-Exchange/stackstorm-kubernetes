@@ -11,7 +11,9 @@ class createCertificatesV1alpha1CertificateSigningRequest(Action):
         args = {}
         if body is not None:
           args['body'] = body
+        else:
+          return (False, "body is a required parameter")
         if pretty is not None:
           args['pretty'] = pretty
 
-        return myk8s.runAction('createCertificatesV1alpha1CertificateSigningRequest', **args)
+        return (True, myk8s.runAction('createCertificatesV1alpha1CertificateSigningRequest', **args))

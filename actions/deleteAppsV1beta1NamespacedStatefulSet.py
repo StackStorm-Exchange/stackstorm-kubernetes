@@ -11,10 +11,16 @@ class deleteAppsV1beta1NamespacedStatefulSet(Action):
         args = {}
         if body is not None:
           args['body'] = body
+        else:
+          return (False, "body is a required parameter")
         if name is not None:
           args['name'] = name
+        else:
+          return (False, "name is a required parameter")
         if namespace is not None:
           args['namespace'] = namespace
+        else:
+          return (False, "namespace is a required parameter")
         if gracePeriodSeconds is not None:
           args['gracePeriodSeconds'] = gracePeriodSeconds
         if orphanDependents is not None:
@@ -22,4 +28,4 @@ class deleteAppsV1beta1NamespacedStatefulSet(Action):
         if pretty is not None:
           args['pretty'] = pretty
 
-        return myk8s.runAction('deleteAppsV1beta1NamespacedStatefulSet', **args)
+        return (True, myk8s.runAction('deleteAppsV1beta1NamespacedStatefulSet', **args))

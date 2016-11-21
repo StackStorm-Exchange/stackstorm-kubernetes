@@ -22,4 +22,4 @@ class listCoreV1PersistentVolumeClaimForAllNamespaces(Action):
         if watch is not None:
           args['watch'] = watch
 
-        return myk8s.runAction('listCoreV1PersistentVolumeClaimForAllNamespaces', **args)
+        return (True, myk8s.runAction('listCoreV1PersistentVolumeClaimForAllNamespaces', **args))

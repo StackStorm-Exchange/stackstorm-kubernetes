@@ -11,6 +11,8 @@ class listBatchV1NamespacedJob(Action):
         args = {}
         if namespace is not None:
           args['namespace'] = namespace
+        else:
+          return (False, "namespace is a required parameter")
         if fieldSelector is not None:
           args['fieldSelector'] = fieldSelector
         if labelSelector is not None:
@@ -24,4 +26,4 @@ class listBatchV1NamespacedJob(Action):
         if pretty is not None:
           args['pretty'] = pretty
 
-        return myk8s.runAction('listBatchV1NamespacedJob', **args)
+        return (True, myk8s.runAction('listBatchV1NamespacedJob', **args))

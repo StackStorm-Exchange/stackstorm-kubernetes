@@ -6,7 +6,7 @@ enabled: true
 entry_point: "createRbacAuthorizationV1alpha1NamespacedRole.py"
 parameters:
     body:
-        type: string
+        type: object
         description: ""
         required: True
     namespace:

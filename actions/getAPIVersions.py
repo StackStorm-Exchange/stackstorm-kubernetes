@@ -10,4 +10,4 @@ class getAPIVersions(Action):
 
         args = {}
 
-        return myk8s.runAction('getAPIVersions', **args)
+        return (True, myk8s.runAction('getAPIVersions', **args))

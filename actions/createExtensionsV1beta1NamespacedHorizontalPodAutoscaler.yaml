@@ -6,7 +6,7 @@ enabled: true
 entry_point: "createExtensionsV1beta1NamespacedHorizontalPodAutoscaler.py"
 parameters:
     body:
-        type: string
+        type: object
         description: ""
         required: True
     namespace:

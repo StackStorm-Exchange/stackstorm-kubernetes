@@ -22,4 +22,4 @@ class deleteRbacAuthorizationV1alpha1CollectionClusterRoleBinding(Action):
         if pretty is not None:
           args['pretty'] = pretty
 
-        return myk8s.runAction('deleteRbacAuthorizationV1alpha1CollectionClusterRoleBinding', **args)
+        return (True, myk8s.runAction('deleteRbacAuthorizationV1alpha1CollectionClusterRoleBinding', **args))

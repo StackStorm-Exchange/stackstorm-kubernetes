@@ -6,7 +6,7 @@ enabled: true
 entry_point: "patchCoreV1NamespacedEndpoints.py"
 parameters:
     body:
-        type: string
+        type: object
         description: ""
         required: True
     name:

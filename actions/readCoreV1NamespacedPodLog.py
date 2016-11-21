@@ -11,8 +11,12 @@ class readCoreV1NamespacedPodLog(Action):
         args = {}
         if name is not None:
           args['name'] = name
+        else:
+          return (False, "name is a required parameter")
         if namespace is not None:
           args['namespace'] = namespace
+        else:
+          return (False, "namespace is a required parameter")
         if container is not None:
           args['container'] = container
         if follow is not None:
@@ -32,4 +36,4 @@ class readCoreV1NamespacedPodLog(Action):
         if timestamps is not None:
           args['timestamps'] = timestamps
 
-        return myk8s.runAction('readCoreV1NamespacedPodLog', **args)
+        return (True, myk8s.runAction('readCoreV1NamespacedPodLog', **args))

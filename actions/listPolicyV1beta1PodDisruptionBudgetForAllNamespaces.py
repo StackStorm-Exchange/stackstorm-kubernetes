@@ -22,4 +22,4 @@ class listPolicyV1beta1PodDisruptionBudgetForAllNamespaces(Action):
         if watch is not None:
           args['watch'] = watch
 
-        return myk8s.runAction('listPolicyV1beta1PodDisruptionBudgetForAllNamespaces', **args)
+        return (True, myk8s.runAction('listPolicyV1beta1PodDisruptionBudgetForAllNamespaces', **args))

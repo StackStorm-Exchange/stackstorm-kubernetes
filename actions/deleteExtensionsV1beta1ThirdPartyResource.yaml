@@ -6,7 +6,7 @@ enabled: true
 entry_point: "deleteExtensionsV1beta1ThirdPartyResource.py"
 parameters:
     body:
-        type: string
+        type: object
         description: ""
         required: True
     name:

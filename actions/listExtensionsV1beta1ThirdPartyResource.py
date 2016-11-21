@@ -22,4 +22,4 @@ class listExtensionsV1beta1ThirdPartyResource(Action):
         if pretty is not None:
           args['pretty'] = pretty
 
-        return myk8s.runAction('listExtensionsV1beta1ThirdPartyResource', **args)
+        return (True, myk8s.runAction('listExtensionsV1beta1ThirdPartyResource', **args))

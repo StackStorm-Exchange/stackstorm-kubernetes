@@ -10,4 +10,4 @@ class getAuthenticationV1beta1APIResources(Action):
 
         args = {}
 
-        return myk8s.runAction('getAuthenticationV1beta1APIResources', **args)
+        return (True, myk8s.runAction('getAuthenticationV1beta1APIResources', **args))

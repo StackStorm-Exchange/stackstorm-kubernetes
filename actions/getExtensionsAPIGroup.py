@@ -10,4 +10,4 @@ class getExtensionsAPIGroup(Action):
 
         args = {}
 
-        return myk8s.runAction('getExtensionsAPIGroup', **args)
+        return (True, myk8s.runAction('getExtensionsAPIGroup', **args))

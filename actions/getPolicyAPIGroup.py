@@ -10,4 +10,4 @@ class getPolicyAPIGroup(Action):
 
         args = {}
 
-        return myk8s.runAction('getPolicyAPIGroup', **args)
+        return (True, myk8s.runAction('getPolicyAPIGroup', **args))

@@ -22,4 +22,4 @@ class listExtensionsV1beta1ReplicaSetForAllNamespaces(Action):
         if watch is not None:
           args['watch'] = watch
 
-        return myk8s.runAction('listExtensionsV1beta1ReplicaSetForAllNamespaces', **args)
+        return (True, myk8s.runAction('listExtensionsV1beta1ReplicaSetForAllNamespaces', **args))

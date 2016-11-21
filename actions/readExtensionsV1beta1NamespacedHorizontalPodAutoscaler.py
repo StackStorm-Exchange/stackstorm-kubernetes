@@ -11,8 +11,12 @@ class readExtensionsV1beta1NamespacedHorizontalPodAutoscaler(Action):
         args = {}
         if name is not None:
           args['name'] = name
+        else:
+          return (False, "name is a required parameter")
         if namespace is not None:
           args['namespace'] = namespace
+        else:
+          return (False, "namespace is a required parameter")
         if exact is not None:
           args['exact'] = exact
         if export is not None:
@@ -20,4 +24,4 @@ class readExtensionsV1beta1NamespacedHorizontalPodAutoscaler(Action):
         if pretty is not None:
           args['pretty'] = pretty
 
-        return myk8s.runAction('readExtensionsV1beta1NamespacedHorizontalPodAutoscaler', **args)
+        return (True, myk8s.runAction('readExtensionsV1beta1NamespacedHorizontalPodAutoscaler', **args))

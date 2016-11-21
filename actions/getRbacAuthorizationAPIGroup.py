@@ -10,4 +10,4 @@ class getRbacAuthorizationAPIGroup(Action):
 
         args = {}
 
-        return myk8s.runAction('getRbacAuthorizationAPIGroup', **args)
+        return (True, myk8s.runAction('getRbacAuthorizationAPIGroup', **args))

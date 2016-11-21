@@ -10,4 +10,4 @@ class getBatchV2alpha1APIResources(Action):
 
         args = {}
 
-        return myk8s.runAction('getBatchV2alpha1APIResources', **args)
+        return (True, myk8s.runAction('getBatchV2alpha1APIResources', **args))

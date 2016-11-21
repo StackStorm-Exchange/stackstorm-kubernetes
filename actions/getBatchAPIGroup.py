@@ -10,4 +10,4 @@ class getBatchAPIGroup(Action):
 
         args = {}
 
-        return myk8s.runAction('getBatchAPIGroup', **args)
+        return (True, myk8s.runAction('getBatchAPIGroup', **args))

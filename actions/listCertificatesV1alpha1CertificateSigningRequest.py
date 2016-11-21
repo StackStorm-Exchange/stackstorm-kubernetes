@@ -22,4 +22,4 @@ class listCertificatesV1alpha1CertificateSigningRequest(Action):
         if pretty is not None:
           args['pretty'] = pretty
 
-        return myk8s.runAction('listCertificatesV1alpha1CertificateSigningRequest', **args)
+        return (True, myk8s.runAction('listCertificatesV1alpha1CertificateSigningRequest', **args))

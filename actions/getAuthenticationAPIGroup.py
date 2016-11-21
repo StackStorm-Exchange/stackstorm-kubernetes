@@ -10,4 +10,4 @@ class getAuthenticationAPIGroup(Action):
 
         args = {}
 
-        return myk8s.runAction('getAuthenticationAPIGroup', **args)
+        return (True, myk8s.runAction('getAuthenticationAPIGroup', **args))

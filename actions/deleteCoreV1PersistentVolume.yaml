@@ -6,7 +6,7 @@ enabled: true
 entry_point: "deleteCoreV1PersistentVolume.py"
 parameters:
     body:
-        type: string
+        type: object
         description: ""
         required: True
     name:

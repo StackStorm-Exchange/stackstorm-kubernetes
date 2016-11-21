@@ -10,4 +10,4 @@ class getCoreAPIVersions(Action):
 
         args = {}
 
-        return myk8s.runAction('getCoreAPIVersions', **args)
+        return (True, myk8s.runAction('getCoreAPIVersions', **args))

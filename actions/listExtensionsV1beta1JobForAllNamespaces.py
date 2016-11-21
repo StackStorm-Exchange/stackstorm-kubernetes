@@ -22,4 +22,4 @@ class listExtensionsV1beta1JobForAllNamespaces(Action):
         if watch is not None:
           args['watch'] = watch
 
-        return myk8s.runAction('listExtensionsV1beta1JobForAllNamespaces', **args)
+        return (True, myk8s.runAction('listExtensionsV1beta1JobForAllNamespaces', **args))

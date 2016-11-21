@@ -22,4 +22,4 @@ class listCoreV1ResourceQuotaForAllNamespaces(Action):
         if watch is not None:
           args['watch'] = watch
 
-        return myk8s.runAction('listCoreV1ResourceQuotaForAllNamespaces', **args)
+        return (True, myk8s.runAction('listCoreV1ResourceQuotaForAllNamespaces', **args))

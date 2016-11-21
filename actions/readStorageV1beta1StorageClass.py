@@ -11,6 +11,8 @@ class readStorageV1beta1StorageClass(Action):
         args = {}
         if name is not None:
           args['name'] = name
+        else:
+          return (False, "name is a required parameter")
         if exact is not None:
           args['exact'] = exact
         if export is not None:
@@ -18,4 +20,4 @@ class readStorageV1beta1StorageClass(Action):
         if pretty is not None:
           args['pretty'] = pretty
 
-        return myk8s.runAction('readStorageV1beta1StorageClass', **args)
+        return (True, myk8s.runAction('readStorageV1beta1StorageClass', **args))

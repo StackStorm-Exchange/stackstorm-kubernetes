@@ -10,4 +10,4 @@ class getPolicyV1beta1APIResources(Action):
 
         args = {}
 
-        return myk8s.runAction('getPolicyV1beta1APIResources', **args)
+        return (True, myk8s.runAction('getPolicyV1beta1APIResources', **args))

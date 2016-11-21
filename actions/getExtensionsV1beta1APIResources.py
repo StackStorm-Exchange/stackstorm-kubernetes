@@ -10,4 +10,4 @@ class getExtensionsV1beta1APIResources(Action):
 
         args = {}
 
-        return myk8s.runAction('getExtensionsV1beta1APIResources', **args)
+        return (True, myk8s.runAction('getExtensionsV1beta1APIResources', **args))

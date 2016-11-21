@@ -3,17 +3,24 @@
 Pack which allows integration with [Kubernetes](https://kubernetes.io/) service.
 
 # Current Status & Capabilities
-Creates a StackStorm Sensor (watch) on Kubernetes ThirdPartyResource API endpoint
-Listens for new events. If 'ADDED', rule can pick up and create and AWS RDS database.
+Creates actions, sensors and rules to interact with kubernetes through stackstorm
+Listens for new third party resources, and dynamically creates new sensors for these
+It does not create rules to match the generated sensors.
+Actions can be created to react to third party resource addition/deletion (for example
+create services in AWS through cloudformation)
+
+Templates for new sensors are installed to the pack root directory by default
 
 ## Configuration
 
 config.yaml includes:
 ```yaml
-user: ""
-password: ""
-kubernetes_api_url: "https://kube_api_url"
-extension_url: "/apis/extensions/v1beta1/watch/thirdpartyresources"
+user: "xxxxxxxx"
+password: "xxxxxxxx"
+kubernetes_api_url: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+verify: false
+
+template_path: "/opt/stackstorm/packs/kubernetes/"
 ```
 Where kube_api_url = The FQDN to your Kubernetes API endpoint.
 
@@ -38,7 +45,9 @@ The following must be enabled on Kubernetes API in ```kube-apiserver.yaml```
 
 Simply add the line above. kube-api container will automatically restart to accept the change.
 
+### To test creating a namespace:
 
+{"kind":"Namespace","apiVersion":"v1","metadata":{"name":"testing2","creationTimestamp":null},"spec":{},"status":{}}
 
 ### To Test the RDS create event in the Kubernetes Pack
 

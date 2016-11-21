@@ -1,4 +1,2 @@
-git+git://github.com/pearsontechnology/k8sv1beta1#k8sv1beta1
-git+git://github.com/pearsontechnology/k8sv1#k8sv1
-boto
-boto3
+pyswagger
+jinja2

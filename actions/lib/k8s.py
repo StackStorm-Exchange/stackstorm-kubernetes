@@ -1,97 +1,107 @@
 import json
 import importlib
+import requests
+import re
+import base64
+
+from pyswagger import App, Security
+from pyswagger.utils import jp_compose
+from pyswagger.core import BaseClient
+from pyswagger.io import Request
+from pyswagger.primitives import Primitive
+
+from k8sbase import Client
 
 from datetime import datetime
 
+import requests
+import logging
+
 class K8sClient:
 
-    def __init__(self, master_url, username, password):
+    def __init__(self, config):
 
-        self.k8s = (
-            self._get_k8s_client('k8sv1','ApivApi', master_url, username, password),
-            self._get_k8s_client('k8sv1beta1','ApisextensionsvbetaApi', master_url, username, password)
+        self.config = config
+        self.templates = config['template_path']
+
+        self.swagger = self.templates + "/swagger.json"
+
+    def _json_serial(self, obj):
+        """JSON serializer for objects not serializable by default json code"""
+
+        if isinstance(obj, datetime):
+            serial = obj.isoformat()
+            return serial
+        raise TypeError("Type not serializable")
+
+    def _encode_intOrString(self, obj, val, ctx):
+        # val is the value used to create this primitive, for example, a
+        # dict would be used to create a Model and list would be used to
+        # create an Array
+
+        # obj in the spec used to create primitives, they are
+        # Header, Items, Schema, Parameter in Swagger 2.0.
+
+        # ctx is parsing context when producing primitives. Some primitves needs
+        # multiple passes to produce(ex. Model), when we need to keep some globals
+        # between passes, we should place them in ctx
+
+        return 
+
+
+    def runAction(self, action, **kwargs):
+
+        factory = Primitive()
+        factory.register('string', 'int-or-string', self._encode_intOrString)
+        app = App.load(self.swagger, prim=factory)
+        app.prepare(strict=True)
+
+        client = Client(config=self.config, send_opt=({'verify': False}))
+
+        # hack to allow initial config against local swagger file, but redirect request to remote host
+        opt=dict(
+            url_netloc = self.config['kubernetes_api_url'][8:] 
         )
 
-    def _get_k8s_client(self, api_version, api_library, master_url, username, password):
 
-        api_version = importlib.import_module(api_version)
-        api_library = getattr(api_version, api_library)
-        api_version.Configuration().verify_ssl = False
-        api_version.Configuration().username = username
-        api_version.Configuration().password = password
+        op = app.op[action]
 
-        apiclient = api_version.ApiClient(
-            master_url,
-            header_name="Authorization",
-            header_value=api_version.configuration.get_basic_auth_token())
-        apiclient.default_headers['Content-Type'] = 'application/json'
+        # bit of a hack - pyswagger can't handle */* currently
+        if op.consumes[0] == u'*/*':
+            op.consumes[0] = u'application/json'
 
-        client = api_library(apiclient)
-        return client
+        a = op(**kwargs)
 
-    def _lookup_func(self, func, functype):
-        """
-        Given a k8s object, and an operation type, return the library function
-        This will break if the library changes..
+        resp = client.request(a, opt=opt)
 
-        :param str func: object type
-        :param str functype: choice between list (read) or create
-        :return: function name
-        """
+        return resp
 
-        funcmap = {"ns": {"list": "read_namespace",
-                          "create": "create_namespace"},
-                   "service": {"list": "list_namespaced_service",
-                               "create": "create_namespaced_service"},
-                   "pod": {"list": "list_namespaced_pod",
-                           "create": "create_namespaced_pod"},
-                   "rc": {"list": "list_namespaced_replication_controller",
-                          "create": "create_namespaced_replication_controller"},
-                   "secret": {"list": "list_namespaced_secret",
-                              "create": "create_namespaced_secret"},
-                   "ingress": {"list": "list_namespaced_ingress_0",
-                               "create": "create_namespaced_ingress"},
-                   "thirdparty": {"list": "list_third_party_resource",
-                                  "create": "create_namespaced_third_party_resource"},
-                   "ds": {"list": "list_namespaced_daemon_set_0",
-                          "create": "create_namespaced_daemon_set"},
-                   "deployments": {"list": "list_namespaced_deployment_2",
-                                   "create": "create_namespaced_deployment"},
-                   "rs": {"list": "list_namespaced_replica_set",
-                          "create": "create_namespaced_replica_set"},
-                   "endpoint": {"list": "list_namespaced_endpoints_20",
-                                "create": "create_namespaced_endpoints"},
-                   "pv": {"list": "list_persistent_volume",
-                          "create": "create_persistent_volume"},
-                   "pvclaim": {"list": "list_namespaced_persistent_volume_claim",
-                               "create": "create_namespaced_persistent_volume_claim"},
-                   "jobs": {"list": "list_namespaced_job_5",
-                            "create": "create_namespaced_job"},
-                   "hpa": {"list": "list_namespaced_horizontal_pod_autoscaler_3",
-                           "create": "create_namespaced_horizontal_pod_autoscaler"},
-                   "networkpol": {"list": "list_namespaced_network_policy",
-                                  "create": "create_namespaced_network_policy"},
-                   "configmap": {"list": "list_namespaced_config_map_19",
-                                 "create": "create_namespaced_config_map"},
-                   "limitrange": {"list": "list_namespaced_limit_range_22",
-                                  "create": "create_namespaced_limit_range"},
-                   "podtemplate": {"list": "list_namespaced_pod_template",
-                                   "create": "create_namespaced_pod_template"},
-                   "resquota": {"list": "list_namespaced_resource_quota",
-                                "create": "create_namespaced_resource_quota"}
-                   }
+if __name__ == "__main__":
 
-        return funcmap[func][functype]
+    config = {'kubernetes_api_url': "https://kuberentes.master.host", 'user': 'admin', 'password': 'password', 'template_path': '/opt/stackstorm/packs/kubernetes'}
 
-    def k8s_action(self, action, ns, data, action_type="list"):
+    k8s = K8sClient(config)
 
-        myfunc = self._lookup_func(action, action_type)
+    #args = {'name': 'default'}
+    #resp = k8s.runAction('readCoreV1Namespace', **args)
+    #print json.dumps(resp, sort_keys=True, indent=2)
 
-        if(myfunc in dir(self.k8s[0])):
-            myapi = self.k8s[0]
-        if(myfunc in dir(self.k8s[1])):
-            myapi = self.k8s[1]
+    #args = {"body": {"kind": "Namespace", "apiVersion": "v1", "metadata": {"labels": {"project": "andy"}, "name": "new-stg"}}}
+    #resp = k8s.runAction('createCoreV1Namespace', **args)
 
-        data = getattr(myapi, myfunc)(data, ns).to_dict()
+    #args = {'namespace': 'new-stg', 'body': {'type': 'Opaque', 'kind':'Secret','test':{'aaa':'YmJi'},'apiVersion':'v1','metadata':{'name':'aaa'}}}
+    #args = {"namespace": "new-stg", "body": {"kind":"Secret","data":{"bbb":"YmJi"},"apiVersion":"v1","metadata":{"namespace":"new-stg","name":"bbb"}}}
+    #args = {"namespace": "new-prd", "body": {"kind":"Secret","apiVersion":"v1","metadata":{"name":"mysecret2","creationTimestamp":None},"data":{"name":"Y29uc3VsLWFhYS1kZXYtcmVhZAo=","value":"YzM3NDBjY2ItNGJkOC1hZTA3LWQ3MjMtYTYyMGY0YTU2YjNhCg=="}   }}
+    #resp = k8s.runAction('createCoreV1NamespacedSecret', **args)
 
-        return data
+    #args = {"namespace": "mmm-tst", "body": { "kind": "ResourceQuota", "spec": { "hard": { "resourcequotas": "1", "persistentvolumeclaims": "60", "secrets": "10", "replicationcontrollers": "20", "services": "10", "pods": "100" } }, "apiVersion": "v1", "metadata": { "namespace": "mmm-tst", "name": "quota" } } }
+
+    #resp = k8s.runAction('createCoreV1NamespacedResourceQuota', **args)
+
+    args = {"namespace": "new-prd", "body": { "kind":"Service","spec":{"ports":[{"targetPort":"80","protocol":"TCP","port":"80"}],"selector":{"name":"jenkins"}},"apiVersion":"v1","metadata":{"labels":{"name":"apt"},"namespace":"new-prd","name":"apt"}}}
+
+    resp = k8s.runAction('createCoreV1NamespacedService', **args)
+
+    print json.dumps(resp, sort_keys=True, indent=2)
+
+    #print json.dumps(args, sort_keys=True, indent=2)

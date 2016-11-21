@@ -1,6 +1,0 @@
-name: list_third_party_resource
-runner_type: run-python
-description: "list of k8s third party resources "
-enabled: true
-entry_point: "list_third_party_resource.py"
-parameters: {}

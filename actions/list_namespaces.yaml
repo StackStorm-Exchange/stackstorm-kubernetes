@@ -1,7 +1,0 @@
-name: list_namespaces
-pack: "kubernetes"
-runner_type: run-python
-description: "list of k8s namespaces "
-enabled: true
-entry_point: "list_namespaces.py"
-parameters: {}

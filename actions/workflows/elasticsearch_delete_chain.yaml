@@ -1,9 +1,0 @@
----
-  chain:
-    -
-      name: "delete_elasticsearch_domain"
-      ref: "aws.es_delete_elasticsearch_domain"
-      params:
-        DomainName: "test2"
-
-

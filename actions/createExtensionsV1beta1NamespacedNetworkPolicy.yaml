@@ -1,0 +1,18 @@
+name: createExtensionsV1beta1NamespacedNetworkPolicy
+pack: kubernetes
+runner_type: run-python
+description: "create a NetworkPolicy"
+enabled: true
+entry_point: "createExtensionsV1beta1NamespacedNetworkPolicy.py"
+parameters:
+    body:
+        type: string
+        description: ""
+        required: True
+    namespace:
+        type: string
+        description: "object name and auth scope, such as for teams and projects"
+        required: True
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

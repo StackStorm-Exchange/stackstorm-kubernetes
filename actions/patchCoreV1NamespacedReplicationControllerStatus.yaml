@@ -1,0 +1,22 @@
+name: patchCoreV1NamespacedReplicationControllerStatus
+pack: kubernetes
+runner_type: run-python
+description: "partially update status of the specified ReplicationController"
+enabled: true
+entry_point: "patchCoreV1NamespacedReplicationControllerStatus.py"
+parameters:
+    body:
+        type: string
+        description: ""
+        required: True
+    name:
+        type: string
+        description: "name of the ReplicationController"
+        required: True
+    namespace:
+        type: string
+        description: "object name and auth scope, such as for teams and projects"
+        required: True
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

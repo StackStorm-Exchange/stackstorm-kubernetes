@@ -1,0 +1,22 @@
+name: replaceBatchV1NamespacedJobStatus
+pack: kubernetes
+runner_type: run-python
+description: "replace status of the specified Job"
+enabled: true
+entry_point: "replaceBatchV1NamespacedJobStatus.py"
+parameters:
+    body:
+        type: string
+        description: ""
+        required: True
+    name:
+        type: string
+        description: "name of the Job"
+        required: True
+    namespace:
+        type: string
+        description: "object name and auth scope, such as for teams and projects"
+        required: True
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

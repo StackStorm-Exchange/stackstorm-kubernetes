@@ -1,0 +1,22 @@
+name: patchExtensionsV1beta1NamespacedReplicationcontrollersScale
+pack: kubernetes
+runner_type: run-python
+description: "partially update scale of the specified Scale"
+enabled: true
+entry_point: "patchExtensionsV1beta1NamespacedReplicationcontrollersScale.py"
+parameters:
+    body:
+        type: string
+        description: ""
+        required: True
+    name:
+        type: string
+        description: "name of the Scale"
+        required: True
+    namespace:
+        type: string
+        description: "object name and auth scope, such as for teams and projects"
+        required: True
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

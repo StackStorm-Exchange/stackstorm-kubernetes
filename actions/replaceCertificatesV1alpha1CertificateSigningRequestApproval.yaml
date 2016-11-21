@@ -1,0 +1,18 @@
+name: replaceCertificatesV1alpha1CertificateSigningRequestApproval
+pack: kubernetes
+runner_type: run-python
+description: "replace approval of the specified CertificateSigningRequest"
+enabled: true
+entry_point: "replaceCertificatesV1alpha1CertificateSigningRequestApproval.py"
+parameters:
+    body:
+        type: string
+        description: ""
+        required: True
+    name:
+        type: string
+        description: "name of the CertificateSigningRequest"
+        required: True
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

@@ -1,0 +1,14 @@
+name: readCoreV1ComponentStatus
+pack: kubernetes
+runner_type: run-python
+description: "read the specified ComponentStatus"
+enabled: true
+entry_point: "readCoreV1ComponentStatus.py"
+parameters:
+    name:
+        type: string
+        description: "name of the ComponentStatus"
+        required: True
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

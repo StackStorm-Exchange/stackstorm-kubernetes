@@ -1,0 +1,19 @@
+---
+  chain:
+    -
+      name: "check_sensor_list"
+      ref: "kubernetes.check_sensor_list"
+      params:
+        search: "{{payload}}"
+      on-success: "create_tpr_sensor"
+    -
+      name: "create_tpr_sensor"
+      ref: "kubernetes.create_tpr_sensor"
+      params:
+        payload: "{{payload}}"
+      on-success: "reload_st2"
+
+    - name: "reload_st2"
+      ref: "core.local"
+      params:
+        cmd: "st2ctl reload --register-sensors"

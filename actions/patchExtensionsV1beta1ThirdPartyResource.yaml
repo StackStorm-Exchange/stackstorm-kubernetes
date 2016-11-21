@@ -1,0 +1,18 @@
+name: patchExtensionsV1beta1ThirdPartyResource
+pack: kubernetes
+runner_type: run-python
+description: "partially update the specified ThirdPartyResource"
+enabled: true
+entry_point: "patchExtensionsV1beta1ThirdPartyResource.py"
+parameters:
+    body:
+        type: string
+        description: ""
+        required: True
+    name:
+        type: string
+        description: "name of the ThirdPartyResource"
+        required: True
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

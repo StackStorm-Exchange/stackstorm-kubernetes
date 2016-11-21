@@ -1,0 +1,22 @@
+name: patchPolicyV1beta1NamespacedPodDisruptionBudgetStatus
+pack: kubernetes
+runner_type: run-python
+description: "partially update status of the specified PodDisruptionBudget"
+enabled: true
+entry_point: "patchPolicyV1beta1NamespacedPodDisruptionBudgetStatus.py"
+parameters:
+    body:
+        type: string
+        description: ""
+        required: True
+    name:
+        type: string
+        description: "name of the PodDisruptionBudget"
+        required: True
+    namespace:
+        type: string
+        description: "object name and auth scope, such as for teams and projects"
+        required: True
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

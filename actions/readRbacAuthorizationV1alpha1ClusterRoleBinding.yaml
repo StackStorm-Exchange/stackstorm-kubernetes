@@ -1,0 +1,14 @@
+name: readRbacAuthorizationV1alpha1ClusterRoleBinding
+pack: kubernetes
+runner_type: run-python
+description: "read the specified ClusterRoleBinding"
+enabled: true
+entry_point: "readRbacAuthorizationV1alpha1ClusterRoleBinding.py"
+parameters:
+    name:
+        type: string
+        description: "name of the ClusterRoleBinding"
+        required: True
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

@@ -1,0 +1,18 @@
+name: replaceCoreV1NamespaceStatus
+pack: kubernetes
+runner_type: run-python
+description: "replace status of the specified Namespace"
+enabled: true
+entry_point: "replaceCoreV1NamespaceStatus.py"
+parameters:
+    body:
+        type: string
+        description: ""
+        required: True
+    name:
+        type: string
+        description: "name of the Namespace"
+        required: True
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

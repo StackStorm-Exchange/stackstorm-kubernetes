@@ -1,0 +1,18 @@
+name: createRbacAuthorizationV1alpha1NamespacedRoleBinding
+pack: kubernetes
+runner_type: run-python
+description: "create a RoleBinding"
+enabled: true
+entry_point: "createRbacAuthorizationV1alpha1NamespacedRoleBinding.py"
+parameters:
+    body:
+        type: string
+        description: ""
+        required: True
+    namespace:
+        type: string
+        description: "object name and auth scope, such as for teams and projects"
+        required: True
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

@@ -1,0 +1,18 @@
+name: patchRbacAuthorizationV1alpha1ClusterRole
+pack: kubernetes
+runner_type: run-python
+description: "partially update the specified ClusterRole"
+enabled: true
+entry_point: "patchRbacAuthorizationV1alpha1ClusterRole.py"
+parameters:
+    body:
+        type: string
+        description: ""
+        required: True
+    name:
+        type: string
+        description: "name of the ClusterRole"
+        required: True
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

@@ -1,0 +1,22 @@
+name: replaceCoreV1NamespacedPersistentVolumeClaim
+pack: kubernetes
+runner_type: run-python
+description: "replace the specified PersistentVolumeClaim"
+enabled: true
+entry_point: "replaceCoreV1NamespacedPersistentVolumeClaim.py"
+parameters:
+    body:
+        type: string
+        description: ""
+        required: True
+    name:
+        type: string
+        description: "name of the PersistentVolumeClaim"
+        required: True
+    namespace:
+        type: string
+        description: "object name and auth scope, such as for teams and projects"
+        required: True
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

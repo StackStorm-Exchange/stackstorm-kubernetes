@@ -1,0 +1,6 @@
+name: getAuthenticationV1beta1APIResources
+pack: kubernetes
+runner_type: run-python
+description: "get available resources"
+enabled: true
+entry_point: "getAuthenticationV1beta1APIResources.py"

@@ -1,0 +1,18 @@
+name: createAppsV1beta1NamespacedStatefulSet
+pack: kubernetes
+runner_type: run-python
+description: "create a StatefulSet"
+enabled: true
+entry_point: "createAppsV1beta1NamespacedStatefulSet.py"
+parameters:
+    body:
+        type: string
+        description: ""
+        required: True
+    namespace:
+        type: string
+        description: "object name and auth scope, such as for teams and projects"
+        required: True
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

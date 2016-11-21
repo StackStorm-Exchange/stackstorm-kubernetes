@@ -1,0 +1,14 @@
+name: createAuthenticationV1beta1TokenReview
+pack: kubernetes
+runner_type: run-python
+description: "create a TokenReview"
+enabled: true
+entry_point: "createAuthenticationV1beta1TokenReview.py"
+parameters:
+    body:
+        type: string
+        description: ""
+        required: True
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

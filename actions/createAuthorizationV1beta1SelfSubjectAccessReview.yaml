@@ -1,0 +1,14 @@
+name: createAuthorizationV1beta1SelfSubjectAccessReview
+pack: kubernetes
+runner_type: run-python
+description: "create a SelfSubjectAccessReview"
+enabled: true
+entry_point: "createAuthorizationV1beta1SelfSubjectAccessReview.py"
+parameters:
+    body:
+        type: string
+        description: ""
+        required: True
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

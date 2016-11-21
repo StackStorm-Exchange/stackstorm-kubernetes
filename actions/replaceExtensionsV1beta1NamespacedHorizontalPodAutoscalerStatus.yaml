@@ -1,0 +1,22 @@
+name: replaceExtensionsV1beta1NamespacedHorizontalPodAutoscalerStatus
+pack: kubernetes
+runner_type: run-python
+description: "replace status of the specified HorizontalPodAutoscaler"
+enabled: true
+entry_point: "replaceExtensionsV1beta1NamespacedHorizontalPodAutoscalerStatus.py"
+parameters:
+    body:
+        type: string
+        description: ""
+        required: True
+    name:
+        type: string
+        description: "name of the HorizontalPodAutoscaler"
+        required: True
+    namespace:
+        type: string
+        description: "object name and auth scope, such as for teams and projects"
+        required: True
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

@@ -1,0 +1,14 @@
+name: createCoreV1Namespace
+pack: kubernetes
+runner_type: run-python
+description: "create a Namespace"
+enabled: true
+entry_point: "createCoreV1Namespace.py"
+parameters:
+    body:
+        type: string
+        description: ""
+        required: True
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

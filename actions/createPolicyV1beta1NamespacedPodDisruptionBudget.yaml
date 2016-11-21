@@ -1,0 +1,18 @@
+name: createPolicyV1beta1NamespacedPodDisruptionBudget
+pack: kubernetes
+runner_type: run-python
+description: "create a PodDisruptionBudget"
+enabled: true
+entry_point: "createPolicyV1beta1NamespacedPodDisruptionBudget.py"
+parameters:
+    body:
+        type: string
+        description: ""
+        required: True
+    namespace:
+        type: string
+        description: "object name and auth scope, such as for teams and projects"
+        required: True
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

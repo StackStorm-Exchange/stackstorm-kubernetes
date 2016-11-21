@@ -1,0 +1,14 @@
+name: createStorageV1beta1StorageClass
+pack: kubernetes
+runner_type: run-python
+description: "create a StorageClass"
+enabled: true
+entry_point: "createStorageV1beta1StorageClass.py"
+parameters:
+    body:
+        type: string
+        description: ""
+        required: True
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

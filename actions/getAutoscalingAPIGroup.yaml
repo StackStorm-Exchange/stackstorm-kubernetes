@@ -1,0 +1,6 @@
+name: getAutoscalingAPIGroup
+pack: kubernetes
+runner_type: run-python
+description: "get information of a group"
+enabled: true
+entry_point: "getAutoscalingAPIGroup.py"

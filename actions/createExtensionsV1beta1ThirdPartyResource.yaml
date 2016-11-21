@@ -1,0 +1,14 @@
+name: createExtensionsV1beta1ThirdPartyResource
+pack: kubernetes
+runner_type: run-python
+description: "create a ThirdPartyResource"
+enabled: true
+entry_point: "createExtensionsV1beta1ThirdPartyResource.py"
+parameters:
+    body:
+        type: string
+        description: ""
+        required: True
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

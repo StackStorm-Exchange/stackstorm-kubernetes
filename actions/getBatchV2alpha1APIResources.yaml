@@ -1,0 +1,6 @@
+name: getBatchV2alpha1APIResources
+pack: kubernetes
+runner_type: run-python
+description: "get available resources"
+enabled: true
+entry_point: "getBatchV2alpha1APIResources.py"

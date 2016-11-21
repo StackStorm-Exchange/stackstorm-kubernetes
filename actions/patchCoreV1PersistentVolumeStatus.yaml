@@ -1,0 +1,18 @@
+name: patchCoreV1PersistentVolumeStatus
+pack: kubernetes
+runner_type: run-python
+description: "partially update status of the specified PersistentVolume"
+enabled: true
+entry_point: "patchCoreV1PersistentVolumeStatus.py"
+parameters:
+    body:
+        type: string
+        description: ""
+        required: True
+    name:
+        type: string
+        description: "name of the PersistentVolume"
+        required: True
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

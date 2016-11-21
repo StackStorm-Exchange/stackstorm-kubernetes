@@ -1,0 +1,6 @@
+name: getPolicyV1beta1APIResources
+pack: kubernetes
+runner_type: run-python
+description: "get available resources"
+enabled: true
+entry_point: "getPolicyV1beta1APIResources.py"

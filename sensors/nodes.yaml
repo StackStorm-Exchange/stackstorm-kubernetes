@@ -1,0 +1,21 @@
+---
+  class_name: "NodesResource"
+  entry_point: "nodes_resource.py"
+  description: "Sensor that watches Kubernetes API for new Nodes objects."
+  trigger_types:
+    -
+      name: "nodes"
+      description: "Trigger for nodes event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "obj"
+          name:
+            type: "obj"
+          labels:
+            type: "obj"
+          object_kind:
+            type: "obj"
+          namespace:
+            type: "obj"

@@ -1,0 +1,21 @@
+---
+  class_name: "StorageclassesResource"
+  entry_point: "storageclasses_resource.py"
+  description: "Sensor that watches Kubernetes API for new Storageclasses objects."
+  trigger_types:
+    -
+      name: "storageclasses"
+      description: "Trigger for storageclasses event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "obj"
+          name:
+            type: "obj"
+          labels:
+            type: "obj"
+          object_kind:
+            type: "obj"
+          namespace:
+            type: "obj"

@@ -1,6 +1,6 @@
 ---
-  class_name: "JobsResource"
-  entry_point: "jobs_resource.py"
+  class_name: "Jobs"
+  entry_point: "jobs.py"
   description: "Sensor that watches Kubernetes API for new Jobs objects."
   trigger_types:
     -

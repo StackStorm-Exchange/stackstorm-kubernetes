@@ -1,6 +1,6 @@
 ---
-  class_name: "ReplicationcontrollersResource"
-  entry_point: "replicationcontrollers_resource.py"
+  class_name: "Replicationcontrollers"
+  entry_point: "replicationcontrollers.py"
   description: "Sensor that watches Kubernetes API for new Replicationcontrollers objects."
   trigger_types:
     -

@@ -1,6 +1,6 @@
 ---
-  class_name: "NetworkpoliciesResource"
-  entry_point: "networkpolicies_resource.py"
+  class_name: "Networkpolicies"
+  entry_point: "networkpolicies.py"
   description: "Sensor that watches Kubernetes API for new Networkpolicies objects."
   trigger_types:
     -

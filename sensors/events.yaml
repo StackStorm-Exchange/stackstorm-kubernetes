@@ -1,6 +1,6 @@
 ---
-  class_name: "EventsResource"
-  entry_point: "events_resource.py"
+  class_name: "Events"
+  entry_point: "events.py"
   description: "Sensor that watches Kubernetes API for new Events objects."
   trigger_types:
     -

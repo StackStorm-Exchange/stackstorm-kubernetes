@@ -1,6 +1,6 @@
 ---
-  class_name: "ClusterrolesResource"
-  entry_point: "clusterroles_resource.py"
+  class_name: "Clusterroles"
+  entry_point: "clusterroles.py"
   description: "Sensor that watches Kubernetes API for new Clusterroles objects."
   trigger_types:
     -

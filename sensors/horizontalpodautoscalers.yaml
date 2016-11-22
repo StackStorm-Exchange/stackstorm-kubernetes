@@ -1,6 +1,6 @@
 ---
-  class_name: "HorizontalpodautoscalersResource"
-  entry_point: "horizontalpodautoscalers_resource.py"
+  class_name: "Horizontalpodautoscalers"
+  entry_point: "horizontalpodautoscalers.py"
   description: "Sensor that watches Kubernetes API for new Horizontalpodautoscalers objects."
   trigger_types:
     -

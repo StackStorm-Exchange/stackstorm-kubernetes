@@ -1,6 +1,6 @@
 ---
-  class_name: "PoddisruptionbudgetsResource"
-  entry_point: "poddisruptionbudgets_resource.py"
+  class_name: "Poddisruptionbudgets"
+  entry_point: "poddisruptionbudgets.py"
   description: "Sensor that watches Kubernetes API for new Poddisruptionbudgets objects."
   trigger_types:
     -

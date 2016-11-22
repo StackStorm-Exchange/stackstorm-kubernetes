@@ -1,6 +1,6 @@
 ---
-  class_name: "DaemonsetsResource"
-  entry_point: "daemonsets_resource.py"
+  class_name: "Daemonsets"
+  entry_point: "daemonsets.py"
   description: "Sensor that watches Kubernetes API for new Daemonsets objects."
   trigger_types:
     -

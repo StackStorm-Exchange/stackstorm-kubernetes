@@ -1,6 +1,6 @@
 ---
-  class_name: "NamespacesResource"
-  entry_point: "namespaces_resource.py"
+  class_name: "Namespaces"
+  entry_point: "namespaces.py"
   description: "Sensor that watches Kubernetes API for new Namespaces objects."
   trigger_types:
     -

@@ -1,6 +1,6 @@
 ---
-  class_name: "PersistentvolumeclaimsResource"
-  entry_point: "persistentvolumeclaims_resource.py"
+  class_name: "Persistentvolumeclaims"
+  entry_point: "persistentvolumeclaims.py"
   description: "Sensor that watches Kubernetes API for new Persistentvolumeclaims objects."
   trigger_types:
     -

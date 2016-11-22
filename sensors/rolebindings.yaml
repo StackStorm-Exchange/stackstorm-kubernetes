@@ -1,6 +1,6 @@
 ---
-  class_name: "RolebindingsResource"
-  entry_point: "rolebindings_resource.py"
+  class_name: "Rolebindings"
+  entry_point: "rolebindings.py"
   description: "Sensor that watches Kubernetes API for new Rolebindings objects."
   trigger_types:
     -

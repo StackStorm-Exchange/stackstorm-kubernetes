@@ -1,6 +1,6 @@
 ---
-  class_name: "RolesResource"
-  entry_point: "roles_resource.py"
+  class_name: "Roles"
+  entry_point: "roles.py"
   description: "Sensor that watches Kubernetes API for new Roles objects."
   trigger_types:
     -

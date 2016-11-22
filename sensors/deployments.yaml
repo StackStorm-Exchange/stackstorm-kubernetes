@@ -1,6 +1,6 @@
 ---
-  class_name: "DeploymentsResource"
-  entry_point: "deployments_resource.py"
+  class_name: "Deployments"
+  entry_point: "deployments.py"
   description: "Sensor that watches Kubernetes API for new Deployments objects."
   trigger_types:
     -

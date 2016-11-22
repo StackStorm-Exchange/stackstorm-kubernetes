@@ -1,6 +1,6 @@
 ---
-  class_name: "ResourcequotasResource"
-  entry_point: "resourcequotas_resource.py"
+  class_name: "Resourcequotas"
+  entry_point: "resourcequotas.py"
   description: "Sensor that watches Kubernetes API for new Resourcequotas objects."
   trigger_types:
     -

@@ -1,6 +1,6 @@
 ---
-  class_name: "StatefulsetsResource"
-  entry_point: "statefulsets_resource.py"
+  class_name: "Statefulsets"
+  entry_point: "statefulsets.py"
   description: "Sensor that watches Kubernetes API for new Statefulsets objects."
   trigger_types:
     -

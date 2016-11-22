@@ -1,6 +1,6 @@
 ---
-  class_name: "PodtemplatesResource"
-  entry_point: "podtemplates_resource.py"
+  class_name: "Podtemplates"
+  entry_point: "podtemplates.py"
   description: "Sensor that watches Kubernetes API for new Podtemplates objects."
   trigger_types:
     -

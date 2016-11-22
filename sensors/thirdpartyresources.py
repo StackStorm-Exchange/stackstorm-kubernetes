@@ -4,8 +4,7 @@ if __name__ == '__main__' and __package__ is None:
 
 from sensor_base import SensorBase
 
-
-class ThirdpartyresourcesResource(SensorBase):
+class Thirdpartyresources(SensorBase):
 
     def __init__(
             self,

@@ -1,6 +1,6 @@
 ---
-  class_name: "ServicesResource"
-  entry_point: "services_resource.py"
+  class_name: "Services"
+  entry_point: "services.py"
   description: "Sensor that watches Kubernetes API for new Services objects."
   trigger_types:
     -

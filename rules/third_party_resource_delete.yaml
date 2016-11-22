@@ -5,7 +5,7 @@ description: "Delete third party resources"
 enabled: true
 
 trigger:
-  type: "kubernetes.thirdpartyobject"
+  type: "kubernetes.thirdpartyresources"
 
 criteria:
   trigger.resource:

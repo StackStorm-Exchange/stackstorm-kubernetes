@@ -8,10 +8,44 @@ from pyswagger import App, Security
 from pyswagger.utils import jp_compose
 from pyswagger.core import BaseClient
 from pyswagger.io import Request
+from pyswagger.primitives import Primitive
 
 from k8sbase import Client
 
 from datetime import datetime
+
+import requests
+import logging
+
+# These two lines enable debugging at httplib level (requests->urllib3->http.client)
+# You will see the REQUEST, including HEADERS and DATA, and RESPONSE with HEADERS but without DATA.
+# The only thing missing will be the response.body which is not logged.
+#try:
+#    import http.client as http_client
+#except ImportError:
+#    # Python 2
+#    import httplib as http_client
+#http_client.HTTPConnection.debuglevel = 1
+
+# You must initialize logging, otherwise you'll not see debug output.
+#logging.basicConfig()
+#logging.getLogger().setLevel(logging.DEBUG)
+#requests_log = logging.getLogger("requests.packages.urllib3")
+#requests_log.setLevel(logging.DEBUG)
+#requests_log.propagate = True
+
+#import logging
+#logger = logging.getLogger('pyswagger')
+
+#formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+#console = logging.StreamHandler()
+#console.setLevel(logging.DEBUG)
+#console.setFormatter(formatter)
+
+#logger.addHandler(console)
+#logger.setLevel(logging.DEBUG)
+
 
 class K8sClient:
 
@@ -30,13 +64,28 @@ class K8sClient:
             return serial
         raise TypeError("Type not serializable")
 
+    def _encode_intOrString(self, obj, val, ctx):
+        # val is the value used to create this primitive, for example, a
+        # dict would be used to create a Model and list would be used to
+        # create an Array
+
+        # obj in the spec used to create primitives, they are
+        # Header, Items, Schema, Parameter in Swagger 2.0.
+
+        # ctx is parsing context when producing primitives. Some primitves needs
+        # multiple passes to produce(ex. Model), when we need to keep some globals
+        # between passes, we should place them in ctx
+
+  
+
     def runAction(self, action, **kwargs):
 
         app = App.create(self.swagger)
         client = Client(config=self.config, send_opt=({'verify': False}))
 
+        # hack to allow initial config against local swagger file, but redirect request to remote host
         opt=dict(
-            url_netloc = self.config['kubernetes_api_url'][8:]  # patch the url of petstore to localhost:8001
+            url_netloc = self.config['kubernetes_api_url'][8:] 
         )
 
         op = app.op[action]
@@ -53,13 +102,30 @@ class K8sClient:
 
 if __name__ == "__main__":
 
-    config = {'master_url': "master-a.andrew.kube", 'username': 'admin', 'password': 'andypass', 'templates': '/opt/stackstorm/packs/kubernetes'}
+    config = {'kubernetes_api_url': "https://master-a.andrew.kube", 'user': 'admin', 'password': 'andypass', 'template_path': '/opt/stackstorm/packs/kubernetes'}
 
     k8s = K8sClient(config)
 
-    args = {'name': 'default'}
-    resp = k8s.runAction('readCoreV1Namespace', **args)
+    #args = {'name': 'default'}
+    #resp = k8s.runAction('readCoreV1Namespace', **args)
+    #print json.dumps(resp, sort_keys=True, indent=2)
 
-    print "content: %s" % resp['content']
-    print "status: %s" % resp['status']
-    print "headers: %s" % resp['headers']
+    #args = {"body": {"kind": "Namespace", "apiVersion": "v1", "metadata": {"labels": {"project": "andy"}, "name": "new-stg"}}}
+    #resp = k8s.runAction('createCoreV1Namespace', **args)
+
+    #args = {'namespace': 'new-stg', 'body': {'type': 'Opaque', 'kind':'Secret','test':{'aaa':'YmJi'},'apiVersion':'v1','metadata':{'name':'aaa'}}}
+    #args = {"namespace": "new-stg", "body": {"kind":"Secret","data":{"bbb":"YmJi"},"apiVersion":"v1","metadata":{"namespace":"new-stg","name":"bbb"}}}
+    #args = {"namespace": "new-prd", "body": {"kind":"Secret","apiVersion":"v1","metadata":{"name":"mysecret2","creationTimestamp":None},"data":{"name":"Y29uc3VsLWFhYS1kZXYtcmVhZAo=","value":"YzM3NDBjY2ItNGJkOC1hZTA3LWQ3MjMtYTYyMGY0YTU2YjNhCg=="}   }}
+    #resp = k8s.runAction('createCoreV1NamespacedSecret', **args)
+
+    #args = {"namespace": "mmm-tst", "body": { "kind": "ResourceQuota", "spec": { "hard": { "resourcequotas": "1", "persistentvolumeclaims": "60", "secrets": "10", "replicationcontrollers": "20", "services": "10", "pods": "100" } }, "apiVersion": "v1", "metadata": { "namespace": "mmm-tst", "name": "quota" } } }
+
+    #resp = k8s.runAction('createCoreV1NamespacedResourceQuota', **args)
+
+    args = {"namespace": "new-prd", "body": { "kind":"Service","spec":{"ports":[{"targetPort":"80","protocol":"TCP","port":"80"}],"selector":{"name":"jenkins"}},"apiVersion":"v1","metadata":{"labels":{"name":"apt"},"namespace":"new-prd","name":"apt"}}}
+
+    resp = k8s.runAction('createCoreV1NamespacedService', **args)
+
+    print json.dumps(resp, sort_keys=True, indent=2)
+
+    #print json.dumps(args, sort_keys=True, indent=2)

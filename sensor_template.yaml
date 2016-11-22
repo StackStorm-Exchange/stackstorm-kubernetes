@@ -1,6 +1,6 @@
 ---
   class_name: "{{ kind }}Resource"
-  entry_point: "{{ name }}_resource.py"
+  entry_point: "{{ name }}_create.py"
   description: "Sensor that watches Kubernetes API for new {{ kind }} objects."
   trigger_types:
     -

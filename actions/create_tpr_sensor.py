@@ -47,7 +47,7 @@ class createTPRSensor(Action):
         if pname is None:
             return (False, "Couldn't match 3PR with an api endpoint")
 
-        allvars['watchurl'] = self.config['kubernetes_api_url'] + "/apis/prsn.io/v1/watch/" + pname
+        allvars['watchurl'] = "/apis/prsn.io/v1/watch/" + pname
         allvars['triggername'] = "thirdpartyobject"
 
         #print json.dumps(allvars, sort_keys=True, indent=2)

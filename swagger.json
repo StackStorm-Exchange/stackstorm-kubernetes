@@ -33229,8 +33229,7 @@
    "v1beta1.DeploymentSpec": {
     "description": "DeploymentSpec is the specification of the desired behavior of the Deployment.",
     "required": [
-     "template",
-     "progressDeadlineSeconds"
+     "template"
     ],
     "properties": {
      "minReadySeconds": {

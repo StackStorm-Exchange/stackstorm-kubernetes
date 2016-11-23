@@ -48,7 +48,7 @@ class createTPRSensor(Action):
             return (False, "Couldn't match 3PR with an api endpoint")
 
         allvars['watchurl'] = "/apis/prsn.io/v1/watch/" + pname
-        allvars['triggername'] = "thirdpartyobject"
+        allvars['triggername'] = "thirdpartyresources"
 
         #print json.dumps(allvars, sort_keys=True, indent=2)
  

@@ -49,7 +49,12 @@ class K8sClient:
 
     def runAction(self, action, **kwargs):
 
-        app = App.create(self.swagger)
+        factory = Primitive()
+        factory.register('string', 'int-or-string', self._encode_intOrString)
+
+        #app = App.create(self.swagger)
+        app = App.load(url=self.swagger, prim=factory)
+        app.prepare()
         client = Client(config=self.config, send_opt=({'verify': False}))
 
         # hack to allow initial config against local swagger file, but redirect request to remote host

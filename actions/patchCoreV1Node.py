@@ -4,7 +4,7 @@ from st2actions.runners.pythonrunner import Action
 
 class patchCoreV1Node(Action):
 
-    def run(self,body,name,pretty=None,config_override=None):
+    def run(self,body,name,config_override=None,pretty=None):
 
         myk8s = k8s.K8sClient(self.config)
 
@@ -17,9 +17,9 @@ class patchCoreV1Node(Action):
           args['name'] = name
         else:
           return (False, "name is a required parameter")
-        if pretty is not None:
-          args['pretty'] = pretty
         if config_override is not None:
           args['config_override'] = config_override
+        if pretty is not None:
+          args['pretty'] = pretty
 
         return (True, myk8s.runAction('patchCoreV1Node', **args))

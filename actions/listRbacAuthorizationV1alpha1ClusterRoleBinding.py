@@ -4,11 +4,13 @@ from st2actions.runners.pythonrunner import Action
 
 class listRbacAuthorizationV1alpha1ClusterRoleBinding(Action):
 
-    def run(self,fieldSelector=None,labelSelector=None,resourceVersion=None,timeoutSeconds=None,watch=None,pretty=None,config_override=None):
+    def run(self,config_override=None,fieldSelector=None,labelSelector=None,resourceVersion=None,timeoutSeconds=None,watch=None,pretty=None):
 
         myk8s = k8s.K8sClient(self.config)
 
         args = {}
+        if config_override is not None:
+          args['config_override'] = config_override
         if fieldSelector is not None:
           args['fieldSelector'] = fieldSelector
         if labelSelector is not None:
@@ -21,7 +23,5 @@ class listRbacAuthorizationV1alpha1ClusterRoleBinding(Action):
           args['watch'] = watch
         if pretty is not None:
           args['pretty'] = pretty
-        if config_override is not None:
-          args['config_override'] = config_override
 
         return (True, myk8s.runAction('listRbacAuthorizationV1alpha1ClusterRoleBinding', **args))

@@ -4,7 +4,7 @@ from st2actions.runners.pythonrunner import Action
 
 class createCoreV1Node(Action):
 
-    def run(self,body,pretty=None,config_override=None):
+    def run(self,body,config_override=None,pretty=None):
 
         myk8s = k8s.K8sClient(self.config)
 
@@ -13,9 +13,9 @@ class createCoreV1Node(Action):
           args['body'] = body
         else:
           return (False, "body is a required parameter")
-        if pretty is not None:
-          args['pretty'] = pretty
         if config_override is not None:
           args['config_override'] = config_override
+        if pretty is not None:
+          args['pretty'] = pretty
 
         return (True, myk8s.runAction('createCoreV1Node', **args))

@@ -4,6 +4,7 @@ runner_type: run-python
 description: "get available API versions"
 enabled: true
 entry_point: "getCoreAPIVersions.py"
+parameters:
     config_override:
         type: object
         description: "override stackstorm config"

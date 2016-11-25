@@ -9,6 +9,9 @@ parameters:
         type: string
         description: "object name and auth scope, such as for teams and projects"
         required: True
+    config_override:
+        type: object
+        description: "override stackstorm config"
     fieldSelector:
         type: string
         description: "A selector to restrict the list of returned objects by their fields. Defaults to everything."
@@ -27,6 +30,3 @@ parameters:
     pretty:
         type: string
         description: "If 'true', then the output is pretty printed."
-    config_override:
-        type: object
-        description: "override stackstorm config"

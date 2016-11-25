@@ -13,9 +13,9 @@ parameters:
         type: string
         description: "name of the PersistentVolume"
         required: True
-    pretty:
-        type: string
-        description: "If 'true', then the output is pretty printed."
     config_override:
         type: object
         description: "override stackstorm config"
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

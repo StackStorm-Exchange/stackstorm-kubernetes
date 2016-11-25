@@ -13,6 +13,9 @@ parameters:
         type: string
         description: "object name and auth scope, such as for teams and projects"
         required: True
+    config_override:
+        type: object
+        description: "override stackstorm config"
     container:
         type: string
         description: "The container for which to stream logs. Defaults to only container if there is one container in the pod."
@@ -40,6 +43,3 @@ parameters:
     timestamps:
         type: boolean
         description: "If true, add an RFC3339 or RFC3339Nano timestamp at the beginning of every line of log output. Defaults to false."
-    config_override:
-        type: object
-        description: "override stackstorm config"

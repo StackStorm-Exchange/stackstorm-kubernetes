@@ -17,9 +17,9 @@ parameters:
         type: string
         description: "object name and auth scope, such as for teams and projects"
         required: True
-    pretty:
-        type: string
-        description: "If 'true', then the output is pretty printed."
     config_override:
         type: object
         description: "override stackstorm config"
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."

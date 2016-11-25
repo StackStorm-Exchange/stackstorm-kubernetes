@@ -4,7 +4,7 @@ from st2actions.runners.pythonrunner import Action
 
 class readCoreV1NamespacedPodLog(Action):
 
-    def run(self,name,namespace,container=None,follow=None,limitBytes=None,pretty=None,previous=None,sinceSeconds=None,sinceTime=None,tailLines=None,timestamps=None,config_override=None):
+    def run(self,name,namespace,config_override=None,container=None,follow=None,limitBytes=None,pretty=None,previous=None,sinceSeconds=None,sinceTime=None,tailLines=None,timestamps=None):
 
         myk8s = k8s.K8sClient(self.config)
 
@@ -17,6 +17,8 @@ class readCoreV1NamespacedPodLog(Action):
           args['namespace'] = namespace
         else:
           return (False, "namespace is a required parameter")
+        if config_override is not None:
+          args['config_override'] = config_override
         if container is not None:
           args['container'] = container
         if follow is not None:
@@ -35,7 +37,5 @@ class readCoreV1NamespacedPodLog(Action):
           args['tailLines'] = tailLines
         if timestamps is not None:
           args['timestamps'] = timestamps
-        if config_override is not None:
-          args['config_override'] = config_override
 
         return (True, myk8s.runAction('readCoreV1NamespacedPodLog', **args))

@@ -5,6 +5,9 @@ description: "list or watch objects of kind PersistentVolume"
 enabled: true
 entry_point: "listCoreV1PersistentVolume.py"
 parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
     fieldSelector:
         type: string
         description: "A selector to restrict the list of returned objects by their fields. Defaults to everything."
@@ -23,6 +26,3 @@ parameters:
     pretty:
         type: string
         description: "If 'true', then the output is pretty printed."
-    config_override:
-        type: object
-        description: "override stackstorm config"

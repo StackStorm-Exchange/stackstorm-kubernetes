@@ -5,6 +5,9 @@ description: "list or watch objects of kind Endpoints"
 enabled: true
 entry_point: "listCoreV1EndpointsForAllNamespaces.py"
 parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
     fieldSelector:
         type: string
         description: "A selector to restrict the list of returned objects by their fields. Defaults to everything."
@@ -23,6 +26,3 @@ parameters:
     watch:
         type: boolean
         description: "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion."
-    config_override:
-        type: object
-        description: "override stackstorm config"

@@ -4,11 +4,13 @@ from st2actions.runners.pythonrunner import Action
 
 class listAutoscalingV1HorizontalPodAutoscalerForAllNamespaces(Action):
 
-    def run(self,fieldSelector=None,labelSelector=None,pretty=None,resourceVersion=None,timeoutSeconds=None,watch=None,config_override=None):
+    def run(self,config_override=None,fieldSelector=None,labelSelector=None,pretty=None,resourceVersion=None,timeoutSeconds=None,watch=None):
 
         myk8s = k8s.K8sClient(self.config)
 
         args = {}
+        if config_override is not None:
+          args['config_override'] = config_override
         if fieldSelector is not None:
           args['fieldSelector'] = fieldSelector
         if labelSelector is not None:
@@ -21,7 +23,5 @@ class listAutoscalingV1HorizontalPodAutoscalerForAllNamespaces(Action):
           args['timeoutSeconds'] = timeoutSeconds
         if watch is not None:
           args['watch'] = watch
-        if config_override is not None:
-          args['config_override'] = config_override
 
         return (True, myk8s.runAction('listAutoscalingV1HorizontalPodAutoscalerForAllNamespaces', **args))

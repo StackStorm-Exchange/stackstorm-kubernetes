@@ -4,7 +4,7 @@ from st2actions.runners.pythonrunner import Action
 
 class createAuthenticationV1beta1TokenReview(Action):
 
-    def run(self,body,pretty=None):
+    def run(self,body,pretty=None,config_override=None):
 
         myk8s = k8s.K8sClient(self.config)
 
@@ -15,5 +15,7 @@ class createAuthenticationV1beta1TokenReview(Action):
           return (False, "body is a required parameter")
         if pretty is not None:
           args['pretty'] = pretty
+        if config_override is not None:
+          args['config_override'] = config_override
 
         return (True, myk8s.runAction('createAuthenticationV1beta1TokenReview', **args))

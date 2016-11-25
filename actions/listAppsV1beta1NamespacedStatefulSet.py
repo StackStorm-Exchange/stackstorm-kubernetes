@@ -4,7 +4,7 @@ from st2actions.runners.pythonrunner import Action
 
 class listAppsV1beta1NamespacedStatefulSet(Action):
 
-    def run(self,namespace,fieldSelector=None,labelSelector=None,resourceVersion=None,timeoutSeconds=None,watch=None,pretty=None):
+    def run(self,namespace,fieldSelector=None,labelSelector=None,resourceVersion=None,timeoutSeconds=None,watch=None,pretty=None,config_override=None):
 
         myk8s = k8s.K8sClient(self.config)
 
@@ -25,5 +25,7 @@ class listAppsV1beta1NamespacedStatefulSet(Action):
           args['watch'] = watch
         if pretty is not None:
           args['pretty'] = pretty
+        if config_override is not None:
+          args['config_override'] = config_override
 
         return (True, myk8s.runAction('listAppsV1beta1NamespacedStatefulSet', **args))

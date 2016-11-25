@@ -4,3 +4,6 @@ runner_type: run-python
 description: "get available resources"
 enabled: true
 entry_point: "getAppsV1beta1APIResources.py"
+    config_override:
+        type: object
+        description: "override stackstorm config"

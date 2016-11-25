@@ -4,7 +4,7 @@ from st2actions.runners.pythonrunner import Action
 
 class readStorageV1beta1StorageClass(Action):
 
-    def run(self,name,exact=None,export=None,pretty=None):
+    def run(self,name,exact=None,export=None,pretty=None,config_override=None):
 
         myk8s = k8s.K8sClient(self.config)
 
@@ -19,5 +19,7 @@ class readStorageV1beta1StorageClass(Action):
           args['export'] = export
         if pretty is not None:
           args['pretty'] = pretty
+        if config_override is not None:
+          args['config_override'] = config_override
 
         return (True, myk8s.runAction('readStorageV1beta1StorageClass', **args))

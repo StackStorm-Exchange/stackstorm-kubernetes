@@ -4,7 +4,7 @@ from st2actions.runners.pythonrunner import Action
 
 class createExtensionsV1beta1NamespacedDaemonSet(Action):
 
-    def run(self,body,namespace,pretty=None):
+    def run(self,body,namespace,pretty=None,config_override=None):
 
         myk8s = k8s.K8sClient(self.config)
 
@@ -19,5 +19,7 @@ class createExtensionsV1beta1NamespacedDaemonSet(Action):
           return (False, "namespace is a required parameter")
         if pretty is not None:
           args['pretty'] = pretty
+        if config_override is not None:
+          args['config_override'] = config_override
 
         return (True, myk8s.runAction('createExtensionsV1beta1NamespacedDaemonSet', **args))

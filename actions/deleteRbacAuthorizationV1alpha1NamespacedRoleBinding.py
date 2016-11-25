@@ -4,7 +4,7 @@ from st2actions.runners.pythonrunner import Action
 
 class deleteRbacAuthorizationV1alpha1NamespacedRoleBinding(Action):
 
-    def run(self,body,name,namespace,gracePeriodSeconds=None,orphanDependents=None,pretty=None):
+    def run(self,body,name,namespace,gracePeriodSeconds=None,orphanDependents=None,pretty=None,config_override=None):
 
         myk8s = k8s.K8sClient(self.config)
 
@@ -27,5 +27,7 @@ class deleteRbacAuthorizationV1alpha1NamespacedRoleBinding(Action):
           args['orphanDependents'] = orphanDependents
         if pretty is not None:
           args['pretty'] = pretty
+        if config_override is not None:
+          args['config_override'] = config_override
 
         return (True, myk8s.runAction('deleteRbacAuthorizationV1alpha1NamespacedRoleBinding', **args))

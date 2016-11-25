@@ -4,7 +4,7 @@ from st2actions.runners.pythonrunner import Action
 
 class listCoreV1EventForAllNamespaces(Action):
 
-    def run(self,fieldSelector=None,labelSelector=None,pretty=None,resourceVersion=None,timeoutSeconds=None,watch=None):
+    def run(self,fieldSelector=None,labelSelector=None,pretty=None,resourceVersion=None,timeoutSeconds=None,watch=None,config_override=None):
 
         myk8s = k8s.K8sClient(self.config)
 
@@ -21,5 +21,7 @@ class listCoreV1EventForAllNamespaces(Action):
           args['timeoutSeconds'] = timeoutSeconds
         if watch is not None:
           args['watch'] = watch
+        if config_override is not None:
+          args['config_override'] = config_override
 
         return (True, myk8s.runAction('listCoreV1EventForAllNamespaces', **args))

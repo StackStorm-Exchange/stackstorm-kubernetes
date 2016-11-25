@@ -40,3 +40,6 @@ parameters:
     timestamps:
         type: boolean
         description: "If true, add an RFC3339 or RFC3339Nano timestamp at the beginning of every line of log output. Defaults to false."
+    config_override:
+        type: object
+        description: "override stackstorm config"

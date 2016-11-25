@@ -4,3 +4,6 @@ runner_type: run-python
 description: "get information of a group"
 enabled: true
 entry_point: "getAppsAPIGroup.py"
+    config_override:
+        type: object
+        description: "override stackstorm config"

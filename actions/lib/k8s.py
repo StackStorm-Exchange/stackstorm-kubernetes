@@ -8,6 +8,8 @@ from pyswagger import App, Security
 from pyswagger.utils import jp_compose
 from pyswagger.core import BaseClient
 from pyswagger.io import Request
+from pyswagger.primitives import Primitive
+
 
 from k8sbase import Client
 

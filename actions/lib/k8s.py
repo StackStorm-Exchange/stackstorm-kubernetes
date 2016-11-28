@@ -55,6 +55,7 @@ class K8sClient:
 
         if "config_override" in kwargs:
             self.overwriteConfig(kwargs['config_override'])
+            del(kwargs['config_override'])
 
         factory = Primitive()
         factory.register('string', 'int-or-string', self._encode_intOrString)

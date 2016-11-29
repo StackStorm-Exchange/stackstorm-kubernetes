@@ -19,10 +19,10 @@ Where kube_api_url = The FQDN to your Kubernetes API endpoint.
 
 Note: Currently SSL verification is turned off. This is a WIP.
 
-## To setup the Kubernetes Pack
+## To install the Kubernetes Pack
+
 ```
-st2 run packs.setup_virtualenv packs=kubernetes
-st2ctl reload
+st2 pack install kubernetes
 ```
 
 Note: AWS pack must be enabled and running

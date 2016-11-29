@@ -18,16 +18,9 @@ class deleteTPRSensor(Action):
         templateLoader = jinja2.FileSystemLoader( searchpath=self.config['template_path'] )
         templateEnv = jinja2.Environment( loader=templateLoader , lstrip_blocks=True, trim_blocks=True)
 
-        myk8s = k8s.K8sClient(self.config)
-        user = self.config['user']
-        password = self.config['password']
-        verify = self.config['verify']
-
         tpr = payload['name']
 
         allvars['name'], allvars['domain'] = tpr.split('.', 1)
-
-        cname = allvars['name'].capitalize()
 
         sensorpy = self.config['template_path'] +"/sensors/" + allvars['name'] + "_create.py"
         sensorpyc = self.config['template_path'] +"/sensors/" + allvars['name'] + "_create.pyc"

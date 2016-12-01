@@ -29,11 +29,14 @@ verify: false
 
 template_path: "/opt/stackstorm/packs/kubernetes/"
 ```
-Where kube_api_url = The FQDN to your Kubernetes API endpoint.
+Where kubernetes_api_url = The FQDN to your Kubernetes API endpoint.
 
 Note: Currently SSL verification is turned off. This is a WIP.
 
 All actions allow an optional 'config_override' argument which takes an object with any of the above
+example:
+
+{"kubernetes_api_url": "http://master.mydomain.kube", "user": "admin", "password": "password"}
 
 ## To setup the Kubernetes Pack
 ```

@@ -7,6 +7,7 @@ import six
 import json
 import base64
 
+
 class Client(BaseClient):
 
     # declare supported schemes here
@@ -26,9 +27,8 @@ class Client(BaseClient):
 
         self.extraheaders = extraheaders
 
-        auth = base64.b64encode(config['user'] + ":" + config['password']) 
+        auth = base64.b64encode(config['user'] + ":" + config['password'])
         self.authhead = {"authorization": "Basic " + auth}
-
 
     def request(self, req_and_resp, opt):
         # passing to parent for default patching behavior,
@@ -39,6 +39,7 @@ class Client(BaseClient):
         req._patch(opt)
 
         file_obj = []
+
         def append(name, obj):
             f = obj.data or open(obj.filename, 'rb')
             if 'Content-Type' in obj.header:
@@ -69,6 +70,6 @@ class Client(BaseClient):
         myresp = {}
         myresp['status'] = rs.status_code
         myresp['data'] = json.loads(rs.content.rstrip())
-        #myresp['headers'] = rs.headers
+        # myresp['headers'] = rs.headers
 
         return myresp

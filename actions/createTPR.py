@@ -4,7 +4,6 @@ import json
 import re
 import requests
 
-from string import capwords
 
 class createTPR(Action):
 
@@ -37,19 +36,19 @@ class createTPR(Action):
         if config_override is not None:
             self.overwriteConfig(config_override)
 
-        self.body = body        
+        self.body = body
 
 # {
-#    "apiVersion": "prsn.io/v1", 
-#    "description": "", 
-#    "kind": "Cassandra", 
+#    "apiVersion": "prsn.io/v1",
+#    "description": "",
+#    "kind": "Cassandra",
 #    "metadata": {
 #      "labels": {
-#        "stack_name": "cass1", 
-#        "type": "cassandra.prsn.io", 
+#        "stack_name": "cass1",
+#        "type": "cassandra.prsn.io",
 #        "version": "2.2"
-#      }, 
-#      "name": "cass1", 
+#      },
+#      "name": "cass1",
 #      "namespace": "test-app"
 #    }
 #  }
@@ -72,7 +71,8 @@ class createTPR(Action):
         if pname is None:
             return (False, "Couldn't match 3PR with an api endpoint")
 
-        tprurl = self.config['kubernetes_api_url'] + '/apis/' + apigroup + '/v1/namespaces/' + namespace + "/" + pname
+        tprurl = "%s/apis/%s/v1/namespaces/%s/%s" % (self.config['kubernetes_api_url'],
+                                                     apigroup, namespace, pname)
 
         resp = self.mkrequest(tprurl, method="POST", data=self.body)
 

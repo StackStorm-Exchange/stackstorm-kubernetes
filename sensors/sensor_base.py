@@ -113,7 +113,7 @@ class SensorBase(Sensor):
                     object_kind=object_kind,
                     uid=uid)
                 self._log.debug('Trigger payload: %s.' % payload)
-                #self._log.info('Trigger payload: %s.' % payload)
+                # self._log.info('Trigger payload: %s.' % payload)
                 return payload
 
     def _build_a_trigger(

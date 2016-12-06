@@ -38,10 +38,10 @@ example:
 
 {"kubernetes_api_url": "http://master.mydomain.kube", "user": "admin", "password": "password"}
 
-## To setup the Kubernetes Pack
+## To install the Kubernetes Pack
+
 ```
-st2 run packs.setup_virtualenv packs=kubernetes
-st2ctl reload
+st2 pack install kubernetes
 ```
 
 ### Kubernetes Specific Settings

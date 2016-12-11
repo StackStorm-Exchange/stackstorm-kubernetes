@@ -5,7 +5,7 @@ from st2actions.runners.pythonrunner import Action
 
 class createAppsV1beta1NamespacedStatefulSet(Action):
 
-    def run(self,body,namespace,config_override=None,pretty=None):
+    def run(self, body, namespace, config_override=None, pretty=None):
 
         myk8s = k8s.K8sClient(self.config)
 

@@ -1,4 +1,3 @@
-# from lib import k8s
 from st2actions.runners.pythonrunner import Action
 
 import json
@@ -16,8 +15,6 @@ class createTPRSensor(Action):
         templateEnv = jinja2.Environment(loader=templateLoader,
                                          lstrip_blocks=True,
                                          trim_blocks=True)
-
-        # myk8s = k8s.K8sClient(self.config)
 
         user = self.config['user']
         password = self.config['password']
@@ -66,24 +63,3 @@ class createTPRSensor(Action):
 
         p.close()
         y.close()
-
-        # print payload
-
-#            'resource': ADDED
-#            'name': otherdb.prsn.io,
-#            'labels': labels,
-#            'object_kind': ThirdPartyResource,
-#            'uid': 2d17dd88-a684-11e6-aba1-02a3a04ccae9
-
-# {'object': {
-#     'apiVersion': 'extensions/v1beta1',
-#     'description': 'otherdb ThirdPartyResource',
-#     'kind': 'ThirdPartyResource',
-#     'metadata': {'creationTimestamp': '2016-11-09T13:55:30Z',
-#                  'labels': {'type': 'ThirdPartyResource'},
-#                  'name': 'otherdb.prsn.io',
-#                  'resourceVersion': '297758',
-#                  'selfLink': '/apis/extensions/v1beta1/thirdpartyresources/otherdb.prsn.io',
-#                  'uid': '2d17dd88-a684-11e6-aba1-02a3a04ccae9'},
-#             'versions': [{'name': 'v1'}]},
-#  'type': 'ADDED'}

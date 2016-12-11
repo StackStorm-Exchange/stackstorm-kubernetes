@@ -1,0 +1,7 @@
+---
+    user: "xxxxxxxx"
+    password: "xxxxxxxx"
+    kubernetes_api_url: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    verify: false
+
+    template_path: "/opt/stackstorm/packs/kubernetes/"

@@ -1,0 +1,11 @@
+---
+  name: "create_tpr_sensor"
+  runner_type: "run-python"
+  description: "Create new 3PR sensor"
+  enabled: true
+  entry_point: "create_tpr_sensor.py"
+  pack: "kubernetes"
+  parameters:
+    payload:
+      type: "object"
+      description: "payload object from kubernetes sensor"

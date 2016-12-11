@@ -2,6 +2,7 @@ from lib import k8s
 
 from st2actions.runners.pythonrunner import Action
 
+
 class createAppsV1beta1NamespacedStatefulSet(Action):
 
     def run(self,body,namespace,config_override=None,pretty=None):
@@ -10,16 +11,16 @@ class createAppsV1beta1NamespacedStatefulSet(Action):
 
         args = {}
         if body is not None:
-          args['body'] = body
+            args['body'] = body
         else:
-          return (False, "body is a required parameter")
+            return (False, "body is a required parameter")
         if namespace is not None:
-          args['namespace'] = namespace
+            args['namespace'] = namespace
         else:
-          return (False, "namespace is a required parameter")
+            return (False, "namespace is a required parameter")
         if config_override is not None:
-          args['config_override'] = config_override
+            args['config_override'] = config_override
         if pretty is not None:
-          args['pretty'] = pretty
+            args['pretty'] = pretty
 
         return (True, myk8s.runAction('createAppsV1beta1NamespacedStatefulSet', **args))

@@ -1,0 +1,22 @@
+---
+  class_name: "{{ kind }}"
+  entry_point: "{{ name }}.py"
+  description: "Sensor that watches Kubernetes API for new {{ kind }} objects."
+  trigger_types:
+    -
+      name: "{{ triggername }}"
+      description: "Trigger for {{ name }} event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "obj"
+          name:
+            type: "obj"
+          labels:
+            type: "obj"
+          object_kind:
+            type: "obj"
+          namespace:
+            type: "obj"
+

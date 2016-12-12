@@ -1,0 +1,21 @@
+---
+  class_name: "Persistentvolumes"
+  entry_point: "persistentvolumes.py"
+  description: "Sensor that watches Kubernetes API for new Persistentvolumes objects."
+  trigger_types:
+    -
+      name: "persistentvolumes"
+      description: "Trigger for persistentvolumes event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "obj"
+          name:
+            type: "obj"
+          labels:
+            type: "obj"
+          object_kind:
+            type: "obj"
+          namespace:
+            type: "obj"

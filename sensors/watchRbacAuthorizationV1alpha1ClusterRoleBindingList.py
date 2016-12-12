@@ -5,14 +5,14 @@ if __name__ == '__main__' and __package__ is None:
 from sensor_base import SensorBase
 
 
-class {{ operationId }}(SensorBase):
+class watchRbacAuthorizationV1alpha1ClusterRoleBindingList(SensorBase):
 
     def __init__(
             self,
             sensor_service,
             config=None,
-            extension="{{ watchurl }}",
-            trigger_ref="kubernetes.{{ triggername }}"):
+            extension="/apis/rbac.authorization.k8s.io/v1alpha1/watch/clusterrolebindings",
+            trigger_ref="kubernetes.clusterrolebindings"):
         super(
             self.__class__,
             self).__init__(
@@ -20,4 +20,3 @@ class {{ operationId }}(SensorBase):
             config=config,
             extension=extension,
             trigger_ref=trigger_ref)
-

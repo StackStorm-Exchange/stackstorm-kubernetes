@@ -1,0 +1,21 @@
+---
+  class_name: "Resourcequotas"
+  entry_point: "resourcequotas.py"
+  description: "Sensor that watches Kubernetes API for new Resourcequotas objects."
+  trigger_types:
+    -
+      name: "resourcequotas"
+      description: "Trigger for resourcequotas event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "obj"
+          name:
+            type: "obj"
+          labels:
+            type: "obj"
+          object_kind:
+            type: "obj"
+          namespace:
+            type: "obj"

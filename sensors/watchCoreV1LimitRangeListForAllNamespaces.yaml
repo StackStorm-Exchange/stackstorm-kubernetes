@@ -1,0 +1,21 @@
+---
+  class_name: "Limitranges"
+  entry_point: "limitranges.py"
+  description: "Sensor that watches Kubernetes API for new Limitranges objects."
+  trigger_types:
+    -
+      name: "limitranges"
+      description: "Trigger for limitranges event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "obj"
+          name:
+            type: "obj"
+          labels:
+            type: "obj"
+          object_kind:
+            type: "obj"
+          namespace:
+            type: "obj"

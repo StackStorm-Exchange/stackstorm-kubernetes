@@ -1,0 +1,21 @@
+---
+  class_name: "Daemonsets"
+  entry_point: "daemonsets.py"
+  description: "Sensor that watches Kubernetes API for new Daemonsets objects."
+  trigger_types:
+    -
+      name: "daemonsets"
+      description: "Trigger for daemonsets event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "obj"
+          name:
+            type: "obj"
+          labels:
+            type: "obj"
+          object_kind:
+            type: "obj"
+          namespace:
+            type: "obj"

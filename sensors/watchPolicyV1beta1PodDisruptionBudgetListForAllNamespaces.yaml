@@ -1,0 +1,21 @@
+---
+  class_name: "Poddisruptionbudgets"
+  entry_point: "poddisruptionbudgets.py"
+  description: "Sensor that watches Kubernetes API for new Poddisruptionbudgets objects."
+  trigger_types:
+    -
+      name: "poddisruptionbudgets"
+      description: "Trigger for poddisruptionbudgets event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "obj"
+          name:
+            type: "obj"
+          labels:
+            type: "obj"
+          object_kind:
+            type: "obj"
+          namespace:
+            type: "obj"

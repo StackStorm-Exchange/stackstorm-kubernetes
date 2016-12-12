@@ -1,0 +1,21 @@
+---
+  class_name: "Statefulsets"
+  entry_point: "statefulsets.py"
+  description: "Sensor that watches Kubernetes API for new Statefulsets objects."
+  trigger_types:
+    -
+      name: "statefulsets"
+      description: "Trigger for statefulsets event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "obj"
+          name:
+            type: "obj"
+          labels:
+            type: "obj"
+          object_kind:
+            type: "obj"
+          namespace:
+            type: "obj"

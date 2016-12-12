@@ -1,0 +1,21 @@
+---
+  class_name: "Endpoints"
+  entry_point: "endpoints.py"
+  description: "Sensor that watches Kubernetes API for new Endpoints objects."
+  trigger_types:
+    -
+      name: "endpoints"
+      description: "Trigger for endpoints event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "obj"
+          name:
+            type: "obj"
+          labels:
+            type: "obj"
+          object_kind:
+            type: "obj"
+          namespace:
+            type: "obj"

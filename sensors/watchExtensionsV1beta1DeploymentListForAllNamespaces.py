@@ -5,14 +5,14 @@ if __name__ == '__main__' and __package__ is None:
 from sensor_base import SensorBase
 
 
-class {{ operationId }}(SensorBase):
+class watchExtensionsV1beta1DeploymentListForAllNamespaces(SensorBase):
 
     def __init__(
             self,
             sensor_service,
             config=None,
-            extension="{{ watchurl }}",
-            trigger_ref="kubernetes.{{ triggername }}"):
+            extension="/apis/extensions/v1beta1/watch/deployments",
+            trigger_ref="kubernetes.deployments"):
         super(
             self.__class__,
             self).__init__(
@@ -20,4 +20,3 @@ class {{ operationId }}(SensorBase):
             config=config,
             extension=extension,
             trigger_ref=trigger_ref)
-

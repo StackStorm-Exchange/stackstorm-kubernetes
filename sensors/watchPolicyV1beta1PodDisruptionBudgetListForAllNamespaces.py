@@ -5,14 +5,14 @@ if __name__ == '__main__' and __package__ is None:
 from sensor_base import SensorBase
 
 
-class {{ operationId }}(SensorBase):
+class watchPolicyV1beta1PodDisruptionBudgetListForAllNamespaces(SensorBase):
 
     def __init__(
             self,
             sensor_service,
             config=None,
-            extension="{{ watchurl }}",
-            trigger_ref="kubernetes.{{ triggername }}"):
+            extension="/apis/policy/v1beta1/watch/poddisruptionbudgets",
+            trigger_ref="kubernetes.poddisruptionbudgets"):
         super(
             self.__class__,
             self).__init__(
@@ -20,4 +20,3 @@ class {{ operationId }}(SensorBase):
             config=config,
             extension=extension,
             trigger_ref=trigger_ref)
-

@@ -1,0 +1,21 @@
+---
+  class_name: "Roles"
+  entry_point: "roles.py"
+  description: "Sensor that watches Kubernetes API for new Roles objects."
+  trigger_types:
+    -
+      name: "roles"
+      description: "Trigger for roles event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "obj"
+          name:
+            type: "obj"
+          labels:
+            type: "obj"
+          object_kind:
+            type: "obj"
+          namespace:
+            type: "obj"

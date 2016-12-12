@@ -114,8 +114,8 @@ for path in app.dump()['paths'].keys():
                 allvars['name'] = thename
                 allvars['triggername'] = thename
 
-                sensorpy = sensorsdir + "/" + allvars['name'] + ".py"
-                sensoryaml = sensorsdir + "/" + allvars['name'] + ".yaml"
+                sensorpy = sensorsdir + "/" + allvars['operationId'] + ".py"
+                sensoryaml = sensorsdir + "/" + allvars['operationId'] + ".yaml"
                 p = open(sensorpy, 'w')
                 y = open(sensoryaml, 'w')
 

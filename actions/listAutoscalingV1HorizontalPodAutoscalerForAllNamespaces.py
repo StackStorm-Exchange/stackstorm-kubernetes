@@ -17,7 +17,8 @@ class listAutoscalingV1HorizontalPodAutoscalerForAllNamespaces(Action):
 
         myk8s = k8s.K8sClient(self.config)
 
-        args = {}if config_override is not None:
+        args = {}
+        if config_override is not None:
             args['config_override'] = config_override
         if fieldSelector is not None:
             args['fieldSelector'] = fieldSelector

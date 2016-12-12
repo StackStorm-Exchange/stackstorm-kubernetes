@@ -15,7 +15,8 @@ class replaceCoreV1NamespacedPodTemplate(Action):
 
         myk8s = k8s.K8sClient(self.config)
 
-        args = {}if body is not None:
+        args = {}
+        if body is not None:
             args['body'] = body
         else:
             return (False, "body is a required parameter")

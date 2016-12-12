@@ -18,7 +18,8 @@ class listCoreV1NamespacedService(Action):
 
         myk8s = k8s.K8sClient(self.config)
 
-        args = {}if namespace is not None:
+        args = {}
+        if namespace is not None:
             args['namespace'] = namespace
         else:
             return (False, "namespace is a required parameter")

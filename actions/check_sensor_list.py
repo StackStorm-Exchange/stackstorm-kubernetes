@@ -36,7 +36,8 @@ class check_sensor_list(Action):
             if jdata['status'] == "failed":
                 for job in jdata['result']['tasks']:
                     if job['state'] == "failed":
-                        return (False, "failed %s stderr %s" % (job['name'], job['result']['stderr']))
+                        return (False,
+                                "failed %s stderr %s" % (job['name'], job['result']['stderr']))
 
             if runcount == 200:
                 return (False, "Timed out 5 mins")

@@ -1,11 +1,11 @@
-from sensor_base import SensorBase
 from os import sys, path
-
 if __name__ == '__main__' and __package__ is None:
     sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
 
+from sensor_base import SensorBase
 
-class {{ kind }}Resource(SensorBase):
+
+class {{ operationId }}(SensorBase):
 
     def __init__(
             self,
@@ -20,3 +20,4 @@ class {{ kind }}Resource(SensorBase):
             config=config,
             extension=extension,
             trigger_ref=trigger_ref)
+

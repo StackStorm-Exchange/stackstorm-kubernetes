@@ -4,22 +4,22 @@ runner_type: run-python
 description: "{{ description }}"
 enabled: true
 entry_point: "{{ operationId }}.py"
-{% if params|length + paramsreq|length > 0 %}
+{%- if params|length + paramsreq|length > 0 %}
 parameters:
-{% endif %}
-    {% for parameter in paramsreq %}
+{%- endif -%}
+    {%- for parameter in paramsreq %}
     {{ parameter.name }}:
         type: {{ parameter.type }}
         description: "{{ parameter.description }}"
-        {% if parameter.required == true %}
+        {% if parameter.required == true -%}
         required: {{ parameter.required }}
-        {% endif %}
-    {% endfor %}
+        {% endif -%}
+    {% endfor -%}
     {% for parameter in params %}
     {{ parameter.name }}:
         type: {{ parameter.type }}
         description: "{{ parameter.description }}"
         {% if parameter.required == true %}
         required: {{ parameter.required }}
-        {% endif %}
+        {% endif -%}
     {% endfor %}

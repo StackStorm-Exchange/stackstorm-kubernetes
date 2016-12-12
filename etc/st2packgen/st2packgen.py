@@ -41,7 +41,8 @@ copyfile(templatedir + "/sensor_template.py.jinja", kubedir + "/sensor_template.
 copyfile(templatedir + "/sensor_template.yaml.jinja", kubedir + "/sensor_template.yaml.jinja")
 
 templateLoader = jinja2.FileSystemLoader(searchpath=templatedir)
-templateEnv = jinja2.Environment(loader=templateLoader, lstrip_blocks=True, trim_blocks=True)
+templateEnv = jinja2.Environment(loader=templateLoader)
+#templateEnv = jinja2.Environment(loader=templateLoader, lstrip_blocks=True, trim_blocks=True)
 
 app = App.create(swagger)
 

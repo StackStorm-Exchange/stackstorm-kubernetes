@@ -29,5 +29,6 @@ class readStorageV1beta1StorageClass(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('readStorageV1beta1StorageClass',
-                                **args))
+                myk8s.runAction(
+                    'readStorageV1beta1StorageClass',
+                    **args))

@@ -15,5 +15,6 @@ class getAutoscalingAPIGroup(Action):
         if config_override is not None:
             args['config_override'] = config_override
         return (True,
-                myk8s.runAction('getAutoscalingAPIGroup',
-                                **args))
+                myk8s.runAction(
+                    'getAutoscalingAPIGroup',
+                    **args))

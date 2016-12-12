@@ -38,5 +38,6 @@ class listRbacAuthorizationV1alpha1NamespacedRoleBinding(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('listRbacAuthorizationV1alpha1NamespacedRoleBinding',
-                                **args))
+                myk8s.runAction(
+                    'listRbacAuthorizationV1alpha1NamespacedRoleBinding',
+                    **args))

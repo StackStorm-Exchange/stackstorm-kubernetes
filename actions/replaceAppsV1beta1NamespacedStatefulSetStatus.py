@@ -33,5 +33,6 @@ class replaceAppsV1beta1NamespacedStatefulSetStatus(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('replaceAppsV1beta1NamespacedStatefulSetStatus',
-                                **args))
+                myk8s.runAction(
+                    'replaceAppsV1beta1NamespacedStatefulSetStatus',
+                    **args))

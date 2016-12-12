@@ -34,5 +34,6 @@ class readExtensionsV1beta1NamespacedIngress(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('readExtensionsV1beta1NamespacedIngress',
-                                **args))
+                myk8s.runAction(
+                    'readExtensionsV1beta1NamespacedIngress',
+                    **args))

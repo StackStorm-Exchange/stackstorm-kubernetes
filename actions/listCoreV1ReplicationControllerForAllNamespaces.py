@@ -33,5 +33,6 @@ class listCoreV1ReplicationControllerForAllNamespaces(Action):
         if watch is not None:
             args['watch'] = watch
         return (True,
-                myk8s.runAction('listCoreV1ReplicationControllerForAllNamespaces',
-                                **args))
+                myk8s.runAction(
+                    'listCoreV1ReplicationControllerForAllNamespaces',
+                    **args))

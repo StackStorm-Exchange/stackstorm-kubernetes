@@ -28,5 +28,6 @@ class createAuthorizationV1beta1NamespacedLocalSubjectAccessReview(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('createAuthorizationV1beta1NamespacedLocalSubjectAccessReview',
-                                **args))
+                myk8s.runAction(
+                    'createAuthorizationV1beta1NamespacedLocalSubjectAccessReview',
+                    **args))

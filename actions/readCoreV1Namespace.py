@@ -29,5 +29,6 @@ class readCoreV1Namespace(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('readCoreV1Namespace',
-                                **args))
+                myk8s.runAction(
+                    'readCoreV1Namespace',
+                    **args))

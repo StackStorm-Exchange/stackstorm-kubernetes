@@ -33,5 +33,6 @@ class listCoreV1ServiceAccountForAllNamespaces(Action):
         if watch is not None:
             args['watch'] = watch
         return (True,
-                myk8s.runAction('listCoreV1ServiceAccountForAllNamespaces',
-                                **args))
+                myk8s.runAction(
+                    'listCoreV1ServiceAccountForAllNamespaces',
+                    **args))

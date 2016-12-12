@@ -28,5 +28,6 @@ class patchCoreV1PersistentVolumeStatus(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('patchCoreV1PersistentVolumeStatus',
-                                **args))
+                myk8s.runAction(
+                    'patchCoreV1PersistentVolumeStatus',
+                    **args))

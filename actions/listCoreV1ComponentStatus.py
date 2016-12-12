@@ -33,5 +33,6 @@ class listCoreV1ComponentStatus(Action):
         if watch is not None:
             args['watch'] = watch
         return (True,
-                myk8s.runAction('listCoreV1ComponentStatus',
-                                **args))
+                myk8s.runAction(
+                    'listCoreV1ComponentStatus',
+                    **args))

@@ -52,5 +52,6 @@ class readCoreV1NamespacedPodLog(Action):
         if timestamps is not None:
             args['timestamps'] = timestamps
         return (True,
-                myk8s.runAction('readCoreV1NamespacedPodLog',
-                                **args))
+                myk8s.runAction(
+                    'readCoreV1NamespacedPodLog',
+                    **args))

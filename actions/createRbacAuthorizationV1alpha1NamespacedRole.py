@@ -28,5 +28,6 @@ class createRbacAuthorizationV1alpha1NamespacedRole(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('createRbacAuthorizationV1alpha1NamespacedRole',
-                                **args))
+                myk8s.runAction(
+                    'createRbacAuthorizationV1alpha1NamespacedRole',
+                    **args))

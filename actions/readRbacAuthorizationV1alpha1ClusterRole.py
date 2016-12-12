@@ -23,5 +23,6 @@ class readRbacAuthorizationV1alpha1ClusterRole(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('readRbacAuthorizationV1alpha1ClusterRole',
-                                **args))
+                myk8s.runAction(
+                    'readRbacAuthorizationV1alpha1ClusterRole',
+                    **args))

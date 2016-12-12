@@ -15,5 +15,6 @@ class getCoreAPIVersions(Action):
         if config_override is not None:
             args['config_override'] = config_override
         return (True,
-                myk8s.runAction('getCoreAPIVersions',
-                                **args))
+                myk8s.runAction(
+                    'getCoreAPIVersions',
+                    **args))

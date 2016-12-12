@@ -34,5 +34,6 @@ class deleteCoreV1Node(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('deleteCoreV1Node',
-                                **args))
+                myk8s.runAction(
+                    'deleteCoreV1Node',
+                    **args))

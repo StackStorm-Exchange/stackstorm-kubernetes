@@ -33,5 +33,6 @@ class createCoreV1NamespacedEvictionEviction(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('createCoreV1NamespacedEvictionEviction',
-                                **args))
+                myk8s.runAction(
+                    'createCoreV1NamespacedEvictionEviction',
+                    **args))

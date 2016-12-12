@@ -38,5 +38,6 @@ class deleteExtensionsV1beta1CollectionNamespacedNetworkPolicy(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('deleteExtensionsV1beta1CollectionNamespacedNetworkPolicy',
-                                **args))
+                myk8s.runAction(
+                    'deleteExtensionsV1beta1CollectionNamespacedNetworkPolicy',
+                    **args))

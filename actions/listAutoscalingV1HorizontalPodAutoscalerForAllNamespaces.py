@@ -33,5 +33,6 @@ class listAutoscalingV1HorizontalPodAutoscalerForAllNamespaces(Action):
         if watch is not None:
             args['watch'] = watch
         return (True,
-                myk8s.runAction('listAutoscalingV1HorizontalPodAutoscalerForAllNamespaces',
-                                **args))
+                myk8s.runAction(
+                    'listAutoscalingV1HorizontalPodAutoscalerForAllNamespaces',
+                    **args))

@@ -39,5 +39,6 @@ class deleteCoreV1NamespacedPersistentVolumeClaim(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('deleteCoreV1NamespacedPersistentVolumeClaim',
-                                **args))
+                myk8s.runAction(
+                    'deleteCoreV1NamespacedPersistentVolumeClaim',
+                    **args))

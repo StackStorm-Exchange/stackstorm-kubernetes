@@ -33,5 +33,6 @@ class listCoreV1Namespace(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('listCoreV1Namespace',
-                                **args))
+                myk8s.runAction(
+                    'listCoreV1Namespace',
+                    **args))

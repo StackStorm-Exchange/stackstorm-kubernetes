@@ -33,5 +33,6 @@ class patchCoreV1NamespacedPodTemplate(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('patchCoreV1NamespacedPodTemplate',
-                                **args))
+                myk8s.runAction(
+                    'patchCoreV1NamespacedPodTemplate',
+                    **args))

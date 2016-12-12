@@ -28,5 +28,6 @@ class createExtensionsV1beta1NamespacedJob(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('createExtensionsV1beta1NamespacedJob',
-                                **args))
+                myk8s.runAction(
+                    'createExtensionsV1beta1NamespacedJob',
+                    **args))

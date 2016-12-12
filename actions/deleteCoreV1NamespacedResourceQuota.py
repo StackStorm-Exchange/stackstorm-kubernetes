@@ -39,5 +39,6 @@ class deleteCoreV1NamespacedResourceQuota(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('deleteCoreV1NamespacedResourceQuota',
-                                **args))
+                myk8s.runAction(
+                    'deleteCoreV1NamespacedResourceQuota',
+                    **args))

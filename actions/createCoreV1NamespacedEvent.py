@@ -28,5 +28,6 @@ class createCoreV1NamespacedEvent(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('createCoreV1NamespacedEvent',
-                                **args))
+                myk8s.runAction(
+                    'createCoreV1NamespacedEvent',
+                    **args))

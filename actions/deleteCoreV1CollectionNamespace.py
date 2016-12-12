@@ -33,5 +33,6 @@ class deleteCoreV1CollectionNamespace(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('deleteCoreV1CollectionNamespace',
-                                **args))
+                myk8s.runAction(
+                    'deleteCoreV1CollectionNamespace',
+                    **args))

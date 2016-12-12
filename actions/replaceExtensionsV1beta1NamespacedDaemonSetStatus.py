@@ -33,5 +33,6 @@ class replaceExtensionsV1beta1NamespacedDaemonSetStatus(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('replaceExtensionsV1beta1NamespacedDaemonSetStatus',
-                                **args))
+                myk8s.runAction(
+                    'replaceExtensionsV1beta1NamespacedDaemonSetStatus',
+                    **args))

@@ -38,5 +38,6 @@ class listExtensionsV1beta1NamespacedDeployment(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('listExtensionsV1beta1NamespacedDeployment',
-                                **args))
+                myk8s.runAction(
+                    'listExtensionsV1beta1NamespacedDeployment',
+                    **args))

@@ -34,5 +34,6 @@ class readCoreV1NamespacedEvent(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('readCoreV1NamespacedEvent',
-                                **args))
+                myk8s.runAction(
+                    'readCoreV1NamespacedEvent',
+                    **args))

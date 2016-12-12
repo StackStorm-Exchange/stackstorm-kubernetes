@@ -34,5 +34,6 @@ class readCoreV1NamespacedConfigMap(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('readCoreV1NamespacedConfigMap',
-                                **args))
+                myk8s.runAction(
+                    'readCoreV1NamespacedConfigMap',
+                    **args))

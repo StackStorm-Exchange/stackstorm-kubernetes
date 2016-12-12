@@ -33,5 +33,6 @@ class deleteCertificatesV1alpha1CollectionCertificateSigningRequest(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('deleteCertificatesV1alpha1CollectionCertificateSigningRequest',
-                                **args))
+                myk8s.runAction(
+                    'deleteCertificatesV1alpha1CollectionCertificateSigningRequest',
+                    **args))

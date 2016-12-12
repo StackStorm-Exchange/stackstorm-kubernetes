@@ -38,5 +38,6 @@ class deleteCoreV1CollectionNamespacedEndpoints(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('deleteCoreV1CollectionNamespacedEndpoints',
-                                **args))
+                myk8s.runAction(
+                    'deleteCoreV1CollectionNamespacedEndpoints',
+                    **args))

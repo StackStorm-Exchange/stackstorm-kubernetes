@@ -33,5 +33,6 @@ class listCoreV1EndpointsForAllNamespaces(Action):
         if watch is not None:
             args['watch'] = watch
         return (True,
-                myk8s.runAction('listCoreV1EndpointsForAllNamespaces',
-                                **args))
+                myk8s.runAction(
+                    'listCoreV1EndpointsForAllNamespaces',
+                    **args))

@@ -33,5 +33,6 @@ class deleteStorageV1beta1CollectionStorageClass(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('deleteStorageV1beta1CollectionStorageClass',
-                                **args))
+                myk8s.runAction(
+                    'deleteStorageV1beta1CollectionStorageClass',
+                    **args))

@@ -28,5 +28,6 @@ class readCoreV1NamespacedServiceStatus(Action):
         if pretty is not None:
             args['pretty'] = pretty
         return (True,
-                myk8s.runAction('readCoreV1NamespacedServiceStatus',
-                                **args))
+                myk8s.runAction(
+                    'readCoreV1NamespacedServiceStatus',
+                    **args))

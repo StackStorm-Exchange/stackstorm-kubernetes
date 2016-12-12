@@ -1,0 +1,20 @@
+name: createCoreV1PersistentVolume
+pack: kubernetes
+runner_type: run-python
+description: "create a PersistentVolume"
+enabled: true
+entry_point: "createCoreV1PersistentVolume.py"
+parameters:
+    body:
+        type: object
+        description: ""
+        required: True
+        
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."
+        

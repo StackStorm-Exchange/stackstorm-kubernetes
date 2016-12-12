@@ -1,0 +1,10 @@
+name: listAllTPR
+pack: kubernetes
+runner_type: run-python
+description: "list all Third Party Resources"
+enabled: true
+entry_point: "listAllTPR.py"
+parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"

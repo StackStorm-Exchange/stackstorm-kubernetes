@@ -1,0 +1,30 @@
+name: patchCoreV1NamespacedLimitRange
+pack: kubernetes
+runner_type: run-python
+description: "partially update the specified LimitRange"
+enabled: true
+entry_point: "patchCoreV1NamespacedLimitRange.py"
+parameters:
+    body:
+        type: object
+        description: ""
+        required: True
+        
+    name:
+        type: string
+        description: "name of the LimitRange"
+        required: True
+        
+    namespace:
+        type: string
+        description: "object name and auth scope, such as for teams and projects"
+        required: True
+        
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."
+        

@@ -1,0 +1,14 @@
+---
+  name: "check_sensor_list"
+  runner_type: "run-python"
+  description: "Check to see whether a sensor already exists"
+  enabled: true
+  entry_point: "check_sensor_list.py"
+  pack: "kubernetes"
+  parameters:
+#    sensorlist:
+#      type: "string"
+#      description: "payload object from kubernetes sensor"
+    search:
+      type: "object"
+      description: "check whether this sensor already exists"

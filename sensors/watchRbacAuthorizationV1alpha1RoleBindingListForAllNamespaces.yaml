@@ -1,0 +1,21 @@
+---
+  class_name: "Rolebindings"
+  entry_point: "rolebindings.py"
+  description: "Sensor that watches Kubernetes API for new Rolebindings objects."
+  trigger_types:
+    -
+      name: "rolebindings"
+      description: "Trigger for rolebindings event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "obj"
+          name:
+            type: "obj"
+          labels:
+            type: "obj"
+          object_kind:
+            type: "obj"
+          namespace:
+            type: "obj"

@@ -1,0 +1,25 @@
+name: replaceRbacAuthorizationV1alpha1ClusterRole
+pack: kubernetes
+runner_type: run-python
+description: "replace the specified ClusterRole"
+enabled: true
+entry_point: "replaceRbacAuthorizationV1alpha1ClusterRole.py"
+parameters:
+    body:
+        type: object
+        description: ""
+        required: True
+        
+    name:
+        type: string
+        description: "name of the ClusterRole"
+        required: True
+        
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."
+        

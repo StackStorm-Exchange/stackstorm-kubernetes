@@ -1,0 +1,21 @@
+---
+  class_name: "Ingresses"
+  entry_point: "ingresses.py"
+  description: "Sensor that watches Kubernetes API for new Ingresses objects."
+  trigger_types:
+    -
+      name: "ingresses"
+      description: "Trigger for ingresses event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "obj"
+          name:
+            type: "obj"
+          labels:
+            type: "obj"
+          object_kind:
+            type: "obj"
+          namespace:
+            type: "obj"

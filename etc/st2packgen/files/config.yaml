@@ -1,0 +1,13 @@
+---
+    user: "admin"
+    password: "andypass"
+    kubernetes_api_url: "https://master-a.andrew.kube"
+    extension_url: "/apis/extensions/v1beta1/watch/thirdpartyresources"
+    verify: false
+
+    environment: "andrew"
+    region: "eu-west-1"
+    stack_id: "a"
+
+    domain: "prsn-dev.io"
+    template_path: "/opt/stackstorm/packs/kubernetes"

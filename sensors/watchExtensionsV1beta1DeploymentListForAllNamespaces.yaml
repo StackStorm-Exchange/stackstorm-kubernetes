@@ -1,0 +1,21 @@
+---
+  class_name: "Deployments"
+  entry_point: "deployments.py"
+  description: "Sensor that watches Kubernetes API for new Deployments objects."
+  trigger_types:
+    -
+      name: "deployments"
+      description: "Trigger for deployments event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "obj"
+          name:
+            type: "obj"
+          labels:
+            type: "obj"
+          object_kind:
+            type: "obj"
+          namespace:
+            type: "obj"

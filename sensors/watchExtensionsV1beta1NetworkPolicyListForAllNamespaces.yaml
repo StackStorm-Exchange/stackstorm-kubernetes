@@ -1,0 +1,21 @@
+---
+  class_name: "Networkpolicies"
+  entry_point: "networkpolicies.py"
+  description: "Sensor that watches Kubernetes API for new Networkpolicies objects."
+  trigger_types:
+    -
+      name: "networkpolicies"
+      description: "Trigger for networkpolicies event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "obj"
+          name:
+            type: "obj"
+          labels:
+            type: "obj"
+          object_kind:
+            type: "obj"
+          namespace:
+            type: "obj"

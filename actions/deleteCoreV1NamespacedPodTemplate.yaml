@@ -1,0 +1,38 @@
+name: deleteCoreV1NamespacedPodTemplate
+pack: kubernetes
+runner_type: run-python
+description: "delete a PodTemplate"
+enabled: true
+entry_point: "deleteCoreV1NamespacedPodTemplate.py"
+parameters:
+    body:
+        type: object
+        description: ""
+        required: True
+        
+    name:
+        type: string
+        description: "name of the PodTemplate"
+        required: True
+        
+    namespace:
+        type: string
+        description: "object name and auth scope, such as for teams and projects"
+        required: True
+        
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        
+    gracePeriodSeconds:
+        type: integer
+        description: "The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately."
+        
+    orphanDependents:
+        type: boolean
+        description: "Should the dependent objects be orphaned. If true/false, the orphan finalizer will be added to/removed from the object's finalizers list."
+        
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."
+        

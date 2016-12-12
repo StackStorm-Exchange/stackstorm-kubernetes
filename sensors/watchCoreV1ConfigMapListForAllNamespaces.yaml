@@ -1,0 +1,21 @@
+---
+  class_name: "Configmaps"
+  entry_point: "configmaps.py"
+  description: "Sensor that watches Kubernetes API for new Configmaps objects."
+  trigger_types:
+    -
+      name: "configmaps"
+      description: "Trigger for configmaps event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "obj"
+          name:
+            type: "obj"
+          labels:
+            type: "obj"
+          object_kind:
+            type: "obj"
+          namespace:
+            type: "obj"

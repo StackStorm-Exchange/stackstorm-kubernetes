@@ -1,0 +1,25 @@
+name: replaceStorageV1beta1StorageClass
+pack: kubernetes
+runner_type: run-python
+description: "replace the specified StorageClass"
+enabled: true
+entry_point: "replaceStorageV1beta1StorageClass.py"
+parameters:
+    body:
+        type: object
+        description: ""
+        required: True
+        
+    name:
+        type: string
+        description: "name of the StorageClass"
+        required: True
+        
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."
+        

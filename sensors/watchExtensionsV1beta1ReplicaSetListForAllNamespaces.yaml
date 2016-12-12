@@ -1,0 +1,21 @@
+---
+  class_name: "Replicasets"
+  entry_point: "replicasets.py"
+  description: "Sensor that watches Kubernetes API for new Replicasets objects."
+  trigger_types:
+    -
+      name: "replicasets"
+      description: "Trigger for replicasets event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "obj"
+          name:
+            type: "obj"
+          labels:
+            type: "obj"
+          object_kind:
+            type: "obj"
+          namespace:
+            type: "obj"

@@ -1,0 +1,21 @@
+---
+  class_name: "Replicationcontrollers"
+  entry_point: "replicationcontrollers.py"
+  description: "Sensor that watches Kubernetes API for new Replicationcontrollers objects."
+  trigger_types:
+    -
+      name: "replicationcontrollers"
+      description: "Trigger for replicationcontrollers event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "obj"
+          name:
+            type: "obj"
+          labels:
+            type: "obj"
+          object_kind:
+            type: "obj"
+          namespace:
+            type: "obj"

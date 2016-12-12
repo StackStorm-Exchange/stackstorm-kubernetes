@@ -1,0 +1,11 @@
+---
+  name: "delete_tpr_sensor"
+  runner_type: "run-python"
+  description: "Delete 3PR sensor"
+  enabled: true
+  entry_point: "delete_tpr_sensor.py"
+  pack: "kubernetes"
+  parameters:
+    payload:
+      type: "object"
+      description: "payload object from kubernetes sensor"

@@ -1,0 +1,11 @@
+---
+  name: "register_tpr"
+  runner_type: "action-chain"
+  description: "Create a new st2 sensor and load it"
+  enabled: true
+  entry_point: "workflows/register_tpr.yaml"
+  pack: "kubernetes"
+  parameters:
+    payload:
+      type: "object"
+      description: "payload object from kubernetes sensor"

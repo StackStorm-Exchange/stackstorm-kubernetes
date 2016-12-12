@@ -1,0 +1,20 @@
+name: createCoreV1Node
+pack: kubernetes
+runner_type: run-python
+description: "create a Node"
+enabled: true
+entry_point: "createCoreV1Node.py"
+parameters:
+    body:
+        type: object
+        description: ""
+        required: True
+        
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."
+        

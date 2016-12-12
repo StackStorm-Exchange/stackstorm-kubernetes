@@ -1,0 +1,25 @@
+name: readCoreV1NamespacedReplicationControllerStatus
+pack: kubernetes
+runner_type: run-python
+description: "read status of the specified ReplicationController"
+enabled: true
+entry_point: "readCoreV1NamespacedReplicationControllerStatus.py"
+parameters:
+    name:
+        type: string
+        description: "name of the ReplicationController"
+        required: True
+        
+    namespace:
+        type: string
+        description: "object name and auth scope, such as for teams and projects"
+        required: True
+        
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."
+        

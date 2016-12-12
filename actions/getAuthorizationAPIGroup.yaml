@@ -1,0 +1,11 @@
+name: getAuthorizationAPIGroup
+pack: kubernetes
+runner_type: run-python
+description: "get information of a group"
+enabled: true
+entry_point: "getAuthorizationAPIGroup.py"
+parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        

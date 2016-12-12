@@ -1,0 +1,21 @@
+---
+  class_name: "Certificatesigningrequests"
+  entry_point: "certificatesigningrequests.py"
+  description: "Sensor that watches Kubernetes API for new Certificatesigningrequests objects."
+  trigger_types:
+    -
+      name: "certificatesigningrequests"
+      description: "Trigger for certificatesigningrequests event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "obj"
+          name:
+            type: "obj"
+          labels:
+            type: "obj"
+          object_kind:
+            type: "obj"
+          namespace:
+            type: "obj"

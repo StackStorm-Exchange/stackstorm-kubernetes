@@ -1,0 +1,21 @@
+---
+name: "kubernetes_third_party_resource_create"
+pack: "kubernetes"
+description: "Check for new third party resources"
+enabled: true
+
+trigger:
+  type: "kubernetes.thirdpartyresources"
+
+criteria:
+  trigger.resource:
+    type: "contains"
+    pattern: "ADDED"
+  trigger.object_kind:
+    type: "equals"
+    pattern: "ThirdPartyResource"
+
+action:
+  ref: "kubernetes.register_tpr"
+  parameters:
+    payload: "{{trigger}}"

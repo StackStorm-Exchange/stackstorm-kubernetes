@@ -1,0 +1,21 @@
+---
+  class_name: "Events"
+  entry_point: "events.py"
+  description: "Sensor that watches Kubernetes API for new Events objects."
+  trigger_types:
+    -
+      name: "events"
+      description: "Trigger for events event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "obj"
+          name:
+            type: "obj"
+          labels:
+            type: "obj"
+          object_kind:
+            type: "obj"
+          namespace:
+            type: "obj"

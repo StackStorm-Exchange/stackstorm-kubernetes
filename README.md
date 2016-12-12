@@ -1,32 +1,50 @@
-# Kubernetes sensor integration
+# Kubernetes Integration Pack
 
 Pack which allows integration with [Kubernetes](https://kubernetes.io/) service.
 
+This pack has been tested with kubernetes 1.4 and 1.5 (betas currently)
+
 # Current Status & Capabilities
-Creates a StackStorm Sensor (watch) on Kubernetes ThirdPartyResource API endpoint
-Listens for new events. If 'ADDED', rule can pick up and create and AWS RDS database.
+Creates actions and sensors to interact with kubernetes through stackstorm
+Listens for new third party resources, and dynamically creates new sensors for these
+It does not create rules to match the generated sensors.
+Actions can be created to react to third party resource addition/deletion (for example
+create services in AWS through cloudformation)
+
+This pack is mostly generated from the Kubernetes OpenAPI spec. There are several additional
+actions, rules and sensors to facilitate dynamic third party resource management.
+
+Action names are derived from OperationID's within the Kubernetes spec
+
+
 
 ## Configuration
 
 config.yaml includes:
 ```yaml
-user: ""
-password: ""
-kubernetes_api_url: "https://kube_api_url"
-extension_url: "/apis/extensions/v1beta1/watch/thirdpartyresources"
+user: "xxxxxxxx"
+password: "xxxxxxxx"
+kubernetes_api_url: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+verify: false
+
+template_path: "/opt/stackstorm/packs/kubernetes/"
 ```
-Where kube_api_url = The FQDN to your Kubernetes API endpoint.
+Where kubernetes_api_url = The FQDN to your Kubernetes API endpoint.
 
 Note: Currently SSL verification is turned off. This is a WIP.
+
+All actions allow an optional 'config_override' argument which takes an object with any of the above
+example:
+
+```
+{"kubernetes_api_url": "http://master.mydomain.kube", "user": "admin", "password": "password"}
+```
 
 ## To install the Kubernetes Pack
 
 ```
 st2 pack install kubernetes
 ```
-
-Note: AWS pack must be enabled and running
-
 
 ### Kubernetes Specific Settings
 
@@ -38,27 +56,10 @@ The following must be enabled on Kubernetes API in ```kube-apiserver.yaml```
 
 Simply add the line above. kube-api container will automatically restart to accept the change.
 
+### To test creating a namespace:
 
-
-### To Test the RDS create event in the Kubernetes Pack
-
-Create a yaml file with something like below:
-
-```yaml
-metadata:
-  name: mysql-db31.example.com
-  labels:
-    resource: database
-    object: mysql
-apiVersion: extensions/v1beta1
-kind: ThirdPartyResource
-description: "A specification of database for mysql"
-versions:
-  - name: stable/v1
-```
-
-With kubectl run:
+kubernetes.createCoreV1Namespace - set the body variable as
 
 ```
-kubectl create -f name_of_your_file.yaml
+{"kind":"Namespace","apiVersion":"v1","metadata":{"name":"testing2","creationTimestamp":null},"spec":{},"status":{}}
 ```

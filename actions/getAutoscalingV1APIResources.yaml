@@ -1,0 +1,11 @@
+name: getAutoscalingV1APIResources
+pack: kubernetes
+runner_type: run-python
+description: "get available resources"
+enabled: true
+entry_point: "getAutoscalingV1APIResources.py"
+parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        

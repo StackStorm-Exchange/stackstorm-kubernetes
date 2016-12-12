@@ -1,0 +1,30 @@
+name: patchExtensionsV1beta1NamespacedReplicaSet
+pack: kubernetes
+runner_type: run-python
+description: "partially update the specified ReplicaSet"
+enabled: true
+entry_point: "patchExtensionsV1beta1NamespacedReplicaSet.py"
+parameters:
+    body:
+        type: object
+        description: ""
+        required: True
+        
+    name:
+        type: string
+        description: "name of the ReplicaSet"
+        required: True
+        
+    namespace:
+        type: string
+        description: "object name and auth scope, such as for teams and projects"
+        required: True
+        
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."
+        

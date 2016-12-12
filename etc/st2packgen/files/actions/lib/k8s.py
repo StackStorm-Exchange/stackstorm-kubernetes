@@ -74,10 +74,10 @@ if __name__ == "__main__":
     print json.dumps(resp, sort_keys=True, indent=2)
 
     args = {"body": {
-                "kind": "Namespace",
-                "apiVersion": "v1",
-                "metadata": {"labels": {"project": "andy"}, "name": "new-stg"}
-            }}
+        "kind": "Namespace",
+        "apiVersion": "v1",
+        "metadata": {"labels": {"project": "andy"}, "name": "new-stg"}
+    }}
     resp = k8s.runAction('createCoreV1Namespace', **args)
 
     # args = {'namespace': 'new-stg', 'body': {

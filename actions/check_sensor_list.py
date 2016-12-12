@@ -11,9 +11,9 @@ class check_sensor_list(Action):
     def run(self, search):
 
         auth_token = os.environ['ST2_ACTION_AUTH_TOKEN']
-        headers = { 'X-Auth-Token': auth_token }
+        headers = {'X-Auth-Token': auth_token}
         executionsurl = os.environ['ST2_ACTION_API_URL'] + "/executions"
-        data = {"action": "st2.sensors.list", "user": None, 
+        data = {"action": "st2.sensors.list", "user": None,
                 "parameters": {"limit": 50, "pack": "kubernetes"}}
 
         r = requests.post(executionsurl, headers=headers, json=data, verify=False)
@@ -35,8 +35,8 @@ class check_sensor_list(Action):
             jdata = json.loads(resp.text)
             if jdata['status'] == "failed":
                 for job in jdata['result']['tasks']:
-                  if job['state'] == "failed":
-                      return (False, "failed %s stderr %s" % (job['name'], job['result']['stderr']))
+                    if job['state'] == "failed":
+                        return (False, "failed %s stderr %s" % (job['name'], job['result']['stderr']))
 
             if runcount == 200:
                 return (False, "Timed out 5 mins")

@@ -30,7 +30,6 @@ class Client(BaseClient):
         auth = base64.b64encode(config['user'] + ":" + config['password'])
         self.authhead = {"authorization": "Basic " + auth}
 
-
     def request(self, req_and_resp, opt):
         # passing to parent for default patching behavior,
         # applying authorizations, ...etc.
@@ -40,6 +39,7 @@ class Client(BaseClient):
         req._patch(opt)
 
         file_obj = []
+
         def append(name, obj):
             f = obj.data or open(obj.filename, 'rb')
             if 'Content-Type' in obj.header:

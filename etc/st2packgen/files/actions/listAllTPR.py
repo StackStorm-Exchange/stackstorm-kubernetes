@@ -4,8 +4,6 @@ import json
 import re
 import requests
 
-from string import capwords
-
 
 class listAllTPR(Action):
 
@@ -15,7 +13,7 @@ class listAllTPR(Action):
         password = self.config['password']
         verify = self.config['verify']
 
-        r = requests.get(url, auth=(user, password), verify = verify)
+        r = requests.get(url, auth=(user, password), verify=verify)
         if r.status_code != 200:
             return (False, "Unable to determine remote api endpoint")
         return json.loads(r.text)
@@ -30,9 +28,9 @@ class listAllTPR(Action):
         if config_override is not None:
             self.overwriteConfig(config_override)
 
-        k8s_api_url = self.config['kubernetes_api_url'] + "/apis/extensions/v1beta1/thirdpartyresources"
+        apiurl = self.config['kubernetes_api_url'] + "/apis/extensions/v1beta1/thirdpartyresources"
 
-        alldata = self.mkrequest(k8s_api_url) 
+        alldata = self.mkrequest(apiurl)
 
         output = {}
         output['data'] = {}
@@ -52,7 +50,7 @@ class listAllTPR(Action):
             pname = None
             for res in resp['resources']:
                 if res['kind'] == kind:
-                    pname = res['name'] 
+                    pname = res['name']
                     break
 
             if pname is None:

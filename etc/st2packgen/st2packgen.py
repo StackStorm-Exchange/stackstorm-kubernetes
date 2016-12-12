@@ -84,8 +84,8 @@ for path in app.dump()['paths'].keys():
                 tmp['type'] = 'object'
                 ref = getattr(x.schema, '$ref')
                 refdata = app.resolve(ref)
-                if refdata.description is not None:
-                    tmp['description'] = refdata.description.replace('"', '')
+                if refdata['description'] is not None:
+                    tmp['description'] = refdata['description'].replace('"', '')
                 else:
                     tmp['description'] = ""
             else:
@@ -99,7 +99,7 @@ for path in app.dump()['paths'].keys():
             tmp['default'] = x.default
             tmp['pattern'] = x.pattern
             tmp['in'] = getattr(x, 'in')
-            if tmp['required'] == True:
+            if tmp['required'] is True:
                 allvars['paramsreq'].append(tmp)
             else:
                 allvars['params'].append(tmp)
@@ -120,10 +120,10 @@ for path in app.dump()['paths'].keys():
                 y = open(sensoryaml, 'w')
 
                 template = templateEnv.get_template('sensor_template.py.jinja')
-                outputText = template.render(allvars)
+                outputText = template.render(allvars)  # pylint: disable=no-member
                 p.write(outputText)
                 template = templateEnv.get_template('sensor_template.yaml.jinja')
-                outputText = template.render(allvars)
+                outputText = template.render(allvars)  # pylint: disable=no-member
                 y.write(outputText)
 
                 p.close()
@@ -135,10 +135,10 @@ for path in app.dump()['paths'].keys():
             y = open(actionyaml, 'w')
 
             template = templateEnv.get_template('action_template.py.jinja')
-            outputText = template.render(allvars)
+            outputText = template.render(allvars)  # pylint: disable=no-member
             p.write(outputText)
             template = templateEnv.get_template('action_template.yaml.jinja')
-            outputText = template.render(allvars)
+            outputText = template.render(allvars)  # pylint: disable=no-member
             y.write(outputText)
 
             p.close()

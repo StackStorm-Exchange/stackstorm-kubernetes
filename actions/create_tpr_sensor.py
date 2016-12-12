@@ -50,10 +50,10 @@ class createTPRSensor(Action):
         y = open(sensoryaml, 'w')
 
         template = templateEnv.get_template('sensor_template.py.jinja')
-        outputText = template.render(allvars) # noqa
+        outputText = template.render(allvars)  # noqa
         p.write(outputText)
         template = templateEnv.get_template('sensor_template.yaml.jinja')
-        outputText = template.render(allvars) # noqa
+        outputText = template.render(allvars)  # noqa
         y.write(outputText)
 
         p.close()

@@ -12,9 +12,7 @@ class createTPRSensor(Action):
         allvars = {}
 
         templateLoader = jinja2.FileSystemLoader(searchpath=self.config['template_path'])
-        templateEnv = jinja2.Environment(loader=templateLoader,
-                                         lstrip_blocks=True,
-                                         trim_blocks=True)
+        templateEnv = jinja2.Environment(loader=templateLoader)
 
         user = self.config['user']
         password = self.config['password']
@@ -46,18 +44,16 @@ class createTPRSensor(Action):
         allvars['watchurl'] = "/apis/prsn.io/v1/watch/" + pname
         allvars['triggername'] = "thirdpartyobject"
 
-        print json.dumps(allvars, sort_keys=True, indent=2)
-
         sensorpy = self.config['template_path'] + "/sensors/" + allvars['name'] + "_create.py"
         sensoryaml = self.config['template_path'] + "/sensors/" + allvars['name'] + "_create.yaml"
         p = open(sensorpy, 'w')
         y = open(sensoryaml, 'w')
 
         template = templateEnv.get_template('sensor_template.py.jinja')
-        outputText = template.render(allvars)
+        outputText = template.render(allvars) # noqa
         p.write(outputText)
         template = templateEnv.get_template('sensor_template.yaml.jinja')
-        outputText = template.render(allvars)
+        outputText = template.render(allvars) # noqa
         y.write(outputText)
 
         p.close()

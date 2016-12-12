@@ -39,9 +39,9 @@ class createTPRSensor(Action):
 
         pname = None
         for res in data['resources']:
-          if res['kind'] == cname:
-            pname = res['name']
-            break
+            if res['kind'] == cname:
+                pname = res['name']
+                break
 
         if pname is None:
             return (False, "Couldn't match 3PR with an api endpoint")

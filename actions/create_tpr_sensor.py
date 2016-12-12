@@ -1,8 +1,5 @@
 from st2actions.runners.pythonrunner import Action
 
-from jinja2 import Template
-from jinja2 import Environment, PackageLoader
-
 import json
 import jinja2
 import requests
@@ -16,8 +13,8 @@ class createTPRSensor(Action):
 
         templateLoader = jinja2.FileSystemLoader(searchpath = self.config['template_path'])
         templateEnv = jinja2.Environment(loader = templateLoader,
-                                         lstrip_blocks=True,
-                                         trim_blocks=True)
+                                         lstrip_blocks = True,
+                                         trim_blocks = True)
 
         user = self.config['user']
         password = self.config['password']

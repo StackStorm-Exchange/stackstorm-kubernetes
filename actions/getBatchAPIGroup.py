@@ -13,4 +13,6 @@ class getBatchAPIGroup(Action):
         if config_override is not None:
             args['config_override'] = config_override
 
-        return (True, myk8s.runAction('getBatchAPIGroup', **args))
+        return (True,
+                myk8s.runAction('getBatchAPIGroup',
+                                **args))

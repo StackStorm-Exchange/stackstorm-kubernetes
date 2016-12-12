@@ -6,6 +6,7 @@ import requests
 
 from string import capwords
 
+
 class listAllTPR(Action):
 
     def mkrequest(self, url):
@@ -14,7 +15,7 @@ class listAllTPR(Action):
         password = self.config['password']
         verify = self.config['verify']
 
-        r = requests.get(url, auth=(user, password), verify=verify)
+        r = requests.get(url, auth=(user, password), verify = verify)
         if r.status_code != 200:
             return (False, "Unable to determine remote api endpoint")
         return json.loads(r.text)
@@ -62,6 +63,6 @@ class listAllTPR(Action):
             tprdata = self.mkrequest(tprendpoint)
 
             for item in tprdata['items']:
-              output['data']['items'].append(item)
+                output['data']['items'].append(item)
 
         return (True, output)

@@ -27,4 +27,6 @@ class replaceExtensionsV1beta1NamespacedReplicaSetStatus(Action):
         if pretty is not None:
             args['pretty'] = pretty
 
-        return (True, myk8s.runAction('replaceExtensionsV1beta1NamespacedReplicaSetStatus', **args))
+        return (True,
+                myk8s.runAction('replaceExtensionsV1beta1NamespacedReplicaSetStatus',
+                                **args))

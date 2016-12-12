@@ -23,4 +23,6 @@ class createPolicyV1beta1NamespacedPodDisruptionBudget(Action):
         if pretty is not None:
             args['pretty'] = pretty
 
-        return (True, myk8s.runAction('createPolicyV1beta1NamespacedPodDisruptionBudget', **args))
+        return (True,
+                myk8s.runAction('createPolicyV1beta1NamespacedPodDisruptionBudget',
+                                **args))

@@ -23,4 +23,6 @@ class replaceCoreV1Node(Action):
         if pretty is not None:
             args['pretty'] = pretty
 
-        return (True, myk8s.runAction('replaceCoreV1Node', **args))
+        return (True,
+                myk8s.runAction('replaceCoreV1Node',
+                                **args))

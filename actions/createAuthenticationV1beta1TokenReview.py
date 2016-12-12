@@ -19,4 +19,6 @@ class createAuthenticationV1beta1TokenReview(Action):
         if pretty is not None:
             args['pretty'] = pretty
 
-        return (True, myk8s.runAction('createAuthenticationV1beta1TokenReview', **args))
+        return (True,
+                myk8s.runAction('createAuthenticationV1beta1TokenReview',
+                                **args))

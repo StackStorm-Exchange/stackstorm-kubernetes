@@ -23,4 +23,6 @@ class createExtensionsV1beta1NamespacedNetworkPolicy(Action):
         if pretty is not None:
             args['pretty'] = pretty
 
-        return (True, myk8s.runAction('createExtensionsV1beta1NamespacedNetworkPolicy', **args))
+        return (True,
+                myk8s.runAction('createExtensionsV1beta1NamespacedNetworkPolicy',
+                                **args))

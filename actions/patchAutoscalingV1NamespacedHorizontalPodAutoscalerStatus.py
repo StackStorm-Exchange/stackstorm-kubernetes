@@ -27,4 +27,6 @@ class patchAutoscalingV1NamespacedHorizontalPodAutoscalerStatus(Action):
         if pretty is not None:
             args['pretty'] = pretty
 
-        return (True, myk8s.runAction('patchAutoscalingV1NamespacedHorizontalPodAutoscalerStatus', **args))
+        return (True,
+                myk8s.runAction('patchAutoscalingV1NamespacedHorizontalPodAutoscalerStatus',
+                                **args))

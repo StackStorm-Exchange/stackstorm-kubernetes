@@ -27,4 +27,6 @@ class replaceCoreV1NamespacedResourceQuotaStatus(Action):
         if pretty is not None:
             args['pretty'] = pretty
 
-        return (True, myk8s.runAction('replaceCoreV1NamespacedResourceQuotaStatus', **args))
+        return (True,
+                myk8s.runAction('replaceCoreV1NamespacedResourceQuotaStatus',
+                                **args))

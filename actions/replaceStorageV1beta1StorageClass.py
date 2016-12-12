@@ -23,4 +23,6 @@ class replaceStorageV1beta1StorageClass(Action):
         if pretty is not None:
             args['pretty'] = pretty
 
-        return (True, myk8s.runAction('replaceStorageV1beta1StorageClass', **args))
+        return (True,
+                myk8s.runAction('replaceStorageV1beta1StorageClass',
+                                **args))

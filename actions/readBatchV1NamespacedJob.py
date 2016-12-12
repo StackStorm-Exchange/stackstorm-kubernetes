@@ -27,4 +27,6 @@ class readBatchV1NamespacedJob(Action):
         if pretty is not None:
             args['pretty'] = pretty
 
-        return (True, myk8s.runAction('readBatchV1NamespacedJob', **args))
+        return (True,
+                myk8s.runAction('readBatchV1NamespacedJob',
+                                **args))

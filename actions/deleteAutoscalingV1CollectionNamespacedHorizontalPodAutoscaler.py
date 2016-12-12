@@ -29,4 +29,6 @@ class deleteAutoscalingV1CollectionNamespacedHorizontalPodAutoscaler(Action):
         if pretty is not None:
             args['pretty'] = pretty
 
-        return (True, myk8s.runAction('deleteAutoscalingV1CollectionNamespacedHorizontalPodAutoscaler', **args))
+        return (True,
+                myk8s.runAction('deleteAutoscalingV1CollectionNamespacedHorizontalPodAutoscaler',
+                                **args))

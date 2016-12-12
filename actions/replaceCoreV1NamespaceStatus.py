@@ -23,4 +23,6 @@ class replaceCoreV1NamespaceStatus(Action):
         if pretty is not None:
             args['pretty'] = pretty
 
-        return (True, myk8s.runAction('replaceCoreV1NamespaceStatus', **args))
+        return (True,
+                myk8s.runAction('replaceCoreV1NamespaceStatus',
+                                **args))

@@ -25,4 +25,6 @@ class listExtensionsV1beta1IngressForAllNamespaces(Action):
         if watch is not None:
             args['watch'] = watch
 
-        return (True, myk8s.runAction('listExtensionsV1beta1IngressForAllNamespaces', **args))
+        return (True,
+                myk8s.runAction('listExtensionsV1beta1IngressForAllNamespaces',
+                                **args))

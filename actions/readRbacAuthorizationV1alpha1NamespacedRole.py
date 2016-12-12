@@ -23,4 +23,6 @@ class readRbacAuthorizationV1alpha1NamespacedRole(Action):
         if pretty is not None:
             args['pretty'] = pretty
 
-        return (True, myk8s.runAction('readRbacAuthorizationV1alpha1NamespacedRole', **args))
+        return (True,
+                myk8s.runAction('readRbacAuthorizationV1alpha1NamespacedRole',
+                                **args))

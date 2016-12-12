@@ -25,4 +25,6 @@ class listCoreV1EventForAllNamespaces(Action):
         if watch is not None:
             args['watch'] = watch
 
-        return (True, myk8s.runAction('listCoreV1EventForAllNamespaces', **args))
+        return (True,
+                myk8s.runAction('listCoreV1EventForAllNamespaces',
+                                **args))

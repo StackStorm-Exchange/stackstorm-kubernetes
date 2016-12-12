@@ -27,4 +27,6 @@ class patchBatchV1NamespacedJobStatus(Action):
         if pretty is not None:
             args['pretty'] = pretty
 
-        return (True, myk8s.runAction('patchBatchV1NamespacedJobStatus', **args))
+        return (True,
+                myk8s.runAction('patchBatchV1NamespacedJobStatus',
+                                **args))

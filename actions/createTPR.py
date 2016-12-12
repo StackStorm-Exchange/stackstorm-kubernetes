@@ -38,21 +38,6 @@ class createTPR(Action):
 
         self.body = body
 
-# {
-#    "apiVersion": "prsn.io/v1",
-#    "description": "",
-#    "kind": "Cassandra",
-#    "metadata": {
-#      "labels": {
-#        "stack_name": "cass1",
-#        "type": "cassandra.prsn.io",
-#        "version": "2.2"
-#      },
-#      "name": "cass1",
-#      "namespace": "test-app"
-#    }
-#  }
-
         name, apigroup = self.body['metadata']['labels']['type'].split('.', 1)
         namespace = self.body['metadata']['namespace']
 

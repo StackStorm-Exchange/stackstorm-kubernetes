@@ -25,4 +25,6 @@ class listRbacAuthorizationV1alpha1RoleForAllNamespaces(Action):
         if watch is not None:
             args['watch'] = watch
 
-        return (True, myk8s.runAction('listRbacAuthorizationV1alpha1RoleForAllNamespaces', **args))
+        return (True,
+                myk8s.runAction('listRbacAuthorizationV1alpha1RoleForAllNamespaces',
+                                **args))

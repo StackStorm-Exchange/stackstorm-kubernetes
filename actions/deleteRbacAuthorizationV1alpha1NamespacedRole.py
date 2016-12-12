@@ -31,4 +31,6 @@ class deleteRbacAuthorizationV1alpha1NamespacedRole(Action):
         if pretty is not None:
             args['pretty'] = pretty
 
-        return (True, myk8s.runAction('deleteRbacAuthorizationV1alpha1NamespacedRole', **args))
+        return (True,
+                myk8s.runAction('deleteRbacAuthorizationV1alpha1NamespacedRole',
+                                **args))

@@ -13,4 +13,6 @@ class getExtensionsV1beta1APIResources(Action):
         if config_override is not None:
             args['config_override'] = config_override
 
-        return (True, myk8s.runAction('getExtensionsV1beta1APIResources', **args))
+        return (True,
+                myk8s.runAction('getExtensionsV1beta1APIResources',
+                                **args))

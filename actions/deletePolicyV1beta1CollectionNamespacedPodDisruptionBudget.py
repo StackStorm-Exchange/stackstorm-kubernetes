@@ -29,4 +29,6 @@ class deletePolicyV1beta1CollectionNamespacedPodDisruptionBudget(Action):
         if pretty is not None:
             args['pretty'] = pretty
 
-        return (True, myk8s.runAction('deletePolicyV1beta1CollectionNamespacedPodDisruptionBudget', **args))
+        return (True,
+                myk8s.runAction('deletePolicyV1beta1CollectionNamespacedPodDisruptionBudget',
+                                **args))

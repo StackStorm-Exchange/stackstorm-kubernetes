@@ -29,4 +29,6 @@ class deleteExtensionsV1beta1CollectionNamespacedIngress(Action):
         if pretty is not None:
             args['pretty'] = pretty
 
-        return (True, myk8s.runAction('deleteExtensionsV1beta1CollectionNamespacedIngress', **args))
+        return (True,
+                myk8s.runAction('deleteExtensionsV1beta1CollectionNamespacedIngress',
+                                **args))

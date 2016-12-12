@@ -23,4 +23,6 @@ class readExtensionsV1beta1NamespacedDeploymentStatus(Action):
         if pretty is not None:
             args['pretty'] = pretty
 
-        return (True, myk8s.runAction('readExtensionsV1beta1NamespacedDeploymentStatus', **args))
+        return (True,
+                myk8s.runAction('readExtensionsV1beta1NamespacedDeploymentStatus',
+                                **args))

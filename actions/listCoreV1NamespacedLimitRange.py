@@ -29,4 +29,6 @@ class listCoreV1NamespacedLimitRange(Action):
         if pretty is not None:
             args['pretty'] = pretty
 
-        return (True, myk8s.runAction('listCoreV1NamespacedLimitRange', **args))
+        return (True,
+                myk8s.runAction('listCoreV1NamespacedLimitRange',
+                                **args))

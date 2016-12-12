@@ -27,4 +27,6 @@ class readCoreV1NamespacedLimitRange(Action):
         if pretty is not None:
             args['pretty'] = pretty
 
-        return (True, myk8s.runAction('readCoreV1NamespacedLimitRange', **args))
+        return (True,
+                myk8s.runAction('readCoreV1NamespacedLimitRange',
+                                **args))

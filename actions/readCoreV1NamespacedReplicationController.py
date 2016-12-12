@@ -27,4 +27,6 @@ class readCoreV1NamespacedReplicationController(Action):
         if pretty is not None:
             args['pretty'] = pretty
 
-        return (True, myk8s.runAction('readCoreV1NamespacedReplicationController', **args))
+        return (True,
+                myk8s.runAction('readCoreV1NamespacedReplicationController',
+                                **args))

@@ -25,4 +25,6 @@ class listAppsV1beta1StatefulSetForAllNamespaces(Action):
         if watch is not None:
             args['watch'] = watch
 
-        return (True, myk8s.runAction('listAppsV1beta1StatefulSetForAllNamespaces', **args))
+        return (True,
+                myk8s.runAction('listAppsV1beta1StatefulSetForAllNamespaces',
+                                **args))

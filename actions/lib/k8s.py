@@ -1,19 +1,8 @@
 import json
-# import importlib
-# import requests
-# import re
-# import base64
 
-from pyswagger import App  # , Security
-# from pyswagger.utils import jp_compose
-# from pyswagger.core import BaseClient
-# from pyswagger.io import Request
+from pyswagger import App
 from pyswagger.primitives import Primitive
-
-
 from k8sbase import Client
-
-from datetime import datetime
 
 
 class K8sClient:
@@ -24,14 +13,6 @@ class K8sClient:
         self.templates = config['template_path']
 
         self.swagger = self.templates + "/swagger.json"
-
-    def _json_serial(self, obj):
-        """JSON serializer for objects not serializable by default json code"""
-
-        if isinstance(obj, datetime):
-            serial = obj.isoformat()
-            return serial
-        raise TypeError("Type not serializable")
 
     def _encode_intOrString(self, obj, val, ctx):
         # val is the value used to create this primitive, for example, a
@@ -60,13 +41,11 @@ class K8sClient:
         factory = Primitive()
         factory.register('string', 'int-or-string', self._encode_intOrString)
 
-        app = App.create(self.swagger)
         app = App.load(url=self.swagger, prim=factory)
         app.prepare()
         client = Client(config=self.config, send_opt=({'verify': False}))
 
         opt = dict(
-            # patch the url of petstore to localhost:8001
             url_netloc=self.config['kubernetes_api_url'][8:]
         )
 

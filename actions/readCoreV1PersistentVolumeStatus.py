@@ -19,4 +19,6 @@ class readCoreV1PersistentVolumeStatus(Action):
         if pretty is not None:
             args['pretty'] = pretty
 
-        return (True, myk8s.runAction('readCoreV1PersistentVolumeStatus', **args))
+        return (True,
+                myk8s.runAction('readCoreV1PersistentVolumeStatus',
+                                **args))

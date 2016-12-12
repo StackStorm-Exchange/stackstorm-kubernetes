@@ -23,4 +23,6 @@ class createCoreV1NamespacedService(Action):
         if pretty is not None:
             args['pretty'] = pretty
 
-        return (True, myk8s.runAction('createCoreV1NamespacedService', **args))
+        return (True,
+                myk8s.runAction('createCoreV1NamespacedService',
+                                **args))

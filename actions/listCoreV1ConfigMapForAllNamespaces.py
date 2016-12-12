@@ -25,4 +25,6 @@ class listCoreV1ConfigMapForAllNamespaces(Action):
         if watch is not None:
             args['watch'] = watch
 
-        return (True, myk8s.runAction('listCoreV1ConfigMapForAllNamespaces', **args))
+        return (True,
+                myk8s.runAction('listCoreV1ConfigMapForAllNamespaces',
+                                **args))

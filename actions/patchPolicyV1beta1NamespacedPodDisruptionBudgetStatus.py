@@ -27,4 +27,6 @@ class patchPolicyV1beta1NamespacedPodDisruptionBudgetStatus(Action):
         if pretty is not None:
             args['pretty'] = pretty
 
-        return (True, myk8s.runAction('patchPolicyV1beta1NamespacedPodDisruptionBudgetStatus', **args))
+        return (True,
+                myk8s.runAction('patchPolicyV1beta1NamespacedPodDisruptionBudgetStatus',
+                                **args))

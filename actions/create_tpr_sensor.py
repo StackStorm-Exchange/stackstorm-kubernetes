@@ -45,8 +45,8 @@ class createTPRSensor(Action):
         allvars['triggername'] = "thirdpartyobject"
         allvars['operationId'] = "watch" + cname
 
-        sensorpy = self.config['template_path'] + "/sensors/" + allvars['name'] + "_create.py"
-        sensoryaml = self.config['template_path'] + "/sensors/" + allvars['name'] + "_create.yaml"
+        sensorpy = self.config['template_path'] + "/sensors/" + allvars['operationId'] + ".py"
+        sensoryaml = self.config['template_path'] + "/sensors/" + allvars['operationId'] + ".yaml"
         p = open(sensorpy, 'w')
         y = open(sensoryaml, 'w')
 

@@ -1,6 +1,6 @@
 ---
-  class_name: "Statefulsets"
-  entry_point: "statefulsets.py"
+  class_name: "StatefulsetsResource"
+  entry_point: "watchAppsV1beta1StatefulSetListForAllNamespaces.py"
   description: "Sensor that watches Kubernetes API for new Statefulsets objects."
   trigger_types:
     -

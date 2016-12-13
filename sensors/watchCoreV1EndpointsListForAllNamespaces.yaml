@@ -1,6 +1,6 @@
 ---
-  class_name: "Endpoints"
-  entry_point: "endpoints.py"
+  class_name: "EndpointsResource"
+  entry_point: "watchCoreV1EndpointsListForAllNamespaces.py"
   description: "Sensor that watches Kubernetes API for new Endpoints objects."
   trigger_types:
     -

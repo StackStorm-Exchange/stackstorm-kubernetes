@@ -1,6 +1,6 @@
 ---
-  class_name: "Poddisruptionbudgets"
-  entry_point: "poddisruptionbudgets.py"
+  class_name: "PoddisruptionbudgetsResource"
+  entry_point: "watchPolicyV1beta1PodDisruptionBudgetListForAllNamespaces.py"
   description: "Sensor that watches Kubernetes API for new Poddisruptionbudgets objects."
   trigger_types:
     -

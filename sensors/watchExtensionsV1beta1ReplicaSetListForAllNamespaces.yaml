@@ -1,6 +1,6 @@
 ---
-  class_name: "Replicasets"
-  entry_point: "replicasets.py"
+  class_name: "ReplicasetsResource"
+  entry_point: "watchExtensionsV1beta1ReplicaSetListForAllNamespaces.py"
   description: "Sensor that watches Kubernetes API for new Replicasets objects."
   trigger_types:
     -

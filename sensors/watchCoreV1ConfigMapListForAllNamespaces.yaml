@@ -1,6 +1,6 @@
 ---
-  class_name: "Configmaps"
-  entry_point: "configmaps.py"
+  class_name: "ConfigmapsResource"
+  entry_point: "watchCoreV1ConfigMapListForAllNamespaces.py"
   description: "Sensor that watches Kubernetes API for new Configmaps objects."
   trigger_types:
     -

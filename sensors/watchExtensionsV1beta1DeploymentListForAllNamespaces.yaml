@@ -1,6 +1,6 @@
 ---
-  class_name: "Deployments"
-  entry_point: "deployments.py"
+  class_name: "DeploymentsResource"
+  entry_point: "watchExtensionsV1beta1DeploymentListForAllNamespaces.py"
   description: "Sensor that watches Kubernetes API for new Deployments objects."
   trigger_types:
     -

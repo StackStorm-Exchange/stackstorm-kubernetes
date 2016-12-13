@@ -1,6 +1,6 @@
 ---
-  class_name: "Pods"
-  entry_point: "pods.py"
+  class_name: "PodsResource"
+  entry_point: "watchCoreV1PodListForAllNamespaces.py"
   description: "Sensor that watches Kubernetes API for new Pods objects."
   trigger_types:
     -

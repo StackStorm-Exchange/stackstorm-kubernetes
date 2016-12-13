@@ -1,6 +1,6 @@
 ---
-  class_name: "{{ kind }}"
-  entry_point: "{{ name }}.py"
+  class_name: "{{ operationId }}"
+  entry_point: "{{ operationId }}.py"
   description: "Sensor that watches Kubernetes API for new {{ kind }} objects."
   trigger_types:
     -
@@ -19,4 +19,3 @@
             type: "obj"
           namespace:
             type: "obj"
-

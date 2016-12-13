@@ -1,6 +1,6 @@
 ---
-  class_name: "Rolebindings"
-  entry_point: "rolebindings.py"
+  class_name: "watchRbacAuthorizationV1alpha1RoleBindingListForAllNamespaces"
+  entry_point: "watchRbacAuthorizationV1alpha1RoleBindingListForAllNamespaces.py"
   description: "Sensor that watches Kubernetes API for new Rolebindings objects."
   trigger_types:
     -

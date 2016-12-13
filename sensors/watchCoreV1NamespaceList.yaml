@@ -1,6 +1,6 @@
 ---
-  class_name: "Namespaces"
-  entry_point: "namespaces.py"
+  class_name: "watchCoreV1NamespaceList"
+  entry_point: "watchCoreV1NamespaceList.py"
   description: "Sensor that watches Kubernetes API for new Namespaces objects."
   trigger_types:
     -

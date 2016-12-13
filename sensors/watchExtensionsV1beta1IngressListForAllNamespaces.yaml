@@ -1,6 +1,6 @@
 ---
-  class_name: "Ingresses"
-  entry_point: "ingresses.py"
+  class_name: "watchExtensionsV1beta1IngressListForAllNamespaces"
+  entry_point: "watchExtensionsV1beta1IngressListForAllNamespaces.py"
   description: "Sensor that watches Kubernetes API for new Ingresses objects."
   trigger_types:
     -

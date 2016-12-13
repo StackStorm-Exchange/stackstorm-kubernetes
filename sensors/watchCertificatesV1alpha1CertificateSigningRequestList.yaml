@@ -1,6 +1,6 @@
 ---
-  class_name: "Certificatesigningrequests"
-  entry_point: "certificatesigningrequests.py"
+  class_name: "watchCertificatesV1alpha1CertificateSigningRequestList"
+  entry_point: "watchCertificatesV1alpha1CertificateSigningRequestList.py"
   description: "Sensor that watches Kubernetes API for new Certificatesigningrequests objects."
   trigger_types:
     -

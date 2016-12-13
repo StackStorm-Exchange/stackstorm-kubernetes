@@ -43,6 +43,7 @@ class createTPRSensor(Action):
 
         allvars['watchurl'] = "/apis/prsn.io/v1/watch/" + pname
         allvars['triggername'] = "thirdpartyobject"
+        allvars['operationId'] = "watch" + cname
 
         sensorpy = self.config['template_path'] + "/sensors/" + allvars['name'] + "_create.py"
         sensoryaml = self.config['template_path'] + "/sensors/" + allvars['name'] + "_create.yaml"

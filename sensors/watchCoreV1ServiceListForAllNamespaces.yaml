@@ -1,5 +1,5 @@
 ---
-  class_name: "ServicesResource"
+  class_name: "watchCoreV1ServiceListForAllNamespaces"
   entry_point: "watchCoreV1ServiceListForAllNamespaces.py"
   description: "Sensor that watches Kubernetes API for new Services objects."
   trigger_types:

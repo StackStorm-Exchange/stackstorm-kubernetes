@@ -1,5 +1,5 @@
 ---
-  class_name: "StorageclassesResource"
+  class_name: "watchStorageV1beta1StorageClassList"
   entry_point: "watchStorageV1beta1StorageClassList.py"
   description: "Sensor that watches Kubernetes API for new Storageclasses objects."
   trigger_types:

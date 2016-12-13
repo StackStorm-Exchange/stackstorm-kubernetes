@@ -1,5 +1,5 @@
 ---
-  class_name: "RolesResource"
+  class_name: "watchRbacAuthorizationV1alpha1RoleListForAllNamespaces"
   entry_point: "watchRbacAuthorizationV1alpha1RoleListForAllNamespaces.py"
   description: "Sensor that watches Kubernetes API for new Roles objects."
   trigger_types:

@@ -1,5 +1,5 @@
 ---
-  class_name: "ResourcequotasResource"
+  class_name: "watchCoreV1ResourceQuotaListForAllNamespaces"
   entry_point: "watchCoreV1ResourceQuotaListForAllNamespaces.py"
   description: "Sensor that watches Kubernetes API for new Resourcequotas objects."
   trigger_types:

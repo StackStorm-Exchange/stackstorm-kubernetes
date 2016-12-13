@@ -1,5 +1,5 @@
 ---
-  class_name: "LimitrangesResource"
+  class_name: "watchCoreV1LimitRangeListForAllNamespaces"
   entry_point: "watchCoreV1LimitRangeListForAllNamespaces.py"
   description: "Sensor that watches Kubernetes API for new Limitranges objects."
   trigger_types:

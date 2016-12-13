@@ -1,5 +1,5 @@
 ---
-  class_name: "NetworkpoliciesResource"
+  class_name: "watchExtensionsV1beta1NetworkPolicyListForAllNamespaces"
   entry_point: "watchExtensionsV1beta1NetworkPolicyListForAllNamespaces.py"
   description: "Sensor that watches Kubernetes API for new Networkpolicies objects."
   trigger_types:

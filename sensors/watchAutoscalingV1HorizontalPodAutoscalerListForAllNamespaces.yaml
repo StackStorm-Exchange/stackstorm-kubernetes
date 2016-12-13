@@ -1,5 +1,5 @@
 ---
-  class_name: "HorizontalpodautoscalersResource"
+  class_name: "watchAutoscalingV1HorizontalPodAutoscalerListForAllNamespaces"
   entry_point: "watchAutoscalingV1HorizontalPodAutoscalerListForAllNamespaces.py"
   description: "Sensor that watches Kubernetes API for new Horizontalpodautoscalers objects."
   trigger_types:

@@ -1,5 +1,5 @@
 ---
-  class_name: "DaemonsetsResource"
+  class_name: "watchExtensionsV1beta1DaemonSetListForAllNamespaces"
   entry_point: "watchExtensionsV1beta1DaemonSetListForAllNamespaces.py"
   description: "Sensor that watches Kubernetes API for new Daemonsets objects."
   trigger_types:

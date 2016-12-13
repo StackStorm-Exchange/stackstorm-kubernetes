@@ -1,5 +1,5 @@
 ---
-  class_name: "PersistentvolumeclaimsResource"
+  class_name: "watchCoreV1PersistentVolumeClaimListForAllNamespaces"
   entry_point: "watchCoreV1PersistentVolumeClaimListForAllNamespaces.py"
   description: "Sensor that watches Kubernetes API for new Persistentvolumeclaims objects."
   trigger_types:

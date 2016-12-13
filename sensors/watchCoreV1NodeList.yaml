@@ -1,5 +1,5 @@
 ---
-  class_name: "NodesResource"
+  class_name: "watchCoreV1NodeList"
   entry_point: "watchCoreV1NodeList.py"
   description: "Sensor that watches Kubernetes API for new Nodes objects."
   trigger_types:

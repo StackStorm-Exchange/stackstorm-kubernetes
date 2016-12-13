@@ -1,5 +1,5 @@
 ---
-  class_name: "EventsResource"
+  class_name: "watchCoreV1EventListForAllNamespaces"
   entry_point: "watchCoreV1EventListForAllNamespaces.py"
   description: "Sensor that watches Kubernetes API for new Events objects."
   trigger_types:

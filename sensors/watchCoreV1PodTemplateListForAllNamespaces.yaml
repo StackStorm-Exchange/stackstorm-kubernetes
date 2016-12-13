@@ -1,5 +1,5 @@
 ---
-  class_name: "PodtemplatesResource"
+  class_name: "watchCoreV1PodTemplateListForAllNamespaces"
   entry_point: "watchCoreV1PodTemplateListForAllNamespaces.py"
   description: "Sensor that watches Kubernetes API for new Podtemplates objects."
   trigger_types:

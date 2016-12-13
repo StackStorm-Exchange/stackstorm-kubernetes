@@ -1,5 +1,5 @@
 ---
-  class_name: "ClusterrolesResource"
+  class_name: "watchRbacAuthorizationV1alpha1ClusterRoleList"
   entry_point: "watchRbacAuthorizationV1alpha1ClusterRoleList.py"
   description: "Sensor that watches Kubernetes API for new Clusterroles objects."
   trigger_types:

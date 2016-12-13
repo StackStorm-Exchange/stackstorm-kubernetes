@@ -1,5 +1,5 @@
 ---
-  class_name: "JobsResource"
+  class_name: "watchBatchV1JobListForAllNamespaces"
   entry_point: "watchBatchV1JobListForAllNamespaces.py"
   description: "Sensor that watches Kubernetes API for new Jobs objects."
   trigger_types:

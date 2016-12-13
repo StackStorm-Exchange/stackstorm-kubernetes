@@ -85,7 +85,8 @@ for path in app.dump()['paths'].keys():
                 ref = getattr(x.schema, '$ref')
                 refdata = app.resolve(ref)
                 if refdata.description is not None:  # pylint: disable=no-member
-                    tmp['description'] = refdata.description.replace('"', '')  # pylint: disable=no-member
+                    tmp['description'] = 
+                        refdata.description.replace('"', '')  # pylint: disable=no-member
                 else:
                     tmp['description'] = ""
             else:

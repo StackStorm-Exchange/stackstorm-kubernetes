@@ -45,10 +45,10 @@ class SensorBase(Sensor):
 
         m = re.search('(http|https)://(.*)/?$', self._config['kubernetes_api_url'])
 
-        method = m.group(1)
+        scheme = m.group(1)
         host = m.group(2)
 
-        if method == "https":
+        if scheme == "https":
             port = 443
         else:
             port = 80

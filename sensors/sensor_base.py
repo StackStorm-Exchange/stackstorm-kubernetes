@@ -1,10 +1,14 @@
 import ast
 import json
 import sys
+import base64
+import select
+import socket
+import ssl
+import io
+import re
 
-import requests
-from requests.auth import HTTPBasicAuth
-
+from http_parser.parser import HttpParser
 from st2reactor.sensor.base import Sensor
 
 
@@ -24,44 +28,96 @@ class SensorBase(Sensor):
     def setup(self):
         try:
             extension = self.extension
-            KUBERNETES_API_URL = self._config['kubernetes_api_url'] + extension
+            api_url = self._config['kubernetes_api_url'] + extension
             user = self._config['user']
             password = self._config['password']
             verify = self._config['verify']
+            auth = base64.b64encode(self._config['user'] + ":" + self._config['password'])
+            authhead = "authorization: Basic %s" % auth
+
         except KeyError:
             self._log.exception(
                 'Configuration file does not contain required fields.')
             raise
         self._log.debug(
             'Connecting to Kubernetes endpoint %s via api_client.' %
-            KUBERNETES_API_URL)
-        self.client = requests.get(
-            KUBERNETES_API_URL, auth=HTTPBasicAuth(
-                user, password), verify=verify, stream=True)
+            api_url)
+
+        m = re.search('(http|https)://(.*)/?$', self._config['kubernetes_api_url'])
+
+        method = m.group(1)
+        host = m.group(2)
+
+        if method == "https":
+            port = 443
+        else:
+            port = 80
+
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.client = ssl.wrap_socket(self.sock,
+                                      ssl_version=ssl.PROTOCOL_TLSv1_2,
+                                      ciphers="DES-CBC3-SHA")
+
+        self._log.debug('Connecting to %s %i' % (host, port))
+
+        self.client.connect((host, port))
+
+        self.client.send("GET %s HTTP/1.1\r\nHost: %s\r\n%s\r\n\r\n" %
+                         (extension,
+                         host,
+                         authhead))
+
 
     def run(self):
         self._log.debug('Watch %s for new information.' % self.extension)
-        r = self.client
-        lines = r.iter_lines()
-        # Save the first line for later or just skip it
-        # first_line = next(lines)
 
-        for line in lines:
-            try:
-                trigger_payload = self._get_trigger_payload_from_line(line)
-            except:
-                msg = (
-                    'Failed generating trigger payload from line %s. Aborting sensor!!!' %
-                    line)
-                self._log.exception(msg)
-                sys.exit(1)
-            else:
-                if trigger_payload == 0:
-                    pass
-                else:
-                    self._log.debug('Triggering Dispatch Now')
-                    self._sensor_service.dispatch(
-                        trigger=self.TRIGGER_REF, payload=trigger_payload)
+        readers = [self.client]
+        writers = out_of_band = []
+
+        parser = HttpParser()
+
+        while not parser.is_headers_complete():
+            chunk = self.client.recv(io.DEFAULT_BUFFER_SIZE)
+            if not chunk:
+                raise Exception('No response!')
+            nreceived = len(chunk)
+            nparsed = parser.execute(chunk, nreceived)
+            if nparsed != nreceived:
+                raise Exception('Ok, http_parser has a real ugly error-handling API')
+
+            while True:
+                rlist, _, _ = select.select(readers, writers, out_of_band)
+                if not rlist:
+                    # No more data queued by the kernel
+                    break
+                chunk = self.client.recv(io.DEFAULT_BUFFER_SIZE)
+                if not chunk:
+                    # remote closed the connection
+                    self.client.close()
+                    break
+                nreceived = len(chunk)
+                nparsed = parser.execute(chunk, nreceived)
+                if nparsed != nreceived:
+                    raise Exception('Something bad happened to the HTTP parser')
+                data = parser.recv_body()
+                lines = data.split(b'\n')
+                pending = lines.pop(-1)
+                for line in lines:
+                    try:
+                        trigger_payload = self._get_trigger_payload_from_line(line)
+                    except:
+                        msg = (
+                            'Failed generating trigger payload from line %s. Aborting sensor!!!' %
+                            line)
+                        self._log.exception(msg)
+                        sys.exit(1)
+                    else:
+                        if trigger_payload == 0:
+                            pass
+                        else:
+                            self._log.debug('Triggering Dispatch Now')
+                            self._sensor_service.dispatch(
+                                trigger=self.TRIGGER_REF, payload=trigger_payload)
 
     def _get_trigger_payload_from_line(self, line):
         k8s_object = self._fix_utf8_enconding_and_eval(line)

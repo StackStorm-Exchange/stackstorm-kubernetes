@@ -1,3 +1,5 @@
+# based on https://cobe.io/blog/posts/kubernetes-watch-python/
+
 import ast
 import json
 import sys
@@ -20,7 +22,7 @@ class SensorBase(Sensor):
             self).__init__(
             sensor_service=sensor_service,
             config=config)
-        self._log = self._sensor_service.get_logger(__name__)
+        self._log = self._sensor_service.get_logger(self.__class__.__name__)
         self.TRIGGER_REF = trigger_ref
         self.extension = extension
         self.client = None
@@ -33,8 +35,7 @@ class SensorBase(Sensor):
             password = self._config['password']
             verify = self._config['verify']
             auth = base64.b64encode(self._config['user'] + ":" + self._config['password'])
-            authhead = "authorization: Basic %s" % auth
-
+            self.authhead = "authorization: Basic %s" % auth
         except KeyError:
             self._log.exception(
                 'Configuration file does not contain required fields.')
@@ -45,64 +46,102 @@ class SensorBase(Sensor):
 
         m = re.search('(http|https)://(.*)/?$', self._config['kubernetes_api_url'])
 
-        scheme = m.group(1)
-        host = m.group(2)
+        method = m.group(1)
+        self.host = m.group(2)
 
-        if scheme == "https":
-            port = 443
+        if method == "https":
+            self.port = 443
         else:
-            port = 80
-
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.client = ssl.wrap_socket(self.sock,
-                                      ssl_version=ssl.PROTOCOL_TLSv1_2,
-                                      ciphers="DES-CBC3-SHA")
-
-        self._log.debug('Connecting to %s %i' % (host, port))
-
-        self.client.connect((host, port))
-
-        self.client.send("GET %s HTTP/1.1\r\nHost: %s\r\n%s\r\n\r\n" %
-                         (extension,
-                         host,
-                         authhead))
-
+            self.port = 80
 
     def run(self):
-        self._log.debug('Watch %s for new information.' % self.extension)
+        self._log.info('Watch %s for new data.' % self.extension)
 
-        readers = [self.client]
-        writers = out_of_band = []
+        while True:
+            try:
+                self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                self.client = ssl.wrap_socket(self.sock,
+                                      ssl_version=ssl.PROTOCOL_TLSv1_2,
+                                      ciphers="DES-CBC3-SHA")
+                self._log.debug('Connecting to %s %i' % (self.host, self.port))
+                #self.client.settimeout(10)
+                self.client.connect((self.host, self.port))
 
-        parser = HttpParser()
+            except socket.error, exc:
+                self._log.exception('unable to connect to %s: %s' % (host, exc))
+                raise
 
-        while not parser.is_headers_complete():
-            chunk = self.client.recv(io.DEFAULT_BUFFER_SIZE)
-            if not chunk:
-                raise Exception('No response!')
-            nreceived = len(chunk)
-            nparsed = parser.execute(chunk, nreceived)
-            if nparsed != nreceived:
-                raise Exception('Ok, http_parser has a real ugly error-handling API')
+            self.client.send("GET %s HTTP/1.1\r\nHost: %s\r\n%s\r\n\r\n" %
+                             (self.extension,
+                             self.host,
+                             self.authhead))
 
-            while True:
-                rlist, _, _ = select.select(readers, writers, out_of_band)
-                if not rlist:
-                    # No more data queued by the kernel
+            readers = [self.client]
+            writers = out_of_band = []
+
+            pending = b''
+
+            parser = HttpParser()
+            self._log.debug("+")
+
+            while not parser.is_headers_complete():
+                self._log.debug(".")
+                try:
+                    chunk = self.client.recv(io.DEFAULT_BUFFER_SIZE)
+                except socket.error, exc:
+                    err = exc.args[0]
+                    self._log.debug('a recv err (%s): %s' % (err, exc))
                     break
-                chunk = self.client.recv(io.DEFAULT_BUFFER_SIZE)
                 if not chunk:
-                    # remote closed the connection
-                    self.client.close()
+                    self._log.exception('a No response from %s' % self.extension)
                     break
+                self._log.debug('a chunk %s' % chunk)
                 nreceived = len(chunk)
                 nparsed = parser.execute(chunk, nreceived)
                 if nparsed != nreceived:
-                    raise Exception('Something bad happened to the HTTP parser')
-                data = parser.recv_body()
+                    #self._log.exception('nparsed != nreceived')
+                    self._log.exception('a nparsed %i != nreceived %i' % (nparsed, nreceived))
+                    break
+            self._log.debug('parser headers complete %s' % parser.get_headers())
+            while True:
+                self._log.debug("-")
+                try:
+                    readable, _, _ = select.select(readers, writers, out_of_band)
+                except select.error, exc:
+                    self._log.debug("b select error: %s" % exc)
+                if not readable:
+                    self._log.debug('b not readable')
+                    break
+                try:
+                    chunk = self.client.recv(io.DEFAULT_BUFFER_SIZE)
+                except socket.error, exc:
+                    err = exc.args[0]
+                    self._log.debug('b recv err (%s): %s' % (err, exc))
+                    break
+                if not chunk:
+                    self._log.debug('b not chunk')
+                    self.client.close()
+                    break
+                nreceived = len(chunk)
+                self._log.debug('b chunk %s' % chunk)
+                self._log.debug("repr: %s" % repr(chunk))
+                if re.match(r'0\r\n\r\n',chunk,re.M):
+                    self._log.debug('b end end end')
+                    break
+                nparsed = parser.execute(chunk, nreceived)
+                if nparsed != nreceived:
+                    self._log.exception('b nparsed %i != nreceived %i' % (nparsed, nreceived))
+                    raise
+                data = pending + parser.recv_body()
+                msg = "DATA: %s" % data
+                self._log.debug(msg)
                 lines = data.split(b'\n')
                 pending = lines.pop(-1)
+                #msg = "PENDING: %s" % pending
+                #self._log.debug(msg)
                 for line in lines:
+                    #msg = "LINE: %s" % line
+                    #self._log.debug(msg)
                     try:
                         trigger_payload = self._get_trigger_payload_from_line(line)
                     except:
@@ -115,13 +154,15 @@ class SensorBase(Sensor):
                         if trigger_payload == 0:
                             pass
                         else:
-                            self._log.debug('Triggering Dispatch Now')
+                            self._log.info('Triggering Dispatch Now')
                             self._sensor_service.dispatch(
                                 trigger=self.TRIGGER_REF, payload=trigger_payload)
+            self._log.debug('main loop done')
+            self.client.close()
 
     def _get_trigger_payload_from_line(self, line):
         k8s_object = self._fix_utf8_enconding_and_eval(line)
-        self._log.debug(
+        self._log.info(
             'Incoming k8s object (from API response): %s',
             k8s_object)
         payload = self._k8s_object_to_st2_trigger(k8s_object)
@@ -130,6 +171,10 @@ class SensorBase(Sensor):
     def _fix_utf8_enconding_and_eval(self, line):
         # need to perform a json dump due to uft8 error prior to performing a
         # json.load
+        # kubernetes returns unquoted true/false values, need to be converted to python booleans
+        line = line.replace('true', 'True')
+        line = line.replace('false', 'False')
+        line = line.replace('null', 'None')
         io = json.dumps(line)
         n = json.loads(io)
         line = ast.literal_eval(n)
@@ -158,7 +203,7 @@ class SensorBase(Sensor):
             return 0
         else:
             if name in ['default', 'kube-system']:
-                self._log.info('Name: %s.' % name)
+                self._log.debug('ignoring name: %s.' % name)
                 return 0
             else:
                 payload = self._build_a_trigger(
@@ -168,8 +213,8 @@ class SensorBase(Sensor):
                     namespace=namespace,
                     object_kind=object_kind,
                     uid=uid)
-                self._log.debug('Trigger payload: %s.' % payload)
-                # self._log.info('Trigger payload: %s.' % payload)
+                #self._log.debug('Trigger payload: %s.' % payload)
+                self._log.info('Trigger payload: %s.' % payload)
                 return payload
 
     def _build_a_trigger(

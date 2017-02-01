@@ -66,7 +66,7 @@ class SensorBase(Sensor):
                 self.client.connect((self.host, self.port))
 
             except socket.error, exc:
-                self._log.exception('unable to connect to %s: %s' % (host, exc))
+                self._log.exception('unable to connect to %s: %s' % (self.host, exc))
                 raise
 
             self.client.send("GET %s HTTP/1.1\r\nHost: %s\r\n%s\r\n\r\n" %

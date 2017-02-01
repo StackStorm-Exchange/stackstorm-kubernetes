@@ -10,7 +10,11 @@ import ssl
 import io
 import re
 
-from http_parser.parser import HttpParser
+try:
+    from http_parser.parser import HttpParser
+except ImportError:
+    from http_parser.pyparser import HttpParser
+
 from st2reactor.sensor.base import Sensor
 
 

@@ -6,7 +6,6 @@ import sys
 import base64
 import select
 import socket
-import ssl
 import io
 import re
 
@@ -15,6 +14,7 @@ try:
 except ImportError:
     from http_parser.pyparser import HttpParser
 
+from backports import ssl
 from st2reactor.sensor.base import Sensor
 
 

@@ -26,14 +26,12 @@ class SensorBase(Sensor):
         self.TRIGGER_REF = trigger_ref
         self.extension = extension
         self.client = None
+        self.setup()
 
     def setup(self):
         try:
             extension = self.extension
             api_url = self._config['kubernetes_api_url'] + extension
-            user = self._config['user']
-            password = self._config['password']
-            verify = self._config['verify']
             auth = base64.b64encode(self._config['user'] + ":" + self._config['password'])
             self.authhead = "authorization: Basic %s" % auth
         except KeyError:
@@ -64,7 +62,7 @@ class SensorBase(Sensor):
                                       ssl_version=ssl.PROTOCOL_TLSv1_2,
                                       ciphers="DES-CBC3-SHA")
                 self._log.debug('Connecting to %s %i' % (self.host, self.port))
-                #self.client.settimeout(10)
+                # self.client.settimeout(10)
                 self.client.connect((self.host, self.port))
 
             except socket.error, exc:
@@ -99,7 +97,6 @@ class SensorBase(Sensor):
                 nreceived = len(chunk)
                 nparsed = parser.execute(chunk, nreceived)
                 if nparsed != nreceived:
-                    #self._log.exception('nparsed != nreceived')
                     self._log.exception('a nparsed %i != nreceived %i' % (nparsed, nreceived))
                     break
             self._log.debug('parser headers complete %s' % parser.get_headers())
@@ -125,7 +122,7 @@ class SensorBase(Sensor):
                 nreceived = len(chunk)
                 self._log.debug('b chunk %s' % chunk)
                 self._log.debug("repr: %s" % repr(chunk))
-                if re.match(r'0\r\n\r\n',chunk,re.M):
+                if re.match(r'0\r\n\r\n', chunk, re.M):
                     self._log.debug('b end end end')
                     break
                 nparsed = parser.execute(chunk, nreceived)
@@ -137,11 +134,7 @@ class SensorBase(Sensor):
                 self._log.debug(msg)
                 lines = data.split(b'\n')
                 pending = lines.pop(-1)
-                #msg = "PENDING: %s" % pending
-                #self._log.debug(msg)
                 for line in lines:
-                    #msg = "LINE: %s" % line
-                    #self._log.debug(msg)
                     try:
                         trigger_payload = self._get_trigger_payload_from_line(line)
                     except:
@@ -213,7 +206,6 @@ class SensorBase(Sensor):
                     namespace=namespace,
                     object_kind=object_kind,
                     uid=uid)
-                #self._log.debug('Trigger payload: %s.' % payload)
                 self._log.info('Trigger payload: %s.' % payload)
                 return payload
 

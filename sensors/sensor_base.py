@@ -10,7 +10,7 @@ import io
 import re
 
 try:
-    from http_parser.parser import HttpParser # pylint: disable=no-member
+    from http_parser.parser import HttpParser  # pylint: disable=no-member
 except ImportError:
     from http_parser.pyparser import HttpParser
 
@@ -63,7 +63,7 @@ class SensorBase(Sensor):
             try:
                 self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 self.client = ssl.wrap_socket(self.sock,
-                                      ssl_version=ssl.PROTOCOL_TLSv1_2, # pylint: disable=no-member
+                                      ssl_version=ssl.PROTOCOL_TLSv1_2,  # pylint: disable=no-member
                                       ciphers="DES-CBC3-SHA")
                 self._log.debug('Connecting to %s %i' % (self.host, self.port))
                 # self.client.settimeout(10)
@@ -121,7 +121,7 @@ class SensorBase(Sensor):
                     break
                 if not chunk:
                     self._log.debug('b not chunk')
-                    self.client.close() # pylint: disable=no-member
+                    self.client.close()  # pylint: disable=no-member
                     break
                 nreceived = len(chunk)
                 self._log.debug('b chunk %s' % chunk)
@@ -155,7 +155,7 @@ class SensorBase(Sensor):
                             self._sensor_service.dispatch(
                                 trigger=self.TRIGGER_REF, payload=trigger_payload)
             self._log.debug('main loop done')
-            self.client.close() # pylint: disable=no-member
+            self.client.close()  # pylint: disable=no-member
 
     def _get_trigger_payload_from_line(self, line):
         k8s_object = self._fix_utf8_enconding_and_eval(line)

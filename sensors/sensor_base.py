@@ -10,7 +10,7 @@ import io
 import re
 
 try:
-    from http_parser.parser import HttpParser  # pylint: disable=no-member
+    from http_parser.parser import HttpParser  # pylint: disable=no-name-in-module
 except ImportError:
     from http_parser.pyparser import HttpParser
 

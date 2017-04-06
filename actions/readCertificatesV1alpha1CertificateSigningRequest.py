@@ -15,6 +15,8 @@ class readCertificatesV1alpha1CertificateSigningRequest(Action):
 
         myk8s = k8s.K8sClient(self.config)
 
+        rc = False
+
         args = {}
         if name is not None:
             args['name'] = name
@@ -28,7 +30,9 @@ class readCertificatesV1alpha1CertificateSigningRequest(Action):
             args['export'] = export
         if pretty is not None:
             args['pretty'] = pretty
-        return (True,
-                myk8s.runAction(
-                    'readCertificatesV1alpha1CertificateSigningRequest',
-                    **args))
+        resp = myk8s.runAction('readCertificatesV1alpha1CertificateSigningRequest',**args)
+
+        if resp['status'] >= 200 and resp['status'] <= 299:
+            rc = True
+
+        return (rc, resp)

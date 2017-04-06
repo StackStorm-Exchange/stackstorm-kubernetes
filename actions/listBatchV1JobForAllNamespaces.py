@@ -17,6 +17,8 @@ class listBatchV1JobForAllNamespaces(Action):
 
         myk8s = k8s.K8sClient(self.config)
 
+        rc = False
+
         args = {}
         if config_override is not None:
             args['config_override'] = config_override
@@ -32,7 +34,9 @@ class listBatchV1JobForAllNamespaces(Action):
             args['timeoutSeconds'] = timeoutSeconds
         if watch is not None:
             args['watch'] = watch
-        return (True,
-                myk8s.runAction(
-                    'listBatchV1JobForAllNamespaces',
-                    **args))
+        resp = myk8s.runAction('listBatchV1JobForAllNamespaces',**args)
+
+        if resp['status'] >= 200 and resp['status'] <= 299:
+            rc = True
+
+        return (rc, resp)

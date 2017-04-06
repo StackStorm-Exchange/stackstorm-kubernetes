@@ -14,6 +14,8 @@ class replaceStorageV1beta1StorageClass(Action):
 
         myk8s = k8s.K8sClient(self.config)
 
+        rc = False
+
         args = {}
         if body is not None:
             args['body'] = body
@@ -27,7 +29,9 @@ class replaceStorageV1beta1StorageClass(Action):
             args['config_override'] = config_override
         if pretty is not None:
             args['pretty'] = pretty
-        return (True,
-                myk8s.runAction(
-                    'replaceStorageV1beta1StorageClass',
-                    **args))
+        resp = myk8s.runAction('replaceStorageV1beta1StorageClass',**args)
+
+        if resp['status'] >= 200 and resp['status'] <= 299:
+            rc = True
+
+        return (rc, resp)

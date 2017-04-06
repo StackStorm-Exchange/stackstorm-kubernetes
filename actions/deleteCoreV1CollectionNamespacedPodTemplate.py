@@ -18,6 +18,8 @@ class deleteCoreV1CollectionNamespacedPodTemplate(Action):
 
         myk8s = k8s.K8sClient(self.config)
 
+        rc = False
+
         args = {}
         if namespace is not None:
             args['namespace'] = namespace
@@ -37,7 +39,9 @@ class deleteCoreV1CollectionNamespacedPodTemplate(Action):
             args['watch'] = watch
         if pretty is not None:
             args['pretty'] = pretty
-        return (True,
-                myk8s.runAction(
-                    'deleteCoreV1CollectionNamespacedPodTemplate',
-                    **args))
+        resp = myk8s.runAction('deleteCoreV1CollectionNamespacedPodTemplate',**args)
+
+        if resp['status'] >= 200 and resp['status'] <= 299:
+            rc = True
+
+        return (rc, resp)

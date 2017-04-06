@@ -15,6 +15,8 @@ class patchCoreV1NamespacedResourceQuota(Action):
 
         myk8s = k8s.K8sClient(self.config)
 
+        rc = False
+
         args = {}
         if body is not None:
             args['body'] = body
@@ -32,7 +34,11 @@ class patchCoreV1NamespacedResourceQuota(Action):
             args['config_override'] = config_override
         if pretty is not None:
             args['pretty'] = pretty
-        return (True,
-                myk8s.runAction(
-                    'patchCoreV1NamespacedResourceQuota',
-                    **args))
+        resp = myk8s.runAction(
+            'patchCoreV1NamespacedResourceQuota',
+            **args)
+
+        if resp['status'] >= 200 and resp['status'] <= 299:
+            rc = True
+
+        return (rc, resp)

@@ -16,6 +16,8 @@ class readBatchV1NamespacedJob(Action):
 
         myk8s = k8s.K8sClient(self.config)
 
+        rc = False
+
         args = {}
         if name is not None:
             args['name'] = name
@@ -33,7 +35,11 @@ class readBatchV1NamespacedJob(Action):
             args['export'] = export
         if pretty is not None:
             args['pretty'] = pretty
-        return (True,
-                myk8s.runAction(
-                    'readBatchV1NamespacedJob',
-                    **args))
+        resp = myk8s.runAction(
+            'readBatchV1NamespacedJob',
+            **args)
+
+        if resp['status'] >= 200 and resp['status'] <= 299:
+            rc = True
+
+        return (rc, resp)

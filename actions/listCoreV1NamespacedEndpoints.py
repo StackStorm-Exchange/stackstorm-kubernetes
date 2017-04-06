@@ -18,6 +18,8 @@ class listCoreV1NamespacedEndpoints(Action):
 
         myk8s = k8s.K8sClient(self.config)
 
+        rc = False
+
         args = {}
         if namespace is not None:
             args['namespace'] = namespace
@@ -37,7 +39,11 @@ class listCoreV1NamespacedEndpoints(Action):
             args['watch'] = watch
         if pretty is not None:
             args['pretty'] = pretty
-        return (True,
-                myk8s.runAction(
-                    'listCoreV1NamespacedEndpoints',
-                    **args))
+        resp = myk8s.runAction(
+            'listCoreV1NamespacedEndpoints',
+            **args)
+
+        if resp['status'] >= 200 and resp['status'] <= 299:
+            rc = True
+
+        return (rc, resp)

@@ -16,6 +16,8 @@ class readExtensionsV1beta1NamespacedIngress(Action):
 
         myk8s = k8s.K8sClient(self.config)
 
+        rc = False
+
         args = {}
         if name is not None:
             args['name'] = name
@@ -33,7 +35,11 @@ class readExtensionsV1beta1NamespacedIngress(Action):
             args['export'] = export
         if pretty is not None:
             args['pretty'] = pretty
-        return (True,
-                myk8s.runAction(
-                    'readExtensionsV1beta1NamespacedIngress',
-                    **args))
+        resp = myk8s.runAction(
+            'readExtensionsV1beta1NamespacedIngress',
+            **args)
+
+        if resp['status'] >= 200 and resp['status'] <= 299:
+            rc = True
+
+        return (rc, resp)

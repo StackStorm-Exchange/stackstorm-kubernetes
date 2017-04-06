@@ -17,6 +17,8 @@ class deleteRbacAuthorizationV1alpha1CollectionClusterRole(Action):
 
         myk8s = k8s.K8sClient(self.config)
 
+        rc = False
+
         args = {}
         if config_override is not None:
             args['config_override'] = config_override
@@ -32,7 +34,11 @@ class deleteRbacAuthorizationV1alpha1CollectionClusterRole(Action):
             args['watch'] = watch
         if pretty is not None:
             args['pretty'] = pretty
-        return (True,
-                myk8s.runAction(
-                    'deleteRbacAuthorizationV1alpha1CollectionClusterRole',
-                    **args))
+        resp = myk8s.runAction(
+            'deleteRbacAuthorizationV1alpha1CollectionClusterRole',
+            **args)
+
+        if resp['status'] >= 200 and resp['status'] <= 299:
+            rc = True
+
+        return (rc, resp)

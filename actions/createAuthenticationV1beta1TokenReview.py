@@ -13,6 +13,8 @@ class createAuthenticationV1beta1TokenReview(Action):
 
         myk8s = k8s.K8sClient(self.config)
 
+        rc = False
+
         args = {}
         if body is not None:
             args['body'] = body
@@ -22,7 +24,11 @@ class createAuthenticationV1beta1TokenReview(Action):
             args['config_override'] = config_override
         if pretty is not None:
             args['pretty'] = pretty
-        return (True,
-                myk8s.runAction(
-                    'createAuthenticationV1beta1TokenReview',
-                    **args))
+        resp = myk8s.runAction(
+            'createAuthenticationV1beta1TokenReview',
+            **args)
+
+        if resp['status'] >= 200 and resp['status'] <= 299:
+            rc = True
+
+        return (rc, resp)

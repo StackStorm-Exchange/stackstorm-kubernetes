@@ -22,6 +22,8 @@ class readCoreV1NamespacedPodLog(Action):
 
         myk8s = k8s.K8sClient(self.config)
 
+        rc = False
+
         args = {}
         if name is not None:
             args['name'] = name
@@ -51,7 +53,11 @@ class readCoreV1NamespacedPodLog(Action):
             args['tailLines'] = tailLines
         if timestamps is not None:
             args['timestamps'] = timestamps
-        return (True,
-                myk8s.runAction(
-                    'readCoreV1NamespacedPodLog',
-                    **args))
+        resp = myk8s.runAction(
+            'readCoreV1NamespacedPodLog',
+            **args)
+
+        if resp['status'] >= 200 and resp['status'] <= 299:
+            rc = True
+
+        return (rc, resp)

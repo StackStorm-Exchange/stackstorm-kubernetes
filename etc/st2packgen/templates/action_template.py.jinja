@@ -16,6 +16,8 @@ class {{ operationId }}(Action):
 
         myk8s = k8s.K8sClient(self.config)
 
+        rc = False
+
         args = {}
         {% for p in paramsreq -%}
         if {{ p.name }} is not None:
@@ -28,8 +30,12 @@ class {{ operationId }}(Action):
             args['{{ p.name }}'] = {{ p.name }}
         {% endfor -%}
 
-        return (True,
-                myk8s.runAction(
-                    '{{ operationId }}',
-                    **args))
+        resp = myk8s.runAction(
+            '{{ operationId }}',
+            **args)
+
+        if resp['status'] >= 200 and resp['status'] <= 299:
+            rc = True
+
+        return (rc, resp)
 

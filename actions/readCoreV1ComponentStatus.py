@@ -13,6 +13,8 @@ class readCoreV1ComponentStatus(Action):
 
         myk8s = k8s.K8sClient(self.config)
 
+        rc = False
+
         args = {}
         if name is not None:
             args['name'] = name
@@ -22,7 +24,11 @@ class readCoreV1ComponentStatus(Action):
             args['config_override'] = config_override
         if pretty is not None:
             args['pretty'] = pretty
-        return (True,
-                myk8s.runAction(
-                    'readCoreV1ComponentStatus',
-                    **args))
+        resp = myk8s.runAction(
+            'readCoreV1ComponentStatus',
+            **args)
+
+        if resp['status'] >= 200 and resp['status'] <= 299:
+            rc = True
+
+        return (rc, resp)

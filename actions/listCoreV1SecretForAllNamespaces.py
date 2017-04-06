@@ -17,6 +17,8 @@ class listCoreV1SecretForAllNamespaces(Action):
 
         myk8s = k8s.K8sClient(self.config)
 
+        rc = False
+
         args = {}
         if config_override is not None:
             args['config_override'] = config_override
@@ -32,7 +34,11 @@ class listCoreV1SecretForAllNamespaces(Action):
             args['timeoutSeconds'] = timeoutSeconds
         if watch is not None:
             args['watch'] = watch
-        return (True,
-                myk8s.runAction(
-                    'listCoreV1SecretForAllNamespaces',
-                    **args))
+        resp = myk8s.runAction(
+            'listCoreV1SecretForAllNamespaces',
+            **args)
+
+        if resp['status'] >= 200 and resp['status'] <= 299:
+            rc = True
+
+        return (rc, resp)

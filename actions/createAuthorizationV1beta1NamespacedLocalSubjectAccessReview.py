@@ -14,6 +14,8 @@ class createAuthorizationV1beta1NamespacedLocalSubjectAccessReview(Action):
 
         myk8s = k8s.K8sClient(self.config)
 
+        rc = False
+
         args = {}
         if body is not None:
             args['body'] = body
@@ -27,7 +29,11 @@ class createAuthorizationV1beta1NamespacedLocalSubjectAccessReview(Action):
             args['config_override'] = config_override
         if pretty is not None:
             args['pretty'] = pretty
-        return (True,
-                myk8s.runAction(
-                    'createAuthorizationV1beta1NamespacedLocalSubjectAccessReview',
-                    **args))
+        resp = myk8s.runAction(
+            'createAuthorizationV1beta1NamespacedLocalSubjectAccessReview',
+            **args)
+
+        if resp['status'] >= 200 and resp['status'] <= 299:
+            rc = True
+
+        return (rc, resp)

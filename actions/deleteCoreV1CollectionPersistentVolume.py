@@ -17,6 +17,8 @@ class deleteCoreV1CollectionPersistentVolume(Action):
 
         myk8s = k8s.K8sClient(self.config)
 
+        rc = False
+
         args = {}
         if config_override is not None:
             args['config_override'] = config_override
@@ -32,7 +34,11 @@ class deleteCoreV1CollectionPersistentVolume(Action):
             args['watch'] = watch
         if pretty is not None:
             args['pretty'] = pretty
-        return (True,
-                myk8s.runAction(
-                    'deleteCoreV1CollectionPersistentVolume',
-                    **args))
+        resp = myk8s.runAction(
+            'deleteCoreV1CollectionPersistentVolume',
+            **args)
+
+        if resp['status'] >= 200 and resp['status'] <= 299:
+            rc = True
+
+        return (rc, resp)

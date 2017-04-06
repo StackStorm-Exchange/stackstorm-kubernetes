@@ -17,6 +17,8 @@ class deletePolicyV1beta1NamespacedPodDisruptionBudget(Action):
 
         myk8s = k8s.K8sClient(self.config)
 
+        rc = False
+
         args = {}
         if body is not None:
             args['body'] = body
@@ -38,7 +40,11 @@ class deletePolicyV1beta1NamespacedPodDisruptionBudget(Action):
             args['orphanDependents'] = orphanDependents
         if pretty is not None:
             args['pretty'] = pretty
-        return (True,
-                myk8s.runAction(
-                    'deletePolicyV1beta1NamespacedPodDisruptionBudget',
-                    **args))
+        resp = myk8s.runAction(
+            'deletePolicyV1beta1NamespacedPodDisruptionBudget',
+            **args)
+
+        if resp['status'] >= 200 and resp['status'] <= 299:
+            rc = True
+
+        return (rc, resp)

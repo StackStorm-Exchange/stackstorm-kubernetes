@@ -35,8 +35,8 @@ class listExtensionsV1beta1IngressForAllNamespaces(Action):
         if watch is not None:
             args['watch'] = watch
         resp = myk8s.runAction(
-                   'listExtensionsV1beta1IngressForAllNamespaces',
-                   **args)
+            'listExtensionsV1beta1IngressForAllNamespaces',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

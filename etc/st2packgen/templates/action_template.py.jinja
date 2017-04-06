@@ -31,8 +31,8 @@ class {{ operationId }}(Action):
         {% endfor -%}
 
         resp = myk8s.runAction(
-                   '{{ operationId }}',
-                   **args)
+            '{{ operationId }}',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

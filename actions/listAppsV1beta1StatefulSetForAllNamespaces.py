@@ -35,8 +35,8 @@ class listAppsV1beta1StatefulSetForAllNamespaces(Action):
         if watch is not None:
             args['watch'] = watch
         resp = myk8s.runAction(
-                   'listAppsV1beta1StatefulSetForAllNamespaces',
-                   **args)
+            'listAppsV1beta1StatefulSetForAllNamespaces',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

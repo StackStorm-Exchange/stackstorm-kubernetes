@@ -36,8 +36,8 @@ class deleteRbacAuthorizationV1alpha1ClusterRole(Action):
         if pretty is not None:
             args['pretty'] = pretty
         resp = myk8s.runAction(
-                   'deleteRbacAuthorizationV1alpha1ClusterRole',
-                   **args)
+            'deleteRbacAuthorizationV1alpha1ClusterRole',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

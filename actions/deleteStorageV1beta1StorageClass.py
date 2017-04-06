@@ -36,8 +36,8 @@ class deleteStorageV1beta1StorageClass(Action):
         if pretty is not None:
             args['pretty'] = pretty
         resp = myk8s.runAction(
-                   'deleteStorageV1beta1StorageClass',
-                   **args)
+            'deleteStorageV1beta1StorageClass',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

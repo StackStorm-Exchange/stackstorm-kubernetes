@@ -41,8 +41,8 @@ class deleteExtensionsV1beta1NamespacedHorizontalPodAutoscaler(Action):
         if pretty is not None:
             args['pretty'] = pretty
         resp = myk8s.runAction(
-                   'deleteExtensionsV1beta1NamespacedHorizontalPodAutoscaler',
-                   **args)
+            'deleteExtensionsV1beta1NamespacedHorizontalPodAutoscaler',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

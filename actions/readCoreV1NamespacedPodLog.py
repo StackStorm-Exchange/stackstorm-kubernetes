@@ -54,8 +54,8 @@ class readCoreV1NamespacedPodLog(Action):
         if timestamps is not None:
             args['timestamps'] = timestamps
         resp = myk8s.runAction(
-                   'readCoreV1NamespacedPodLog',
-                   **args)
+            'readCoreV1NamespacedPodLog',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

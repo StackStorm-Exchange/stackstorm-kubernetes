@@ -35,8 +35,8 @@ class listCoreV1EventForAllNamespaces(Action):
         if watch is not None:
             args['watch'] = watch
         resp = myk8s.runAction(
-                   'listCoreV1EventForAllNamespaces',
-                   **args)
+            'listCoreV1EventForAllNamespaces',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

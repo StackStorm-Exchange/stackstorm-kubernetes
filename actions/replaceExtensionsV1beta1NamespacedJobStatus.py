@@ -35,8 +35,8 @@ class replaceExtensionsV1beta1NamespacedJobStatus(Action):
         if pretty is not None:
             args['pretty'] = pretty
         resp = myk8s.runAction(
-                   'replaceExtensionsV1beta1NamespacedJobStatus',
-                   **args)
+            'replaceExtensionsV1beta1NamespacedJobStatus',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

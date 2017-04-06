@@ -35,8 +35,8 @@ class patchCoreV1NamespacedEvent(Action):
         if pretty is not None:
             args['pretty'] = pretty
         resp = myk8s.runAction(
-                   'patchCoreV1NamespacedEvent',
-                   **args)
+            'patchCoreV1NamespacedEvent',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

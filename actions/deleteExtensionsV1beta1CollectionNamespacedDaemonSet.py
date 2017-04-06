@@ -40,8 +40,8 @@ class deleteExtensionsV1beta1CollectionNamespacedDaemonSet(Action):
         if pretty is not None:
             args['pretty'] = pretty
         resp = myk8s.runAction(
-                   'deleteExtensionsV1beta1CollectionNamespacedDaemonSet',
-                   **args)
+            'deleteExtensionsV1beta1CollectionNamespacedDaemonSet',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

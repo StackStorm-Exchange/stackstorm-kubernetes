@@ -17,8 +17,8 @@ class getRbacAuthorizationAPIGroup(Action):
         if config_override is not None:
             args['config_override'] = config_override
         resp = myk8s.runAction(
-                   'getRbacAuthorizationAPIGroup',
-                   **args)
+            'getRbacAuthorizationAPIGroup',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

@@ -35,8 +35,8 @@ class listCoreV1LimitRangeForAllNamespaces(Action):
         if watch is not None:
             args['watch'] = watch
         resp = myk8s.runAction(
-                   'listCoreV1LimitRangeForAllNamespaces',
-                   **args)
+            'listCoreV1LimitRangeForAllNamespaces',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

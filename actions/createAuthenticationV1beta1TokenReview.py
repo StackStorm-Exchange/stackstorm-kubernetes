@@ -25,8 +25,8 @@ class createAuthenticationV1beta1TokenReview(Action):
         if pretty is not None:
             args['pretty'] = pretty
         resp = myk8s.runAction(
-                   'createAuthenticationV1beta1TokenReview',
-                   **args)
+            'createAuthenticationV1beta1TokenReview',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

@@ -35,8 +35,8 @@ class patchBatchV1NamespacedJob(Action):
         if pretty is not None:
             args['pretty'] = pretty
         resp = myk8s.runAction(
-                   'patchBatchV1NamespacedJob',
-                   **args)
+            'patchBatchV1NamespacedJob',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

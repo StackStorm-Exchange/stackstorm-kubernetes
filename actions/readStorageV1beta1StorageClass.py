@@ -31,8 +31,8 @@ class readStorageV1beta1StorageClass(Action):
         if pretty is not None:
             args['pretty'] = pretty
         resp = myk8s.runAction(
-                   'readStorageV1beta1StorageClass',
-                   **args)
+            'readStorageV1beta1StorageClass',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

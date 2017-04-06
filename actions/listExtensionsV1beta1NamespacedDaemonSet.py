@@ -40,8 +40,8 @@ class listExtensionsV1beta1NamespacedDaemonSet(Action):
         if pretty is not None:
             args['pretty'] = pretty
         resp = myk8s.runAction(
-                   'listExtensionsV1beta1NamespacedDaemonSet',
-                   **args)
+            'listExtensionsV1beta1NamespacedDaemonSet',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

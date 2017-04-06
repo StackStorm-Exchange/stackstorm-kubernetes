@@ -35,8 +35,8 @@ class patchCoreV1NamespacedReplicationControllerStatus(Action):
         if pretty is not None:
             args['pretty'] = pretty
         resp = myk8s.runAction(
-                   'patchCoreV1NamespacedReplicationControllerStatus',
-                   **args)
+            'patchCoreV1NamespacedReplicationControllerStatus',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

@@ -25,8 +25,8 @@ class createExtensionsV1beta1ThirdPartyResource(Action):
         if pretty is not None:
             args['pretty'] = pretty
         resp = myk8s.runAction(
-                   'createExtensionsV1beta1ThirdPartyResource',
-                   **args)
+            'createExtensionsV1beta1ThirdPartyResource',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

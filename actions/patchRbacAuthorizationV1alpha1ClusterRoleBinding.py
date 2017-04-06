@@ -30,8 +30,8 @@ class patchRbacAuthorizationV1alpha1ClusterRoleBinding(Action):
         if pretty is not None:
             args['pretty'] = pretty
         resp = myk8s.runAction(
-                   'patchRbacAuthorizationV1alpha1ClusterRoleBinding',
-                   **args)
+            'patchRbacAuthorizationV1alpha1ClusterRoleBinding',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

@@ -36,8 +36,8 @@ class readExtensionsV1beta1NamespacedReplicaSet(Action):
         if pretty is not None:
             args['pretty'] = pretty
         resp = myk8s.runAction(
-                   'readExtensionsV1beta1NamespacedReplicaSet',
-                   **args)
+            'readExtensionsV1beta1NamespacedReplicaSet',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

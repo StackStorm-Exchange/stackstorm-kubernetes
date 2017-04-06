@@ -30,8 +30,8 @@ class patchCoreV1PersistentVolumeStatus(Action):
         if pretty is not None:
             args['pretty'] = pretty
         resp = myk8s.runAction(
-                   'patchCoreV1PersistentVolumeStatus',
-                   **args)
+            'patchCoreV1PersistentVolumeStatus',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

@@ -35,8 +35,8 @@ class listRbacAuthorizationV1alpha1RoleForAllNamespaces(Action):
         if watch is not None:
             args['watch'] = watch
         resp = myk8s.runAction(
-                   'listRbacAuthorizationV1alpha1RoleForAllNamespaces',
-                   **args)
+            'listRbacAuthorizationV1alpha1RoleForAllNamespaces',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

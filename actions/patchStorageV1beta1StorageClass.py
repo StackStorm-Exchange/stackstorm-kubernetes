@@ -30,8 +30,8 @@ class patchStorageV1beta1StorageClass(Action):
         if pretty is not None:
             args['pretty'] = pretty
         resp = myk8s.runAction(
-                   'patchStorageV1beta1StorageClass',
-                   **args)
+            'patchStorageV1beta1StorageClass',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

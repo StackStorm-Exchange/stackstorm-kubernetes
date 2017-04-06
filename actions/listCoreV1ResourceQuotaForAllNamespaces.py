@@ -35,8 +35,8 @@ class listCoreV1ResourceQuotaForAllNamespaces(Action):
         if watch is not None:
             args['watch'] = watch
         resp = myk8s.runAction(
-                   'listCoreV1ResourceQuotaForAllNamespaces',
-                   **args)
+            'listCoreV1ResourceQuotaForAllNamespaces',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

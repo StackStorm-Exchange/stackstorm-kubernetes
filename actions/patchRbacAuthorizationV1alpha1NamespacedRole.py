@@ -35,8 +35,8 @@ class patchRbacAuthorizationV1alpha1NamespacedRole(Action):
         if pretty is not None:
             args['pretty'] = pretty
         resp = myk8s.runAction(
-                   'patchRbacAuthorizationV1alpha1NamespacedRole',
-                   **args)
+            'patchRbacAuthorizationV1alpha1NamespacedRole',
+            **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

@@ -34,7 +34,9 @@ class listCoreV1ServiceForAllNamespaces(Action):
             args['timeoutSeconds'] = timeoutSeconds
         if watch is not None:
             args['watch'] = watch
-        resp = myk8s.runAction('listCoreV1ServiceForAllNamespaces', **args)
+        resp = myk8s.runAction(
+                   'listCoreV1ServiceForAllNamespaces',
+                   **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

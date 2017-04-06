@@ -34,7 +34,9 @@ class listExtensionsV1beta1NetworkPolicyForAllNamespaces(Action):
             args['timeoutSeconds'] = timeoutSeconds
         if watch is not None:
             args['watch'] = watch
-        resp = myk8s.runAction('listExtensionsV1beta1NetworkPolicyForAllNamespaces', **args)
+        resp = myk8s.runAction(
+                   'listExtensionsV1beta1NetworkPolicyForAllNamespaces',
+                   **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

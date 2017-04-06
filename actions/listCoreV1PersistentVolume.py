@@ -34,7 +34,9 @@ class listCoreV1PersistentVolume(Action):
             args['watch'] = watch
         if pretty is not None:
             args['pretty'] = pretty
-        resp = myk8s.runAction('listCoreV1PersistentVolume', **args)
+        resp = myk8s.runAction(
+                   'listCoreV1PersistentVolume',
+                   **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

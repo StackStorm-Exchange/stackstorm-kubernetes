@@ -34,7 +34,9 @@ class listExtensionsV1beta1ThirdPartyResource(Action):
             args['watch'] = watch
         if pretty is not None:
             args['pretty'] = pretty
-        resp = myk8s.runAction('listExtensionsV1beta1ThirdPartyResource', **args)
+        resp = myk8s.runAction(
+                   'listExtensionsV1beta1ThirdPartyResource',
+                   **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

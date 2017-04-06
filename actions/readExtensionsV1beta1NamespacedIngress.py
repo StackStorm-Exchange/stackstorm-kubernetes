@@ -35,7 +35,7 @@ class readExtensionsV1beta1NamespacedIngress(Action):
             args['export'] = export
         if pretty is not None:
             args['pretty'] = pretty
-        resp = myk8s.runAction('readExtensionsV1beta1NamespacedIngress',**args)
+        resp = myk8s.runAction('readExtensionsV1beta1NamespacedIngress', **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

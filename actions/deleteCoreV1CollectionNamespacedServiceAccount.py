@@ -39,7 +39,7 @@ class deleteCoreV1CollectionNamespacedServiceAccount(Action):
             args['watch'] = watch
         if pretty is not None:
             args['pretty'] = pretty
-        resp = myk8s.runAction('deleteCoreV1CollectionNamespacedServiceAccount',**args)
+        resp = myk8s.runAction('deleteCoreV1CollectionNamespacedServiceAccount', **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

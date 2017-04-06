@@ -34,7 +34,7 @@ class createCoreV1NamespacedBindingBinding(Action):
             args['config_override'] = config_override
         if pretty is not None:
             args['pretty'] = pretty
-        resp = myk8s.runAction('createCoreV1NamespacedBindingBinding',**args)
+        resp = myk8s.runAction('createCoreV1NamespacedBindingBinding', **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

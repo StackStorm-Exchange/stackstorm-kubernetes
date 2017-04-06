@@ -34,7 +34,7 @@ class listAutoscalingV1HorizontalPodAutoscalerForAllNamespaces(Action):
             args['timeoutSeconds'] = timeoutSeconds
         if watch is not None:
             args['watch'] = watch
-        resp = myk8s.runAction('listAutoscalingV1HorizontalPodAutoscalerForAllNamespaces',**args)
+        resp = myk8s.runAction('listAutoscalingV1HorizontalPodAutoscalerForAllNamespaces', **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

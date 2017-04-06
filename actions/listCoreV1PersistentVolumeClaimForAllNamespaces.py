@@ -34,7 +34,7 @@ class listCoreV1PersistentVolumeClaimForAllNamespaces(Action):
             args['timeoutSeconds'] = timeoutSeconds
         if watch is not None:
             args['watch'] = watch
-        resp = myk8s.runAction('listCoreV1PersistentVolumeClaimForAllNamespaces',**args)
+        resp = myk8s.runAction('listCoreV1PersistentVolumeClaimForAllNamespaces', **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

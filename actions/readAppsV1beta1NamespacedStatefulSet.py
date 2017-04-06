@@ -35,7 +35,7 @@ class readAppsV1beta1NamespacedStatefulSet(Action):
             args['export'] = export
         if pretty is not None:
             args['pretty'] = pretty
-        resp = myk8s.runAction('readAppsV1beta1NamespacedStatefulSet',**args)
+        resp = myk8s.runAction('readAppsV1beta1NamespacedStatefulSet', **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

@@ -34,7 +34,7 @@ class replaceExtensionsV1beta1NamespacedHorizontalPodAutoscalerStatus(Action):
             args['config_override'] = config_override
         if pretty is not None:
             args['pretty'] = pretty
-        resp = myk8s.runAction('replaceExtensionsV1beta1NamespacedHorizontalPodAutoscalerStatus',**args)
+        resp = myk8s.runAction('replaceExtensionsV1beta1NamespacedHorizontalPodAutoscalerStatus', **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

@@ -29,7 +29,7 @@ class createCoreV1NamespacedConfigMap(Action):
             args['config_override'] = config_override
         if pretty is not None:
             args['pretty'] = pretty
-        resp = myk8s.runAction('createCoreV1NamespacedConfigMap',**args)
+        resp = myk8s.runAction('createCoreV1NamespacedConfigMap', **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

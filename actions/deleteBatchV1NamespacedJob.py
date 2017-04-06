@@ -40,7 +40,7 @@ class deleteBatchV1NamespacedJob(Action):
             args['orphanDependents'] = orphanDependents
         if pretty is not None:
             args['pretty'] = pretty
-        resp = myk8s.runAction('deleteBatchV1NamespacedJob',**args)
+        resp = myk8s.runAction('deleteBatchV1NamespacedJob', **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

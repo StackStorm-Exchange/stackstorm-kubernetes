@@ -39,7 +39,7 @@ class deletePolicyV1beta1CollectionNamespacedPodDisruptionBudget(Action):
             args['watch'] = watch
         if pretty is not None:
             args['pretty'] = pretty
-        resp = myk8s.runAction('deletePolicyV1beta1CollectionNamespacedPodDisruptionBudget',**args)
+        resp = myk8s.runAction('deletePolicyV1beta1CollectionNamespacedPodDisruptionBudget', **args)
 
         if resp['status'] >= 200 and resp['status'] <= 299:
             rc = True

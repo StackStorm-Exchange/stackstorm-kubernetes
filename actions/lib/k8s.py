@@ -25,7 +25,7 @@ class K8sClient:
         # ctx is parsing context when producing primitives. Some primitves needs
         # multiple passes to produce(ex. Model), when we need to keep some globals
         # between passes, we should place them in ctx
-        pass
+        return int(val)
 
     def overwriteConfig(self, newconf):
 

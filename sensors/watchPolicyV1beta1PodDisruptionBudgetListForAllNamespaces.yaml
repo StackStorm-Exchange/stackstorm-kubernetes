@@ -10,12 +10,12 @@
         type: "object"
         properties:
           resource:
-            type: "obj"
+            type: "string"
           name:
-            type: "obj"
+            type: "string"
           labels:
-            type: "obj"
+            type: "string"
           object_kind:
-            type: "obj"
+            type: "string"
           namespace:
-            type: "obj"
+            type: "string"

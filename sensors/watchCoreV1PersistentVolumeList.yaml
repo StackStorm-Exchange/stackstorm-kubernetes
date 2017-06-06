@@ -14,7 +14,7 @@
           name:
             type: "string"
           labels:
-            type: "string"
+            type: "object"
           object_kind:
             type: "string"
           namespace:

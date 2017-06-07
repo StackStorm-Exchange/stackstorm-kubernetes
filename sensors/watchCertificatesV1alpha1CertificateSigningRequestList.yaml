@@ -14,7 +14,9 @@
           name:
             type: "string"
           labels:
-            type: "object"
+            anyOf:
+              - type: "object"
+              - type: "null"
           object_kind:
             type: "string"
           namespace:

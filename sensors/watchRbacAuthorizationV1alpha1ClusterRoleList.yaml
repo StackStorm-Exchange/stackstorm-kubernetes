@@ -16,6 +16,7 @@
           labels:
             anyOf:
               - type: "object"
+              - type: "string"
               - type: "null"
           object_kind:
             type: "string"

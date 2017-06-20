@@ -1,9 +1,9 @@
-from lib import k8s
+import json
 
-from st2actions.runners.pythonrunner import Action
+from lib.k8s import K8sClient
 
 
-class readCoreV1NamespacedPodLog(Action):
+class readCoreV1NamespacedPodLog(K8sClient):
 
     def run(
             self,
@@ -20,11 +20,12 @@ class readCoreV1NamespacedPodLog(Action):
             tailLines=None,
             timestamps=None):
 
-        myk8s = k8s.K8sClient(self.config)
-
         rc = False
 
         args = {}
+        args['config_override'] = {}
+        args['pretty'] = ''
+
         if name is not None:
             args['name'] = name
         else:
@@ -53,11 +54,20 @@ class readCoreV1NamespacedPodLog(Action):
             args['tailLines'] = tailLines
         if timestamps is not None:
             args['timestamps'] = timestamps
-        resp = myk8s.runAction(
-            'readCoreV1NamespacedPodLog',
-            **args)
+        if 'body' in args:
+            args['data'] = args['body']
+        args['headers'] = {'Content-type': u'application/json', 'Accept': u'text/plain, application/json, application/yaml, application/vnd.kubernetes.protobuf'}
+        args['url'] = "api/v1/namespaces/{namespace}/pods/{name}/log".format(name=name, namespace=namespace )
+        args['method'] = "get"
 
-        if resp['status'] >= 200 and resp['status'] <= 299:
+        self.addArgs(**args)
+        self.makeRequest()
+
+        myresp = {}
+        myresp['status_code'] = self.resp.status_code
+        myresp['data'] = json.loads(self.resp.content.rstrip())
+
+        if myresp['status_code'] >= 200 and myresp['status_code'] <= 299:
             rc = True
 
-        return (rc, resp)
+        return (rc, myresp)

@@ -1,9 +1,9 @@
-from lib import k8s
+import json
 
-from st2actions.runners.pythonrunner import Action
+from lib.k8s import K8sClient
 
 
-class deleteCertificatesV1alpha1CertificateSigningRequest(Action):
+class deleteCertificatesV1alpha1CertificateSigningRequest(K8sClient):
 
     def run(
             self,
@@ -14,11 +14,12 @@ class deleteCertificatesV1alpha1CertificateSigningRequest(Action):
             orphanDependents=None,
             pretty=None):
 
-        myk8s = k8s.K8sClient(self.config)
-
         rc = False
 
         args = {}
+        args['config_override'] = {}
+        args['pretty'] = ''
+
         if body is not None:
             args['body'] = body
         else:
@@ -35,11 +36,20 @@ class deleteCertificatesV1alpha1CertificateSigningRequest(Action):
             args['orphanDependents'] = orphanDependents
         if pretty is not None:
             args['pretty'] = pretty
-        resp = myk8s.runAction(
-            'deleteCertificatesV1alpha1CertificateSigningRequest',
-            **args)
+        if 'body' in args:
+            args['data'] = args['body']
+        args['headers'] = {'Content-type': u'application/json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf'}
+        args['url'] = "apis/certificates.k8s.io/v1alpha1/certificatesigningrequests/{name}".format(body=body, name=name )
+        args['method'] = "delete"
 
-        if resp['status'] >= 200 and resp['status'] <= 299:
+        self.addArgs(**args)
+        self.makeRequest()
+
+        myresp = {}
+        myresp['status_code'] = self.resp.status_code
+        myresp['data'] = json.loads(self.resp.content.rstrip())
+
+        if myresp['status_code'] >= 200 and myresp['status_code'] <= 299:
             rc = True
 
-        return (rc, resp)
+        return (rc, myresp)

@@ -1,9 +1,9 @@
-from lib import k8s
+import json
 
-from st2actions.runners.pythonrunner import Action
+from lib.k8s import K8sClient
 
 
-class replaceAutoscalingV1NamespacedHorizontalPodAutoscalerStatus(Action):
+class replaceAutoscalingV1NamespacedHorizontalPodAutoscalerStatus(K8sClient):
 
     def run(
             self,
@@ -13,11 +13,12 @@ class replaceAutoscalingV1NamespacedHorizontalPodAutoscalerStatus(Action):
             config_override=None,
             pretty=None):
 
-        myk8s = k8s.K8sClient(self.config)
-
         rc = False
 
         args = {}
+        args['config_override'] = {}
+        args['pretty'] = ''
+
         if body is not None:
             args['body'] = body
         else:
@@ -34,11 +35,20 @@ class replaceAutoscalingV1NamespacedHorizontalPodAutoscalerStatus(Action):
             args['config_override'] = config_override
         if pretty is not None:
             args['pretty'] = pretty
-        resp = myk8s.runAction(
-            'replaceAutoscalingV1NamespacedHorizontalPodAutoscalerStatus',
-            **args)
+        if 'body' in args:
+            args['data'] = args['body']
+        args['headers'] = {'Content-type': u'application/json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf'}
+        args['url'] = "apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status".format(body=body, name=name, namespace=namespace )
+        args['method'] = "put"
 
-        if resp['status'] >= 200 and resp['status'] <= 299:
+        self.addArgs(**args)
+        self.makeRequest()
+
+        myresp = {}
+        myresp['status_code'] = self.resp.status_code
+        myresp['data'] = json.loads(self.resp.content.rstrip())
+
+        if myresp['status_code'] >= 200 and myresp['status_code'] <= 299:
             rc = True
 
-        return (rc, resp)
+        return (rc, myresp)

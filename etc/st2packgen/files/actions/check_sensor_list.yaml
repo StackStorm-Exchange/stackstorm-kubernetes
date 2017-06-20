@@ -1,6 +1,6 @@
 ---
   name: "check_sensor_list"
-  runner_type: "run-python"
+  runner_type: "python-script"
   description: "Check to see whether a sensor already exists"
   enabled: true
   entry_point: "check_sensor_list.py"

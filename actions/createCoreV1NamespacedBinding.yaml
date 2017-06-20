@@ -1,6 +1,6 @@
 name: createCoreV1NamespacedBinding
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "create a Binding"
 enabled: true
 entry_point: "createCoreV1NamespacedBinding.py"

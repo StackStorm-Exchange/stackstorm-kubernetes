@@ -1,6 +1,6 @@
 name: getRbacAuthorizationAPIGroup
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "get information of a group"
 enabled: true
 entry_point: "getRbacAuthorizationAPIGroup.py"

@@ -1,6 +1,6 @@
 name: replaceCoreV1NamespacedLimitRange
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "replace the specified LimitRange"
 enabled: true
 entry_point: "replaceCoreV1NamespacedLimitRange.py"

@@ -1,6 +1,6 @@
 name: createCoreV1NamespacedService
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "create a Service"
 enabled: true
 entry_point: "createCoreV1NamespacedService.py"

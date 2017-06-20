@@ -1,6 +1,6 @@
 name: listExtensionsV1beta1NamespacedDaemonSet
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "list or watch objects of kind DaemonSet"
 enabled: true
 entry_point: "listExtensionsV1beta1NamespacedDaemonSet.py"

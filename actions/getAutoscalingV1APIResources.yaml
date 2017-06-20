@@ -1,6 +1,6 @@
 name: getAutoscalingV1APIResources
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "get available resources"
 enabled: true
 entry_point: "getAutoscalingV1APIResources.py"

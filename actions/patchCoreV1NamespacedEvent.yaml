@@ -1,6 +1,6 @@
 name: patchCoreV1NamespacedEvent
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "partially update the specified Event"
 enabled: true
 entry_point: "patchCoreV1NamespacedEvent.py"

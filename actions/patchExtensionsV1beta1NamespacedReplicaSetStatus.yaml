@@ -1,6 +1,6 @@
 name: patchExtensionsV1beta1NamespacedReplicaSetStatus
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "partially update status of the specified ReplicaSet"
 enabled: true
 entry_point: "patchExtensionsV1beta1NamespacedReplicaSetStatus.py"

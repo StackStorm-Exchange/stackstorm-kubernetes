@@ -1,6 +1,6 @@
 name: readBatchV1NamespacedJob
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "read the specified Job"
 enabled: true
 entry_point: "readBatchV1NamespacedJob.py"

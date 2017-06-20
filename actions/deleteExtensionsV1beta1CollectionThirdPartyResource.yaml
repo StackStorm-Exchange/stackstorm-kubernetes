@@ -1,6 +1,6 @@
 name: deleteExtensionsV1beta1CollectionThirdPartyResource
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "delete collection of ThirdPartyResource"
 enabled: true
 entry_point: "deleteExtensionsV1beta1CollectionThirdPartyResource.py"

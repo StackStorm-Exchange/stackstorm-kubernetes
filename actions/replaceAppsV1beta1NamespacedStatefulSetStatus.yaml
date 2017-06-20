@@ -1,6 +1,6 @@
 name: replaceAppsV1beta1NamespacedStatefulSetStatus
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "replace status of the specified StatefulSet"
 enabled: true
 entry_point: "replaceAppsV1beta1NamespacedStatefulSetStatus.py"

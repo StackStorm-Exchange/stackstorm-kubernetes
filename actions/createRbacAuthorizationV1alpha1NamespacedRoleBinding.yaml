@@ -1,6 +1,6 @@
 name: createRbacAuthorizationV1alpha1NamespacedRoleBinding
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "create a RoleBinding"
 enabled: true
 entry_point: "createRbacAuthorizationV1alpha1NamespacedRoleBinding.py"

@@ -1,6 +1,6 @@
 name: replaceCoreV1NamespacedReplicationController
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "replace the specified ReplicationController"
 enabled: true
 entry_point: "replaceCoreV1NamespacedReplicationController.py"

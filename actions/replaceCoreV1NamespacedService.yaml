@@ -1,6 +1,6 @@
 name: replaceCoreV1NamespacedService
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "replace the specified Service"
 enabled: true
 entry_point: "replaceCoreV1NamespacedService.py"

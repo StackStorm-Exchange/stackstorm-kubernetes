@@ -1,6 +1,6 @@
 name: patchCertificatesV1alpha1CertificateSigningRequest
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "partially update the specified CertificateSigningRequest"
 enabled: true
 entry_point: "patchCertificatesV1alpha1CertificateSigningRequest.py"

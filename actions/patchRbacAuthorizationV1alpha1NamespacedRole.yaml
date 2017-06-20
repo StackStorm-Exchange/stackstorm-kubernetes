@@ -1,6 +1,6 @@
 name: patchRbacAuthorizationV1alpha1NamespacedRole
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "partially update the specified Role"
 enabled: true
 entry_point: "patchRbacAuthorizationV1alpha1NamespacedRole.py"

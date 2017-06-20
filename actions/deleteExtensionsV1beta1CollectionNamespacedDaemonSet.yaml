@@ -1,6 +1,6 @@
 name: deleteExtensionsV1beta1CollectionNamespacedDaemonSet
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "delete collection of DaemonSet"
 enabled: true
 entry_point: "deleteExtensionsV1beta1CollectionNamespacedDaemonSet.py"

@@ -1,6 +1,6 @@
 name: deletePolicyV1beta1CollectionNamespacedPodDisruptionBudget
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "delete collection of PodDisruptionBudget"
 enabled: true
 entry_point: "deletePolicyV1beta1CollectionNamespacedPodDisruptionBudget.py"

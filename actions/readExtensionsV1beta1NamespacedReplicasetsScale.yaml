@@ -1,6 +1,6 @@
 name: readExtensionsV1beta1NamespacedReplicasetsScale
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "read scale of the specified Scale"
 enabled: true
 entry_point: "readExtensionsV1beta1NamespacedReplicasetsScale.py"

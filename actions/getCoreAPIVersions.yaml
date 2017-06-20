@@ -1,6 +1,6 @@
 name: getCoreAPIVersions
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "get available API versions"
 enabled: true
 entry_point: "getCoreAPIVersions.py"

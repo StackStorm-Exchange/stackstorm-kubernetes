@@ -1,6 +1,6 @@
 name: patchExtensionsV1beta1ThirdPartyResource
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "partially update the specified ThirdPartyResource"
 enabled: true
 entry_point: "patchExtensionsV1beta1ThirdPartyResource.py"

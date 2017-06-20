@@ -1,6 +1,6 @@
 name: patchBatchV1NamespacedJob
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "partially update the specified Job"
 enabled: true
 entry_point: "patchBatchV1NamespacedJob.py"

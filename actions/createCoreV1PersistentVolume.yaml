@@ -1,6 +1,6 @@
 name: createCoreV1PersistentVolume
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "create a PersistentVolume"
 enabled: true
 entry_point: "createCoreV1PersistentVolume.py"

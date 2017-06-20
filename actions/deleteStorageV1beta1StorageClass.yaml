@@ -1,6 +1,6 @@
 name: deleteStorageV1beta1StorageClass
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "delete a StorageClass"
 enabled: true
 entry_point: "deleteStorageV1beta1StorageClass.py"

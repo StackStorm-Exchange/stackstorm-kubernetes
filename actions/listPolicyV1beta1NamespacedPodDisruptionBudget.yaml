@@ -1,6 +1,6 @@
 name: listPolicyV1beta1NamespacedPodDisruptionBudget
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "list or watch objects of kind PodDisruptionBudget"
 enabled: true
 entry_point: "listPolicyV1beta1NamespacedPodDisruptionBudget.py"

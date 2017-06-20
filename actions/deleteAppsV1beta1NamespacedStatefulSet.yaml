@@ -1,6 +1,6 @@
 name: deleteAppsV1beta1NamespacedStatefulSet
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "delete a StatefulSet"
 enabled: true
 entry_point: "deleteAppsV1beta1NamespacedStatefulSet.py"

@@ -1,6 +1,6 @@
 name: createPolicyV1beta1NamespacedPodDisruptionBudget
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "create a PodDisruptionBudget"
 enabled: true
 entry_point: "createPolicyV1beta1NamespacedPodDisruptionBudget.py"

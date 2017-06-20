@@ -1,6 +1,6 @@
 name: replaceExtensionsV1beta1NamespacedDaemonSet
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "replace the specified DaemonSet"
 enabled: true
 entry_point: "replaceExtensionsV1beta1NamespacedDaemonSet.py"

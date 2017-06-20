@@ -1,6 +1,6 @@
 name: deleteExtensionsV1beta1CollectionNamespacedNetworkPolicy
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "delete collection of NetworkPolicy"
 enabled: true
 entry_point: "deleteExtensionsV1beta1CollectionNamespacedNetworkPolicy.py"

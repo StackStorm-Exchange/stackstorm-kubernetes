@@ -1,6 +1,6 @@
 name: deleteExtensionsV1beta1CollectionNamespacedIngress
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "delete collection of Ingress"
 enabled: true
 entry_point: "deleteExtensionsV1beta1CollectionNamespacedIngress.py"

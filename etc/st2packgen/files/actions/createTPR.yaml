@@ -1,6 +1,6 @@
 name: createTPR
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "create a Third Party Resource"
 enabled: true
 entry_point: "createTPR.py"

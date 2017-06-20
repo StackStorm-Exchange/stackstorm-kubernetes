@@ -1,6 +1,6 @@
 name: createCoreV1NamespacedResourceQuota
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "create a ResourceQuota"
 enabled: true
 entry_point: "createCoreV1NamespacedResourceQuota.py"

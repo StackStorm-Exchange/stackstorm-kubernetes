@@ -1,6 +1,6 @@
 name: deleteExtensionsV1beta1NamespacedReplicaSet
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "delete a ReplicaSet"
 enabled: true
 entry_point: "deleteExtensionsV1beta1NamespacedReplicaSet.py"

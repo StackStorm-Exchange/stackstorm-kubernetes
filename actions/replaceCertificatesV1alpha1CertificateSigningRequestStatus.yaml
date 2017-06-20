@@ -1,6 +1,6 @@
 name: replaceCertificatesV1alpha1CertificateSigningRequestStatus
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "replace status of the specified CertificateSigningRequest"
 enabled: true
 entry_point: "replaceCertificatesV1alpha1CertificateSigningRequestStatus.py"

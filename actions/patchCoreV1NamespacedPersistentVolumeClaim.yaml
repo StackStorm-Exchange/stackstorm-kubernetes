@@ -1,6 +1,6 @@
 name: patchCoreV1NamespacedPersistentVolumeClaim
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "partially update the specified PersistentVolumeClaim"
 enabled: true
 entry_point: "patchCoreV1NamespacedPersistentVolumeClaim.py"

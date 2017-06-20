@@ -1,6 +1,6 @@
 name: listCoreV1NamespacedService
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "list or watch objects of kind Service"
 enabled: true
 entry_point: "listCoreV1NamespacedService.py"

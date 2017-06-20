@@ -1,6 +1,6 @@
 name: createCoreV1NamespacedEvent
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "create an Event"
 enabled: true
 entry_point: "createCoreV1NamespacedEvent.py"

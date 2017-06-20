@@ -1,6 +1,6 @@
 name: createRbacAuthorizationV1alpha1NamespacedRole
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "create a Role"
 enabled: true
 entry_point: "createRbacAuthorizationV1alpha1NamespacedRole.py"

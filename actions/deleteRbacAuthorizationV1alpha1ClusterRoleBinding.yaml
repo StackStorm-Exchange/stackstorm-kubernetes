@@ -1,6 +1,6 @@
 name: deleteRbacAuthorizationV1alpha1ClusterRoleBinding
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "delete a ClusterRoleBinding"
 enabled: true
 entry_point: "deleteRbacAuthorizationV1alpha1ClusterRoleBinding.py"

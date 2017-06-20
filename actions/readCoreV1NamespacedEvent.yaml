@@ -1,6 +1,6 @@
 name: readCoreV1NamespacedEvent
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "read the specified Event"
 enabled: true
 entry_point: "readCoreV1NamespacedEvent.py"

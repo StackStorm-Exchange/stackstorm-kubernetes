@@ -1,6 +1,6 @@
 name: listCoreV1NamespacedEndpoints
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "list or watch objects of kind Endpoints"
 enabled: true
 entry_point: "listCoreV1NamespacedEndpoints.py"

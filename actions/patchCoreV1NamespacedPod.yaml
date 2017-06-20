@@ -1,6 +1,6 @@
 name: patchCoreV1NamespacedPod
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "partially update the specified Pod"
 enabled: true
 entry_point: "patchCoreV1NamespacedPod.py"

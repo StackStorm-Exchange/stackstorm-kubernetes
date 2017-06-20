@@ -1,6 +1,6 @@
 name: deleteCoreV1PersistentVolume
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "delete a PersistentVolume"
 enabled: true
 entry_point: "deleteCoreV1PersistentVolume.py"

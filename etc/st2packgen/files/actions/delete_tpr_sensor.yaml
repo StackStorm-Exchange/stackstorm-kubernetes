@@ -1,6 +1,6 @@
 ---
   name: "delete_tpr_sensor"
-  runner_type: "run-python"
+  runner_type: "python-script"
   description: "Delete 3PR sensor"
   enabled: true
   entry_point: "delete_tpr_sensor.py"

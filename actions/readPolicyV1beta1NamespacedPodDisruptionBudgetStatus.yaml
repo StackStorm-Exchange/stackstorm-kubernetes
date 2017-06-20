@@ -1,6 +1,6 @@
 name: readPolicyV1beta1NamespacedPodDisruptionBudgetStatus
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "read status of the specified PodDisruptionBudget"
 enabled: true
 entry_point: "readPolicyV1beta1NamespacedPodDisruptionBudgetStatus.py"

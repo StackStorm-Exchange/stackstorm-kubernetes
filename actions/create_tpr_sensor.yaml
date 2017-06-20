@@ -1,6 +1,6 @@
 ---
   name: "create_tpr_sensor"
-  runner_type: "run-python"
+  runner_type: "python-script"
   description: "Create new 3PR sensor"
   enabled: true
   entry_point: "create_tpr_sensor.py"

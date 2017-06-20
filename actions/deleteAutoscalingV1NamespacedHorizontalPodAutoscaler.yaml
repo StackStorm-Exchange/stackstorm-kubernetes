@@ -1,6 +1,6 @@
 name: deleteAutoscalingV1NamespacedHorizontalPodAutoscaler
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "delete a HorizontalPodAutoscaler"
 enabled: true
 entry_point: "deleteAutoscalingV1NamespacedHorizontalPodAutoscaler.py"

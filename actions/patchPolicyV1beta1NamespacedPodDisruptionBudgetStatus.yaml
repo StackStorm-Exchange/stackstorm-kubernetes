@@ -1,6 +1,6 @@
 name: patchPolicyV1beta1NamespacedPodDisruptionBudgetStatus
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "partially update status of the specified PodDisruptionBudget"
 enabled: true
 entry_point: "patchPolicyV1beta1NamespacedPodDisruptionBudgetStatus.py"

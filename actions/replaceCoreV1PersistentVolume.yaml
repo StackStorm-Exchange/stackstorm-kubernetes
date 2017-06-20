@@ -1,6 +1,6 @@
 name: replaceCoreV1PersistentVolume
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "replace the specified PersistentVolume"
 enabled: true
 entry_point: "replaceCoreV1PersistentVolume.py"

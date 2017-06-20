@@ -1,6 +1,6 @@
 name: listAllTPR
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "list all Third Party Resources"
 enabled: true
 entry_point: "listAllTPR.py"

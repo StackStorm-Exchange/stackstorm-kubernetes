@@ -1,6 +1,6 @@
 name: createAutoscalingV1NamespacedHorizontalPodAutoscaler
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "create a HorizontalPodAutoscaler"
 enabled: true
 entry_point: "createAutoscalingV1NamespacedHorizontalPodAutoscaler.py"

@@ -1,6 +1,6 @@
 name: createCoreV1NamespacedLimitRange
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "create a LimitRange"
 enabled: true
 entry_point: "createCoreV1NamespacedLimitRange.py"

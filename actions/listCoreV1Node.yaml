@@ -1,6 +1,6 @@
 name: listCoreV1Node
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "list or watch objects of kind Node"
 enabled: true
 entry_point: "listCoreV1Node.py"

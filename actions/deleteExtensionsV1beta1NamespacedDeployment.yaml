@@ -1,6 +1,6 @@
 name: deleteExtensionsV1beta1NamespacedDeployment
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "delete a Deployment"
 enabled: true
 entry_point: "deleteExtensionsV1beta1NamespacedDeployment.py"

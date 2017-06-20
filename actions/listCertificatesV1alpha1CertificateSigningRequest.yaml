@@ -1,6 +1,6 @@
 name: listCertificatesV1alpha1CertificateSigningRequest
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "list or watch objects of kind CertificateSigningRequest"
 enabled: true
 entry_point: "listCertificatesV1alpha1CertificateSigningRequest.py"

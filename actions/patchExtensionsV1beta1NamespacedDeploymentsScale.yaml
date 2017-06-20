@@ -1,6 +1,6 @@
 name: patchExtensionsV1beta1NamespacedDeploymentsScale
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "partially update scale of the specified Scale"
 enabled: true
 entry_point: "patchExtensionsV1beta1NamespacedDeploymentsScale.py"

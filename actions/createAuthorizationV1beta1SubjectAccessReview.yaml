@@ -1,6 +1,6 @@
 name: createAuthorizationV1beta1SubjectAccessReview
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "create a SubjectAccessReview"
 enabled: true
 entry_point: "createAuthorizationV1beta1SubjectAccessReview.py"

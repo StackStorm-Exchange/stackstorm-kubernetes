@@ -1,6 +1,6 @@
 name: readCoreV1NamespacedPodStatus
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "read status of the specified Pod"
 enabled: true
 entry_point: "readCoreV1NamespacedPodStatus.py"

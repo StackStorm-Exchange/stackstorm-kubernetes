@@ -1,6 +1,6 @@
 name: patchCoreV1NamespacedEndpoints
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "partially update the specified Endpoints"
 enabled: true
 entry_point: "patchCoreV1NamespacedEndpoints.py"

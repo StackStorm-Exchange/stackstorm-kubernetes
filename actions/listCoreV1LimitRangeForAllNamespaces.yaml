@@ -1,6 +1,6 @@
 name: listCoreV1LimitRangeForAllNamespaces
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "list or watch objects of kind LimitRange"
 enabled: true
 entry_point: "listCoreV1LimitRangeForAllNamespaces.py"

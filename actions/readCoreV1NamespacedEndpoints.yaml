@@ -1,6 +1,6 @@
 name: readCoreV1NamespacedEndpoints
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "read the specified Endpoints"
 enabled: true
 entry_point: "readCoreV1NamespacedEndpoints.py"

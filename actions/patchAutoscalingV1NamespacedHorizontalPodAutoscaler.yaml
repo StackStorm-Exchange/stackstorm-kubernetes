@@ -1,6 +1,6 @@
 name: patchAutoscalingV1NamespacedHorizontalPodAutoscaler
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "partially update the specified HorizontalPodAutoscaler"
 enabled: true
 entry_point: "patchAutoscalingV1NamespacedHorizontalPodAutoscaler.py"

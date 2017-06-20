@@ -1,6 +1,6 @@
 name: listExtensionsV1beta1ReplicaSetForAllNamespaces
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "list or watch objects of kind ReplicaSet"
 enabled: true
 entry_point: "listExtensionsV1beta1ReplicaSetForAllNamespaces.py"

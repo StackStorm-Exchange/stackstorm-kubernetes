@@ -1,6 +1,6 @@
 name: replaceCoreV1NamespacedResourceQuota
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "replace the specified ResourceQuota"
 enabled: true
 entry_point: "replaceCoreV1NamespacedResourceQuota.py"

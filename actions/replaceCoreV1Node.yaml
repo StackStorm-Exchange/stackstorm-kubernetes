@@ -1,6 +1,6 @@
 name: replaceCoreV1Node
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "replace the specified Node"
 enabled: true
 entry_point: "replaceCoreV1Node.py"

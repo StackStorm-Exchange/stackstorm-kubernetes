@@ -1,6 +1,6 @@
 name: createRbacAuthorizationV1alpha1ClusterRole
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "create a ClusterRole"
 enabled: true
 entry_point: "createRbacAuthorizationV1alpha1ClusterRole.py"

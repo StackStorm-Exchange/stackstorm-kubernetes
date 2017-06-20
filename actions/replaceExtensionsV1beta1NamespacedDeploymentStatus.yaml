@@ -1,6 +1,6 @@
 name: replaceExtensionsV1beta1NamespacedDeploymentStatus
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "replace status of the specified Deployment"
 enabled: true
 entry_point: "replaceExtensionsV1beta1NamespacedDeploymentStatus.py"

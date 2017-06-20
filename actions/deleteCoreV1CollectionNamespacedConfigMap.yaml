@@ -1,6 +1,6 @@
 name: deleteCoreV1CollectionNamespacedConfigMap
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "delete collection of ConfigMap"
 enabled: true
 entry_point: "deleteCoreV1CollectionNamespacedConfigMap.py"

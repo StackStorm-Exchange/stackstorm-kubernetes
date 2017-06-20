@@ -1,6 +1,6 @@
 name: readCoreV1NamespacedPodTemplate
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "read the specified PodTemplate"
 enabled: true
 entry_point: "readCoreV1NamespacedPodTemplate.py"

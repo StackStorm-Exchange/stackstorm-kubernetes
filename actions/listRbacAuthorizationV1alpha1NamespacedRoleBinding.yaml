@@ -1,6 +1,6 @@
 name: listRbacAuthorizationV1alpha1NamespacedRoleBinding
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "list or watch objects of kind RoleBinding"
 enabled: true
 entry_point: "listRbacAuthorizationV1alpha1NamespacedRoleBinding.py"

@@ -1,6 +1,6 @@
 name: patchAppsV1beta1NamespacedStatefulSet
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "partially update the specified StatefulSet"
 enabled: true
 entry_point: "patchAppsV1beta1NamespacedStatefulSet.py"

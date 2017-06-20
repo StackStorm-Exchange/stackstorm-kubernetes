@@ -1,6 +1,6 @@
 name: createCertificatesV1alpha1CertificateSigningRequest
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "create a CertificateSigningRequest"
 enabled: true
 entry_point: "createCertificatesV1alpha1CertificateSigningRequest.py"

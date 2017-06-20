@@ -1,6 +1,6 @@
 name: readExtensionsV1beta1NamespacedReplicaSet
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "read the specified ReplicaSet"
 enabled: true
 entry_point: "readExtensionsV1beta1NamespacedReplicaSet.py"

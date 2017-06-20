@@ -1,6 +1,6 @@
 name: replaceCoreV1NamespacedPersistentVolumeClaim
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "replace the specified PersistentVolumeClaim"
 enabled: true
 entry_point: "replaceCoreV1NamespacedPersistentVolumeClaim.py"

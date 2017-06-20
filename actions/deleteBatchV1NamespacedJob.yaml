@@ -1,6 +1,6 @@
 name: deleteBatchV1NamespacedJob
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "delete a Job"
 enabled: true
 entry_point: "deleteBatchV1NamespacedJob.py"

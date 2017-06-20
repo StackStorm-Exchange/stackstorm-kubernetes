@@ -1,6 +1,6 @@
 name: replaceCoreV1NamespacedServiceStatus
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "replace status of the specified Service"
 enabled: true
 entry_point: "replaceCoreV1NamespacedServiceStatus.py"

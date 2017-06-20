@@ -1,6 +1,6 @@
 name: replaceExtensionsV1beta1NamespacedReplicasetsScale
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "replace scale of the specified Scale"
 enabled: true
 entry_point: "replaceExtensionsV1beta1NamespacedReplicasetsScale.py"

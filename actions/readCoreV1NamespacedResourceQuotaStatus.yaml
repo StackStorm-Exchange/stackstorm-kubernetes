@@ -1,6 +1,6 @@
 name: readCoreV1NamespacedResourceQuotaStatus
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "read status of the specified ResourceQuota"
 enabled: true
 entry_point: "readCoreV1NamespacedResourceQuotaStatus.py"

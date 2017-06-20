@@ -1,6 +1,6 @@
 name: patchStorageV1beta1StorageClass
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "partially update the specified StorageClass"
 enabled: true
 entry_point: "patchStorageV1beta1StorageClass.py"

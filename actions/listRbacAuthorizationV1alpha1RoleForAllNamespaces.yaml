@@ -1,6 +1,6 @@
 name: listRbacAuthorizationV1alpha1RoleForAllNamespaces
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "list or watch objects of kind Role"
 enabled: true
 entry_point: "listRbacAuthorizationV1alpha1RoleForAllNamespaces.py"

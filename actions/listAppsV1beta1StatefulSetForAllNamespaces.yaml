@@ -1,6 +1,6 @@
 name: listAppsV1beta1StatefulSetForAllNamespaces
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "list or watch objects of kind StatefulSet"
 enabled: true
 entry_point: "listAppsV1beta1StatefulSetForAllNamespaces.py"

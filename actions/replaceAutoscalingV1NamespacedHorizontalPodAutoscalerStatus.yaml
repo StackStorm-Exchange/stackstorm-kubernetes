@@ -1,6 +1,6 @@
 name: replaceAutoscalingV1NamespacedHorizontalPodAutoscalerStatus
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "replace status of the specified HorizontalPodAutoscaler"
 enabled: true
 entry_point: "replaceAutoscalingV1NamespacedHorizontalPodAutoscalerStatus.py"

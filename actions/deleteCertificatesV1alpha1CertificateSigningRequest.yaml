@@ -1,6 +1,6 @@
 name: deleteCertificatesV1alpha1CertificateSigningRequest
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "delete a CertificateSigningRequest"
 enabled: true
 entry_point: "deleteCertificatesV1alpha1CertificateSigningRequest.py"

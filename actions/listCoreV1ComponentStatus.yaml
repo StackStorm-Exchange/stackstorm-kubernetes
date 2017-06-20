@@ -1,6 +1,6 @@
 name: listCoreV1ComponentStatus
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "list objects of kind ComponentStatus"
 enabled: true
 entry_point: "listCoreV1ComponentStatus.py"

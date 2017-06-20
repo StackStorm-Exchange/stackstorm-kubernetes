@@ -1,6 +1,6 @@
 name: replaceCoreV1NamespacedPod
 pack: kubernetes
-runner_type: run-python
+runner_type: python-script
 description: "replace the specified Pod"
 enabled: true
 entry_point: "replaceCoreV1NamespacedPod.py"

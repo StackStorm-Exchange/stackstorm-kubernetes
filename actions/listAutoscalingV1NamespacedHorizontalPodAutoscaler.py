@@ -42,7 +42,7 @@ class listAutoscalingV1NamespacedHorizontalPodAutoscaler(K8sClient):
             args['pretty'] = pretty
         if 'body' in args:
             args['data'] = args['body']
-        args['headers'] = {'Content-type': u'application/json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch'}
+        args['headers'] = {'Content-type': u'application/json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch'}  # pylint: disable=line-too-long
         args['url'] = "apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers".format(namespace=namespace )
         args['method'] = "get"
 

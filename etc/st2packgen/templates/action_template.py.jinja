@@ -33,7 +33,7 @@ class {{ operationId }}(K8sClient):
 
         if 'body' in args:
             args['data'] = args['body']
-        args['headers'] = {{ headers }}
+        args['headers'] = {{ headers }}  # pylint: disable=line-too-long
         args['url'] = "{{ url }}".format({%- for p in paramsreq -%}{{ p.name }}={{ p.name }}{{ "," if not loop.last }} {% endfor -%})
         args['method'] = "{{ method }}"
 

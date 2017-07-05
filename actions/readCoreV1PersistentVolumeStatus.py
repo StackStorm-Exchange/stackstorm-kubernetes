@@ -27,7 +27,7 @@ class readCoreV1PersistentVolumeStatus(K8sClient):
             args['pretty'] = pretty
         if 'body' in args:
             args['data'] = args['body']
-        args['headers'] = {'Content-type': u'application/json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf'}
+        args['headers'] = {'Content-type': u'application/json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf'}  # pylint: disable=line-too-long
         args['url'] = "api/v1/persistentvolumes/{name}/status".format(name=name )
         args['method'] = "get"
 

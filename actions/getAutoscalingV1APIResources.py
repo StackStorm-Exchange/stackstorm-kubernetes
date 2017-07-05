@@ -19,7 +19,7 @@ class getAutoscalingV1APIResources(K8sClient):
             args['config_override'] = config_override
         if 'body' in args:
             args['data'] = args['body']
-        args['headers'] = {'Content-type': u'application/json, application/yaml, application/vnd.kubernetes.protobuf', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf'}
+        args['headers'] = {'Content-type': u'application/json, application/yaml, application/vnd.kubernetes.protobuf', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf'}  # pylint: disable=line-too-long
         args['url'] = "apis/autoscaling/v1/".format()
         args['method'] = "get"
 

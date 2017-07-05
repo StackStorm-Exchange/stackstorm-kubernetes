@@ -32,7 +32,7 @@ class patchCoreV1Namespace(K8sClient):
             args['pretty'] = pretty
         if 'body' in args:
             args['data'] = args['body']
-        args['headers'] = {'Content-type': u'application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf'}
+        args['headers'] = {'Content-type': u'application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf'}  # pylint: disable=line-too-long
         args['url'] = "api/v1/namespaces/{name}".format(body=body, name=name )
         args['method'] = "patch"
 

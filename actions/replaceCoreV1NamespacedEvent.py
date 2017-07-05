@@ -37,7 +37,7 @@ class replaceCoreV1NamespacedEvent(K8sClient):
             args['pretty'] = pretty
         if 'body' in args:
             args['data'] = args['body']
-        args['headers'] = {'Content-type': u'application/json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf'}
+        args['headers'] = {'Content-type': u'application/json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf'}  # pylint: disable=line-too-long
         args['url'] = "api/v1/namespaces/{namespace}/events/{name}".format(body=body, name=name, namespace=namespace )
         args['method'] = "put"
 

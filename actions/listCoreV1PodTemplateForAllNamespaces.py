@@ -37,7 +37,7 @@ class listCoreV1PodTemplateForAllNamespaces(K8sClient):
             args['watch'] = watch
         if 'body' in args:
             args['data'] = args['body']
-        args['headers'] = {'Content-type': u'application/json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch'}
+        args['headers'] = {'Content-type': u'application/json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch'}  # pylint: disable=line-too-long
         args['url'] = "api/v1/podtemplates".format()
         args['method'] = "get"
 

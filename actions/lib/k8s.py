@@ -22,6 +22,8 @@ class K8sClient(Action):
 
         super(K8sClient, self).__init__(config=config)
 
+        self.clientcert = 0
+
         self.myconfig = self.config
         self.req = {'method': '', 'url': '', 'headers': {}, 'data': {}}
 
@@ -39,7 +41,19 @@ class K8sClient(Action):
         else:
             self.req['data'] = ''
 
-        self.addauth()
+        for entry in self.myconfig:
+            if self.myconfig[entry] == 'None':
+                self.myconfig[entry] = None
+
+        if self.myconfig['user'] is not None and self.myconfig['password'] is not None:
+            self.addauth()
+        elif self.myconfig['cert_path'] is not None:
+            self.clientcert = 1
+            return True
+        else:
+            return (False,
+                    "Failed finding authentication method\n \
+                     Please specify either username and password or clientcert location")
 
     def overwriteConfig(self, newconf):
 
@@ -50,19 +64,24 @@ class K8sClient(Action):
 
         auth = base64.b64encode(self.myconfig['user'] + ":" + self.myconfig['password'])
         self.req['headers'].update({"authorization": "Basic " + auth})
+        return True
 
     def makeRequest(self):
 
-        import json
-        print json.dumps(self.req, sort_keys=True, indent=2)
+        s = requests.Session()
 
-        self.resp = requests.request(
-            method=self.req['method'].upper(),
-            url=self.req['url'],
-            json=self.req['data'],
-            headers=self.req['headers'],
-            verify=False
-        )
+        if self.clientcert:
+            if self.myconfig['cert_key_path'] is not None:
+                s.cert = (self.myconfig['cert_path'], self.myconfig['cert_key_path'])
+            else:
+                s.cert = self.myconfig['cert_path']
+
+        kwargs = {}
+        kwargs['url'] = self.req['url']
+        kwargs['json'] = self.req['data']
+        kwargs['headers'] = self.req['headers']
+        kwargs['verify'] = self.myconfig['verify']
+        self.resp = getattr(s, self.req['method'])(**kwargs)
 
 if __name__ == "__main__":
 

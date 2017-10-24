@@ -5,6 +5,10 @@ description: "delete a RoleBinding"
 enabled: true
 entry_point: "deleteRbacAuthorizationV1alpha1NamespacedRoleBinding.py"
 parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        secret: true
     body:
         type: object
         description: ""
@@ -19,10 +23,6 @@ parameters:
         type: string
         description: "object name and auth scope, such as for teams and projects"
         required: True
-        
-    config_override:
-        type: object
-        description: "override stackstorm config"
         
     gracePeriodSeconds:
         type: integer

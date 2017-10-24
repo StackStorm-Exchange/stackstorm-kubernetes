@@ -8,13 +8,13 @@ class deleteExtensionsV1beta1CollectionNamespacedIngress(K8sClient):
     def run(
             self,
             namespace,
-            config_override=None,
             fieldSelector=None,
             labelSelector=None,
             resourceVersion=None,
             timeoutSeconds=None,
             watch=None,
-            pretty=None):
+            pretty=None,
+            config_override=None):
 
         rc = False
 
@@ -22,12 +22,13 @@ class deleteExtensionsV1beta1CollectionNamespacedIngress(K8sClient):
         args['config_override'] = {}
         args['pretty'] = ''
 
+        if config_override is not None:
+            args['config_override'] = config_override
+
         if namespace is not None:
             args['namespace'] = namespace
         else:
             return (False, "namespace is a required parameter")
-        if config_override is not None:
-            args['config_override'] = config_override
         if fieldSelector is not None:
             args['fieldSelector'] = fieldSelector
         if labelSelector is not None:

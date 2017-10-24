@@ -9,16 +9,19 @@ class readExtensionsV1beta1NamespacedHorizontalPodAutoscaler(K8sClient):
             self,
             name,
             namespace,
-            config_override=None,
             exact=None,
             export=None,
-            pretty=None):
+            pretty=None,
+            config_override=None):
 
         rc = False
 
         args = {}
         args['config_override'] = {}
         args['pretty'] = ''
+
+        if config_override is not None:
+            args['config_override'] = config_override
 
         if name is not None:
             args['name'] = name
@@ -28,8 +31,6 @@ class readExtensionsV1beta1NamespacedHorizontalPodAutoscaler(K8sClient):
             args['namespace'] = namespace
         else:
             return (False, "namespace is a required parameter")
-        if config_override is not None:
-            args['config_override'] = config_override
         if exact is not None:
             args['exact'] = exact
         if export is not None:

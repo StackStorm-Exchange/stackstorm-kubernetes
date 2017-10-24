@@ -8,10 +8,10 @@ class readExtensionsV1beta1ThirdPartyResource(K8sClient):
     def run(
             self,
             name,
-            config_override=None,
             exact=None,
             export=None,
-            pretty=None):
+            pretty=None,
+            config_override=None):
 
         rc = False
 
@@ -19,12 +19,13 @@ class readExtensionsV1beta1ThirdPartyResource(K8sClient):
         args['config_override'] = {}
         args['pretty'] = ''
 
+        if config_override is not None:
+            args['config_override'] = config_override
+
         if name is not None:
             args['name'] = name
         else:
             return (False, "name is a required parameter")
-        if config_override is not None:
-            args['config_override'] = config_override
         if exact is not None:
             args['exact'] = exact
         if export is not None:

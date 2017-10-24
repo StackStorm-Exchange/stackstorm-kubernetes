@@ -10,16 +10,19 @@ class deleteAutoscalingV1NamespacedHorizontalPodAutoscaler(K8sClient):
             body,
             name,
             namespace,
-            config_override=None,
             gracePeriodSeconds=None,
             orphanDependents=None,
-            pretty=None):
+            pretty=None,
+            config_override=None):
 
         rc = False
 
         args = {}
         args['config_override'] = {}
         args['pretty'] = ''
+
+        if config_override is not None:
+            args['config_override'] = config_override
 
         if body is not None:
             args['body'] = body
@@ -33,8 +36,6 @@ class deleteAutoscalingV1NamespacedHorizontalPodAutoscaler(K8sClient):
             args['namespace'] = namespace
         else:
             return (False, "namespace is a required parameter")
-        if config_override is not None:
-            args['config_override'] = config_override
         if gracePeriodSeconds is not None:
             args['gracePeriodSeconds'] = gracePeriodSeconds
         if orphanDependents is not None:

@@ -8,8 +8,8 @@ class createRbacAuthorizationV1alpha1ClusterRoleBinding(K8sClient):
     def run(
             self,
             body,
-            config_override=None,
-            pretty=None):
+            pretty=None,
+            config_override=None):
 
         rc = False
 
@@ -17,12 +17,13 @@ class createRbacAuthorizationV1alpha1ClusterRoleBinding(K8sClient):
         args['config_override'] = {}
         args['pretty'] = ''
 
+        if config_override is not None:
+            args['config_override'] = config_override
+
         if body is not None:
             args['body'] = body
         else:
             return (False, "body is a required parameter")
-        if config_override is not None:
-            args['config_override'] = config_override
         if pretty is not None:
             args['pretty'] = pretty
         if 'body' in args:

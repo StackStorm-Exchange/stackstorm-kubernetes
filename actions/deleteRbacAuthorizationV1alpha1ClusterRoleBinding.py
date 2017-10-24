@@ -9,16 +9,19 @@ class deleteRbacAuthorizationV1alpha1ClusterRoleBinding(K8sClient):
             self,
             body,
             name,
-            config_override=None,
             gracePeriodSeconds=None,
             orphanDependents=None,
-            pretty=None):
+            pretty=None,
+            config_override=None):
 
         rc = False
 
         args = {}
         args['config_override'] = {}
         args['pretty'] = ''
+
+        if config_override is not None:
+            args['config_override'] = config_override
 
         if body is not None:
             args['body'] = body
@@ -28,8 +31,6 @@ class deleteRbacAuthorizationV1alpha1ClusterRoleBinding(K8sClient):
             args['name'] = name
         else:
             return (False, "name is a required parameter")
-        if config_override is not None:
-            args['config_override'] = config_override
         if gracePeriodSeconds is not None:
             args['gracePeriodSeconds'] = gracePeriodSeconds
         if orphanDependents is not None:

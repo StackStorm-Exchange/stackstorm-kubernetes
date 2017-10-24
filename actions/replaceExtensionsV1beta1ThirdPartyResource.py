@@ -9,14 +9,17 @@ class replaceExtensionsV1beta1ThirdPartyResource(K8sClient):
             self,
             body,
             name,
-            config_override=None,
-            pretty=None):
+            pretty=None,
+            config_override=None):
 
         rc = False
 
         args = {}
         args['config_override'] = {}
         args['pretty'] = ''
+
+        if config_override is not None:
+            args['config_override'] = config_override
 
         if body is not None:
             args['body'] = body
@@ -26,8 +29,6 @@ class replaceExtensionsV1beta1ThirdPartyResource(K8sClient):
             args['name'] = name
         else:
             return (False, "name is a required parameter")
-        if config_override is not None:
-            args['config_override'] = config_override
         if pretty is not None:
             args['pretty'] = pretty
         if 'body' in args:

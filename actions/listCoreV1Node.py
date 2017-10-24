@@ -7,13 +7,13 @@ class listCoreV1Node(K8sClient):
 
     def run(
             self,
-            config_override=None,
             fieldSelector=None,
             labelSelector=None,
             resourceVersion=None,
             timeoutSeconds=None,
             watch=None,
-            pretty=None):
+            pretty=None,
+            config_override=None):
 
         rc = False
 
@@ -23,6 +23,7 @@ class listCoreV1Node(K8sClient):
 
         if config_override is not None:
             args['config_override'] = config_override
+
         if fieldSelector is not None:
             args['fieldSelector'] = fieldSelector
         if labelSelector is not None:

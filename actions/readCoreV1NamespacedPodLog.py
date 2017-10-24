@@ -9,7 +9,6 @@ class readCoreV1NamespacedPodLog(K8sClient):
             self,
             name,
             namespace,
-            config_override=None,
             container=None,
             follow=None,
             limitBytes=None,
@@ -18,13 +17,17 @@ class readCoreV1NamespacedPodLog(K8sClient):
             sinceSeconds=None,
             sinceTime=None,
             tailLines=None,
-            timestamps=None):
+            timestamps=None,
+            config_override=None):
 
         rc = False
 
         args = {}
         args['config_override'] = {}
         args['pretty'] = ''
+
+        if config_override is not None:
+            args['config_override'] = config_override
 
         if name is not None:
             args['name'] = name
@@ -34,8 +37,6 @@ class readCoreV1NamespacedPodLog(K8sClient):
             args['namespace'] = namespace
         else:
             return (False, "namespace is a required parameter")
-        if config_override is not None:
-            args['config_override'] = config_override
         if container is not None:
             args['container'] = container
         if follow is not None:

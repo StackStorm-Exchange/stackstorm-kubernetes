@@ -2,17 +2,21 @@
   user:
     description: "kubernetes username"
     type: "string"
-    required: true
     default: "admin"
   password:
     description: "kubernetes password"
     type: "string"
-    required: true
     secret: true
   kubernetes_api_url:
     description: "kubernetes api url"
     type: "string"
     required: true
+  cert_path:
+    description: "client cert path"
+    type: "string"
+  cert_key_path:
+    description: "client cert key path"
+    type: "string"
   verify:
     description: "SSL verify"
     type: "boolean"

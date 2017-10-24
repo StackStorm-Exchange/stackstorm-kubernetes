@@ -78,12 +78,6 @@ for path in app.dump()['paths'].keys():
         allvars['params'] = []
 
         tmp = {}
-        tmp['type'] = 'object'
-        tmp['description'] = 'override stackstorm config'
-        tmp['required'] = False
-        tmp['name'] = 'config_override'
-
-        allvars['params'].append(tmp)
 
         allvars['path'] = op.path
         allvars['operationId'] = op.operationId

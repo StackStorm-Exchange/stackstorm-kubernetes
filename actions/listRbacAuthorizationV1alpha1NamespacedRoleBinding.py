@@ -16,7 +16,7 @@ class listRbacAuthorizationV1alpha1NamespacedRoleBinding(K8sClient):
             pretty=None,
             config_override=None):
 
-        rc = False
+        ret = False
 
         args = {}
         args['config_override'] = {}
@@ -44,7 +44,8 @@ class listRbacAuthorizationV1alpha1NamespacedRoleBinding(K8sClient):
         if 'body' in args:
             args['data'] = args['body']
         args['headers'] = {'Content-type': u'application/json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch'}  # pylint: disable=line-too-long
-        args['url'] = "apis/rbac.authorization.k8s.io/v1alpha1/namespaces/{namespace}/rolebindings".format(namespace=namespace )
+        args['url'] = "apis/rbac.authorization.k8s.io/v1alpha1/namespaces/{namespace}/rolebindings".format(  # pylint: disable=line-too-long
+            namespace=namespace)
         args['method'] = "get"
 
         self.addArgs(**args)
@@ -55,6 +56,6 @@ class listRbacAuthorizationV1alpha1NamespacedRoleBinding(K8sClient):
         myresp['data'] = json.loads(self.resp.content.rstrip())
 
         if myresp['status_code'] >= 200 and myresp['status_code'] <= 299:
-            rc = True
+            ret = True
 
-        return (rc, myresp)
+        return (ret, myresp)

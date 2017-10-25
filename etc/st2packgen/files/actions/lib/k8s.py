@@ -1,5 +1,4 @@
 import base64
-import json
 import requests
 
 from st2actions.runners.pythonrunner import Action
@@ -8,17 +7,6 @@ from st2actions.runners.pythonrunner import Action
 class K8sClient(Action):
 
     def __init__(self, config=None):
-
-        # args
-        # - method
-        # - url
-        # - headers
-        # - body
-        # - config_override
-
-        # stuff to be added
-        # - auth
-        # - config
 
         super(K8sClient, self).__init__(config=config)
 
@@ -82,30 +70,3 @@ class K8sClient(Action):
         kwargs['headers'] = self.req['headers']
         kwargs['verify'] = self.myconfig['verify']
         self.resp = getattr(s, self.req['method'])(**kwargs)
-
-if __name__ == "__main__":
-
-    config = {'kubernetes_api_url': "https://master-a.andy.kube",
-              'user': 'admin', 'password': 'andypass',
-              'template_path': '/opt/stackstorm/packs/kubernetes'}
-
-    body = {
-        "kind": "Namespace",
-        "apiVersion": "v1",
-        "metadata": {"labels": {"project": "andy"}, "name": "new-stg"}
-    }
-
-    url = "/api/v1/namespaces"
-
-    header = {'Accept': u'application/json', 'Content-Type': 'application/json'}
-
-    request = {
-        "method": "GET",
-        "url": url,
-        "params": "",
-        "data": body,
-        "headers": header
-    }
-
-    k8s = k8scli(config, request)
-    print json.dumps(k8s.makeRequest(), sort_keys=True, indent=2)

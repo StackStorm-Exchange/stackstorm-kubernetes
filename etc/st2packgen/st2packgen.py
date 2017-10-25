@@ -40,6 +40,7 @@ copyfile(templatedir + "/sensor_template.yaml.jinja", kubedir + "/sensor_templat
 templateLoader = jinja2.FileSystemLoader(searchpath=templatedir)
 templateEnv = jinja2.Environment(loader=templateLoader)
 
+
 def _encode_intOrString(self, obj, val, ctx):
 
     return int(val)

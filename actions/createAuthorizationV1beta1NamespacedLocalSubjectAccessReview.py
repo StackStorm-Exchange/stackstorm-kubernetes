@@ -33,8 +33,8 @@ class createAuthorizationV1beta1NamespacedLocalSubjectAccessReview(K8sClient):
             args['pretty'] = pretty
         if 'body' in args:
             args['data'] = args['body']
-        args['headers'] = {'Content-type': u'application/json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf'}  # pylint: disable=line-too-long
-        args['url'] = "apis/authorization.k8s.io/v1beta1/namespaces/{namespace}/localsubjectaccessreviews".format(  # pylint: disable=line-too-long
+        args['headers'] = {'Content-type': u'application/json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf'}  # noqa pylint: disable=line-too-long
+        args['url'] = "apis/authorization.k8s.io/v1beta1/namespaces/{namespace}/localsubjectaccessreviews".format(  # noqa pylint: disable=line-too-long
             body=body, namespace=namespace)
         args['method'] = "post"
 

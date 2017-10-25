@@ -38,8 +38,8 @@ class patchAutoscalingV1NamespacedHorizontalPodAutoscaler(K8sClient):
             args['pretty'] = pretty
         if 'body' in args:
             args['data'] = args['body']
-        args['headers'] = {'Content-type': u'application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf'}  # pylint: disable=line-too-long
-        args['url'] = "apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}".format(  # pylint: disable=line-too-long
+        args['headers'] = {'Content-type': u'application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf'}  # noqa pylint: disable=line-too-long
+        args['url'] = "apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}".format(  # noqa pylint: disable=line-too-long
             body=body, name=name, namespace=namespace)
         args['method'] = "patch"
 

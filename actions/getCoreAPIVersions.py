@@ -20,8 +20,8 @@ class getCoreAPIVersions(K8sClient):
 
         if 'body' in args:
             args['data'] = args['body']
-        args['headers'] = {'Content-type': u'application/json, application/yaml, application/vnd.kubernetes.protobuf', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf'}  # pylint: disable=line-too-long
-        args['url'] = "api/".format(  # pylint: disable=line-too-long
+        args['headers'] = {'Content-type': u'application/json, application/yaml, application/vnd.kubernetes.protobuf', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf'}  # noqa pylint: disable=line-too-long
+        args['url'] = "api/".format(  # noqa pylint: disable=line-too-long
             )
         args['method'] = "get"
 

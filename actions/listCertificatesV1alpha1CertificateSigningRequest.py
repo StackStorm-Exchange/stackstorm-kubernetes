@@ -38,8 +38,8 @@ class listCertificatesV1alpha1CertificateSigningRequest(K8sClient):
             args['pretty'] = pretty
         if 'body' in args:
             args['data'] = args['body']
-        args['headers'] = {'Content-type': u'application/json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch'}  # pylint: disable=line-too-long
-        args['url'] = "apis/certificates.k8s.io/v1alpha1/certificatesigningrequests".format(  # pylint: disable=line-too-long
+        args['headers'] = {'Content-type': u'application/json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch'}  # noqa pylint: disable=line-too-long
+        args['url'] = "apis/certificates.k8s.io/v1alpha1/certificatesigningrequests".format(  # noqa pylint: disable=line-too-long
             )
         args['method'] = "get"
 

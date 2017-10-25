@@ -57,8 +57,8 @@ class readCoreV1NamespacedPodLog(K8sClient):
             args['timestamps'] = timestamps
         if 'body' in args:
             args['data'] = args['body']
-        args['headers'] = {'Content-type': u'application/json', 'Accept': u'text/plain, application/json, application/yaml, application/vnd.kubernetes.protobuf'}  # pylint: disable=line-too-long
-        args['url'] = "api/v1/namespaces/{namespace}/pods/{name}/log".format(  # pylint: disable=line-too-long
+        args['headers'] = {'Content-type': u'application/json', 'Accept': u'text/plain, application/json, application/yaml, application/vnd.kubernetes.protobuf'}  # noqa pylint: disable=line-too-long
+        args['url'] = "api/v1/namespaces/{namespace}/pods/{name}/log".format(  # noqa pylint: disable=line-too-long
             name=name, namespace=namespace)
         args['method'] = "get"
 

@@ -38,8 +38,8 @@ class listAppsV1beta1StatefulSetForAllNamespaces(K8sClient):
             args['watch'] = watch
         if 'body' in args:
             args['data'] = args['body']
-        args['headers'] = {'Content-type': u'application/json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch'}  # pylint: disable=line-too-long
-        args['url'] = "apis/apps/v1beta1/statefulsets".format(  # pylint: disable=line-too-long
+        args['headers'] = {'Content-type': u'application/json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch'}  # noqa pylint: disable=line-too-long
+        args['url'] = "apis/apps/v1beta1/statefulsets".format(  # noqa pylint: disable=line-too-long
             )
         args['method'] = "get"
 

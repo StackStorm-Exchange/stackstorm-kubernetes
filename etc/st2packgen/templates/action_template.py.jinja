@@ -15,7 +15,7 @@ class {{ operationId }}(K8sClient):
             {% endfor %},
             config_override=None):
 
-        rc = False
+        ret = False
 
         args = {}
         args['config_override'] = {}
@@ -38,7 +38,8 @@ class {{ operationId }}(K8sClient):
         if 'body' in args:
             args['data'] = args['body']
         args['headers'] = {{ headers }}  # pylint: disable=line-too-long
-        args['url'] = "{{ url }}".format({%- for p in paramsreq -%}{{ p.name }}={{ p.name }}{{ "," if not loop.last }} {% endfor -%})
+        args['url'] = "{{ url }}".format(  # pylint: disable=line-too-long
+            {% for p in paramsreq -%}{{ p.name }}={{ p.name }}{{ ", " if not loop.last }}{% endfor -%})
         args['method'] = "{{ method }}"
 
         self.addArgs(**args)
@@ -49,6 +50,6 @@ class {{ operationId }}(K8sClient):
         myresp['data'] = json.loads(self.resp.content.rstrip())
 
         if myresp['status_code'] >= 200 and myresp['status_code'] <= 299:
-            rc = True
+            ret = True
 
-        return (rc, myresp)
+        return (ret, myresp)

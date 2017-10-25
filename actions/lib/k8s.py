@@ -1,138 +1,72 @@
-import json
+import base64
+import requests
 
-from pyswagger import App
-from pyswagger.primitives import Primitive
-from k8sbase import Client
+from st2actions.runners.pythonrunner import Action
 
 
-class K8sClient:
+class K8sClient(Action):
 
-    def __init__(self, config):
+    def __init__(self, config=None):
 
-        self.config = config
-        self.templates = config['template_path']
+        super(K8sClient, self).__init__(config=config)
 
-        self.swagger = self.templates + "/swagger.json"
+        self.clientcert = 0
 
-    def _encode_intOrString(self, obj, val, ctx):
-        # val is the value used to create this primitive, for example, a
-        # dict would be used to create a Model and list would be used to
-        # create an Array
+        self.myconfig = self.config
+        self.req = {'method': '', 'url': '', 'headers': {}, 'data': {}}
 
-        # obj in the spec used to create primitives, they are
-        # Header, Items, Schema, Parameter in Swagger 2.0.
+    def addArgs(self, **args):
 
-        # ctx is parsing context when producing primitives. Some primitves needs
-        # multiple passes to produce(ex. Model), when we need to keep some globals
-        # between passes, we should place them in ctx
-        return int(val)
+        if "config_override" in args:
+            self.overwriteConfig(args['config_override'])
+            del(args['config_override'])
+
+        self.req['url'] = self.myconfig['kubernetes_api_url'] + '/' + args['url']
+        self.req['method'] = args['method']
+        self.req['headers'] = args['headers']
+        if 'data' in args:
+            self.req['data'] = args['data']
+        else:
+            self.req['data'] = ''
+
+        for entry in self.myconfig:
+            if self.myconfig[entry] == 'None':
+                self.myconfig[entry] = None
+
+        if self.myconfig['user'] is not None and self.myconfig['password'] is not None:
+            self.addauth()
+        elif self.myconfig['cert_path'] is not None:
+            self.clientcert = 1
+            return True
+        else:
+            return (False,
+                    "Failed finding authentication method\n \
+                     Please specify either username and password or clientcert location")
 
     def overwriteConfig(self, newconf):
 
         for key in newconf:
-            self.config[key] = newconf[key]
+            self.myconfig[key] = newconf[key]
 
-    def runAction(self, action, **kwargs):
+    def addauth(self):
 
-        if "config_override" in kwargs:
-            self.overwriteConfig(kwargs['config_override'])
-            del(kwargs['config_override'])
+        auth = base64.b64encode(self.myconfig['user'] + ":" + self.myconfig['password'])
+        self.req['headers'].update({"authorization": "Basic " + auth})
+        return True
 
-        factory = Primitive()
-        factory.register('string', 'int-or-string', self._encode_intOrString)
+    def makeRequest(self):
 
-        app = App.load(url=self.swagger, prim=factory)
-        app.prepare()
-        client = Client(config=self.config, send_opt=({'verify': False}))
+        s = requests.Session()
 
-        opt = dict(
-            url_netloc=self.config['kubernetes_api_url'][8:]
-        )
+        if self.clientcert:
+            if self.myconfig['cert_key_path'] is not None:
+                s.cert = (self.myconfig['cert_path'], self.myconfig['cert_key_path'])
+            else:
+                s.cert = self.myconfig['cert_path']
 
-        op = app.op[action]
-
-        # bit of a hack - pyswagger can't handle */* currently
-        if op.consumes[0] == u'*/*':
-            op.consumes[0] = u'application/json'
-
-        a = op(**kwargs)
-
-        resp = client.request(a, opt=opt)
-
-        return resp
-
-if __name__ == "__main__":
-
-    config = {'kubernetes_api_url': "https://master-a.andrew.kube",
-              'user': 'admin', 'password': 'andypass',
-              'template_path': '/opt/stackstorm/packs/kubernetes'}
-
-    k8s = K8sClient(config)
-
-    args = {'name': 'default'}
-    resp = k8s.runAction('readCoreV1Namespace', **args)
-    print json.dumps(resp, sort_keys=True, indent=2)
-
-    args = {"body": {
-        "kind": "Namespace",
-        "apiVersion": "v1",
-        "metadata": {"labels": {"project": "andy"}, "name": "new-stg"}
-    }}
-    resp = k8s.runAction('createCoreV1Namespace', **args)
-
-    # args = {'namespace': 'new-stg', 'body': {
-    #             'type': 'Opaque',
-    #             'kind':'Secret',
-    #             'test':{'aaa':'YmJi'},
-    #             'apiVersion':'v1',
-    #             'metadata':{'name':'aaa'}
-    #         }}
-    # args = {"namespace": "new-stg", "body": {
-    #             "kind":"Secret",
-    #             "data":{"bbb":"YmJi"},
-    #             "apiVersion":"v1",
-    #             "metadata":{"namespace":"new-stg","name":"bbb"}
-    #         }}
-    # args = {"namespace": "new-prd", "body": {
-    #             "kind":"Secret",
-    #             "apiVersion":"v1",
-    #             "metadata":{"name":"mysecret2","creationTimestamp":None},
-    #             "data":{
-    #                 "name":"Y29uc3VsLWFhYS1kZXYtcmVhZAo=",
-    #                 "value":"YzM3NDBjY2ItNGJkOC1hZTA3LWQ3MjMtYTYyMGY0YTU2YjNhCg=="
-    #             }
-    #         }}
-    # resp = k8s.runAction('createCoreV1NamespacedSecret', **args)
-    # args = {"namespace": "mmm-tst", "body": {
-    #             "kind": "ResourceQuota",
-    #             "spec": {
-    #                 "hard": {
-    #                     "resourcequotas": "1",
-    #                     "persistentvolumeclaims": "60",
-    #                     "secrets": "10",
-    #                     "replicationcontrollers": "20",
-    #                     "services": "10",
-    #                     "pods": "100"
-    #                 }
-    #             },
-    #             "apiVersion": "v1",
-    #             "metadata": { "namespace": "mmm-tst", "name": "quota" }
-    #         }}
-    # resp = k8s.runAction('createCoreV1NamespacedResourceQuota', **args)
-    # args = {"namespace": "new-prd", "body": {
-    #             "kind":"Service",
-    #             "spec":{
-    #                 "ports":[
-    #                     {"targetPort":"80","protocol":"TCP","port":"80"}
-    #                 ],
-    #                 "selector":{"name":"jenkins"}
-    #             },
-    #             "apiVersion":"v1",
-    #             "metadata":{"labels":{"name":"apt"},"namespace":"new-prd","name":"apt"}
-    #         }}
-
-    # resp = k8s.runAction('createCoreV1NamespacedService', **args)
-
-    # print json.dumps(resp, sort_keys=True, indent=2)
-
-    # print json.dumps(args, sort_keys=True, indent=2)
+        kwargs = {}
+        kwargs['url'] = self.req['url']
+        kwargs['json'] = self.req['data']
+        kwargs['headers'] = self.req['headers']
+        kwargs['verify'] = self.myconfig['verify']
+        self.resp = getattr(s, self.req['method'])(**kwargs)

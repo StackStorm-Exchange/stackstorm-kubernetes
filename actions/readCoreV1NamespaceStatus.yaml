@@ -5,14 +5,14 @@ description: "read status of the specified Namespace"
 enabled: true
 entry_point: "readCoreV1NamespaceStatus.py"
 parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        secret: true
     name:
         type: string
         description: "name of the Namespace"
         required: True
-        
-    config_override:
-        type: object
-        description: "override stackstorm config"
         
     pretty:
         type: string

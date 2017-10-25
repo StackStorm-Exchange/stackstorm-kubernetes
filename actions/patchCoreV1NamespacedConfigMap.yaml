@@ -5,6 +5,10 @@ description: "partially update the specified ConfigMap"
 enabled: true
 entry_point: "patchCoreV1NamespacedConfigMap.py"
 parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        secret: true
     body:
         type: object
         description: ""
@@ -19,10 +23,6 @@ parameters:
         type: string
         description: "object name and auth scope, such as for teams and projects"
         required: True
-        
-    config_override:
-        type: object
-        description: "override stackstorm config"
         
     pretty:
         type: string

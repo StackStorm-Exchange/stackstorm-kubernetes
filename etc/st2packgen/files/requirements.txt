@@ -1,5 +1,0 @@
-pyswagger
-jinja2
-http_parser
-backports.ssl==0.0.9
-pyopenssl==16.2.0

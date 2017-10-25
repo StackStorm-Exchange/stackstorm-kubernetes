@@ -5,14 +5,14 @@ description: "create a ClusterRole"
 enabled: true
 entry_point: "createRbacAuthorizationV1alpha1ClusterRole.py"
 parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        secret: true
     body:
         type: object
         description: ""
         required: True
-        
-    config_override:
-        type: object
-        description: "override stackstorm config"
         
     pretty:
         type: string

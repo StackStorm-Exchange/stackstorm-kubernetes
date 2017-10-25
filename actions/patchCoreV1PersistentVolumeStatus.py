@@ -1,22 +1,26 @@
-from lib import k8s
+import json
 
-from st2actions.runners.pythonrunner import Action
+from lib.k8s import K8sClient
 
 
-class patchCoreV1PersistentVolumeStatus(Action):
+class patchCoreV1PersistentVolumeStatus(K8sClient):
 
     def run(
             self,
             body,
             name,
-            config_override=None,
-            pretty=None):
+            pretty=None,
+            config_override=None):
 
-        myk8s = k8s.K8sClient(self.config)
-
-        rc = False
+        ret = False
 
         args = {}
+        args['config_override'] = {}
+        args['pretty'] = ''
+
+        if config_override is not None:
+            args['config_override'] = config_override
+
         if body is not None:
             args['body'] = body
         else:
@@ -25,15 +29,23 @@ class patchCoreV1PersistentVolumeStatus(Action):
             args['name'] = name
         else:
             return (False, "name is a required parameter")
-        if config_override is not None:
-            args['config_override'] = config_override
         if pretty is not None:
             args['pretty'] = pretty
-        resp = myk8s.runAction(
-            'patchCoreV1PersistentVolumeStatus',
-            **args)
+        if 'body' in args:
+            args['data'] = args['body']
+        args['headers'] = {'Content-type': u'application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf'}  # noqa pylint: disable=line-too-long
+        args['url'] = "api/v1/persistentvolumes/{name}/status".format(  # noqa pylint: disable=line-too-long
+            body=body, name=name)
+        args['method'] = "patch"
 
-        if resp['status'] >= 200 and resp['status'] <= 299:
-            rc = True
+        self.addArgs(**args)
+        self.makeRequest()
 
-        return (rc, resp)
+        myresp = {}
+        myresp['status_code'] = self.resp.status_code
+        myresp['data'] = json.loads(self.resp.content.rstrip())
+
+        if myresp['status_code'] >= 200 and myresp['status_code'] <= 299:
+            ret = True
+
+        return (ret, myresp)

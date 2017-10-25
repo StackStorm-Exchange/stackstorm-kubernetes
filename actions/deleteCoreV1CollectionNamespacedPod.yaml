@@ -5,14 +5,14 @@ description: "delete collection of Pod"
 enabled: true
 entry_point: "deleteCoreV1CollectionNamespacedPod.py"
 parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        secret: true
     namespace:
         type: string
         description: "object name and auth scope, such as for teams and projects"
         required: True
-        
-    config_override:
-        type: object
-        description: "override stackstorm config"
         
     fieldSelector:
         type: string

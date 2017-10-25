@@ -1,26 +1,38 @@
-from lib import k8s
+import json
 
-from st2actions.runners.pythonrunner import Action
+from lib.k8s import K8sClient
 
 
-class getAutoscalingV1APIResources(Action):
+class getAutoscalingV1APIResources(K8sClient):
 
     def run(
             self,
             config_override=None):
 
-        myk8s = k8s.K8sClient(self.config)
-
-        rc = False
+        ret = False
 
         args = {}
+        args['config_override'] = {}
+        args['pretty'] = ''
+
         if config_override is not None:
             args['config_override'] = config_override
-        resp = myk8s.runAction(
-            'getAutoscalingV1APIResources',
-            **args)
 
-        if resp['status'] >= 200 and resp['status'] <= 299:
-            rc = True
+        if 'body' in args:
+            args['data'] = args['body']
+        args['headers'] = {'Content-type': u'application/json, application/yaml, application/vnd.kubernetes.protobuf', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf'}  # noqa pylint: disable=line-too-long
+        args['url'] = "apis/autoscaling/v1/".format(  # noqa pylint: disable=line-too-long
+            )
+        args['method'] = "get"
 
-        return (rc, resp)
+        self.addArgs(**args)
+        self.makeRequest()
+
+        myresp = {}
+        myresp['status_code'] = self.resp.status_code
+        myresp['data'] = json.loads(self.resp.content.rstrip())
+
+        if myresp['status_code'] >= 200 and myresp['status_code'] <= 299:
+            ret = True
+
+        return (ret, myresp)

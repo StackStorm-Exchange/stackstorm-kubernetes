@@ -8,7 +8,7 @@ parameters:
     config_override:
         type: object
         description: "override stackstorm config"
-        
+        secret: true
     fieldSelector:
         type: string
         description: "A selector to restrict the list of returned objects by their fields. Defaults to everything."

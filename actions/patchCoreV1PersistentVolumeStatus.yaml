@@ -5,6 +5,10 @@ description: "partially update status of the specified PersistentVolume"
 enabled: true
 entry_point: "patchCoreV1PersistentVolumeStatus.py"
 parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        secret: true
     body:
         type: object
         description: ""
@@ -14,10 +18,6 @@ parameters:
         type: string
         description: "name of the PersistentVolume"
         required: True
-        
-    config_override:
-        type: object
-        description: "override stackstorm config"
         
     pretty:
         type: string

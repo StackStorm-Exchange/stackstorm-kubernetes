@@ -183,6 +183,10 @@ class SensorBase(Sensor):
             resource_type = k8s_object['type']
             object_kind = k8s_object['object']['kind']
             name = k8s_object['object']['metadata']['name']
+            if 'spec' in k8s_object['object']:
+                spec = k8s_object['object']['spec']
+            else:
+                spec = 'None'
             if 'namespace' in k8s_object['object']['metadata']:
                 namespace = k8s_object['object']['metadata']['namespace']
             else:
@@ -208,6 +212,7 @@ class SensorBase(Sensor):
                     name=name,
                     labels=labels_data,
                     namespace=namespace,
+                    spec=spec,
                     object_kind=object_kind,
                     uid=uid)
                 self._log.info('Trigger payload: %s.' % payload)
@@ -219,12 +224,14 @@ class SensorBase(Sensor):
             name,
             labels,
             namespace,
+            spec,
             object_kind,
             uid):
         payload = {
             'resource': resource_type,
             'name': name,
             'namespace': namespace,
+            'spec': spec,
             'labels': labels,
             'object_kind': object_kind,
             'uid': uid

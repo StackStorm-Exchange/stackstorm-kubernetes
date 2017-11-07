@@ -1,6 +1,8 @@
 ---
-    user: ""
-    password: ""
+    user: None
+    password: None
+    client_cert: None
+    client_cert_key: None
     kubernetes_api_url: "https://kube_api_url"
     verify: true
     template_path: "/opt/stackstorm/packs/kubernetes/"

@@ -30,10 +30,10 @@ class SensorBase(Sensor):
         self.TRIGGER_REF = trigger_ref
         self.extension = extension
         self.client = None
-        self.setup()
-
-        self.authhead = ""
+        self.authhead = None
         self.authmethod = None
+
+        self.setup()
 
     def setup(self):
         if 'user' in self._config and self._config['user'] != None:
@@ -92,7 +92,7 @@ class SensorBase(Sensor):
             except KeyError:
                 raise KeyError('No authentication mechanisms defined')
 
-            if self.authhead:
+            if self.authhead is not None:
                 self.client.send("GET %s HTTP/1.1\r\nHost: %s\r\n%s\r\n\r\n" %
                              (self.extension,
                              self.host,

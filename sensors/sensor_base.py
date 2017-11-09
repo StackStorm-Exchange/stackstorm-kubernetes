@@ -41,8 +41,8 @@ class SensorBase(Sensor):
                 auth = base64.b64encode(self._config['user'] + ":" + self._config['password'])
                 self.authhead = "authorization: Basic %s" % auth
                 self.authmethod = "basic"
-        if 'cert_path' in self._config and self._config['cert_path'] != None:
-            if 'cert_key_path' in self._config and self._config['cert_key_path'] != None:
+        if 'client_cert_path' in self._config and self._config['client_cert_path'] != None:
+            if 'client_cert_key_path' in self._config and self._config['client_cert_key_path'] != None:
                 self.authmethod = "cert"
 
         try:
@@ -78,7 +78,7 @@ class SensorBase(Sensor):
                 if self.authmethod == "basic":
                     self.client = ssl.wrap_socket(self.sock)
                 elif self.authmethod == "cert":
-                    self.client = ssl.wrap_socket(self.sock, keyfile=self._config['cert_key_path'], certfile=self._config['cert_path'])
+                    self.client = ssl.wrap_socket(self.sock, keyfile=self._config['client_cert_key_path'], certfile=self._config['client_cert_path'])
                 else:
                     raise KeyError('No authentication mechanisms defined')
                 self._log.debug('Connecting to %s %i' % (self.host, self.port))

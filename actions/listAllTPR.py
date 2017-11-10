@@ -9,13 +9,29 @@ class listAllTPR(Action):
 
     def mkrequest(self, url):
 
-        user = self.config['user']
-        password = self.config['password']
-        verify = self.config['verify']
+        kwargs = {}
 
-        r = requests.get(url, auth=(user, password), verify=verify)
-        if r.status_code != 200:
-            return (False, "Unable to determine remote api endpoint")
+        if 'user' in self.config:
+            if 'password' in self.config:
+                kwargs['auth'] = (self.config['user'], self.config['password'])
+
+        if 'client_cert_path' in self.config:
+            if 'client_cert_key_path' in self.config:
+                kwargs['cert'] = (self.config['client_cert_path'], self.config['client_cert_key_path'])
+
+        if "verify" in self.config:
+            kwargs['verify'] = self.config['verify']
+
+        kwargs['method'] = "GET"
+        kwargs['url'] = url
+        if data is not None:
+            kwargs['json'] = data
+
+        r = requests.request(**kwargs)
+
+        if r.status_code not in (200, 201):
+            return (False, "Unable to connect to kubernetes. statuscode: %i" % r.status_code)
+
         return json.loads(r.text)
 
     def overwriteConfig(self, newconf):

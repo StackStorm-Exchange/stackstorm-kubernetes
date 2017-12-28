@@ -36,18 +36,18 @@ class SensorBase(Sensor):
         self.setup()
 
     def setup(self):
-        if 'user' in self._config and self._config['user'] != None:
-            if 'password' in self._config and self._config['password'] != None:
-                auth = base64.b64encode(self._config['user'] + ":" + self._config['password'])
+        if 'user' in self.config and self.config['user'] != None:
+            if 'password' in self.config and self.config['password'] != None:
+                auth = base64.b64encode(self.config['user'] + ":" + self.config['password'])
                 self.authhead = "authorization: Basic %s" % auth
                 self.authmethod = "basic"
-        if 'client_cert_path' in self._config and self._config['client_cert_path'] != None:
-            if 'client_cert_key_path' in self._config and self._config['client_cert_key_path'] != None:
+        if 'client_cert_path' in self.config and self.config['client_cert_path'] != None:
+            if 'client_cert_key_path' in self.config and self.config['client_cert_key_path'] != None:
                 self.authmethod = "cert"
 
         try:
             extension = self.extension
-            api_url = self._config['kubernetes_api_url'] + extension
+            api_url = self.config['kubernetes_api_url'] + extension
             if self.authmethod is None:
                 raise KeyError('No authentication mechanisms defined')
 
@@ -59,7 +59,7 @@ class SensorBase(Sensor):
             'Connecting to Kubernetes endpoint %s via api_client.' %
             api_url)
 
-        m = re.search('(http|https)://(.*)/?$', self._config['kubernetes_api_url'])
+        m = re.search('(http|https)://(.*)/?$', self.config['kubernetes_api_url'])
 
         method = m.group(1)
         self.host = m.group(2)
@@ -78,7 +78,7 @@ class SensorBase(Sensor):
                 if self.authmethod == "basic":
                     self.client = ssl.wrap_socket(self.sock)
                 elif self.authmethod == "cert":
-                    self.client = ssl.wrap_socket(self.sock, keyfile=self._config['client_cert_key_path'], certfile=self._config['client_cert_path'])
+                    self.client = ssl.wrap_socket(self.sock, keyfile=self.config['client_cert_key_path'], certfile=self.config['client_cert_path'])
                 else:
                     raise KeyError('No authentication mechanisms defined')
                 self._log.debug('Connecting to %s %i' % (self.host, self.port))

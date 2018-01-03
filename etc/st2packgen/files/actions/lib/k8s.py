@@ -33,9 +33,12 @@ class K8sClient(Action):
             if self.myconfig[entry] == 'None':
                 self.myconfig[entry] = None
 
-        if self.myconfig['user'] is not None and self.myconfig['password'] is not None:
-            self.addauth()
-        elif self.myconfig['cert_path'] is not None:
+        if 'user' in self.myconfig and self.myconfig['user'] is not None:
+            if 'password' in self.myconfig and  self.myconfig['password'] is not None:
+                self.addauth()
+            else:
+                return (False, "user defined but no password")
+        elif 'client_cert_path' in self.myconfig and self.myconfig['client_cert_path'] is not None:
             self.clientcert = 1
             return True
         else:
@@ -59,10 +62,10 @@ class K8sClient(Action):
         s = requests.Session()
 
         if self.clientcert:
-            if self.myconfig['cert_key_path'] is not None:
-                s.cert = (self.myconfig['cert_path'], self.myconfig['cert_key_path'])
+            if self.myconfig['client_cert_key_path'] is not None:
+                s.cert = (self.myconfig['client_cert_path'], self.myconfig['client_cert_key_path'])
             else:
-                s.cert = self.myconfig['cert_path']
+                s.cert = self.myconfig['client_cert_path']
 
         kwargs = {}
         kwargs['url'] = self.req['url']

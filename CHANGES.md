@@ -2,8 +2,8 @@
 
 # 0.8.0
 
-- New configuration options cert_path and cert_key_path allow client
-  certs to be used for kubernetes authentication
+- New configuration options client_cert_path and client_cert_key_path
+  allow client certs to be used for kubernetes authentication
 - config_override now defined as a secret
 
 # 0.7.0

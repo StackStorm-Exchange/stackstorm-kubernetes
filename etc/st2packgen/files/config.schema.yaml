@@ -11,10 +11,10 @@
     description: "kubernetes api url"
     type: "string"
     required: true
-  cert_path:
+  client_cert_path:
     description: "client cert path"
     type: "string"
-  cert_key_path:
+  client_cert_key_path:
     description: "client cert key path"
     type: "string"
   verify:

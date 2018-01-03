@@ -24,8 +24,8 @@ config.yaml includes:
 ```yaml
 user: "admin"
 password: "password"
-cert_path: "/path/to/cert.pem"
-cert_key_path: "/path/to/cert.key"
+client_cert_path: "/path/to/cert.pem"
+client_cert_key_path: "/path/to/cert.key"
 kubernetes_api_url: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 verify: false
 
@@ -33,7 +33,7 @@ template_path: "/opt/stackstorm/packs/kubernetes/"
 ```
 Where kubernetes_api_url = The FQDN to your Kubernetes API endpoint.
 
-Only user and password or cert_path (key is optional) need to be set for this to work
+Only user and password or client_cert_path (key is optional) need to be set for this to work
 
 Note: Currently SSL verification is turned off. This is a WIP.
 

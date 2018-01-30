@@ -34,7 +34,7 @@ class K8sClient(Action):
                 self.myconfig[entry] = None
 
         if 'user' in self.myconfig and self.myconfig['user'] is not None:
-            if 'password' in self.myconfig and  self.myconfig['password'] is not None:
+            if 'password' in self.myconfig and self.myconfig['password'] is not None:
                 self.addauth()
             else:
                 return (False, "user defined but no password")

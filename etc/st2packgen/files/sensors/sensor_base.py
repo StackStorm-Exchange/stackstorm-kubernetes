@@ -20,7 +20,7 @@ from st2reactor.sensor.base import Sensor
 class SensorBase(Sensor):
 
     def __init__(self, sensor_service, extension, trigger_ref, config=None):
-        super(
+        super(  # pylint: disable=bad-super-call
             SensorBase,
             self).__init__(
             sensor_service=sensor_service,
@@ -158,7 +158,7 @@ class SensorBase(Sensor):
                 nparsed = parser.execute(chunk, nreceived)
                 if nparsed != nreceived:
                     self._log.exception('b nparsed %i != nreceived %i' % (nparsed, nreceived))
-                    raise
+                    break
                 data = pending + parser.recv_body()
                 msg = "DATA: %s" % data
                 self._log.debug(msg)

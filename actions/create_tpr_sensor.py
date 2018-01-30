@@ -15,15 +15,14 @@ class createTPRSensor(Action):
         templateLoader = jinja2.FileSystemLoader(searchpath=self.config['template_path'])
         templateEnv = jinja2.Environment(loader=templateLoader)
 
-        authmethod = None
-
         if 'user' in self.config:
             if 'password' in self.config:
                 kwargs['auth'] = (self.config['user'], self.config['password'])
 
         if 'client_cert_path' in self.config:
             if 'client_cert_key_path' in self.config:
-                kwargs['cert'] = (self.config['client_cert_path'], self.config['client_cert_key_path'])
+                kwargs['cert'] = (self.config['client_cert_path'],
+                                  self.config['client_cert_key_path'])
 
         if 'verify' in self.config:
             kwargs['verify'] = self.config['verify']

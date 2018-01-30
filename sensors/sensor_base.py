@@ -2,7 +2,6 @@
 
 import ast
 import json
-import sys
 import base64
 import select
 import socket
@@ -42,9 +41,9 @@ class SensorBase(Sensor):
                 self.authhead = "authorization: Basic %s" % auth
                 self.authmethod = "basic"
         if 'client_cert_path' in self.config and self.config['client_cert_path'] is not None:
-            if 'client_cert_key_path' in self.config and
-                self.config['client_cert_key_path'] is not None:
-                self.authmethod = "cert"
+            if 'client_cert_key_path' in self.config:
+                if self.config['client_cert_key_path'] is not None:
+                    self.authmethod = "cert"
 
         try:
             extension = self.extension

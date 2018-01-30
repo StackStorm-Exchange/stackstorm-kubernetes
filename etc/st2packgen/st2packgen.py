@@ -45,6 +45,7 @@ def _encode_intOrString(self, obj, val, ctx):
 
     return int(val)
 
+
 factory = Primitive()
 factory.register('string', 'int-or-string', _encode_intOrString)
 

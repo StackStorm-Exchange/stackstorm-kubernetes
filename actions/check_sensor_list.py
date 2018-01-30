@@ -1,3 +1,4 @@
+from st2common.runners.base_action import Action
 
 import os
 import json

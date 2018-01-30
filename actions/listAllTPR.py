@@ -17,7 +17,8 @@ class listAllTPR(Action):
 
         if 'client_cert_path' in self.config:
             if 'client_cert_key_path' in self.config:
-                kwargs['cert'] = (self.config['client_cert_path'], self.config['client_cert_key_path'])
+                kwargs['cert'] = (self.config['client_cert_path'],
+                                  self.config['client_cert_key_path'])
 
         if "verify" in self.config:
             kwargs['verify'] = self.config['verify']

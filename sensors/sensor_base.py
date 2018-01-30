@@ -20,7 +20,7 @@ from st2reactor.sensor.base import Sensor
 class SensorBase(Sensor):
 
     def __init__(self, sensor_service, extension, trigger_ref, config=None):
-        super(
+        super(  # pylint: disable=bad-super-call
             SensorBase,
             self).__init__(
             sensor_service=sensor_service,

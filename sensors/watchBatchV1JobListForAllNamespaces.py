@@ -13,7 +13,7 @@ class watchBatchV1JobListForAllNamespaces(SensorBase):
             config=None,
             extension="/apis/batch/v1/watch/jobs",
             trigger_ref="kubernetes.jobs"):
-        super(
+        super(  # pylint: disable=bad-super-call
             self.__class__,  # pylint: disable=bad-super-call
             self).__init__(
             sensor_service=sensor_service,

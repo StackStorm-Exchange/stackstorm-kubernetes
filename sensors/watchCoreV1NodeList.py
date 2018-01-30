@@ -13,7 +13,7 @@ class watchCoreV1NodeList(SensorBase):
             config=None,
             extension="/api/v1/watch/nodes",
             trigger_ref="kubernetes.nodes"):
-        super(
+        super(  # pylint: disable=bad-super-call
             self.__class__,  # pylint: disable=bad-super-call
             self).__init__(
             sensor_service=sensor_service,

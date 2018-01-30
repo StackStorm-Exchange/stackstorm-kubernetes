@@ -13,7 +13,7 @@ class watchAppsV1beta1StatefulSetListForAllNamespaces(SensorBase):
             config=None,
             extension="/apis/apps/v1beta1/watch/statefulsets",
             trigger_ref="kubernetes.statefulsets"):
-        super(
+        super(  # pylint: disable=bad-super-call
             self.__class__,  # pylint: disable=bad-super-call
             self).__init__(
             sensor_service=sensor_service,

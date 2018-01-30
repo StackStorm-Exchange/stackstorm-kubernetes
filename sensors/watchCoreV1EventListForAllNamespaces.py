@@ -13,7 +13,7 @@ class watchCoreV1EventListForAllNamespaces(SensorBase):
             config=None,
             extension="/api/v1/watch/events",
             trigger_ref="kubernetes.events"):
-        super(
+        super(  # pylint: disable=bad-super-call
             self.__class__,  # pylint: disable=bad-super-call
             self).__init__(
             sensor_service=sensor_service,

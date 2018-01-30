@@ -25,8 +25,6 @@ class listAllTPR(Action):
 
         kwargs['method'] = "GET"
         kwargs['url'] = url
-        if data is not None:
-            kwargs['json'] = data
 
         r = requests.request(**kwargs)
 

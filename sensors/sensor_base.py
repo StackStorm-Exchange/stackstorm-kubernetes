@@ -227,7 +227,7 @@ class SensorBase(Sensor):
             # raise
             return 0
         else:
-            if name in ['default', 'kube-system']:
+            if name in ['default']:
                 self._log.debug('ignoring name: %s.' % name)
                 return 0
             else:

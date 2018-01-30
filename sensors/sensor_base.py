@@ -36,13 +36,14 @@ class SensorBase(Sensor):
         self.setup()
 
     def setup(self):
-        if 'user' in self.config and self.config['user'] != None:
-            if 'password' in self.config and self.config['password'] != None:
+        if 'user' in self.config and self.config['user'] is not None:
+            if 'password' in self.config and self.config['password'] is not None:
                 auth = base64.b64encode(self.config['user'] + ":" + self.config['password'])
                 self.authhead = "authorization: Basic %s" % auth
                 self.authmethod = "basic"
-        if 'client_cert_path' in self.config and self.config['client_cert_path'] != None:
-            if 'client_cert_key_path' in self.config and self.config['client_cert_key_path'] != None:
+        if 'client_cert_path' in self.config and self.config['client_cert_path'] is not None:
+            if 'client_cert_key_path' in self.config and
+                self.config['client_cert_key_path'] is not None:
                 self.authmethod = "cert"
 
         try:
@@ -78,7 +79,9 @@ class SensorBase(Sensor):
                 if self.authmethod == "basic":
                     self.client = ssl.wrap_socket(self.sock)
                 elif self.authmethod == "cert":
-                    self.client = ssl.wrap_socket(self.sock, keyfile=self.config['client_cert_key_path'], certfile=self.config['client_cert_path'])
+                    self.client = ssl.wrap_socket(self.sock,
+                                                  keyfile=self.config['client_cert_key_path'],
+                                                  certfile=self.config['client_cert_path'])
                 else:
                     raise KeyError('No authentication mechanisms defined')
                 self._log.debug('Connecting to %s %i' % (self.host, self.port))
@@ -163,21 +166,13 @@ class SensorBase(Sensor):
                 lines = data.split(b'\n')
                 pending = lines.pop(-1)
                 for line in lines:
-                    try:
-                        trigger_payload = self._get_trigger_payload_from_line(line)
-                    except:
-                        msg = (
-                            'Failed generating trigger payload from line %s. Aborting sensor!!!' %
-                            line)
-                        self._log.exception(msg)
-                        sys.exit(1)
+                    trigger_payload = self._get_trigger_payload_from_line(line)
+                    if trigger_payload == 0:
+                        pass
                     else:
-                        if trigger_payload == 0:
-                            pass
-                        else:
-                            self._log.info('Triggering Dispatch Now')
-                            self._sensor_service.dispatch(
-                                trigger=self.TRIGGER_REF, payload=trigger_payload)
+                        self._log.info('Triggering Dispatch Now')
+                        self._sensor_service.dispatch(
+                            trigger=self.TRIGGER_REF, payload=trigger_payload)
             self._log.debug('main loop done')
             self.client.close()  # pylint: disable=no-member
 
@@ -224,7 +219,6 @@ class SensorBase(Sensor):
             msg = 'One of "type", "kind", "name" or "uid" or "labels" ' + \
                   'do not exist in the object. Incoming object=%s' % k8s_object
             self._log.exception(msg)
-            # raise
             return 0
         else:
             if name in ['default']:

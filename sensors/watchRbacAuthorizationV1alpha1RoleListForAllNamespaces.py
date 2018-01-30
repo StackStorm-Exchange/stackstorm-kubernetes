@@ -14,7 +14,7 @@ class watchRbacAuthorizationV1alpha1RoleListForAllNamespaces(SensorBase):
             extension="/apis/rbac.authorization.k8s.io/v1alpha1/watch/roles",
             trigger_ref="kubernetes.roles"):
         super(
-            self.__class__,
+            self.__class__,  # pylint: disable=bad-super-call
             self).__init__(
             sensor_service=sensor_service,
             config=config,

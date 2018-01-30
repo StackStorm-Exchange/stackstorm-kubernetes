@@ -14,7 +14,7 @@ class watchExtensionsV1beta1ThirdPartyResourceList(SensorBase):
             extension="/apis/extensions/v1beta1/watch/thirdpartyresources",
             trigger_ref="kubernetes.thirdpartyresources"):
         super(
-            self.__class__,
+            self.__class__,  # pylint: disable=bad-super-call
             self).__init__(
             sensor_service=sensor_service,
             config=config,

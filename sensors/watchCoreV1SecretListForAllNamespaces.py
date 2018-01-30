@@ -14,7 +14,7 @@ class watchCoreV1SecretListForAllNamespaces(SensorBase):
             extension="/api/v1/watch/secrets",
             trigger_ref="kubernetes.secrets"):
         super(
-            self.__class__,
+            self.__class__,  # pylint: disable=bad-super-call
             self).__init__(
             sensor_service=sensor_service,
             config=config,

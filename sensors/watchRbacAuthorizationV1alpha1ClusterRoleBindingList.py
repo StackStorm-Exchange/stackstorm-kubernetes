@@ -14,7 +14,7 @@ class watchRbacAuthorizationV1alpha1ClusterRoleBindingList(SensorBase):
             extension="/apis/rbac.authorization.k8s.io/v1alpha1/watch/clusterrolebindings",
             trigger_ref="kubernetes.clusterrolebindings"):
         super(
-            self.__class__,
+            self.__class__,  # pylint: disable=bad-super-call
             self).__init__(
             sensor_service=sensor_service,
             config=config,

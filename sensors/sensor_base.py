@@ -158,7 +158,7 @@ class SensorBase(Sensor):
                 nparsed = parser.execute(chunk, nreceived)
                 if nparsed != nreceived:
                     self._log.exception('b nparsed %i != nreceived %i' % (nparsed, nreceived))
-                    raise
+                    break
                 data = pending + parser.recv_body()
                 msg = "DATA: %s" % data
                 self._log.debug(msg)

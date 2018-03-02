@@ -20,7 +20,7 @@ Action names are derived from OperationID's within the Kubernetes spec
 
 ## Configuration
 
-config.yaml includes:
+Copy `kubernetes.yaml.example` to `/opt/stackstorm/configs/kubernetes.yaml`. It should contain something like this:
 ```yaml
 user: "admin"
 password: "password"

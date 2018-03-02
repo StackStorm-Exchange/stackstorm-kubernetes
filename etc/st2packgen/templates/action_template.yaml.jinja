@@ -6,6 +6,10 @@ enabled: true
 entry_point: "{{ operationId }}.py"
 {%- if params|length + paramsreq|length > 0 %}
 parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        secret: true
 {%- endif -%}
     {%- for parameter in paramsreq %}
     {{ parameter.name }}:

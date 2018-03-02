@@ -5,14 +5,14 @@ description: "read status of the specified PersistentVolume"
 enabled: true
 entry_point: "readCoreV1PersistentVolumeStatus.py"
 parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        secret: true
     name:
         type: string
         description: "name of the PersistentVolume"
         required: True
-        
-    config_override:
-        type: object
-        description: "override stackstorm config"
         
     pretty:
         type: string

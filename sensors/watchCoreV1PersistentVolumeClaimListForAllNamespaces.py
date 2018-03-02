@@ -13,8 +13,8 @@ class watchCoreV1PersistentVolumeClaimListForAllNamespaces(SensorBase):
             config=None,
             extension="/api/v1/watch/persistentvolumeclaims",
             trigger_ref="kubernetes.persistentvolumeclaims"):
-        super(
-            self.__class__,
+        super(  # pylint: disable=bad-super-call
+            self.__class__,  # pylint: disable=bad-super-call
             self).__init__(
             sensor_service=sensor_service,
             config=config,

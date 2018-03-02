@@ -5,14 +5,14 @@ description: "read the specified ComponentStatus"
 enabled: true
 entry_point: "readCoreV1ComponentStatus.py"
 parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        secret: true
     name:
         type: string
         description: "name of the ComponentStatus"
         required: True
-        
-    config_override:
-        type: object
-        description: "override stackstorm config"
         
     pretty:
         type: string

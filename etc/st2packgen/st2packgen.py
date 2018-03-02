@@ -1,11 +1,12 @@
 #!/usr/bin/python
 
-from pyswagger import App
-
-from shutil import copytree, copyfile
-
 import argparse
 import jinja2
+
+from pyswagger import App
+from pyswagger.primitives import Primitive
+from shutil import copytree, copyfile
+
 
 parser = argparse.ArgumentParser(description="Generate a kubernetes stackstorm client")
 parser.add_argument('-s', '--swagger', required=True)
@@ -39,7 +40,17 @@ copyfile(templatedir + "/sensor_template.yaml.jinja", kubedir + "/sensor_templat
 templateLoader = jinja2.FileSystemLoader(searchpath=templatedir)
 templateEnv = jinja2.Environment(loader=templateLoader)
 
-app = App.create(swagger)
+
+def _encode_intOrString(self, obj, val, ctx):
+
+    return int(val)
+
+
+factory = Primitive()
+factory.register('string', 'int-or-string', _encode_intOrString)
+
+app = App.load(url=swagger, prim=factory)
+app.prepare()
 
 for path in app.dump()['paths'].keys():
     if not path.startswith("/api"):
@@ -59,6 +70,9 @@ for path in app.dump()['paths'].keys():
 
         op = app.op[operationId]
 
+        if op.consumes[0] == u'*/*':
+            op.consumes[0] = u'application/json'
+
         allvars = {}
         allvars['swaggerspec'] = swagger
 
@@ -66,17 +80,18 @@ for path in app.dump()['paths'].keys():
         allvars['params'] = []
 
         tmp = {}
-        tmp['type'] = 'object'
-        tmp['description'] = 'override stackstorm config'
-        tmp['required'] = False
-        tmp['name'] = 'config_override'
-
-        allvars['params'].append(tmp)
 
         allvars['path'] = op.path
         allvars['operationId'] = op.operationId
         allvars['description'] = op.description
         allvars['method'] = method
+        allvars['consumes'] = op.consumes
+        allvars['produces'] = op.produces
+        allvars['url'] = op.url[12:]
+
+        allvars['headers'] = {}
+        allvars['headers']['Accept'] = ", ".join(op.produces)
+        allvars['headers']['Content-type'] = ", ".join(op.consumes)
 
         for x in op.parameters:
             tmp = {}

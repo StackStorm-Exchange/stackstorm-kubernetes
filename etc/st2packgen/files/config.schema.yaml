@@ -1,0 +1,29 @@
+---
+  user:
+    description: "kubernetes username"
+    type: "string"
+    default: "admin"
+  password:
+    description: "kubernetes password"
+    type: "string"
+    secret: true
+  kubernetes_api_url:
+    description: "kubernetes api url"
+    type: "string"
+    required: true
+  client_cert_path:
+    description: "client cert path"
+    type: "string"
+  client_cert_key_path:
+    description: "client cert key path"
+    type: "string"
+  verify:
+    description: "SSL verify"
+    type: "boolean"
+    default: false
+  template_path:
+    description: "location of kubernetes sensor templates"
+    type: "string"
+    required: true
+    default: "/opt/stackstorm/packs/kubernetes/"
+

@@ -2,7 +2,6 @@
 
 import ast
 import json
-import sys
 import base64
 import select
 import socket
@@ -21,7 +20,7 @@ from st2reactor.sensor.base import Sensor
 class SensorBase(Sensor):
 
     def __init__(self, sensor_service, extension, trigger_ref, config=None):
-        super(
+        super(  # pylint: disable=bad-super-call
             SensorBase,
             self).__init__(
             sensor_service=sensor_service,
@@ -30,14 +29,28 @@ class SensorBase(Sensor):
         self.TRIGGER_REF = trigger_ref
         self.extension = extension
         self.client = None
+        self.authhead = None
+        self.authmethod = None
+
         self.setup()
 
     def setup(self):
+        if 'user' in self.config and self.config['user'] is not None:
+            if 'password' in self.config and self.config['password'] is not None:
+                auth = base64.b64encode(self.config['user'] + ":" + self.config['password'])
+                self.authhead = "authorization: Basic %s" % auth
+                self.authmethod = "basic"
+        if 'client_cert_path' in self.config and self.config['client_cert_path'] is not None:
+            if 'client_cert_key_path' in self.config:
+                if self.config['client_cert_key_path'] is not None:
+                    self.authmethod = "cert"
+
         try:
             extension = self.extension
-            api_url = self._config['kubernetes_api_url'] + extension
-            auth = base64.b64encode(self._config['user'] + ":" + self._config['password'])
-            self.authhead = "authorization: Basic %s" % auth
+            api_url = self.config['kubernetes_api_url'] + extension
+            if self.authmethod is None:
+                raise KeyError('No authentication mechanisms defined')
+
         except KeyError:
             self._log.exception(
                 'Configuration file does not contain required fields.')
@@ -46,7 +59,7 @@ class SensorBase(Sensor):
             'Connecting to Kubernetes endpoint %s via api_client.' %
             api_url)
 
-        m = re.search('(http|https)://(.*)/?$', self._config['kubernetes_api_url'])
+        m = re.search('(http|https)://(.*)/?$', self.config['kubernetes_api_url'])
 
         method = m.group(1)
         self.host = m.group(2)
@@ -62,9 +75,14 @@ class SensorBase(Sensor):
         while True:
             try:
                 self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                self.client = ssl.wrap_socket(self.sock,
-                                      ssl_version=ssl.PROTOCOL_TLSv1_2,  # pylint: disable=no-member
-                                      ciphers="DES-CBC3-SHA")
+                if self.authmethod == "basic":
+                    self.client = ssl.wrap_socket(self.sock)
+                elif self.authmethod == "cert":
+                    self.client = ssl.wrap_socket(self.sock,
+                                                  keyfile=self.config['client_cert_key_path'],
+                                                  certfile=self.config['client_cert_path'])
+                else:
+                    raise KeyError('No authentication mechanisms defined')
                 self._log.debug('Connecting to %s %i' % (self.host, self.port))
                 # self.client.settimeout(10)
                 self.client.connect((self.host, self.port))
@@ -73,10 +91,18 @@ class SensorBase(Sensor):
                 self._log.exception('unable to connect to %s: %s' % (self.host, exc))
                 raise
 
-            self.client.send("GET %s HTTP/1.1\r\nHost: %s\r\n%s\r\n\r\n" %
+            except KeyError:
+                raise KeyError('No authentication mechanisms defined')
+
+            if self.authhead is not None:
+                self.client.send("GET %s HTTP/1.1\r\nHost: %s\r\n%s\r\n\r\n" %
                              (self.extension,
                              self.host,
                              self.authhead))
+            else:
+                self.client.send("GET %s HTTP/1.1\r\nHost: %s\r\n\r\n" %
+                             (self.extension,
+                             self.host))
 
             readers = [self.client]
             writers = out_of_band = []
@@ -132,28 +158,20 @@ class SensorBase(Sensor):
                 nparsed = parser.execute(chunk, nreceived)
                 if nparsed != nreceived:
                     self._log.exception('b nparsed %i != nreceived %i' % (nparsed, nreceived))
-                    raise
+                    break
                 data = pending + parser.recv_body()
                 msg = "DATA: %s" % data
                 self._log.debug(msg)
                 lines = data.split(b'\n')
                 pending = lines.pop(-1)
                 for line in lines:
-                    try:
-                        trigger_payload = self._get_trigger_payload_from_line(line)
-                    except:
-                        msg = (
-                            'Failed generating trigger payload from line %s. Aborting sensor!!!' %
-                            line)
-                        self._log.exception(msg)
-                        sys.exit(1)
+                    trigger_payload = self._get_trigger_payload_from_line(line)
+                    if trigger_payload == 0:
+                        pass
                     else:
-                        if trigger_payload == 0:
-                            pass
-                        else:
-                            self._log.info('Triggering Dispatch Now')
-                            self._sensor_service.dispatch(
-                                trigger=self.TRIGGER_REF, payload=trigger_payload)
+                        self._log.info('Triggering Dispatch Now')
+                        self._sensor_service.dispatch(
+                            trigger=self.TRIGGER_REF, payload=trigger_payload)
             self._log.debug('main loop done')
             self.client.close()  # pylint: disable=no-member
 
@@ -183,6 +201,10 @@ class SensorBase(Sensor):
             resource_type = k8s_object['type']
             object_kind = k8s_object['object']['kind']
             name = k8s_object['object']['metadata']['name']
+            if 'spec' in k8s_object['object']:
+                spec = k8s_object['object']['spec']
+            else:
+                spec = 'None'
             if 'namespace' in k8s_object['object']['metadata']:
                 namespace = k8s_object['object']['metadata']['namespace']
             else:
@@ -196,10 +218,9 @@ class SensorBase(Sensor):
             msg = 'One of "type", "kind", "name" or "uid" or "labels" ' + \
                   'do not exist in the object. Incoming object=%s' % k8s_object
             self._log.exception(msg)
-            # raise
             return 0
         else:
-            if name in ['default', 'kube-system']:
+            if name in ['default']:
                 self._log.debug('ignoring name: %s.' % name)
                 return 0
             else:
@@ -208,6 +229,7 @@ class SensorBase(Sensor):
                     name=name,
                     labels=labels_data,
                     namespace=namespace,
+                    spec=spec,
                     object_kind=object_kind,
                     uid=uid)
                 self._log.info('Trigger payload: %s.' % payload)
@@ -219,12 +241,14 @@ class SensorBase(Sensor):
             name,
             labels,
             namespace,
+            spec,
             object_kind,
             uid):
         payload = {
             'resource': resource_type,
             'name': name,
             'namespace': namespace,
+            'spec': spec,
             'labels': labels,
             'object_kind': object_kind,
             'uid': uid

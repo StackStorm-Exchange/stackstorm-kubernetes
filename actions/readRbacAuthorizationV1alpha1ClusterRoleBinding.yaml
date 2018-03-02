@@ -5,14 +5,14 @@ description: "read the specified ClusterRoleBinding"
 enabled: true
 entry_point: "readRbacAuthorizationV1alpha1ClusterRoleBinding.py"
 parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        secret: true
     name:
         type: string
         description: "name of the ClusterRoleBinding"
         required: True
-        
-    config_override:
-        type: object
-        description: "override stackstorm config"
         
     pretty:
         type: string

@@ -2,7 +2,7 @@
 
 Pack which allows integration with [Kubernetes](https://kubernetes.io/) service.
 
-This pack has been tested with kubernetes 1.4 and 1.5 (betas currently)
+This pack has been tested with kubernetes 1.4 and 1.5
 
 # Current Status & Capabilities
 Creates actions and sensors to interact with kubernetes through stackstorm
@@ -20,16 +20,20 @@ Action names are derived from OperationID's within the Kubernetes spec
 
 ## Configuration
 
-config.yaml includes:
+Copy `kubernetes.yaml.example` to `/opt/stackstorm/configs/kubernetes.yaml`. It should contain something like this:
 ```yaml
-user: "xxxxxxxx"
-password: "xxxxxxxx"
+user: "admin"
+password: "password"
+client_cert_path: "/path/to/cert.pem"
+client_cert_key_path: "/path/to/cert.key"
 kubernetes_api_url: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 verify: false
 
 template_path: "/opt/stackstorm/packs/kubernetes/"
 ```
 Where kubernetes_api_url = The FQDN to your Kubernetes API endpoint.
+
+Only user and password or client_cert_path (key is optional) need to be set for this to work
 
 Note: Currently SSL verification is turned off. This is a WIP.
 

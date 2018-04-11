@@ -1,19 +1,36 @@
----
-  chain:
-    -
-      name: "check_sensor_list"
-      ref: "kubernetes.check_sensor_list"
-      params:
-        search: "{{payload}}"
-      on-success: "create_tpr_sensor"
-    -
-      name: "create_tpr_sensor"
-      ref: "kubernetes.create_tpr_sensor"
-      params:
-        payload: "{{payload}}"
-      on-success: "reload_st2"
+#---
+#  chain:
+#    -
+#      name: "check_sensor_list"
+#      ref: "kubernetes.check_sensor_list"
+#      params:
+#        search: "{{payload}}"
+#      on-success: "create_tpr_sensor"
+#    -
+#      name: "create_tpr_sensor"
+#      ref: "kubernetes.create_tpr_sensor"
+#      params:
+#        payload: "{{payload}}"
+#      on-success: "reload_st2"
+#
+#    - name: "reload_st2"
+#      ref: "core.local"
+#      params:
+#        cmd: "st2ctl reload --register-sensors"
 
-    - name: "reload_st2"
-      ref: "core.local"
-      params:
-        cmd: "st2ctl reload --register-sensors"
+version '2.0'
+bitesize.register_tpr_new:
+  description: register a TPR sensor
+  type: direct
+  input:
+    - payload
+  tasks:
+    dump_payload:
+      action: core.local
+      inputs:
+        - cmd: "echo {{ payload }}"
+#    create_sensor:
+#      action
+#    get_sensor_list:
+#      action: get_sensorlist
+

@@ -1,6 +1,6 @@
 ---
   name: "register_tpr"
-  pack: "bitesize"
+  pack: "kubernetes"
   description: "migrate services"
   runner_type: "mistral-v2"
   enabled: true

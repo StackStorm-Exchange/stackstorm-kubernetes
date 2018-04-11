@@ -19,7 +19,7 @@
 #        cmd: "st2ctl reload --register-sensors"
 
 version '2.0'
-bitesize.register_tpr_new:
+kubernetes.register_tpr:
   description: register a TPR sensor
   type: direct
   input:

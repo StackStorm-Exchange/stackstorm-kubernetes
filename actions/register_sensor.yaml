@@ -1,0 +1,7 @@
+---
+  name: "register_sensor"
+  runner_type: "python-script"
+  description: "Register a sensor"
+  enabled: true
+  entry_point: "register_sensor.py"
+  pack: "kubernetes"

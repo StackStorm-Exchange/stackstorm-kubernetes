@@ -25,4 +25,4 @@ class RegisterSensor(Action):
 
         print registrar._register_sensor_from_pack("kubernetes", destfile)
 
-        st2common.teardown()
+        st2common.script_setup.teardown()

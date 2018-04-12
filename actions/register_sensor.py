@@ -2,12 +2,9 @@
 
 from __future__ import absolute_import
 
-from oslo_config import cfg
-
 import st2common
 from st2common import config
 import st2common.script_setup
-from st2common.bootstrap.base import ResourceRegistrar
 
 import st2common.bootstrap.sensorsregistrar as sensors_registrar
 
@@ -17,10 +14,9 @@ class RegisterSensor(Action):
 
     def run(self, payload):
 
-        print payload
-
         tprname = payload['name'].split('.', 1)[0]
         cname = tprname.capitalize()
+        destfile = '/opt/stackstorm/packs/kubernetes/sensors/watch%s.yaml' % cname
 
         st2common.script_setup.register_exchanges_with_retry()
         st2common.script_setup.db_setup()
@@ -28,6 +24,6 @@ class RegisterSensor(Action):
         
         registrar = sensors_registrar.SensorsRegistrar(use_pack_cache=True, fail_on_failure=True)
 
-        print registrar._register_sensor_from_pack("kubernetes", '/opt/stackstorm/packs/kubernetes/sensors/watch%s.yaml' % cname)
+        print registrar._register_sensor_from_pack("kubernetes", destfile)
 
         st2common.teardown()

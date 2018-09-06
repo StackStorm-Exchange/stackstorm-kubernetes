@@ -2,7 +2,6 @@
   user:
     description: "kubernetes username"
     type: "string"
-    default: "admin"
   password:
     description: "kubernetes password"
     type: "string"

@@ -9,20 +9,29 @@ class createTPR(Action):
 
     def mkrequest(self, url, method="GET", data=None):
 
-        user = self.config['user']
-        password = self.config['password']
-        verify = self.config['verify']
+        kwargs = {}
 
-        print "%s url: %s" % (method, url)
+        if 'user' in self.config:
+            if 'password' in self.config:
+                kwargs['auth'] = (self.config['user'], self.config['password'])
 
-        if method == "GET":
-            r = requests.get(url, auth=(user, password), verify=verify)
+        if 'client_cert_path' in self.config:
+            if 'client_cert_key_path' in self.config:
+                kwargs['cert'] = (self.config['client_cert_path'],
+                                  self.config['client_cert_key_path'])
 
-        if method == "POST":
-            r = requests.post(url, auth=(user, password), verify=verify, json=data)
+        if 'verify' in self.config:
+            kwargs['verify'] = self.config['verify']
+
+        kwargs['method'] = method
+        kwargs['url'] = url
+        if data is not None:
+            kwargs['json'] = data
+
+        r = requests.request(**kwargs)
 
         if r.status_code not in (200, 201):
-            return (False, "Unable to determine remote api endpoint")
+            return (False, "Unable to connect to kubernetes. statuscode: %i" % r.status_code)
 
         return json.loads(r.text)
 

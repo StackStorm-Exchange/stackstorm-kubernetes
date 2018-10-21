@@ -1,0 +1,11 @@
+---
+  name: "create_crd_sensor"
+  runner_type: "python-script"
+  description: "Create new CRD sensor"
+  enabled: true
+  entry_point: "create_crd_sensor.py"
+  pack: "kubernetes"
+  parameters:
+    payload:
+      type: "object"
+      description: "payload object from kubernetes sensor"

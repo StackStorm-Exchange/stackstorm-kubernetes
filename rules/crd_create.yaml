@@ -1,0 +1,21 @@
+---
+name: "kubernetes_crd"
+pack: "kubernetes"
+description: "Check for new crds"
+enabled: true
+
+trigger:
+  type: "kubernetes.customresourcedefinitions"
+
+criteria:
+  trigger.resource:
+    type: "contains"
+    pattern: "ADDED"
+  trigger.object_kind:
+    type: "equals"
+    pattern: "CustomResourceDefinitions"
+
+action:
+  ref: "kubernetes.register_crd"
+  parameters:
+    payload: "{{trigger}}"

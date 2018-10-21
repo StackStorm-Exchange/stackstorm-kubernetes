@@ -1,17 +1,19 @@
-version: '2.0'
-kubernetes.register_tpr:
-  description: register a TPR sensor
-  type: direct
-  input:
-    - payload
-  tasks:
-    create_sensor:
-      action: kubernetes.create_tpr_sensor
-      input:
-        payload: <% $.payload %>
-      on-success:
-        - register_sensor
-    register_sensor:
-      action: kubernetes.register_sensor
-      input:
-        payload: <% $.payload %>
+---
+  chain:
+    -
+      name: "check_sensor_list"
+      ref: "kubernetes.check_sensor_list"
+      params:
+        search: "{{payload}}"
+      on-success: "create_tpr_sensor"
+    -
+      name: "create_tpr_sensor"
+      ref: "kubernetes.create_tpr_sensor"
+      params:
+        payload: "{{payload}}"
+      on-success: "reload_st2"
+
+    - name: "reload_st2"
+      ref: "core.local"
+      params:
+        cmd: "st2ctl reload --register-sensors"

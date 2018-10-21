@@ -1,0 +1,24 @@
+---
+  class_name: "watchSettingsV1alpha1PodPresetListForAllNamespaces"
+  entry_point: "watchSettingsV1alpha1PodPresetListForAllNamespaces.py"
+  description: "Sensor that watches Kubernetes API for new Podpresets objects."
+  trigger_types:
+    -
+      name: "podpresets"
+      description: "Trigger for podpresets event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "string"
+          name:
+            type: "string"
+          labels:
+            anyOf:
+              - type: "object"
+              - type: "string"
+              - type: "null"
+          object_kind:
+            type: "string"
+          namespace:
+            type: "string"

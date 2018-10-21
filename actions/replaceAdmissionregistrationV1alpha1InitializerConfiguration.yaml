@@ -1,0 +1,25 @@
+name: replaceAdmissionregistrationV1alpha1InitializerConfiguration
+pack: kubernetes
+runner_type: python-script
+description: "replace the specified InitializerConfiguration"
+enabled: true
+entry_point: "replaceAdmissionregistrationV1alpha1InitializerConfiguration.py"
+parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        secret: true
+    body:
+        type: object
+        description: ""
+        required: True
+        
+    name:
+        type: string
+        description: "name of the InitializerConfiguration"
+        required: True
+        
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."
+        

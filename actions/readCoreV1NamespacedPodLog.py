@@ -15,7 +15,6 @@ class readCoreV1NamespacedPodLog(K8sClient):
             pretty=None,
             previous=None,
             sinceSeconds=None,
-            sinceTime=None,
             tailLines=None,
             timestamps=None,
             config_override=None):
@@ -49,8 +48,6 @@ class readCoreV1NamespacedPodLog(K8sClient):
             args['previous'] = previous
         if sinceSeconds is not None:
             args['sinceSeconds'] = sinceSeconds
-        if sinceTime is not None:
-            args['sinceTime'] = sinceTime
         if tailLines is not None:
             args['tailLines'] = tailLines
         if timestamps is not None:

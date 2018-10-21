@@ -21,7 +21,7 @@ parameters:
         
     exact:
         type: boolean
-        description: "Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'"
+        description: "Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'."
         
     export:
         type: boolean

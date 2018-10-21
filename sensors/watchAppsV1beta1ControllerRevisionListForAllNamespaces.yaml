@@ -1,0 +1,24 @@
+---
+  class_name: "watchAppsV1beta1ControllerRevisionListForAllNamespaces"
+  entry_point: "watchAppsV1beta1ControllerRevisionListForAllNamespaces.py"
+  description: "Sensor that watches Kubernetes API for new Controllerrevisions objects."
+  trigger_types:
+    -
+      name: "controllerrevisions"
+      description: "Trigger for controllerrevisions event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "string"
+          name:
+            type: "string"
+          labels:
+            anyOf:
+              - type: "object"
+              - type: "string"
+              - type: "null"
+          object_kind:
+            type: "string"
+          namespace:
+            type: "string"

@@ -1,0 +1,25 @@
+name: patchCertificatesV1beta1CertificateSigningRequest
+pack: kubernetes
+runner_type: python-script
+description: "partially update the specified CertificateSigningRequest"
+enabled: true
+entry_point: "patchCertificatesV1beta1CertificateSigningRequest.py"
+parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        secret: true
+    body:
+        type: object
+        description: ""
+        required: True
+        
+    name:
+        type: string
+        description: "name of the CertificateSigningRequest"
+        required: True
+        
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."
+        

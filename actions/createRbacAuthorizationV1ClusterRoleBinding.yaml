@@ -1,0 +1,20 @@
+name: createRbacAuthorizationV1ClusterRoleBinding
+pack: kubernetes
+runner_type: python-script
+description: "create a ClusterRoleBinding"
+enabled: true
+entry_point: "createRbacAuthorizationV1ClusterRoleBinding.py"
+parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        secret: true
+    body:
+        type: object
+        description: ""
+        required: True
+        
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."
+        

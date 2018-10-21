@@ -1,0 +1,33 @@
+name: readAppsV1beta1NamespacedDeployment
+pack: kubernetes
+runner_type: python-script
+description: "read the specified Deployment"
+enabled: true
+entry_point: "readAppsV1beta1NamespacedDeployment.py"
+parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        secret: true
+    name:
+        type: string
+        description: "name of the Deployment"
+        required: True
+        
+    namespace:
+        type: string
+        description: "object name and auth scope, such as for teams and projects"
+        required: True
+        
+    exact:
+        type: boolean
+        description: "Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'."
+        
+    export:
+        type: boolean
+        description: "Should this value be exported.  Export strips fields that a user can not specify."
+        
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."
+        

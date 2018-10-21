@@ -1,0 +1,20 @@
+name: createApiregistrationV1beta1APIService
+pack: kubernetes
+runner_type: python-script
+description: "create an APIService"
+enabled: true
+entry_point: "createApiregistrationV1beta1APIService.py"
+parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        secret: true
+    body:
+        type: object
+        description: ""
+        required: True
+        
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."
+        

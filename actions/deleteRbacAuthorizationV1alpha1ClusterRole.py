@@ -11,6 +11,7 @@ class deleteRbacAuthorizationV1alpha1ClusterRole(K8sClient):
             name,
             gracePeriodSeconds=None,
             orphanDependents=None,
+            propagationPolicy=None,
             pretty=None,
             config_override=None):
 
@@ -35,6 +36,8 @@ class deleteRbacAuthorizationV1alpha1ClusterRole(K8sClient):
             args['gracePeriodSeconds'] = gracePeriodSeconds
         if orphanDependents is not None:
             args['orphanDependents'] = orphanDependents
+        if propagationPolicy is not None:
+            args['propagationPolicy'] = propagationPolicy
         if pretty is not None:
             args['pretty'] = pretty
         if 'body' in args:

@@ -1,0 +1,24 @@
+---
+  class_name: "watchAdmissionregistrationV1alpha1InitializerConfigurationList"
+  entry_point: "watchAdmissionregistrationV1alpha1InitializerConfigurationList.py"
+  description: "Sensor that watches Kubernetes API for new Initializerconfigurations objects."
+  trigger_types:
+    -
+      name: "initializerconfigurations"
+      description: "Trigger for initializerconfigurations event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "string"
+          name:
+            type: "string"
+          labels:
+            anyOf:
+              - type: "object"
+              - type: "string"
+              - type: "null"
+          object_kind:
+            type: "string"
+          namespace:
+            type: "string"

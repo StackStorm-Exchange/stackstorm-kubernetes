@@ -8,8 +8,11 @@ class deleteCoreV1CollectionNamespacedReplicationController(K8sClient):
     def run(
             self,
             namespace,
+            continue=None,
             fieldSelector=None,
+            includeUninitialized=None,
             labelSelector=None,
+            limit=None,
             resourceVersion=None,
             timeoutSeconds=None,
             watch=None,
@@ -29,10 +32,16 @@ class deleteCoreV1CollectionNamespacedReplicationController(K8sClient):
             args['namespace'] = namespace
         else:
             return (False, "namespace is a required parameter")
+        if continue is not None:
+            args['continue'] = continue
         if fieldSelector is not None:
             args['fieldSelector'] = fieldSelector
+        if includeUninitialized is not None:
+            args['includeUninitialized'] = includeUninitialized
         if labelSelector is not None:
             args['labelSelector'] = labelSelector
+        if limit is not None:
+            args['limit'] = limit
         if resourceVersion is not None:
             args['resourceVersion'] = resourceVersion
         if timeoutSeconds is not None:

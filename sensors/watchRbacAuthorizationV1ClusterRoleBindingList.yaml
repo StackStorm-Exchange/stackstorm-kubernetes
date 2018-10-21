@@ -1,0 +1,24 @@
+---
+  class_name: "watchRbacAuthorizationV1ClusterRoleBindingList"
+  entry_point: "watchRbacAuthorizationV1ClusterRoleBindingList.py"
+  description: "Sensor that watches Kubernetes API for new Clusterrolebindings objects."
+  trigger_types:
+    -
+      name: "clusterrolebindings"
+      description: "Trigger for clusterrolebindings event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "string"
+          name:
+            type: "string"
+          labels:
+            anyOf:
+              - type: "object"
+              - type: "string"
+              - type: "null"
+          object_kind:
+            type: "string"
+          namespace:
+            type: "string"

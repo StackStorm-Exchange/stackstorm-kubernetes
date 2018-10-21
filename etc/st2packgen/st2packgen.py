@@ -50,7 +50,7 @@ factory = Primitive()
 factory.register('string', 'int-or-string', _encode_intOrString)
 
 app = App.load(url=swagger, prim=factory)
-app.prepare()
+app.prepare(strict=False)
 
 for path in app.dump()['paths'].keys():
     if not path.startswith("/api"):

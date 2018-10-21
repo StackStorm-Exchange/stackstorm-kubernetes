@@ -1,0 +1,25 @@
+name: replaceApiextensionsV1beta1CustomResourceDefinition
+pack: kubernetes
+runner_type: python-script
+description: "replace the specified CustomResourceDefinition"
+enabled: true
+entry_point: "replaceApiextensionsV1beta1CustomResourceDefinition.py"
+parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        secret: true
+    body:
+        type: object
+        description: ""
+        required: True
+        
+    name:
+        type: string
+        description: "name of the CustomResourceDefinition"
+        required: True
+        
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."
+        

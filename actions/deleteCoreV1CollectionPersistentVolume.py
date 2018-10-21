@@ -7,8 +7,11 @@ class deleteCoreV1CollectionPersistentVolume(K8sClient):
 
     def run(
             self,
+            continue=None,
             fieldSelector=None,
+            includeUninitialized=None,
             labelSelector=None,
+            limit=None,
             resourceVersion=None,
             timeoutSeconds=None,
             watch=None,
@@ -24,10 +27,16 @@ class deleteCoreV1CollectionPersistentVolume(K8sClient):
         if config_override is not None:
             args['config_override'] = config_override
 
+        if continue is not None:
+            args['continue'] = continue
         if fieldSelector is not None:
             args['fieldSelector'] = fieldSelector
+        if includeUninitialized is not None:
+            args['includeUninitialized'] = includeUninitialized
         if labelSelector is not None:
             args['labelSelector'] = labelSelector
+        if limit is not None:
+            args['limit'] = limit
         if resourceVersion is not None:
             args['resourceVersion'] = resourceVersion
         if timeoutSeconds is not None:

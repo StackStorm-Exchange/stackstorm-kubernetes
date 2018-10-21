@@ -1,0 +1,42 @@
+name: deleteRbacAuthorizationV1NamespacedRole
+pack: kubernetes
+runner_type: python-script
+description: "delete a Role"
+enabled: true
+entry_point: "deleteRbacAuthorizationV1NamespacedRole.py"
+parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        secret: true
+    body:
+        type: object
+        description: ""
+        required: True
+        
+    name:
+        type: string
+        description: "name of the Role"
+        required: True
+        
+    namespace:
+        type: string
+        description: "object name and auth scope, such as for teams and projects"
+        required: True
+        
+    gracePeriodSeconds:
+        type: integer
+        description: "The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately."
+        
+    orphanDependents:
+        type: boolean
+        description: "Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the orphan finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both."
+        
+    propagationPolicy:
+        type: string
+        description: "Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy."
+        
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."
+        

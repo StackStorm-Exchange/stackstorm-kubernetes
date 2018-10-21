@@ -1,0 +1,6 @@
+name: getAdmissionregistrationAPIGroup
+pack: kubernetes
+runner_type: python-script
+description: "get information of a group"
+enabled: true
+entry_point: "getAdmissionregistrationAPIGroup.py"

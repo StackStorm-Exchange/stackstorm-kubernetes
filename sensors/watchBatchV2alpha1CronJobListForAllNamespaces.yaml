@@ -1,0 +1,24 @@
+---
+  class_name: "watchBatchV2alpha1CronJobListForAllNamespaces"
+  entry_point: "watchBatchV2alpha1CronJobListForAllNamespaces.py"
+  description: "Sensor that watches Kubernetes API for new Cronjobs objects."
+  trigger_types:
+    -
+      name: "cronjobs"
+      description: "Trigger for cronjobs event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "string"
+          name:
+            type: "string"
+          labels:
+            anyOf:
+              - type: "object"
+              - type: "string"
+              - type: "null"
+          object_kind:
+            type: "string"
+          namespace:
+            type: "string"

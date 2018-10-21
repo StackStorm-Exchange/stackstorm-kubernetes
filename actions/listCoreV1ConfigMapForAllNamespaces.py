@@ -7,8 +7,11 @@ class listCoreV1ConfigMapForAllNamespaces(K8sClient):
 
     def run(
             self,
+            continue=None,
             fieldSelector=None,
+            includeUninitialized=None,
             labelSelector=None,
+            limit=None,
             pretty=None,
             resourceVersion=None,
             timeoutSeconds=None,
@@ -24,10 +27,16 @@ class listCoreV1ConfigMapForAllNamespaces(K8sClient):
         if config_override is not None:
             args['config_override'] = config_override
 
+        if continue is not None:
+            args['continue'] = continue
         if fieldSelector is not None:
             args['fieldSelector'] = fieldSelector
+        if includeUninitialized is not None:
+            args['includeUninitialized'] = includeUninitialized
         if labelSelector is not None:
             args['labelSelector'] = labelSelector
+        if limit is not None:
+            args['limit'] = limit
         if pretty is not None:
             args['pretty'] = pretty
         if resourceVersion is not None:

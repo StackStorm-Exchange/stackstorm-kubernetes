@@ -1,10 +1,10 @@
 ---
   name: "register_tpr"
-  pack: "kubernetes"
-  description: "migrate services"
-  runner_type: "mistral-v2"
+  runner_type: "action-chain"
+  description: "Create a new st2 sensor and load it"
   enabled: true
   entry_point: "workflows/register_tpr.yaml"
+  pack: "kubernetes"
   parameters:
     payload:
       type: "object"

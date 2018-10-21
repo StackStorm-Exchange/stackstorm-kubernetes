@@ -1,0 +1,25 @@
+name: replaceAdmissionregistrationV1alpha1ExternalAdmissionHookConfiguration
+pack: kubernetes
+runner_type: python-script
+description: "replace the specified ExternalAdmissionHookConfiguration"
+enabled: true
+entry_point: "replaceAdmissionregistrationV1alpha1ExternalAdmissionHookConfiguration.py"
+parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        secret: true
+    body:
+        type: object
+        description: ""
+        required: True
+        
+    name:
+        type: string
+        description: "name of the ExternalAdmissionHookConfiguration"
+        required: True
+        
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."
+        

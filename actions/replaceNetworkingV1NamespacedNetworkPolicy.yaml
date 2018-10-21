@@ -1,0 +1,30 @@
+name: replaceNetworkingV1NamespacedNetworkPolicy
+pack: kubernetes
+runner_type: python-script
+description: "replace the specified NetworkPolicy"
+enabled: true
+entry_point: "replaceNetworkingV1NamespacedNetworkPolicy.py"
+parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        secret: true
+    body:
+        type: object
+        description: ""
+        required: True
+        
+    name:
+        type: string
+        description: "name of the NetworkPolicy"
+        required: True
+        
+    namespace:
+        type: string
+        description: "object name and auth scope, such as for teams and projects"
+        required: True
+        
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."
+        

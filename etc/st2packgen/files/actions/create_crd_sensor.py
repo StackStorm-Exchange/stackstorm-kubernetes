@@ -52,7 +52,7 @@ class createCRDSensor(Action):
         if pname is None:
             return (False, "Couldn't match CRD with an api endpoint")
 
-        allvars['watchurl'] = "/apis/prsn.io/v1/watch/" + pname
+        allvars['watchurl'] = "/apis/" + allvars['domain'] + "/v1/watch/" + pname
         allvars['triggername'] = "crd" + allvars['name']
         allvars['operationId'] = "watch" + cname
 

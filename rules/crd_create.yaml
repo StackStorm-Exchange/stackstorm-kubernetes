@@ -13,7 +13,7 @@ criteria:
     pattern: "ADDED"
   trigger.object_kind:
     type: "equals"
-    pattern: "CustomResourceDefinitions"
+    pattern: "CustomResourceDefinition"
 
 action:
   ref: "kubernetes.register_crd"

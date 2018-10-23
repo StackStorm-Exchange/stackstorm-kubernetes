@@ -1,6 +1,6 @@
 ---
   name: "register_crd"
-  runner_type: "action-chain"
+  runner_type: "mistral-v2"
   description: "Create a new st2 sensor and load it"
   enabled: true
   entry_point: "workflows/register_crd.yaml"

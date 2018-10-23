@@ -3,15 +3,15 @@ from st2common.runners.base_action import Action
 import os
 
 
-class deleteTPRSensor(Action):
+class deleteCRDSensor(Action):
 
     def run(self, payload):
 
         allvars = {}
 
-        tpr = payload['name']
+        crd = payload['name']
 
-        allvars['name'], allvars['domain'] = tpr.split('.', 1)
+        allvars['name'], allvars['domain'] = crd.split('.', 1)
 
         sensorpy = self.config['template_path'] + "/sensors/" + allvars['name'] + "_create.py"
         sensorpyc = self.config['template_path'] + "/sensors/" + allvars['name'] + "_create.pyc"

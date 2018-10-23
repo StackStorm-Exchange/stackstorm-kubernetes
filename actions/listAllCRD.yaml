@@ -1,14 +1,10 @@
-name: createTPR
+name: listAllCRD
 pack: kubernetes
 runner_type: python-script
-description: "create a Third Party Resource"
+description: "list all Custom Resource Definitions"
 enabled: true
-entry_point: "createTPR.py"
+entry_point: "listAllCRD.py"
 parameters:
-    body:
-        type: object
-        description: ""
-        required: True
     config_override:
         type: object
         description: "override stackstorm config"

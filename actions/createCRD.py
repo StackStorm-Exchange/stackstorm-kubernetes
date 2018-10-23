@@ -5,7 +5,7 @@ import re
 import requests
 
 
-class createTPR(Action):
+class createCRD(Action):
 
     def mkrequest(self, url, method="GET", data=None):
 
@@ -50,8 +50,8 @@ class createTPR(Action):
         name, apigroup = self.body['metadata']['labels']['type'].split('.', 1)
         namespace = self.body['metadata']['namespace']
 
-        alltpr = self.config['kubernetes_api_url'] + "/apis/" + apigroup + "/v1"
-        resp = self.mkrequest(alltpr)
+        allcrd = self.config['kubernetes_api_url'] + "/apis/" + apigroup + "/v1"
+        resp = self.mkrequest(allcrd)
 
         regex = re.compile('[^a-zA-Z]')
         kind = regex.sub('', name.title())
@@ -65,9 +65,9 @@ class createTPR(Action):
         if pname is None:
             return (False, "Couldn't match 3PR with an api endpoint")
 
-        tprurl = "%s/apis/%s/v1/namespaces/%s/%s" % (self.config['kubernetes_api_url'],
+        crdurl = "%s/apis/%s/v1/namespaces/%s/%s" % (self.config['kubernetes_api_url'],
                                                      apigroup, namespace, pname)
 
-        resp = self.mkrequest(tprurl, method="POST", data=self.body)
+        resp = self.mkrequest(crdurl, method="POST", data=self.body)
 
         print resp

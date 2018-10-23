@@ -1,9 +1,9 @@
-name: createTPR
+name: createCRD
 pack: kubernetes
 runner_type: python-script
-description: "create a Third Party Resource"
+description: "create a CRD"
 enabled: true
-entry_point: "createTPR.py"
+entry_point: "createCRD.py"
 parameters:
     body:
         type: object

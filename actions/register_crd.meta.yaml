@@ -1,9 +1,9 @@
 ---
-  name: "register_tpr"
+  name: "register_crd"
   runner_type: "action-chain"
   description: "Create a new st2 sensor and load it"
   enabled: true
-  entry_point: "workflows/register_tpr.yaml"
+  entry_point: "workflows/register_crd.yaml"
   pack: "kubernetes"
   parameters:
     payload:

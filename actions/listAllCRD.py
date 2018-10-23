@@ -5,7 +5,7 @@ import re
 import requests
 
 
-class listAllTPR(Action):
+class listAllCRD(Action):
 
     def mkrequest(self, url):
 
@@ -43,7 +43,7 @@ class listAllTPR(Action):
         if config_override is not None:
             self.overwriteConfig(config_override)
 
-        apiurl = self.config['kubernetes_api_url'] + "/apis/extensions/v1beta1/thirdpartyresources"
+        apiurl = self.config['kubernetes_api_url'] + "/apis/apiextensions.k8s.io/v1beta1/watch/customresourcedefinitions"
 
         alldata = self.mkrequest(apiurl)
 
@@ -55,9 +55,9 @@ class listAllTPR(Action):
 
             name, apigroup = data['metadata']['name'].split('.', 1)
 
-            alltpr = self.config['kubernetes_api_url'] + "/apis/" + apigroup + "/v1"
+            allcrd = self.config['kubernetes_api_url'] + "/apis/" + apigroup + "/v1"
 
-            resp = self.mkrequest(alltpr)
+            resp = self.mkrequest(allcrd)
 
             regex = re.compile('[^a-zA-Z]')
             kind = regex.sub('', name.title())
@@ -69,13 +69,13 @@ class listAllTPR(Action):
                     break
 
             if pname is None:
-                return (False, "Couldn't match 3PR with an api endpoint")
+                return (False, "Couldn't match CRD with an api endpoint")
 
-            tprendpoint = alltpr + "/" + pname
+            crdendpoint = allcrd + "/" + pname
 
-            tprdata = self.mkrequest(tprendpoint)
+            crddata = self.mkrequest(crdendpoint)
 
-            for item in tprdata['items']:
+            for item in crddata['items']:
                 output['data']['items'].append(item)
 
         return (True, output)

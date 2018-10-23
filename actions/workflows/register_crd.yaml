@@ -5,10 +5,10 @@
       ref: "kubernetes.check_sensor_list"
       params:
         search: "{{payload}}"
-      on-success: "create_tpr_sensor"
+      on-success: "create_crd_sensor"
     -
-      name: "create_tpr_sensor"
-      ref: "kubernetes.create_tpr_sensor"
+      name: "create_crd_sensor"
+      ref: "kubernetes.create_crd_sensor"
       params:
         payload: "{{payload}}"
       on-success: "reload_st2"

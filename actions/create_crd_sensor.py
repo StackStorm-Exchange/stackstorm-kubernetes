@@ -29,9 +29,9 @@ class createCRDSensor(Action):
 
         crd = payload['name']
 
-        allvars['name'], allvars['domain'] = crd.split('.', 1)
+        allvars['name'], allvars['apigroup'] = crd.split('.', 1)
 
-        k8s_api_url = self.config['kubernetes_api_url'] + "/apis/" + allvars['domain'] + "/v1"
+        k8s_api_url = self.config['kubernetes_api_url'] + "/apis/" + allvars['apigroup'] + "/v1"
 
         r = requests.get(k8s_api_url, **kwargs)
 
@@ -40,21 +40,16 @@ class createCRDSensor(Action):
 
         data = json.loads(r.text)
 
-        cname = allvars['name'].capitalize()
-        allvars['kind'] = cname
+        allvars['kind'] = payload['spec']['names']['kind']
+        allvars['plural'] = payload['spec']['names']['plural']
+        allvars['singular'] = payload['spec']['names']['singular']
 
-        pname = None
-        for res in data['resources']:
-            if res['kind'] == cname:
-                pname = res['name']
-                break
+        if allvars['plural'] is None:
+            return (False, "CRD missing plural; please double check configuration")
 
-        if pname is None:
-            return (False, "Couldn't match CRD with an api endpoint")
-
-        allvars['watchurl'] = "/apis/" + allvars['domain'] + "/v1/watch/" + pname
-        allvars['triggername'] = "crd" + allvars['name']
-        allvars['operationId'] = "watch" + cname
+        allvars['watchurl'] = "/apis/" + allvars['apigroup'] + "/v1/watch/" + allvars['plural']
+        allvars['triggername'] = "crd" + allvars['singular']
+        allvars['operationId'] = "watch" + allvars['kind']
 
         sensorpy = self.config['template_path'] + "/sensors/" + allvars['operationId'] + ".py"
         sensoryaml = self.config['template_path'] + "/sensors/" + allvars['operationId'] + ".yaml"

@@ -47,10 +47,12 @@ class check_sensor_list(Action):
 
             time.sleep(5)
 
+
         result = jdata['result']['result']
         resname, _ = search['name'].split('.', 1)
+        resname = search['spec']['names']['kind']
         for sensor in result:
-            match = "watch%s" % resname.capitalize()
+            match = "watch%s" % resname
             if sensor['name'] == match:
                 return (False, "sensor already exists")
                 break

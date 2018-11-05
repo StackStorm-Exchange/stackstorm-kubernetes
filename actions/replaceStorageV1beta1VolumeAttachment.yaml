@@ -1,0 +1,25 @@
+name: replaceStorageV1beta1VolumeAttachment
+pack: kubernetes
+runner_type: python-script
+description: "replace the specified VolumeAttachment"
+enabled: true
+entry_point: "replaceStorageV1beta1VolumeAttachment.py"
+parameters:
+    config_override:
+        type: object
+        description: "override stackstorm config"
+        secret: true
+    body:
+        type: object
+        description: ""
+        required: True
+        
+    name:
+        type: string
+        description: "name of the VolumeAttachment"
+        required: True
+        
+    pretty:
+        type: string
+        description: "If 'true', then the output is pretty printed."
+        

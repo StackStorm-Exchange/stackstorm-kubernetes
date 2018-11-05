@@ -13,8 +13,8 @@ class watchAdmissionregistrationV1alpha1InitializerConfigurationList(SensorBase)
             config=None,
             extension="/apis/admissionregistration.k8s.io/v1alpha1/watch/initializerconfigurations",
             trigger_ref="kubernetes.initializerconfigurations"):
-        super(  # pylint: disable=bad-super-call
-            self.__class__,  # pylint: disable=bad-super-call
+        super(
+            watchAdmissionregistrationV1alpha1InitializerConfigurationList,
             self).__init__(
             sensor_service=sensor_service,
             config=config,

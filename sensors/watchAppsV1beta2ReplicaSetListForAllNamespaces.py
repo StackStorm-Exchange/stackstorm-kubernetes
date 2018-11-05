@@ -13,8 +13,8 @@ class watchAppsV1beta2ReplicaSetListForAllNamespaces(SensorBase):
             config=None,
             extension="/apis/apps/v1beta2/watch/replicasets",
             trigger_ref="kubernetes.replicasets"):
-        super(  # pylint: disable=bad-super-call
-            self.__class__,  # pylint: disable=bad-super-call
+        super(
+            watchAppsV1beta2ReplicaSetListForAllNamespaces,
             self).__init__(
             sensor_service=sensor_service,
             config=config,

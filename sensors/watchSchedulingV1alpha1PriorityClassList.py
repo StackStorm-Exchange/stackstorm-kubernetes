@@ -13,8 +13,8 @@ class watchSchedulingV1alpha1PriorityClassList(SensorBase):
             config=None,
             extension="/apis/scheduling.k8s.io/v1alpha1/watch/priorityclasses",
             trigger_ref="kubernetes.priorityclasses"):
-        super(  # pylint: disable=bad-super-call
-            self.__class__,  # pylint: disable=bad-super-call
+        super(
+            watchSchedulingV1alpha1PriorityClassList,
             self).__init__(
             sensor_service=sensor_service,
             config=config,

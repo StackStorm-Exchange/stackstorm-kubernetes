@@ -13,8 +13,8 @@ class watchExtensionsV1beta1NetworkPolicyListForAllNamespaces(SensorBase):
             config=None,
             extension="/apis/extensions/v1beta1/watch/networkpolicies",
             trigger_ref="kubernetes.networkpolicies"):
-        super(  # pylint: disable=bad-super-call
-            self.__class__,  # pylint: disable=bad-super-call
+        super(
+            watchExtensionsV1beta1NetworkPolicyListForAllNamespaces,
             self).__init__(
             sensor_service=sensor_service,
             config=config,

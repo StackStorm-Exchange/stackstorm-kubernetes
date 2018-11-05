@@ -7,8 +7,12 @@ class deleteCoreV1NamespacedService(K8sClient):
 
     def run(
             self,
+            body,
             name,
             namespace,
+            gracePeriodSeconds=None,
+            orphanDependents=None,
+            propagationPolicy=None,
             pretty=None,
             config_override=None):
 
@@ -21,6 +25,10 @@ class deleteCoreV1NamespacedService(K8sClient):
         if config_override is not None:
             args['config_override'] = config_override
 
+        if body is not None:
+            args['body'] = body
+        else:
+            return (False, "body is a required parameter")
         if name is not None:
             args['name'] = name
         else:
@@ -29,13 +37,19 @@ class deleteCoreV1NamespacedService(K8sClient):
             args['namespace'] = namespace
         else:
             return (False, "namespace is a required parameter")
+        if gracePeriodSeconds is not None:
+            args['gracePeriodSeconds'] = gracePeriodSeconds
+        if orphanDependents is not None:
+            args['orphanDependents'] = orphanDependents
+        if propagationPolicy is not None:
+            args['propagationPolicy'] = propagationPolicy
         if pretty is not None:
             args['pretty'] = pretty
         if 'body' in args:
             args['data'] = args['body']
         args['headers'] = {'Content-type': u'application/json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf'}  # noqa pylint: disable=line-too-long
         args['url'] = "api/v1/namespaces/{namespace}/services/{name}".format(  # noqa pylint: disable=line-too-long
-            name=name, namespace=namespace)
+            body=body, name=name, namespace=namespace)
         args['method'] = "delete"
 
         self.addArgs(**args)

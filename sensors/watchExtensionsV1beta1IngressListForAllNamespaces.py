@@ -13,8 +13,8 @@ class watchExtensionsV1beta1IngressListForAllNamespaces(SensorBase):
             config=None,
             extension="/apis/extensions/v1beta1/watch/ingresses",
             trigger_ref="kubernetes.ingresses"):
-        super(  # pylint: disable=bad-super-call
-            self.__class__,  # pylint: disable=bad-super-call
+        super(
+            watchExtensionsV1beta1IngressListForAllNamespaces,
             self).__init__(
             sensor_service=sensor_service,
             config=config,

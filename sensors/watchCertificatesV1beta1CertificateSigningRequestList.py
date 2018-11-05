@@ -13,8 +13,8 @@ class watchCertificatesV1beta1CertificateSigningRequestList(SensorBase):
             config=None,
             extension="/apis/certificates.k8s.io/v1beta1/watch/certificatesigningrequests",
             trigger_ref="kubernetes.certificatesigningrequests"):
-        super(  # pylint: disable=bad-super-call
-            self.__class__,  # pylint: disable=bad-super-call
+        super(
+            watchCertificatesV1beta1CertificateSigningRequestList,
             self).__init__(
             sensor_service=sensor_service,
             config=config,

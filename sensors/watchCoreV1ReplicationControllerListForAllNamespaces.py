@@ -13,8 +13,8 @@ class watchCoreV1ReplicationControllerListForAllNamespaces(SensorBase):
             config=None,
             extension="/api/v1/watch/replicationcontrollers",
             trigger_ref="kubernetes.replicationcontrollers"):
-        super(  # pylint: disable=bad-super-call
-            self.__class__,  # pylint: disable=bad-super-call
+        super(
+            watchCoreV1ReplicationControllerListForAllNamespaces,
             self).__init__(
             sensor_service=sensor_service,
             config=config,

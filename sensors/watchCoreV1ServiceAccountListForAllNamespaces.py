@@ -13,8 +13,8 @@ class watchCoreV1ServiceAccountListForAllNamespaces(SensorBase):
             config=None,
             extension="/api/v1/watch/serviceaccounts",
             trigger_ref="kubernetes.serviceaccounts"):
-        super(  # pylint: disable=bad-super-call
-            self.__class__,  # pylint: disable=bad-super-call
+        super(
+            watchCoreV1ServiceAccountListForAllNamespaces,
             self).__init__(
             sensor_service=sensor_service,
             config=config,

@@ -13,8 +13,8 @@ class watchCoreV1PodListForAllNamespaces(SensorBase):
             config=None,
             extension="/api/v1/watch/pods",
             trigger_ref="kubernetes.pods"):
-        super(  # pylint: disable=bad-super-call
-            self.__class__,  # pylint: disable=bad-super-call
+        super(
+            watchCoreV1PodListForAllNamespaces,
             self).__init__(
             sensor_service=sensor_service,
             config=config,

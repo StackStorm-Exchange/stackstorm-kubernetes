@@ -13,8 +13,8 @@ class watchRbacAuthorizationV1alpha1ClusterRoleList(SensorBase):
             config=None,
             extension="/apis/rbac.authorization.k8s.io/v1alpha1/watch/clusterroles",
             trigger_ref="kubernetes.clusterroles"):
-        super(  # pylint: disable=bad-super-call
-            self.__class__,  # pylint: disable=bad-super-call
+        super(
+            watchRbacAuthorizationV1alpha1ClusterRoleList,
             self).__init__(
             sensor_service=sensor_service,
             config=config,

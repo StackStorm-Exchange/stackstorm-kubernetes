@@ -13,8 +13,8 @@ class watchCoreV1PersistentVolumeList(SensorBase):
             config=None,
             extension="/api/v1/watch/persistentvolumes",
             trigger_ref="kubernetes.persistentvolumes"):
-        super(  # pylint: disable=bad-super-call
-            self.__class__,  # pylint: disable=bad-super-call
+        super(
+            watchCoreV1PersistentVolumeList,
             self).__init__(
             sensor_service=sensor_service,
             config=config,

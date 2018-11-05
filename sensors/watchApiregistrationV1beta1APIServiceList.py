@@ -13,8 +13,8 @@ class watchApiregistrationV1beta1APIServiceList(SensorBase):
             config=None,
             extension="/apis/apiregistration.k8s.io/v1beta1/watch/apiservices",
             trigger_ref="kubernetes.apiservices"):
-        super(  # pylint: disable=bad-super-call
-            self.__class__,  # pylint: disable=bad-super-call
+        super(
+            watchApiregistrationV1beta1APIServiceList,
             self).__init__(
             sensor_service=sensor_service,
             config=config,

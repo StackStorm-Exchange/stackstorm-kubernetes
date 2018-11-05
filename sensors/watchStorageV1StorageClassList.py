@@ -13,8 +13,8 @@ class watchStorageV1StorageClassList(SensorBase):
             config=None,
             extension="/apis/storage.k8s.io/v1/watch/storageclasses",
             trigger_ref="kubernetes.storageclasses"):
-        super(  # pylint: disable=bad-super-call
-            self.__class__,  # pylint: disable=bad-super-call
+        super(
+            watchStorageV1StorageClassList,
             self).__init__(
             sensor_service=sensor_service,
             config=config,

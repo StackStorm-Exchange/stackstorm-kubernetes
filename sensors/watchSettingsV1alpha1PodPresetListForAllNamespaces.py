@@ -13,8 +13,8 @@ class watchSettingsV1alpha1PodPresetListForAllNamespaces(SensorBase):
             config=None,
             extension="/apis/settings.k8s.io/v1alpha1/watch/podpresets",
             trigger_ref="kubernetes.podpresets"):
-        super(  # pylint: disable=bad-super-call
-            self.__class__,  # pylint: disable=bad-super-call
+        super(
+            watchSettingsV1alpha1PodPresetListForAllNamespaces,
             self).__init__(
             sensor_service=sensor_service,
             config=config,

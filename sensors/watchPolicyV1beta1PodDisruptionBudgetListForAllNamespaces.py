@@ -13,8 +13,8 @@ class watchPolicyV1beta1PodDisruptionBudgetListForAllNamespaces(SensorBase):
             config=None,
             extension="/apis/policy/v1beta1/watch/poddisruptionbudgets",
             trigger_ref="kubernetes.poddisruptionbudgets"):
-        super(  # pylint: disable=bad-super-call
-            self.__class__,  # pylint: disable=bad-super-call
+        super(
+            watchPolicyV1beta1PodDisruptionBudgetListForAllNamespaces,
             self).__init__(
             sensor_service=sensor_service,
             config=config,

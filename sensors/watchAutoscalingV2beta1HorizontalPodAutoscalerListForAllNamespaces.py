@@ -13,8 +13,8 @@ class watchAutoscalingV2beta1HorizontalPodAutoscalerListForAllNamespaces(SensorB
             config=None,
             extension="/apis/autoscaling/v2beta1/watch/horizontalpodautoscalers",
             trigger_ref="kubernetes.horizontalpodautoscalers"):
-        super(  # pylint: disable=bad-super-call
-            self.__class__,  # pylint: disable=bad-super-call
+        super(
+            watchAutoscalingV2beta1HorizontalPodAutoscalerListForAllNamespaces,
             self).__init__(
             sensor_service=sensor_service,
             config=config,

@@ -13,8 +13,8 @@ class watchAppsV1beta2DeploymentListForAllNamespaces(SensorBase):
             config=None,
             extension="/apis/apps/v1beta2/watch/deployments",
             trigger_ref="kubernetes.deployments"):
-        super(  # pylint: disable=bad-super-call
-            self.__class__,  # pylint: disable=bad-super-call
+        super(
+            watchAppsV1beta2DeploymentListForAllNamespaces,
             self).__init__(
             sensor_service=sensor_service,
             config=config,

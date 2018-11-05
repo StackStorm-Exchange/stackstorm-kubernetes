@@ -13,8 +13,8 @@ class watchCoreV1LimitRangeListForAllNamespaces(SensorBase):
             config=None,
             extension="/api/v1/watch/limitranges",
             trigger_ref="kubernetes.limitranges"):
-        super(  # pylint: disable=bad-super-call
-            self.__class__,  # pylint: disable=bad-super-call
+        super(
+            watchCoreV1LimitRangeListForAllNamespaces,
             self).__init__(
             sensor_service=sensor_service,
             config=config,

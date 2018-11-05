@@ -8,7 +8,7 @@ class deleteCoreV1CollectionNamespacedReplicationController(K8sClient):
     def run(
             self,
             namespace,
-            continue=None,
+            more=None,
             fieldSelector=None,
             includeUninitialized=None,
             labelSelector=None,
@@ -32,8 +32,8 @@ class deleteCoreV1CollectionNamespacedReplicationController(K8sClient):
             args['namespace'] = namespace
         else:
             return (False, "namespace is a required parameter")
-        if continue is not None:
-            args['continue'] = continue
+        if more is not None:
+            args['continue'] = more
         if fieldSelector is not None:
             args['fieldSelector'] = fieldSelector
         if includeUninitialized is not None:

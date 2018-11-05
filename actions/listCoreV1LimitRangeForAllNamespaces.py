@@ -7,7 +7,7 @@ class listCoreV1LimitRangeForAllNamespaces(K8sClient):
 
     def run(
             self,
-            continue=None,
+            more=None,
             fieldSelector=None,
             includeUninitialized=None,
             labelSelector=None,
@@ -27,8 +27,8 @@ class listCoreV1LimitRangeForAllNamespaces(K8sClient):
         if config_override is not None:
             args['config_override'] = config_override
 
-        if continue is not None:
-            args['continue'] = continue
+        if more is not None:
+            args['continue'] = more
         if fieldSelector is not None:
             args['fieldSelector'] = fieldSelector
         if includeUninitialized is not None:

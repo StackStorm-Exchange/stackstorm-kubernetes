@@ -13,8 +13,8 @@ class watchBatchV1beta1CronJobListForAllNamespaces(SensorBase):
             config=None,
             extension="/apis/batch/v1beta1/watch/cronjobs",
             trigger_ref="kubernetes.cronjobs"):
-        super(  # pylint: disable=bad-super-call
-            self.__class__,  # pylint: disable=bad-super-call
+        super(
+            watchBatchV1beta1CronJobListForAllNamespaces,
             self).__init__(
             sensor_service=sensor_service,
             config=config,

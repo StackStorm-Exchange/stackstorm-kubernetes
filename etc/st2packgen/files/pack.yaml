@@ -6,7 +6,7 @@ keywords:
   - kubernetes
   - sensors
   - thirdpartyresource
-version: 0.8.0
+version: 0.10.0
 author: Andrew Moore
 email: andrew.moore@pearson.com
 contributors:

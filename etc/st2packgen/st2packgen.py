@@ -10,7 +10,7 @@ from shutil import copytree, copyfile
 
 parser = argparse.ArgumentParser(description="Generate a kubernetes stackstorm client")
 parser.add_argument('-s', '--swagger', required=True)
-parser.add_argument('-d', '--outputdir', default="bitesize")
+parser.add_argument('-d', '--outputdir', default="k8spack")
 parser.add_argument('-t', '--templatedir', default="templates")
 parser.add_argument('-f', '--filesdir', default="files")
 args = parser.parse_args()
@@ -111,7 +111,10 @@ for path in app.dump()['paths'].keys():
             else:
                 tmp['description'] = ""
             tmp['required'] = x.required
-            tmp['name'] = x.name
+            if x.name == "continue":
+                tmp['name'] = "more"
+            else:
+                tmp['name'] = x.name
             tmp['default'] = x.default
             tmp['pattern'] = x.pattern
             tmp['in'] = getattr(x, 'in')

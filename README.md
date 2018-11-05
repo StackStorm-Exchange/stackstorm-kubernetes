@@ -2,7 +2,7 @@
 
 Pack which allows integration with [Kubernetes](https://kubernetes.io/) service.
 
-This pack has been tested with kubernetes 1.4 and 1.5
+This pack has been tested with kubernetes 1.4, 1.5 1.10
 
 # Current Status & Capabilities
 Creates actions and sensors to interact with kubernetes through stackstorm

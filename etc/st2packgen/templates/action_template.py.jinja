@@ -30,9 +30,9 @@ class {{ operationId }}(K8sClient):
         else:
             return (False, "{{ p.name }} is a required parameter")
         {% endfor -%}
-        {%- for p in params -%}
+        {% for p in params -%}
         if {{ p.name }} is not None:
-            args['{{ p.name }}'] = {{ p.name }}
+            {% if p.name == "more" %}args['continue'] = {{ p.name }}{% else %}args['{{ p.name }}'] = {{ p.name }}{% endif %}
         {% endfor -%}
 
         if 'body' in args:

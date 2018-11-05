@@ -86,3 +86,6 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+
+etc/st2packgen/k8spack

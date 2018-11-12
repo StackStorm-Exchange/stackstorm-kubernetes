@@ -1,6 +1,0 @@
-name: getApiregistrationV1APIResources
-pack: kubernetes
-runner_type: python-script
-description: "get available resources"
-enabled: true
-entry_point: "getApiregistrationV1APIResources.py"

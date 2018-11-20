@@ -33,9 +33,9 @@ template_path: "/opt/stackstorm/packs/kubernetes/"
 ```
 Where kubernetes_api_url = The FQDN to your Kubernetes API endpoint.
 
-Only user and password or client_cert_path (key is optional) need to be set for this to work
+Only `user` and `password` or `client_cert_path` (`client_cert_key_path` is optional) need to be set for this to work. It means you should remove `user` and `password` fields from the `kubernetes.yaml` config file if you are using a certificate.
 
-Note: Currently SSL verification is turned off. This is a WIP.
+> Note: Currently SSL verification is turned off. This is a WIP.
 
 All actions allow an optional 'config_override' argument which takes an object with any of the above
 example:

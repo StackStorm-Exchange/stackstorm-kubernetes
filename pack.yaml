@@ -1,12 +1,12 @@
 ---
 ref: kubernetes
 name: kubernetes
-description: st2 content pack containing Kubernetes sensors
+description: Kubernetes actions and sensors
 keywords:
   - kubernetes
   - sensors
   - thirdpartyresource
-version: 0.9.6
+version: 0.9.7
 author: Andrew Moore
 email: andy@impulsed.net
 contributors:

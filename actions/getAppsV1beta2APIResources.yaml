@@ -1,6 +1,0 @@
-name: getAppsV1beta2APIResources
-pack: kubernetes
-runner_type: python-script
-description: "get available resources"
-enabled: true
-entry_point: "getAppsV1beta2APIResources.py"

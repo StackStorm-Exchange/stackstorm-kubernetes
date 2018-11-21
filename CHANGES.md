@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.9.8
+
+- Upgrade pyopenssl to resolve security vulnerabilities
+
 ## 0.9.7
 
 - Fixed issue with use of certs for authentication

@@ -15,7 +15,6 @@ class K8sActionRunner(K8sClient):
             config_override=None):
 
         configuration = self.get_k8s_config(config_override)
-        # new stuff
 
         # create an instance of the API class
         api_instance = getattr(kubernetes.client, service)(

@@ -9,7 +9,7 @@ class K8sActionRunner(K8sClient):
 
     def run(
             self,
-            service,
+            api_group,
             action_name,
             params=None,
             config_override=None):
@@ -20,7 +20,7 @@ class K8sActionRunner(K8sClient):
             return (success, configuration)
 
         # create an instance of the API class
-        api_instance = getattr(kubernetes.client, service)(
+        api_instance = getattr(kubernetes.client, api_group)(
             kubernetes.client.ApiClient(configuration))
 
         try:

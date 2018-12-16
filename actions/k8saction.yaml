@@ -6,9 +6,9 @@ enabled: true
 entry_point: "k8saction.py"
 pack: "kubernetes"
 parameters:
-  service:
+  api_group:
     type: "string"
-    description: "Name of the service to create client"
+    description: "Name of the api_group "
     required: true
   action_name:
     type: "string"
@@ -16,7 +16,7 @@ parameters:
     required: true
   params:
     type: object
-    description: "Parms for the API action"
+    description: "Params for the API action"
   config_override:
     type: object
     description: "Kubernetes config override"

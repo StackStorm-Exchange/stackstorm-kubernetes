@@ -44,7 +44,7 @@ class K8sClient(Action):
                     "Failed finding authentication method\n \
                      Please specify either username and password or clientcert location")
 
-        return (True)
+        return (True, configuration)
 
     def overwrite_config(self, newconf):
         for key in newconf:

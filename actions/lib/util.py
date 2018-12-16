@@ -3,7 +3,7 @@ from datetime import date, datetime
 
 # pylint: disable=too-few-public-methods
 
-def json_serial(self, obj):
+def json_serial(obj):
     if isinstance(obj, (datetime, date)):
         serial = obj.isoformat()
         return serial

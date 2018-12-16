@@ -1,7 +1,6 @@
 import json
 import kubernetes.client
 from lib.k8s import K8sClient
-from lib.util import json_serial
 from kubernetes.client.rest import ApiException
 
 
@@ -30,8 +29,7 @@ class K8sActionRunner(K8sClient):
                 params.body = getattr(kubernetes.client, params.body)()
 
             api_response = getattr(api_instance, action_name)(**params)
-            response = json.loads(json.dumps(
-                api_response.__dict__, default=json_serial))
+            response = json.loads(json.dumps(api_response))
 
             return(True, response)
         except ApiException as e:
@@ -39,5 +37,4 @@ class K8sActionRunner(K8sClient):
                 service, action_name, e)
             print(erro_str)
 
-            return (False, json.loads(json.dumps(
-                erro_str, default=json_serial)))
+            return (False, json.loads(json.dumps(erro_str)))

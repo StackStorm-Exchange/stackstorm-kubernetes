@@ -30,8 +30,17 @@ class K8sActionRunner(K8sClient):
                 params.body = getattr(kubernetes.client, params.body)()
 
             api_response = getattr(api_instance, action_name)(**params)
-            return(True, api_response)
+            response = json.loads(json.dumps(
+                api_response, default=json_serial))
+
+            return(True, response)
         except ApiException as e:
             print("Exception when calling {}->{}: {}\n".format(
                 service, action_name, e))
-            return (False, e)
+            error_resp = {
+                'status': e.status,
+                'reason': e.reason,
+                'body': json.loads(e.body),
+                'headers': e.headers,
+            }
+            return (False, json.loads(json.dumps(error_resp, default=json_serial)))

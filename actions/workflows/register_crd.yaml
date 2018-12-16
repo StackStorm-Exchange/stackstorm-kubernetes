@@ -1,0 +1,46 @@
+version: '2.0'
+kubernetes.register_crd:
+  description: register a crd sensor if it doesnt already exist
+  type: direct
+  input:
+    - payload
+  vars:
+    sensor: <% concat("watch", $.payload['spec']['names']['kind']) %>
+  tasks:
+    get_sensors:
+      action: st2.sensors.list
+      input:
+        limit: 100
+        pack: kubernetes
+      on-success:
+        - sensor_already_exists: <% task(get_sensors).result.result.select($.name).contains($.sensor) %>
+        - sensor_required: <% not task(get_sensors).result.result.select($.name).contains($.sensor) %>
+
+    sensor_already_exists:
+      action: core.noop
+
+    sensor_required:
+      action: kubernetes.create_crd_sensor
+      input:
+        payload: <% $.payload %>
+      on-success:
+        - check_other_processes
+
+    check_other_processes:
+      action: st2.executions.list
+      input:
+        action: kubernetes.register_crd
+        limit: 50
+        status: running
+
+      on-success:
+        - reload_st2: <% len(task(check_other_processes).result.result) <= 1 %>
+        - dont_reload_st2: <% len(task(check_other_processes).result.result) > 1 %>
+
+    reload_st2:
+      action: core.local
+      input:
+        cmd: "st2ctl reload --register-sensors"
+
+    dont_reload_st2:
+      action: core.noop

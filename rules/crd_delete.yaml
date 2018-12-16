@@ -1,0 +1,22 @@
+---
+name: "crd_delete"
+pack: "kubernetes"
+description: "Delete crd"
+enabled: true
+
+trigger:
+  type: "kubernetes.customresourcedefinitions"
+
+criteria:
+  trigger.resource:
+    type: "contains"
+    pattern: "DELETED"
+  trigger.object_kind:
+    type: "equals"
+    pattern: "CustomResourceDefinitions"
+
+action:
+  ref: "kubernetes.delete_crd_sensor"
+  parameters:
+    payload: "{{trigger}}"
+

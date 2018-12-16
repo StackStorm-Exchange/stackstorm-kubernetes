@@ -1,0 +1,56 @@
+import json
+
+from lib.k8s import K8sClient
+
+
+class {{ operationId }}(K8sClient):
+
+    def run(
+            self{% if paramsreq|length > 0 %},{% endif -%}
+            {% for parameter in paramsreq %}
+            {{ parameter.name }}{% if not loop.last %},{% endif -%}
+            {% endfor %}{% if params|length > 0 %},{% endif -%}
+            {% for parameter in params %}
+            {{ parameter.name }}=None{% if not loop.last %},{% endif -%}
+            {% endfor %},
+            config_override=None):
+
+        ret = False
+
+        args = {}
+        args['config_override'] = {}
+        args['pretty'] = ''
+
+        if config_override is not None:
+            args['config_override'] = config_override
+
+        {% for p in paramsreq -%}
+        if {{ p.name }} is not None:
+            args['{{ p.name }}'] = {{ p.name }}
+        else:
+            return (False, "{{ p.name }} is a required parameter")
+        {% endfor -%}
+        {% for p in params -%}
+        if {{ p.name }} is not None:
+            {% if p.name == "more" %}args['continue'] = {{ p.name }}{% else %}args['{{ p.name }}'] = {{ p.name }}{% endif %}
+        {% endfor -%}
+
+        if 'body' in args:
+            args['data'] = args['body']
+        args['headers'] = {{ headers }}  # noqa pylint: disable=line-too-long
+        args['url'] = "{{ url }}".format(  # noqa pylint: disable=line-too-long
+            {% for p in paramsreq -%}{{ p.name }}={{ p.name }}{{ ", " if not loop.last }}{% endfor -%})
+        args['method'] = "{{ method }}"
+
+        self.addArgs(**args)
+        self.makeRequest()
+
+        myresp = {}
+        myresp['status_code'] = self.resp.status_code
+        myresp['data'] = json.loads(self.resp.content.rstrip())
+
+        if myresp['status_code'] >= 200 and myresp['status_code'] <= 299:
+            ret = True
+
+        return (ret, myresp)
+

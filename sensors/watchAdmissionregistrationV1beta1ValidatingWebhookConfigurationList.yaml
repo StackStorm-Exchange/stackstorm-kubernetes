@@ -1,0 +1,24 @@
+---
+  class_name: "watchAdmissionregistrationV1beta1ValidatingWebhookConfigurationList"
+  entry_point: "watchAdmissionregistrationV1beta1ValidatingWebhookConfigurationList.py"
+  description: "Sensor that watches Kubernetes API for new Validatingwebhookconfigurations objects."
+  trigger_types:
+    -
+      name: "validatingwebhookconfigurations"
+      description: "Trigger for validatingwebhookconfigurations event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "string"
+          name:
+            type: "string"
+          labels:
+            anyOf:
+              - type: "object"
+              - type: "string"
+              - type: "null"
+          object_kind:
+            type: "string"
+          namespace:
+            type: "string"

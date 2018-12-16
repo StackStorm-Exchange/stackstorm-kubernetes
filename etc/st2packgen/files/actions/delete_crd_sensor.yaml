@@ -1,0 +1,11 @@
+---
+  name: "delete_crd_sensor"
+  runner_type: "python-script"
+  description: "Delete CRD sensor"
+  enabled: true
+  entry_point: "delete_crd_sensor.py"
+  pack: "kubernetes"
+  parameters:
+    payload:
+      type: "object"
+      description: "payload object from kubernetes sensor"

@@ -1,0 +1,24 @@
+---
+  class_name: "watchAdmissionregistrationV1beta1MutatingWebhookConfigurationList"
+  entry_point: "watchAdmissionregistrationV1beta1MutatingWebhookConfigurationList.py"
+  description: "Sensor that watches Kubernetes API for new Mutatingwebhookconfigurations objects."
+  trigger_types:
+    -
+      name: "mutatingwebhookconfigurations"
+      description: "Trigger for mutatingwebhookconfigurations event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "string"
+          name:
+            type: "string"
+          labels:
+            anyOf:
+              - type: "object"
+              - type: "string"
+              - type: "null"
+          object_kind:
+            type: "string"
+          namespace:
+            type: "string"

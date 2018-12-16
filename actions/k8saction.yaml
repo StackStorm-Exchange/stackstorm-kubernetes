@@ -1,0 +1,22 @@
+---
+name: "k8saction"
+runner_type: "python-script"
+description: "Run create k8s API action"
+enabled: true
+entry_point: "k8saction.py"
+pack: "kubernetes"
+parameters:
+  service:
+    type: "string"
+    description: "Name of the service to create client"
+    required: true
+  action_name:
+    type: "string"
+    description: "Name of the action to run"
+    required: true
+  params:
+    type: object
+    description: "Parms for the API action"
+  config_override:
+    type: object
+    description: "Kubernetes config override"

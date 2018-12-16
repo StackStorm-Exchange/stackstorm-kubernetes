@@ -3,3 +3,4 @@ jinja2
 http_parser
 backports.ssl==0.0.9
 pyopenssl==18.0.0
+kubernetes==6.0.0

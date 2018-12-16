@@ -31,7 +31,7 @@ class K8sActionRunner(K8sClient):
 
             api_response = getattr(api_instance, action_name)(**params)
             response = json.loads(json.dumps(
-                api_response, default=json_serial))
+                api_response.__dict__, default=json_serial))
 
             return(True, response)
         except ApiException as e:

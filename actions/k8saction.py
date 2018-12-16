@@ -29,7 +29,10 @@ class K8sActionRunner(K8sClient):
             if hasattr(params, 'body') and params.body == str:
                 params.body = getattr(kubernetes.client, params.body)()
 
-            api_response = getattr(api_instance, action_name)(**params)
+            if params is not None:
+                api_response = getattr(api_instance, action_name)(**params)
+            else:
+                api_response = getattr(api_instance, action_name)()
             response = json.loads(json.dumps(
                 api_response, default=json_serial))
 

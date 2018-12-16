@@ -8,5 +8,5 @@ def json_serial(obj):
         serial = obj.isoformat()
         return serial
     if isinstance(obj, object):
-        return obj.__dict__
+        return {k.lstrip('_'): v for k, v in vars(obj).items()}
     raise TypeError("Type %s not serializable" % type(obj))

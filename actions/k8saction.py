@@ -35,8 +35,6 @@ class K8sActionRunner(K8sClient):
 
             return(True, response)
         except ApiException as e:
-            print("Exception when calling {}->{}: {}\n".format(
-                service, action_name, e))
             error_resp = {
                 'status': e.status,
                 'reason': e.reason,

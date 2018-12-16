@@ -15,7 +15,7 @@ class K8sClient(Action):
 
     def get_k8s_config(self, config_override):
 
-        if config_override not None:
+        if config_override != None:
             self.overwrite_config(config_override)
 
         for entry in self.myconfig:

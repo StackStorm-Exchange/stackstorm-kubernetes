@@ -18,7 +18,7 @@ class K8sActionRunner(K8sClient):
 
         # create an instance of the API class
         api_instance = getattr(kubernetes.client, service)(
-            kubernetes.client.ApiClient(configuration))()
+            kubernetes.client.ApiClient(configuration))
 
         try:
             # check if the body contains and object or a string

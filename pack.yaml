@@ -7,6 +7,9 @@ keywords:
   - sensors
   - thirdpartyresource
 version: 0.9.8
+python_versions:
+  - "2"
+  - "3"
 author: Andrew Moore
 email: andy@impulsed.net
 contributors:

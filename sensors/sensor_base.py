@@ -87,7 +87,7 @@ class SensorBase(Sensor):
                 # self.client.settimeout(10)
                 self.client.connect((self.host, self.port))
 
-            except socket.error, exc:
+            except socket.error as exc:
                 self._log.exception('unable to connect to %s: %s' % (self.host, exc))
                 raise
 

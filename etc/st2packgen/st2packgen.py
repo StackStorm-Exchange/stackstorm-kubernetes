@@ -20,10 +20,10 @@ outputdir = args.outputdir
 templatedir = args.templatedir
 filesdir = args.filesdir
 
-print "swagger: %s" % swagger
-print "outputdir: %s" % outputdir
-print "templatedir: %s" % templatedir
-print "filesdir: %s" % filesdir
+print("swagger: %s" % swagger)
+print("outputdir: %s" % outputdir)
+print("templatedir: %s" % templatedir)
+print("filesdir: %s" % filesdir)
 
 kubedir = outputdir + "/kubernetes"
 actionsdir = kubedir + "/actions"
@@ -61,12 +61,12 @@ for path in app.dump()['paths'].keys():
         try:
             operationId = app.dump()['paths'][path][method]['operationId']
         except KeyError:
-            print "path missing operationId: %s" % path
+            print("path missing operationId: %s" % path)
             continue
         if operationId.startswith(('proxy', 'connect')):
             continue
 
-        print "creating path %s method %s" % (operationId, method)
+        print("creating path %s method %s" % (operationId, method))
 
         op = app.op[operationId]
 

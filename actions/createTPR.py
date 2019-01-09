@@ -69,5 +69,4 @@ class createTPR(Action):
                                                      apigroup, namespace, pname)
 
         resp = self.mkrequest(tprurl, method="POST", data=self.body)
-
-        print resp
+        self.logger.debug(resp)

@@ -23,6 +23,6 @@ class RegisterSensor(Action):
 
         registrar = sensors_registrar.SensorsRegistrar(use_pack_cache=True, fail_on_failure=True)
 
-        print registrar._register_sensor_from_pack("kubernetes", destfile)
+        print(registrar._register_sensor_from_pack("kubernetes", destfile))
 
         st2common.script_setup.teardown()

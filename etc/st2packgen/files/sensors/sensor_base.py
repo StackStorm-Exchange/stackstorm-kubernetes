@@ -116,7 +116,7 @@ class SensorBase(Sensor):
                 self._log.debug(".")
                 try:
                     chunk = self.client.recv(io.DEFAULT_BUFFER_SIZE)
-                except socket.error, exc:
+                except socket.error as exc:
                     err = exc.args[0]
                     self._log.debug('a recv err (%s): %s' % (err, exc))
                     break
@@ -134,14 +134,14 @@ class SensorBase(Sensor):
                 self._log.debug("-")
                 try:
                     readable, _, _ = select.select(readers, writers, out_of_band)
-                except select.error, exc:
+                except select.error as exc:
                     self._log.debug("b select error: %s" % exc)
                 if not readable:
                     self._log.debug('b not readable')
                     break
                 try:
                     chunk = self.client.recv(io.DEFAULT_BUFFER_SIZE)
-                except socket.error, exc:
+                except socket.error as exc:
                     err = exc.args[0]
                     self._log.debug('b recv err (%s): %s' % (err, exc))
                     break

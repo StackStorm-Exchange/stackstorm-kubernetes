@@ -40,6 +40,8 @@ class K8sClient(Action):
                 self.addauth()
             else:
                 return (False, "user defined but no password")
+        elif 'bearer_token' in self.myconfig and self.myconfig['bearer_token']:
+            self.addTokenAuth()
         elif ('client_cert_path' in self.myconfig and
                 self.myconfig['client_cert_path'] is not None and
                 self.myconfig['client_cert_path']):
@@ -59,6 +61,11 @@ class K8sClient(Action):
 
         auth = base64.b64encode(self.myconfig['user'] + ":" + self.myconfig['password'])
         self.req['headers'].update({"authorization": "Basic " + auth})
+        return True
+
+    def addTokenAuth(self):
+        bearer_token = "Bearer {0}".format(self.myconfig['bearer_token'])
+        self.req['headers'].update({"authorization": bearer_token})
         return True
 
     def makeRequest(self):

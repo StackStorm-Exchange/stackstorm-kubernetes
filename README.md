@@ -22,10 +22,14 @@ Action names are derived from OperationID's within the Kubernetes spec
 
 Copy `kubernetes.yaml.example` to `/opt/stackstorm/configs/kubernetes.yaml`. It should contain something like this:
 ```yaml
+# If you want to use basic auth use the below
 user: "admin"
 password: "password"
+# If you want to use a client cert use the below
 client_cert_path: "/path/to/cert.pem"
 client_cert_key_path: "/path/to/cert.key"
+# If you are using auth token use the below
+bearer_token: "<bearer_token>"
 kubernetes_api_url: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 verify: false
 
@@ -33,7 +37,14 @@ template_path: "/opt/stackstorm/packs/kubernetes/"
 ```
 Where kubernetes_api_url = The FQDN to your Kubernetes API endpoint.
 
-Only `user` and `password` or `client_cert_path` (`client_cert_key_path` is optional) need to be set for this to work. It means you should remove `user` and `password` fields from the `kubernetes.yaml` config file if you are using a certificate.
+#### Authentication
+You can use the following authentication strategies
+1. Basic Auth: Needs `user` and `password` in the config
+
+2. Client certificate: Needs `client_cert_path` and  `client_cert_key_path` in the config
+
+3. Bearer token: Needs `bearer_token` in the config
+
 
 > Note: Currently SSL verification is turned off. This is a WIP.
 

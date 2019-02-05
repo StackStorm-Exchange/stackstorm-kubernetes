@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.9.9
+
+- Added bearer token authentication support
+
 ## 0.9.8
 
 - Upgrade pyopenssl to resolve security vulnerabilities

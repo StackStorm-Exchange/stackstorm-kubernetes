@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.9.10
+- Add schema documentation for bearer token authentication support
+
 ## 0.9.9
 
 - Added bearer token authentication support

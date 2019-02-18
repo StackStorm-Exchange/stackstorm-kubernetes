@@ -16,6 +16,9 @@
   client_cert_key_path:
     description: "client cert key path"
     type: "string"
+  bearer_token:
+    description: "bearer token"
+    type: "string"
   verify:
     description: "SSL verify"
     type: "boolean"

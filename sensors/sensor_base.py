@@ -67,9 +67,12 @@ class SensorBase(Sensor):
 
         if port:
             self.port = int(port)
+
         else:
-        # assume port if not in url
-            self.port = 443 if method == "https" else 80
+            if method == "https":
+                self.port = 443 
+            if method == "http":
+                self.port = 80
     
     def run(self):
         self._log.info('Watch %s for new data.' % self.extension)

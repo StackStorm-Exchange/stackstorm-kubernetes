@@ -59,16 +59,18 @@ class SensorBase(Sensor):
             'Connecting to Kubernetes endpoint %s via api_client.' %
             api_url)
 
-        m = re.search('(http|https)://(.*)/?$', self.config['kubernetes_api_url'])
+        m = re.search('(http|https)://([-\.a-zA-Z0-9]+):?(\d*)/?$', self.config['kubernetes_api_url'])
 
         method = m.group(1)
         self.host = m.group(2)
+        port = m.group(3)
 
-        if method == "https":
-            self.port = 443
+        if port:
+            self.port = int(port)
         else:
-            self.port = 80
-
+        # assume port if not in url
+            self.port = 443 if method == "https" else 80
+    
     def run(self):
         self._log.info('Watch %s for new data.' % self.extension)
 

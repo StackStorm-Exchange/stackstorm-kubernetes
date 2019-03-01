@@ -6,7 +6,7 @@ keywords:
   - kubernetes
   - sensors
   - thirdpartyresource
-version: 0.9.10
+version: 0.9.11
 python_versions:
   - "2"
   - "3"

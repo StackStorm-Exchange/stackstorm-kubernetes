@@ -19,7 +19,7 @@ class {{ operationId }}(K8sClient):
 
         args = {}
         args['config_override'] = {}
-        args['pretty'] = ''
+        args['params'] = {}
 
         if config_override is not None:
             args['config_override'] = config_override
@@ -32,11 +32,12 @@ class {{ operationId }}(K8sClient):
         {% endfor -%}
         {%- for p in params -%}
         if {{ p.name }} is not None:
-            args['{{ p.name }}'] = {{ p.name }}
+            args['params'].update({'{{ p.name }}': {{ p.name }}})
         {% endfor -%}
 
         if 'body' in args:
             args['data'] = args['body']
+            args.pop('body')
         args['headers'] = {{ headers }}  # noqa pylint: disable=line-too-long
         args['url'] = "{{ url }}".format(  # noqa pylint: disable=line-too-long
             {% for p in paramsreq -%}{{ p.name }}={{ p.name }}{{ ", " if not loop.last }}{% endfor -%})

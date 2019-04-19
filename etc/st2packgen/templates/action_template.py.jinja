@@ -48,7 +48,10 @@ class {{ operationId }}(K8sClient):
 
         myresp = {}
         myresp['status_code'] = self.resp.status_code
-        myresp['data'] = json.loads(self.resp.content.rstrip())
+        try:
+            myresp['data'] = json.loads(self.resp.content.rstrip())
+        except ValueError:
+            myresp['data'] = self.resp.content
 
         if myresp['status_code'] >= 200 and myresp['status_code'] <= 299:
             ret = True

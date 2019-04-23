@@ -19,25 +19,26 @@ class listAppsV1beta1StatefulSetForAllNamespaces(K8sClient):
 
         args = {}
         args['config_override'] = {}
-        args['pretty'] = ''
+        args['params'] = {}
 
         if config_override is not None:
             args['config_override'] = config_override
 
         if fieldSelector is not None:
-            args['fieldSelector'] = fieldSelector
+            args['params'].update({'fieldSelector': fieldSelector})
         if labelSelector is not None:
-            args['labelSelector'] = labelSelector
+            args['params'].update({'labelSelector': labelSelector})
         if pretty is not None:
-            args['pretty'] = pretty
+            args['params'].update({'pretty': pretty})
         if resourceVersion is not None:
-            args['resourceVersion'] = resourceVersion
+            args['params'].update({'resourceVersion': resourceVersion})
         if timeoutSeconds is not None:
-            args['timeoutSeconds'] = timeoutSeconds
+            args['params'].update({'timeoutSeconds': timeoutSeconds})
         if watch is not None:
-            args['watch'] = watch
+            args['params'].update({'watch': watch})
         if 'body' in args:
             args['data'] = args['body']
+            args.pop('body')
         args['headers'] = {'Content-type': u'application/json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch'}  # noqa pylint: disable=line-too-long
         args['url'] = "apis/apps/v1beta1/statefulsets".format(  # noqa pylint: disable=line-too-long
             )
@@ -48,7 +49,10 @@ class listAppsV1beta1StatefulSetForAllNamespaces(K8sClient):
 
         myresp = {}
         myresp['status_code'] = self.resp.status_code
-        myresp['data'] = json.loads(self.resp.content.rstrip())
+        try:
+            myresp['data'] = json.loads(self.resp.content.rstrip())
+        except ValueError:
+            myresp['data'] = self.resp.content
 
         if myresp['status_code'] >= 200 and myresp['status_code'] <= 299:
             ret = True

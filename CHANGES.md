@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.9.12
+- Add resolution for query parameters on making API requests
+- Add fallback for JSON decoding on API responses
+
+## 0.9.11
+- Fix issue with improper API address resolution
+- Add port support
+
 ## 0.9.10
 - Add schema documentation for bearer token authentication support
 

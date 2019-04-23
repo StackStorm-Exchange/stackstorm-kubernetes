@@ -17,7 +17,7 @@ class readStorageV1beta1StorageClass(K8sClient):
 
         args = {}
         args['config_override'] = {}
-        args['pretty'] = ''
+        args['params'] = {}
 
         if config_override is not None:
             args['config_override'] = config_override
@@ -27,13 +27,14 @@ class readStorageV1beta1StorageClass(K8sClient):
         else:
             return (False, "name is a required parameter")
         if exact is not None:
-            args['exact'] = exact
+            args['params'].update({'exact': exact})
         if export is not None:
-            args['export'] = export
+            args['params'].update({'export': export})
         if pretty is not None:
-            args['pretty'] = pretty
+            args['params'].update({'pretty': pretty})
         if 'body' in args:
             args['data'] = args['body']
+            args.pop('body')
         args['headers'] = {'Content-type': u'application/json', 'Accept': u'application/json, application/yaml, application/vnd.kubernetes.protobuf'}  # noqa pylint: disable=line-too-long
         args['url'] = "apis/storage.k8s.io/v1beta1/storageclasses/{name}".format(  # noqa pylint: disable=line-too-long
             name=name)
@@ -44,7 +45,10 @@ class readStorageV1beta1StorageClass(K8sClient):
 
         myresp = {}
         myresp['status_code'] = self.resp.status_code
-        myresp['data'] = json.loads(self.resp.content.rstrip())
+        try:
+            myresp['data'] = json.loads(self.resp.content.rstrip())
+        except ValueError:
+            myresp['data'] = self.resp.content
 
         if myresp['status_code'] >= 200 and myresp['status_code'] <= 299:
             ret = True

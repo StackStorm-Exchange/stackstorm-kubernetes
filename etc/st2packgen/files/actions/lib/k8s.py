@@ -29,6 +29,8 @@ class K8sClient(Action):
         else:
             self.req['data'] = ''
 
+        self.req['params'] = args.get('params', {})
+
         for entry in self.myconfig:
             if self.myconfig[entry] == 'None':
                 self.myconfig[entry] = None
@@ -82,5 +84,6 @@ class K8sClient(Action):
         kwargs['url'] = self.req['url']
         kwargs['json'] = self.req['data']
         kwargs['headers'] = self.req['headers']
+        kwargs['params'] = self.req['params']
         kwargs['verify'] = self.myconfig['verify']
         self.resp = getattr(s, self.req['method'])(**kwargs)

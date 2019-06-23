@@ -59,7 +59,7 @@ class SensorBase(Sensor):
             'Connecting to Kubernetes endpoint %s via api_client.' %
             api_url)
 
-        m = re.search('(http|https)://([-\.a-zA-Z0-9]+):?(\d*)/?$',
+        m = re.search(r'(http|https)://([-\.a-zA-Z0-9]+):?(\d*)/?$',
                       self.config['kubernetes_api_url'])
 
         method = m.group(1)

@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.9.13
+- Minor linting change
+
 ## 0.9.12
 - Add resolution for query parameters on making API requests
 - Add fallback for JSON decoding on API responses

@@ -56,7 +56,7 @@ for path in app.dump()['paths'].keys():
     if not path.startswith("/api"):
         continue
     for method in app.dump()['paths'][path]:
-        if method is 'parameters':
+        if method == 'parameters':
             continue
         try:
             operationId = app.dump()['paths'][path][method]['operationId']

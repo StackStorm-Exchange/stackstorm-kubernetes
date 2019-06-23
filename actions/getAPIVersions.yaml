@@ -1,6 +1,0 @@
-name: getAPIVersions
-pack: kubernetes
-runner_type: python-script
-description: "get available API versions"
-enabled: true
-entry_point: "getAPIVersions.py"

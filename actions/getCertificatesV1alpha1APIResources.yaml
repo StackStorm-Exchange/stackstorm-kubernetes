@@ -1,6 +1,0 @@
-name: getCertificatesV1alpha1APIResources
-pack: kubernetes
-runner_type: python-script
-description: "get available resources"
-enabled: true
-entry_point: "getCertificatesV1alpha1APIResources.py"

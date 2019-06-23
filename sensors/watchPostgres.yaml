@@ -1,0 +1,24 @@
+---
+  class_name: "watchPostgres"
+  entry_point: "watchPostgres.py"
+  description: "Sensor that watches Kubernetes API for new Postgres Custom Objects."
+  trigger_types:
+    -
+      name: "crdpostgres"
+      description: "Trigger for Postgres CustomObjects event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "string"
+          name:
+            type: "string"
+          labels:
+            anyOf:
+              - type: "object"
+              - type: "string"
+              - type: "null"
+          object_kind:
+            type: "string"
+          namespace:
+            type: "string"

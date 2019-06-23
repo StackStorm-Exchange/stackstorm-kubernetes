@@ -1,0 +1,24 @@
+---
+  class_name: "watchInfluxdb"
+  entry_point: "watchInfluxdb.py"
+  description: "Sensor that watches Kubernetes API for new Influxdb Custom Objects."
+  trigger_types:
+    -
+      name: "crdinfluxdb"
+      description: "Trigger for Influxdb CustomObjects event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "string"
+          name:
+            type: "string"
+          labels:
+            anyOf:
+              - type: "object"
+              - type: "string"
+              - type: "null"
+          object_kind:
+            type: "string"
+          namespace:
+            type: "string"

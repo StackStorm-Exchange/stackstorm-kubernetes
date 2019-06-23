@@ -1,0 +1,24 @@
+---
+  class_name: "watchSns"
+  entry_point: "watchSns.py"
+  description: "Sensor that watches Kubernetes API for new SNS Custom Objects."
+  trigger_types:
+    -
+      name: "crdsns"
+      description: "Trigger for SNS CustomObjects event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "string"
+          name:
+            type: "string"
+          labels:
+            anyOf:
+              - type: "object"
+              - type: "string"
+              - type: "null"
+          object_kind:
+            type: "string"
+          namespace:
+            type: "string"

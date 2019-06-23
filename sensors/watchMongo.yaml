@@ -1,0 +1,24 @@
+---
+  class_name: "watchMongo"
+  entry_point: "watchMongo.py"
+  description: "Sensor that watches Kubernetes API for new Mongo Custom Objects."
+  trigger_types:
+    -
+      name: "crdmongo"
+      description: "Trigger for Mongo CustomObjects event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "string"
+          name:
+            type: "string"
+          labels:
+            anyOf:
+              - type: "object"
+              - type: "string"
+              - type: "null"
+          object_kind:
+            type: "string"
+          namespace:
+            type: "string"

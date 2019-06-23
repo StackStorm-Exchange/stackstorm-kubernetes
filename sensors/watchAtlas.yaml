@@ -1,0 +1,24 @@
+---
+  class_name: "watchAtlas"
+  entry_point: "watchAtlas.py"
+  description: "Sensor that watches Kubernetes API for new Atlas Custom Objects."
+  trigger_types:
+    -
+      name: "crdatlas"
+      description: "Trigger for Atlas CustomObjects event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "string"
+          name:
+            type: "string"
+          labels:
+            anyOf:
+              - type: "object"
+              - type: "string"
+              - type: "null"
+          object_kind:
+            type: "string"
+          namespace:
+            type: "string"

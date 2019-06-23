@@ -1,0 +1,24 @@
+---
+  class_name: "watchRedis"
+  entry_point: "watchRedis.py"
+  description: "Sensor that watches Kubernetes API for new Redis Custom Objects."
+  trigger_types:
+    -
+      name: "crdredis"
+      description: "Trigger for Redis CustomObjects event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "string"
+          name:
+            type: "string"
+          labels:
+            anyOf:
+              - type: "object"
+              - type: "string"
+              - type: "null"
+          object_kind:
+            type: "string"
+          namespace:
+            type: "string"

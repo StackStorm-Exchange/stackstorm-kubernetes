@@ -1,0 +1,23 @@
+---
+  class_name: "watchS3"
+  entry_point: "watchS3.py"
+  description: "Sensor that watches Kubernetes API for new S3 Custom Objects."
+  trigger_types:
+    - name: "crds3"
+      description: "Trigger for S3 CustomObjects event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "string"
+          name:
+            type: "string"
+          labels:
+            anyOf:
+              - type: "object"
+              - type: "string"
+              - type: "null"
+          object_kind:
+            type: "string"
+          namespace:
+            type: "string"

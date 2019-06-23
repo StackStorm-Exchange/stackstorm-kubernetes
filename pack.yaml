@@ -1,0 +1,13 @@
+---
+ref: kubernetes
+name: kubernetes
+description: st2 content pack containing Kubernetes sensors
+keywords:
+  - kubernetes
+  - sensors
+  - customresourcedefinitions
+version: 0.6.0
+author: Gamunu Balagalla
+email: udaya.balagalla@pearson.com
+contributors:
+  - Andrew Moore <mward29@gmail.com>

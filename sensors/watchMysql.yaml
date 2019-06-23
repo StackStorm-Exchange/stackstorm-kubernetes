@@ -1,0 +1,24 @@
+---
+  class_name: "watchMysql"
+  entry_point: "watchMysql.py"
+  description: "Sensor that watches Kubernetes API for new MySQL Custom Objects."
+  trigger_types:
+    -
+      name: "crdmysql"
+      description: "Trigger for MySQL CustomObjects event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "string"
+          name:
+            type: "string"
+          labels:
+            anyOf:
+              - type: "object"
+              - type: "string"
+              - type: "null"
+          object_kind:
+            type: "string"
+          namespace:
+            type: "string"

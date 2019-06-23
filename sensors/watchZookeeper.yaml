@@ -1,0 +1,24 @@
+---
+  class_name: "watchZookeeper"
+  entry_point: "watchZookeeper.py"
+  description: "Sensor that watches Kubernetes API for new Zookeeper Custom Objects."
+  trigger_types:
+    -
+      name: "crdzookeeper"
+      description: "Trigger for Zookeeper CustomObjects event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "string"
+          name:
+            type: "string"
+          labels:
+            anyOf:
+              - type: "object"
+              - type: "string"
+              - type: "null"
+          object_kind:
+            type: "string"
+          namespace:
+            type: "string"

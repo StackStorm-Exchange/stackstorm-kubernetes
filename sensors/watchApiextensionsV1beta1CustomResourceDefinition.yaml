@@ -1,0 +1,24 @@
+---
+  class_name: "watchApiextensionsV1beta1CustomResourceDefinition"
+  entry_point: "watchApiextensionsV1beta1CustomResourceDefinition.py"
+  description: "Sensor that watches Kubernetes API for new Customresourcedefinitions objects."
+  trigger_types:
+    -
+      name: "customresourcedefinitions"
+      description: "Trigger for customresourcedefinitions event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "string"
+          name:
+            type: "string"
+          labels:
+            anyOf:
+              - type: "object"
+              - type: "string"
+              - type: "null"
+          object_kind:
+            type: "string"
+          namespace:
+            type: "string"

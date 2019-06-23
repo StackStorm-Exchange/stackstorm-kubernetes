@@ -1,0 +1,24 @@
+---
+  class_name: "watchKafka"
+  entry_point: "watchKafka.py"
+  description: "Sensor that watches Kubernetes API for new Kafka Custom Objects."
+  trigger_types:
+    -
+      name: "crdkafka"
+      description: "Trigger for Kafka CustomObjects event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "string"
+          name:
+            type: "string"
+          labels:
+            anyOf:
+              - type: "object"
+              - type: "string"
+              - type: "null"
+          object_kind:
+            type: "string"
+          namespace:
+            type: "string"

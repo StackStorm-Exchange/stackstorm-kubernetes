@@ -1,0 +1,24 @@
+---
+  class_name: "watchMsk"
+  entry_point: "watchMsk.py"
+  description: "Sensor that watches Kubernetes API for new Msk Custom Objects."
+  trigger_types:
+    -
+      name: "crdmsk"
+      description: "Trigger for Msk CustomObjects event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "string"
+          name:
+            type: "string"
+          labels:
+            anyOf:
+              - type: "object"
+              - type: "string"
+              - type: "null"
+          object_kind:
+            type: "string"
+          namespace:
+            type: "string"

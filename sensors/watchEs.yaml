@@ -1,0 +1,23 @@
+---
+  class_name: "watchEs"
+  entry_point: "watchEs.py"
+  description: "Sensor that watches Kubernetes API for a new ES domain."
+  trigger_types:
+    - name: "crdes"
+      description: "Trigger for ES event dispatch."
+      payload_schema:
+        type: "object"
+        properties:
+          resource:
+            type: "string"
+          name:
+            type: "string"
+          labels:
+            anyOf:
+              - type: "object"
+              - type: "string"
+              - type: "null"
+          object_kind:
+            type: "string"
+          namespace:
+            type: "string"

@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.10.0
+- Converted `kubernetes.register_tpr` workflow to Orquesta
+  Contributed by Nick Maludy (@nmaludy Encore Technologies)
+
 ## 0.9.13
 - Minor linting change
 

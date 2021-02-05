@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.0
+
+* Drop Python 2.7 support
+
 ## 0.10.0
 - Converted `kubernetes.register_tpr` workflow to Orquesta
   Contributed by Nick Maludy (@nmaludy Encore Technologies)

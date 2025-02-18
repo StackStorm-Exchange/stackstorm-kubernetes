@@ -13,7 +13,7 @@ try:
 except ImportError:
     from http_parser.pyparser import HttpParser
 
-from backports import ssl
+import ssl
 from st2reactor.sensor.base import Sensor
 
 
@@ -74,13 +74,16 @@ class SensorBase(Sensor):
 
         while True:
             try:
+                context = ssl.create_default_context()
                 self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 if self.authmethod == "basic":
-                    self.client = ssl.wrap_socket(self.sock)
+                    self.client = context.wrap_socket(self.sock)
                 elif self.authmethod == "cert":
-                    self.client = ssl.wrap_socket(self.sock,
-                                                  keyfile=self.config['client_cert_key_path'],
-                                                  certfile=self.config['client_cert_path'])
+                    context.load_cert_chain(
+                        certfile=self.config['client_cert_path'],
+                        keyfile=self.config['client_cert_key_path']
+                    )
+                    self.client = context.wrap_socket(self.sock)
                 else:
                     raise KeyError('No authentication mechanisms defined')
                 self._log.debug('Connecting to %s %i' % (self.host, self.port))

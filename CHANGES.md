@@ -1,5 +1,9 @@
 # Change Log
 
+# 1.0.1
+
+* Removed Backport ssl in favor of built in ssl.
+
 ## 1.0.0
 
 * Drop Python 2.7 support
